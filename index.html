@@ -11,8 +11,12 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  </head>
-  <body>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
+    <script src="javascripts/utilities.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    </head>
+    <body>
     <div class="wrapper">
       <header>
         <h1>Dotfiles</h1>
@@ -67,7 +71,7 @@
 
 <p><strong><em>DEMO:</em></strong></p>
 
-<p><img src="https://github.com/b4b4r07/dotfiles/blob/master/doc/img/environment.png" alt="" title="b4b4r07's environment"></p>
+<p><img src="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/doc/img/environment.png" alt="" title="b4b4r07's environment"></p>
 
 <p><strong>Note:</strong> You can clone or fork them freely, but I don't guarantee that they fit you.</p>
 
@@ -82,16 +86,20 @@ Run the following command to set up a new machine:</p>
 <tr>
 <th>Tools</th>
 <th><a name="oneliner">Installation command</a></th>
+<th>Copy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>cURL</td>
 <td>bash -c "$(curl -fsSL <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"</td>
+<td><a id="clip-curl" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
 </tr>
 <tr>
 <td>Wget</td>
 <td>bash -c "$(wget -qO - <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"</td>
+
+<td><a id="clip-wget" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
 </tr>
 </tbody>
 </table>
@@ -136,7 +144,7 @@ $ <span class="pl-s2"><span class="pl-s3">cd</span> <span class="pl-k">~</span>/
 
 <p><strong><em>DEMO:</em></strong></p>
 
-<p><img src="https://github.com/b4b4r07/dotfiles/blob/master/doc/img/installation.gif" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/doc/img/installation.gif" alt=""></p>
 
 <h3>
 <a id="quick-installation" class="anchor" href="#quick-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick installation</h3>
@@ -188,20 +196,20 @@ $ <span class="pl-s2"><span class="pl-s3">cd</span> <span class="pl-k">~</span>/
 <p><strong>Init scripts</strong></p>
 
 <ul>
-<li><a href="./etc/init/build_vim_by_myself.sh">Build and install the original cutsom Vim</a></li>
-<li><a href="./etc/init/globalize_your_home_directory.sh">Translate your home directory into English</a></li>
-<li><a href="./etc/init/install_zsh_plugin_manager_antigen.sh">Install antigen the zsh plugin manager</a></li>
-<li><a href="./etc/init/install_pygments.sh">Install pygments the generic syntax highlighter written in python</a></li>
-<li><a href="./etc/init/osx/install_homebrew.sh">Install Homebrew the missing package manager for OS X</a></li>
-<li><a href="./etc/init/osx/install_xcode_cli_tools.sh">Install the CLI tool that comes with Xcode</a></li>
-<li><a href="./etc/init/osx/install_brew_packages.sh">Run 'brew install' based on the Brewfile</a></li>
-<li><a href="./etc/init/osx/install_cask_packages.sh">Run 'brew cask install' based on the Caskfile</a></li>
-<li><a href="./etc/init/osx/execute_osx_defaults.sh">Sensible OS X defaults</a></li>
-<li><a href="./etc/init/osx/setup_kanabiner.sh">Setup Karabiner (formerly KeyRemap4MacBook)</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/build_vim_by_myself.sh">Build and install the original cutsom Vim</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/globalize_your_home_directory.sh">Translate your home directory into English</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/install_zsh_plugin_manager_antigen.sh">Install antigen the zsh plugin manager</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/install_pygments.sh">Install pygments the generic syntax highlighter written in python</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/install_homebrew.sh">Install Homebrew the missing package manager for OS X</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/install_xcode_cli_tools.sh">Install the CLI tool that comes with Xcode</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/install_brew_packages.sh">Run 'brew install' based on the Brewfile</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/install_cask_packages.sh">Run 'brew cask install' based on the Caskfile</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/execute_osx_defaults.sh">Sensible OS X defaults</a></li>
+<li><a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/init/osx/setup_kanabiner.sh">Setup Karabiner (formerly KeyRemap4MacBook)</a></li>
 <li>...</li>
 </ul>
 
-<p>For more information about initializing, see also <a href="./etc/README.md">./etc/README.md</a>.</p>
+<p>For more information about initializing, see also <a href="https://github.com/b4b4r07/dotfiles/tree/master/etc/README.md">./etc/README.md</a>.</p>
 
 <h3>
 <a id="vim" class="anchor" href="#vim" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vim</h3>
@@ -270,7 +278,7 @@ $ <span class="pl-s2">make cask</span></pre></div>
 </li>
 </ul>
 
-<p>All of these are included in the <code>make init</code> for OS X. For more detail, see also <a href="./doc/OSX.md">here</a> of documentation of OS X operation.</p>
+<p>All of these are included in the <code>make init</code> for OS X. For more detail, see also <a href="https://github.com/b4b4r07/dotfiles/tree/master/doc/OSX.md">here</a> of documentation of OS X operation.</p>
 
 <h2>
 <a id="components" class="anchor" href="#components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Components</h2>
