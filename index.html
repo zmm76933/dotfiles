@@ -15,6 +15,13 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
     <script src="javascripts/utilities.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('a[href=#]').click(function(e){
+            e.preventDefault();
+        })
+    });
+    </script>
     </head>
     <body>
     <div class="wrapper">
