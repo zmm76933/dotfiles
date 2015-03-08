@@ -16,7 +16,19 @@
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script type="text/javascript">
+flag = false;
+  $(document).ready(function(){
+    
+    $("button").click(function () {
+      $("span.tog").toggle();
+    });
+
+  });
+function onClick() {
+      flag = !flag;
+}
     $(function(){
         $('a[href=#]').click(function(e){
             e.preventDefault();
@@ -29,6 +41,14 @@
             var clip = new ZeroClipboard(elements[i]);
             clip.on("ready", function() {
             });
+            clip.on( 'copy', function(event) {
+                    if (document.getElementsByTagName("a").value == 'curlVer') {
+          event.clipboardData.setData('text/plain', document.getElementById('curlVer').innerText+flag?"-s init":"");
+          }
+                    if (document.getElementsByTagName("a").value == 'wgetVer') {
+          event.clipboardData.setData('text/plain', document.getElementById('wgetVer').innerText+flag?"-s init":"");
+          }
+        } );
         }
         }
     };
@@ -83,17 +103,22 @@
 <tbody>
 <tr>
 <td>cURL</td>
-<td>bash -c "$(curl -fsSL <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"</td>
-<td><a class="btn" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
+<td id='curlVer'>bash -c "$(curl -fsSL <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"
+  <span class="tog"></span><span class="tog" style="display: none">-s init</span>
+</td>
+<td><a class="btn" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' href='#' value="curlVer"><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
 </tr>
 <tr>
 <td>Wget</td>
-<td>bash -c "$(wget -qO - <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"</td>
-
-<td><a class="btn" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
+<td id='wgetVer'>bash -c "$(wget -qO - <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"
+  <span class="tog"></span><span class="tog" style="display: none">-s init</span>
+</td>
+<td><a class="btn" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' href='#' value="wgetVer"><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
 </tr>
 </tbody>
 </table>
+
+<button onclick="onClick();">init</button>
 
 <p><strong>What's inside?</strong></p>
 
