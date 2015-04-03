@@ -10,8 +10,8 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript">
-    var curl = '<code>bash -c "$(curl -fsSL dot.b4b4r07.com)"</code>';
-    var wget = '<code>bash -c "$(wget -qO - dot.b4b4r07.com)"</code>';
+    var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
+    var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
     function ChangeTxt(txt) {
         document.getElementById("oneliner").innerHTML=txt;
     }
@@ -23,6 +23,13 @@
         });
     
     });
+    function onClick() {
+        var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
+        var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
+        function ChangeTxt(txt) {
+            document.getElementById("oneliner").innerHTML=txt;
+        }
+    }
     $(function(){
         $('a[href=#]').click(function(e){
             e.preventDefault();
@@ -54,8 +61,13 @@
         <h1 class="st-header-title"><a href="https://github.com/b4b4r07/dotfiles" class="st-getStartedNoBorder">.files</a></h1>
         <h3 class="st-header-body">#VIM + #ZSH + #TMUX = Best Developer Environment</h3>
 
+<<<<<<< HEAD
         <p>Paste that at a Terminal prompt, install in one shot.</p>
         <div id="oneliner">Choose the cURL or Wget</div>
+=======
+        <p>Paste that at a Terminal prompt.</p>
+        <div id="oneliner"><code>bash -c "$(curl -L dot.b4b4r07.com)"</code></div>
+>>>>>>> parent of 26a84a4... Change sentence
 
         <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)">CURL</a>
         <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)">WGET</a>
