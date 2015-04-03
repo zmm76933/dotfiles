@@ -10,6 +10,12 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript">
+    var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
+    var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
+    function ChangeTxt(txt) {
+        document.getElementById("oneliner").innerHTML=txt;
+    }
+
     $(document).ready(function(){
     
         $("button").click(function () {
