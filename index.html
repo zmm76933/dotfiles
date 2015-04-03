@@ -10,7 +10,6 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
   <script type="text/javascript">
-    flag = false;
     $(document).ready(function(){
     
         $("button").click(function () {
@@ -19,7 +18,11 @@
     
     });
     function onClick() {
-        flag = !flag;
+        var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
+        var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
+        function ChangeTxt(txt) {
+            document.getElementById("oneliner").innerHTML=txt;
+        }
     }
     $(function(){
         $('a[href=#]').click(function(e){
@@ -35,10 +38,10 @@
                 });
                 clip.on( 'copy', function(event) {
                     if (document.getElementsByTagName("a").value == 'curlVer') {
-                        event.clipboardData.setData('text/plain', document.getElementById('curlVer').innerText+flag?"-s init":"");
+                        event.clipboardData.setData('text/plain', document.getElementById('curlVer'));
                     }
                     if (document.getElementsByTagName("a").value == 'wgetVer') {
-                        event.clipboardData.setData('text/plain', document.getElementById('wgetVer').innerText+flag?"-s init":"");
+                        event.clipboardData.setData('text/plain', document.getElementById('wgetVer'));
                     }
                 } );
             }
@@ -53,10 +56,10 @@
         <h3 class="st-header-body">#VIM + #ZSH + #TMUX = Best Developer Environment</h3>
 
         <p>Paste that at a Terminal prompt.</p>
-        <p><code>bash -c "$(curl -L dot.b4b4r07.com)"</code></p>
+        <div id="oneliner"><code>bash -c "$(curl -L dot.b4b4r07.com)"</code></div>
 
-        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer">CURL</a>
-        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer">WGET</a>
+        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)">CURL</a>
+        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)">WGET</a>
       </div>
   </div>
 </body>
