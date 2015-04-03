@@ -5,68 +5,100 @@
   <meta charset='utf-8'>
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
-  <script src="javascripts/ZeroClipboard.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/tooltipster.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/themes/tooltipster-shadow.css" />
   <script type="text/javascript">
-    var curl = '<code>bash -c "$(curl -fsSL dot.b4b4r07.com)"</code>';
-    var wget = '<code>bash -c "$(wget -qO - dot.b4b4r07.com)"</code>';
-    function ChangeTxt(txt) {
-        document.getElementById("oneliner").innerHTML=txt;
-    }
+  $(document).ready(function() {
+      $('.tooltipCurl').tooltipster({
+          animation: 'grow',
+          delay: 200,
+          timer: 500,
+          position: 'right',
+          theme: 'tooltipster-shadow',
+          offsetX: 150,
+          offsetY: 38,
+          trigger: 'click'
+      });
+  });
+  $(document).ready(function() {
+      $('.tooltipWget').tooltipster({
+          animation: 'grow',
+          delay: 200,
+          timer: 500,
+          position: 'right',
+          theme: 'tooltipster-shadow',
+          offsetX: -15,
+          offsetY: 38,
+          trigger: 'click'
+      });
+  });
+  </script>
 
-    $(document).ready(function(){
-    
-        $("button").click(function () {
-            $("span.tog").toggle();
-        });
-    
-    });
-    function onClick() {
-        var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
-        var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
-        function ChangeTxt(txt) {
-            document.getElementById("oneliner").innerHTML=txt;
-        }
-    }
-    $(function(){
-        $('a[href=#]').click(function(e){
-            e.preventDefault();
-        })
-    });
-    window.onload = function() {
-        var elements = document.getElementsByTagName("a");
-        for (var i = 0; i < elements.length; i++) {
-            if (elements[i].className == "st-getStarted") {
-                var clip = new ZeroClipboard(elements[i]);
-                clip.on("ready", function() {
-                });
-                clip.on( 'copy', function(event) {
-                    if (document.getElementsByTagName("a").value == 'curlVer') {
-                        event.clipboardData.setData('text/plain', document.getElementById('curlVer'));
-                    }
-                    if (document.getElementsByTagName("a").value == 'wgetVer') {
-                        event.clipboardData.setData('text/plain', document.getElementById('wgetVer'));
-                    }
-                } );
-            }
-        }
-    };
+  <script type="text/javascript">
+  var curl = '<code>bash -c "$(curl -fsSL dot.b4b4r07.com)"</code>';
+  var wget = '<code>bash -c "$(wget -qO - dot.b4b4r07.com)"</code>';
+  $('#myclippy').tooltip();
+  function ChangeTxt(txt) {
+      document.getElementById("oneliner").innerHTML=txt;
+      $('.tooltip .tooltip-inner').text('Copied!');
+  }
+
+  $(document).ready(function(){
+      $("button").click(function () {
+          $("span.tog").toggle();
+      });
+  });
+  $(function(){
+      $('a[href=#]').click(function(e){
+          e.preventDefault();
+      })
+  });
+  window.onload = function() {
+      var elements = document.getElementsByTagName("a");
+      for (var i = 0; i < elements.length; i++) {
+          if (elements[i].className == "st-getStarted") {
+              var clip = new ZeroClipboard(elements[i]);
+              clip.on('ready', function() {
+              });
+              clip.on('copy', function(event) {
+                  if (document.getElementsByTagName("a").value == 'curlVer') {
+                      event.clipboardData.setData('text/plain', document.getElementById('curlVer'));
+                  }
+                  if (document.getElementsByTagName("a").value == 'wgetVer') {
+                      event.clipboardData.setData('text/plain', document.getElementById('wgetVer'));
+                  }
+              } );
+              clip.on('aftercopy', function(event) {
+              });
+          }
+      }
+  };
   </script>
   </head>
-<body>
-  <div id="st-header">
-      <div class="st-container">
-        <h1 class="st-header-title"><a href="https://github.com/b4b4r07/dotfiles" class="st-getStartedNoBorder">.files</a></h1>
-        <h3 class="st-header-body">#VIM + #ZSH + #TMUX = Best Developer Environment</h3>
 
-        <p>Paste that at a Terminal prompt, install in one shot.</p>
-        <div id="oneliner"><code># Choose the cURL or Wget</code></div>
-
-        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)">CURL</a>
-        <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)">WGET</a>
-      </div>
-  </div>
-</body>
+  <body>
+    <div id="st-header">
+        <div class="st-container">
+          <h1 class="st-header-title"><a href="https://github.com/b4b4r07/dotfiles" class="st-getStartedNoBorder">.files</a></h1>
+          <h3 class="st-header-body">#VIM + #ZSH + #TMUX = Best Developer Environment</h3>
+  
+          <p>Paste that at a Terminal prompt, install in one shot.</p>
+          <div id="oneliner"><code># Choose the cURL or Wget</code></div>
+  
+          <span id="my-tooltip" class="tooltipCurl" title="Copied!">
+              <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)">CURL</a>
+          </span>
+          <span id="my-tooltip" class="tooltipWget" title="Copied!">
+              <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)">WGET</a>
+          </span>
+        </div>
+    </div>
+  
+    <script src="javascripts/ZeroClipboard.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.2.0" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.tooltipster.min.js"></script>
+  </body>
 </html>
