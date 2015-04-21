@@ -53,6 +53,17 @@
       }
   };
   </script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+  <!-- begin-scripts -->
+  <script type="text/javascript" src="javascripts/jquery-powertip/core.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-powertip/csscoordinates.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-powertip/displaycontroller.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-powertip/placementcalculator.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-powertip/tooltipcontroller.js"></script>
+  <script type="text/javascript" src="javascripts/jquery-powertip/utility.js"></script>
+  <!-- end-scripts -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/jquery-powertip/jquery.powertip.css" />
   </head>
   <body>
     <div id="st-header">
@@ -63,9 +74,39 @@
           <p>Paste that at a Terminal prompt, install in one shot.</p>
           <div id="oneliner"><code># Choose the cURL or Wget</code></div>
 
-          <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)" title="Copy to clipboard">CURL</a>
-          <a href="#" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)" title="Copy to clipboard">WGET</a>
+          <a href="#" id="curl" class="st-getStarted" data-clipboard-text='bash -c "$(curl -fsSL dot.b4b4r07.com)"' value="curlVer" onclick="ChangeTxt(curl)" title="Copy to clipboard">CURL</a>
+          <a href="#" id="wget" class="st-getStarted" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' value="wgetVer" onclick="ChangeTxt(wget)" title="Copy to clipboard">WGET</a>
         </div>
     </div>
+
+	<script type="text/javascript">
+		$(function() {
+			$('#curl')
+				.powerTip({
+					manual: true,
+					placement: 's',
+					smartPlacement: true
+				})
+				.on('click', function() {
+					$(this).powerTip('show');
+				})
+				.on('mouseleave', function() {
+					$(this).powerTip('hide', true);
+				});
+			$('#wget')
+				.powerTip({
+					theme: 'light',
+					manual: true,
+					placement: 's',
+					smartPlacement: true
+				})
+				.on('click', function() {
+					$(this).powerTip('show');
+				})
+				.on('mouseleave', function() {
+					$(this).powerTip('hide', true);
+				});
+		});
+	</script>
   </body>
 </html>
