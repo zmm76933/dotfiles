@@ -5,48 +5,8 @@
         <meta charset='utf-8'>
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
-        <script type="text/javascript" src="javascripts/ZeroClipboard.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-        <script type="text/javascript">
-var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
-var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
-function ChangeTxt(txt) {
-    document.getElementById("oneliner").innerHTML=txt;
-    $("div.oneliner").wrapInner("<code>");
-}
-
-$(function(){
-    $('a[href=#]').click(function(e){
-        e.preventDefault();
-    })
-});
-window.onload = function() {
-    var elements = document.getElementsByTagName("a");
-    for (var i = 0; i < elements.length; i++) {
-        if (elements[i].className == "st-getStarted") {
-            var clip = new ZeroClipboard(elements[i]);
-            clip.on( 'ready', function() {
-                client.on( 'copy', function(event) {
-                } );
-                client.on( 'aftercopy', function(event) {
-                } );
-            } );
-        }
-    }
-};
-        </script>
-
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
-        <!-- begin-scripts -->
-        <script type="text/javascript" src="javascripts/jquery-powertip/core.js"></script>
-        <script type="text/javascript" src="javascripts/jquery-powertip/csscoordinates.js"></script>
-        <script type="text/javascript" src="javascripts/jquery-powertip/displaycontroller.js"></script>
-        <script type="text/javascript" src="javascripts/jquery-powertip/placementcalculator.js"></script>
-        <script type="text/javascript" src="javascripts/jquery-powertip/tooltipcontroller.js"></script>
-        <script type="text/javascript" src="javascripts/jquery-powertip/utility.js"></script>
-        <!-- end-scripts -->
         <link rel="stylesheet" type="text/css" href="stylesheets/jquery-powertip/jquery.powertip.css" />
+
     </head>
     <body>
         <div id="st-header">
@@ -62,26 +22,69 @@ window.onload = function() {
             </div>
         </div>
 
+        <!-- begin-powertip -->
+        <script type="text/javascript" src="javascripts/ZeroClipboard.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
         <script type="text/javascript">
-$(function() {
-    $('.st-getStarted')
-        .powerTip({
-            manual: true,
-            placement: 's',
-            smartPlacement: true
-        })
-    .on('click', function() {
-        $(this).powerTip('show');
-    })
-    .on('mouseleave', function() {
-        $(this).powerTip('hide', true);
-    })
-    .on({
-        powerTipPreRender: function() {
-            $(this).data('powertip' , 'Copied!!');
+        var curl = 'bash -c "$(curl -fsSL dot.b4b4r07.com)"';
+        var wget = 'bash -c "$(wget -qO - dot.b4b4r07.com)"';
+        function ChangeTxt(txt) {
+            document.getElementById("oneliner").innerHTML=txt;
+            $("div.oneliner").wrapInner("<code>");
         }
-    });
-});
+        
+        $(function(){
+            $('a[href=#]').click(function(e){
+                e.preventDefault();
+            })
+        });
+        window.onload = function() {
+            var elements = document.getElementsByTagName("a");
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].className == "st-getStarted") {
+                    var clip = new ZeroClipboard(elements[i]);
+                    clip.on( 'ready', function() {
+                        client.on( 'copy', function(event) {
+                        } );
+                        client.on( 'aftercopy', function(event) {
+                        } );
+                    } );
+                }
+            }
+        };
         </script>
+        <!-- end-powertip -->
+
+        <!-- begin-powertip -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/core.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/csscoordinates.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/displaycontroller.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/placementcalculator.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/tooltipcontroller.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-powertip/utility.js"></script>
+        <script type="text/javascript">
+        $(function() {
+            $('.st-getStarted')
+                .powerTip({
+                    manual: true,
+                    placement: 's',
+                    smartPlacement: true
+                })
+            .on('click', function() {
+                $(this).powerTip('show');
+            })
+            .on('mouseleave', function() {
+                $(this).powerTip('hide', true);
+            })
+            .on({
+                powerTipPreRender: function() {
+                    $(this).data('powertip' , 'Copied!!');
+                }
+            });
+        });
+        </script>
+        <!-- end-powertip -->
     </body>
 </html>
