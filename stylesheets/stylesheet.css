@@ -1,5 +1,5 @@
 html {
-    font-family:Lato,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Lato,'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 300;
     -ms-text-size-adjust: 100%; /* 2 */
     -webkit-text-size-adjust: 100%; /* 2 */
@@ -12,6 +12,7 @@ html {
 
 body {
     margin: 0;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -40,6 +41,13 @@ a {
   text-decoration: none;
 }
 
+pre, code, var, samp, kbd, .mono {
+    //font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+    font-family: monospace, Consolas, 'Courier New', Courier, Monaco;
+    font-size: 14px;
+    font-weight: 100;
+    //line-height: 1.2;
+}
 
 #st-header {
     margin-top: 150px;
