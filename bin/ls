@@ -49,7 +49,7 @@ ls_options() {
         fi
 
         # identifier option
-        ls_option="${ls_option} --classify"
+        ls_option="${ls_option} -F"
 
         # grouping option
         if is_gls; then

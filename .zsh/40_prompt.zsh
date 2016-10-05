@@ -13,7 +13,10 @@ left_down_prompt_preexec() {
 add-zsh-hook preexec left_down_prompt_preexec
 function zle-keymap-select zle-line-init zle-line-finish {
     case $KEYMAP in
-        main|viins)
+        main)
+            PROMPT_2=""
+            ;;
+        viins)
             PROMPT_2="$fg[black]-- INSERT --$reset_color"
             ;;
         vicmd)

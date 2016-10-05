@@ -88,7 +88,7 @@ setopt long_list_jobs
 setopt auto_resume
 
 # Disable Ctrl-d (Use 'exit', 'logout')
-#setopt ignore_eof
+setopt ignore_eof
 
 # Ignore case when glob
 setopt no_case_glob

@@ -12,6 +12,19 @@ if [[ -z $DOTPATH ]]; then
     unfunction _get_dotpath
 fi
 
+# Add custom path to PATH
+typeset -gx -U path
+path=(
+	~/bin(N-/) \
+    /usr/local/bin(N-/) \
+    /usr/bin(N-/) \
+    /bin(N-/) \
+	/usr/local/sbin(N-/) \
+    /usr/sbin(N-/) \
+    /sbin(N-/) \
+    $path \
+	)
+
 # NOTE: set fpath before compinit
 typeset -gx -U fpath
 fpath=( \
@@ -61,8 +74,6 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 setopt no_global_rcs
-# Add ~/bin to PATH
-export PATH=~/bin:"$PATH"
 
 # Settings for golang
 export GOPATH="$HOME"
@@ -75,11 +86,6 @@ export CORRECT_IGNORE_FILE='.*'
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 export WORDCHARS='*?.[]~&;!#$%^(){}<>'
-
-# History file and its size
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000
-export SAVEHIST=1000000
 
 # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS="--extended --ansi --multi"

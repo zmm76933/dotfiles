@@ -9,6 +9,7 @@ alias p="print -l"
 # For mac, aliases
 if is_osx; then
     has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
+	has "open" && alias o='open'
 fi
 
 if has 'git'; then
@@ -44,6 +45,7 @@ alias zmv='noglob zmv -W'
 
 alias du='du -h'
 alias job='jobs -l'
+alias //='quit'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'

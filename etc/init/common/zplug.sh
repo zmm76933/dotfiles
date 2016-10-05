@@ -17,22 +17,23 @@ if [[ ! -f ~/.zplug/init.zsh ]]; then
 fi
 
 if [[ -f ~/.zplug/init.zsh ]]; then
+    # load zplug
+    source ~/.zplug/init.zsh
+
+    if [[ -f $DOTPATH/.zsh/zplug.zsh ]]; then
+        export ZPLUG_LOADFILE="$DOTPATH/.zsh/zplug.zsh"
+    fi
+
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        else
+            echo
+        fi
+    fi
+    zplug load --verbose
+else
     echo "zplug: not found" >&2
     exit 1
 fi
-# load zplug
-source ~/.zplug/init.zsh
-
-if [[ -f $DOTPATH/.zsh/zplug.zsh ]]; then
-    export ZPLUG_LOADFILE="$DOTPATH/.zsh/zplug.zsh"
-fi
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    else
-        echo
-    fi
-fi
-zplug load --verbose

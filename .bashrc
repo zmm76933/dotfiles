@@ -16,6 +16,12 @@
 
 [ -n "$VIMRUNTIME" ] && return
 
+
+
+if [[ -z $DOTPATH ]]; then
+    export DOTPATH="$HOME/.dotfiles"
+fi
+
 # It is necessary for the setting of DOTPATH
 #[ -f ~/.path ] && source ~/.path
 
@@ -326,7 +332,7 @@ bashrc_loading() {
         fi
 
         # finding and sourcing script file in repo
-        . $(find "$HOME/.repos/$repo" -name "*${repo##*/}*" -depth 1 | grep -E "${repo##*/}($|\.sh$)")
+        . $(find "$HOME/.repos/$repo" -depth -maxdepth 2 -type f -o -type l -name "*${repo##*/}*" | grep -E "${repo##*/}($|\.sh$)")
         # displaying the info
         if [ $? -eq 0 ]; then
             echo "checking... $HOME/.repos/$repo/${repo##*/}".sh | e_indent 2
@@ -340,7 +346,8 @@ bashrc_loading() {
 
 bashrc_startup() {
     # tmux_automatically_attach attachs tmux session automatically when your are in zsh
-    tmux_automatically_attach
+    #tmux_automatically_attach
+    $DOTPATH/bin/tmuxx
 
     bashrc_loading || return 1
 

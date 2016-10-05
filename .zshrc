@@ -53,9 +53,10 @@ fi
 # automatically when your are in zsh
 $DOTPATH/bin/tmuxx
 
-if [[ -f ~/.zplug/init.zsh ]]; then
+ZPLUG_HOME="/usr/local/opt/zplug"
+if [[ -f $ZPLUG_HOME/init.zsh ]]; then
     export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"
-    source ~/.zplug/init.zsh
+    source $ZPLUG_HOME/init.zsh
     #source ~/src/github.com/zplug/zplug/init.zsh
 
     if ! zplug check --verbose; then
