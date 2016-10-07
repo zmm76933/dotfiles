@@ -277,3 +277,45 @@ exec-oneliner() {
 }
 zle -N exec-oneliner
 bindkey '^x^x' exec-oneliner
+
+autobackq() {
+    LBUFFER+='`'
+    RBUFFER='`'"$RBUFFER"
+}
+zle -N autobackq
+bindkey '`' autobackq
+
+autobrace() {
+    LBUFFER+="{"
+    RBUFFER="}$RBUFFER"
+}
+zle -N autobrace
+bindkey "{" autobrace
+
+autobract() {
+    LBUFFER+="["
+    RBUFFER="]$RBUFFER"
+}
+zle -N autobract
+bindkey "[" autobract
+
+autodoubq() {
+    LBUFFER+='"'
+    RBUFFER='"'"$RBUFFER"
+}
+zle -N autodoubq
+bindkey '"' autodoubq
+
+autoparen() {
+    LBUFFER+="("
+    RBUFFER=")$RBUFFER"
+}
+zle -N autoparen
+bindkey "(" autoparen
+
+autosingq() {
+    LBUFFER+="'"
+    RBUFFER="'$RBUFFER"
+}
+zle -N autosingq
+bindkey "'" autosingq
