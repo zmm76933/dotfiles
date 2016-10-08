@@ -1,72 +1,96 @@
 tap 'homebrew/bundle'
 
 brew 'ack'
+brew 'aspell'
 brew 'autoconf'
 brew 'checkbashisms'
+brew 'cmigemo'
 brew 'coreutils'
 brew 'cowsay'
-brew 'direnv'
-brew 'ffmpeg'
 brew 'figlet'
+brew 'fortune'
 brew 'fzf'
 brew 'gawk'
 brew 'gdbm'
-brew 'gifsicle'
 brew 'git'
 brew 'go', args: ['cross-compile-common']
 brew 'hub'
-brew 'hugo'
+brew 'imagemagick'
 brew 'jq'
-brew 'lame'
-brew 'libevent'
-brew 'mercurial'
+brew 'lv'
+brew 'mas'
 brew 'nkf'
-brew 'node.js'
-brew 'nodebrew'
+brew 'nmap'
 brew 'openssl'
 brew 'peco'
 brew 'python'
-brew 'rbenv'
 brew 'readline'
 brew 'reattach-to-user-namespace'
-brew 'ruby-build'
 brew 'shellcheck'
 brew 'sqlite'
 brew 'terminal-notifier'
+brew 'the_silver_searcher'
 brew 'tig', args: ['with-docs']
 brew 'tmux'
 brew 'tree'
 brew 'vim', args: ['with-lua', 'with-luajit']
+brew 'wakeonlan'
 brew 'wget'
+brew 'wireshark'
 brew 'zsh', args: ['disable-etcdir']
 brew 'zsh-completions'
 
-tap 'caskroom/cask'
-brew 'brew-cask'
-cask '1password'
-cask 'appcleaner'
+cask 'adobe-air'
+cask 'aquaskk'
+cask 'bartender'
 cask 'bettertouchtool'
-cask 'burn'
+cask 'blueharvest'
+cask 'cleanmymac'
 cask 'clipmenu'
-cask 'dragondrop'
-#cask 'dropbox'
-cask 'firefox'
-cask 'flashlight'
-cask 'google-japanese-ime'
+cask 'dropbox'
+cask 'duet'
+cask 'geekbench'
+cask 'google-chrome'
+cask 'google-earth'
+cask 'istat-menus'
 cask 'karabiner'
-cask 'karabiner'
-cask 'keycast'
-cask 'kobito'
-cask 'macdown'
+cask 'keycue'
+cask 'kindle'
 cask 'mactex'
-cask 'macvim'
-cask 'mailbox'
-cask 'messenger'
-cask 'skitch'
+cask 'onyx'
+cask 'skim'
 cask 'skype'
-cask 'the-unarchiver'
+cask 'textexpander'
+cask 'totalfinder'
+cask 'totalterminal'
+cask 'transmit'
 cask 'vagrant'
 cask 'virtualbox'
-cask 'vlc'
+cask 'xquartz'
+
+mas 'LINE', id: 539883307
+mas 'Blackmagic Disk Speed Test', id: 425264550
+mas 'Evernote', id: 406056744
+mas 'Keynote', id: 409183694
+mas 'App Language Chooser', id: 451732904
+mas 'Skitch', id: 425955336
+mas 'Twitter', id: 409789998
+mas 'WiFi Explorer', id: 494803304
+mas 'GarageBand', id: 682658836
+mas 'The Unarchiver', id:425424353
+mas '1Password', id: 443987910
+mas 'Growl', id: 467939042
+mas 'Tweetbot', id: 557168941
+mas 'Reeder', id: 880001334
+mas 'Xcode', id: 497799835
+mas 'Ring Menu', id: 934212116
+mas 'Pages', id: 409201541
+mas 'Numbers', id: 409203825
+mas 'iMovie', id: 408981434
+mas 'Microsoft Remote Desktop', id: 715768417
+mas 'SoraAnnai', id: 599799247
+mas 'Deliveries', id: 924726344
+mas 'PopClip', id: 445189367
+mas 'Mactracker', id: 430255202
 
 # vim: ft=conf
