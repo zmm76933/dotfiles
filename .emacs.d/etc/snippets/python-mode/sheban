@@ -1,0 +1,6 @@
+# name : #!/usr/bin/env python # Shebang
+# key  : sheban
+# --
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+$0

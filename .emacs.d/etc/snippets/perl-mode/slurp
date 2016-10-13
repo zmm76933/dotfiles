@@ -1,0 +1,8 @@
+# name : do {local $/; <$fh> }; # File slurp
+# key  : slurp
+# --
+do {
+   local \$/;
+   open my \$fh, "<", \$${1:filename};
+   <$fh>;
+};

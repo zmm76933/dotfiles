@@ -1,0 +1,7 @@
+# name : (ert-deftest test-name () description ...)
+# key  : ert
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+(ert-deftest $0 ()
+  ""
+  )

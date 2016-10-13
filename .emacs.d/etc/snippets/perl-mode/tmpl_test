@@ -1,0 +1,12 @@
+# name : Test Template
+# key  : testt
+# --
+use strict;
+use warnings;
+use Test::More;
+
+use ${1:ModuleName};
+
+$0
+
+done_testing;

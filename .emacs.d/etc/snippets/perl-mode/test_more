@@ -1,0 +1,8 @@
+# name : use Test::More; and done_testing
+# key  : more
+# --
+use Test::More;
+
+$0
+
+done_testing;
