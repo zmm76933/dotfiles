@@ -1,33 +1,24 @@
 {
-    "CustomMatcher": {
-        "Migemo": [
-            "migemogrep",
-            "$QUERY"
-        ]
-    }
+    "CustomFilter": {
+        "Migemo": {
+            "Cmd": "migemogrep"
+        }
+    },
     "Prompt": "[peco]",
     "Keymap": {
-        "Esc": "peco.Cancel",
-        "Enter": "peco.Finish",
-        "BS": "peco.DeleteBackwardChar",
-        "C-h": "peco.DeleteBackwardChar",
+        "M-f": "peco.ForwardWord",
+        "M-b": "peco.BackwardWord",
         "C-d": "peco.DeleteForwardChar",
-        "C-c": "peco.Cancel",
-        "C-f": "peco.ForwardChar",
-        "C-a": "peco.BeginningOfLine",
-        "C-e": "peco.EndOfLine",
-        "C-k": "peco.KillEndOfLine",
-        "C-u": "peco.KillBeginningOfLine",
-        "C-b": "peco.BackwardChar",
-        "C-p": "peco.SelectUp",
-        "C-n": "peco.SelectDown",
-        "C-u": "peco.ScrollPageUp",
-        "C-d": "peco.ScrollPageDown",
-        "C-r": "peco.RotateMatcher",
-        "ArrowUp": "peco.SelectUp",
-        "ArrowDown": "peco.SelectDown",
-        "ArrowLeft": "peco.ScrollPageUp",
-        "ArrowRight": "peco.ScrollPageDown"
+        "C-h": "peco.DeleteBackwardChar",
+        "M-d": "peco.DeleteForwardWord",
+        "M-C-8": "peco.DeleteBackwardWord",
+        "C-l": "peco.DeleteAll",
+        "C-z": "peco.ScrollPageDown",
+        "C-v": "peco.ScrollPageUp",
+        "C-s": "peco.ToggleSelection",
+        "C-g": "peco.SelectNone",
+        "C-m": "peco.Finish",
+        "C-j": "peco.Finish"
     },
     "Style": {
         "Basic": ["on_default", "default"],
