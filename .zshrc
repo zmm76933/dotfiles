@@ -1,9 +1,9 @@
-#          _              
-#  _______| |__  _ __ ___ 
+#          _
+#  _______| |__  _ __ ___
 # |_  / __| '_ \| '__/ __|
-#  / /\__ \ | | | | | (__ 
+#  / /\__ \ | | | | | (__
 # /___|___/_| |_|_|  \___|
-#                         
+#
 #
 
 umask 022
@@ -53,10 +53,9 @@ fi
 # automatically when your are in zsh
 $DOTPATH/bin/tmuxx
 
-ZPLUG_HOME="/usr/local/opt/zplug"
-if [[ -f $ZPLUG_HOME/init.zsh ]]; then
+if [[ -f ~/.zplug/init.zsh ]]; then
     export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"
-    source $ZPLUG_HOME/init.zsh
+    source ~/.zplug/init.zsh
     #source ~/src/github.com/zplug/zplug/init.zsh
 
     if ! zplug check --verbose; then
