@@ -52,6 +52,11 @@ zplug "peco/peco", \
     from:gh-r, \
     frozen:1
 
+zplug "peco/migemogrep", \
+    as:command, \
+    from:gh-r, \
+    frozen:1
+
 zplug "motemen/ghq", \
     as:command, \
     from:gh-r, \

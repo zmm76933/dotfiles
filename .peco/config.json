@@ -1,4 +1,10 @@
 {
+    "CustomMatcher": {
+        "Migemo": [
+            "migemogrep",
+            "$QUERY"
+        ]
+    }
     "Prompt": "[peco]",
     "Keymap": {
         "Esc": "peco.Cancel",
