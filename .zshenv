@@ -15,15 +15,15 @@ fi
 # Add custom path to PATH
 typeset -gx -U path
 path=(
-	~/bin(N-/) \
+    ~/bin(N-/) \
     /usr/local/bin(N-/) \
     /usr/bin(N-/) \
     /bin(N-/) \
-	/usr/local/sbin(N-/) \
+    /usr/local/sbin(N-/) \
     /usr/sbin(N-/) \
     /sbin(N-/) \
     $path \
-	)
+    )
 
 # NOTE: set fpath before compinit
 typeset -gx -U fpath
@@ -87,8 +87,7 @@ export PATH="$GOBIN:$PATH"
 export CORRECT_IGNORE='_*'
 export CORRECT_IGNORE_FILE='.*'
 
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-export WORDCHARS='*?.[]~&;!#$%^(){}<>'
+export WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS="--extended --ansi --multi"

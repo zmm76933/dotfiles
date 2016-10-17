@@ -28,7 +28,6 @@ bindkey -e
 #bindkey -M viins '^?'    backward-delete-char
 #bindkey -M viins '^G'    send-break
 #bindkey -M viins '^D'    delete-char-or-list
-bindkey '^[[3~' delete-char-or-list
 
 #bindkey -M vicmd '^A'    beginning-of-line
 #bindkey -M vicmd '^E'    end-of-line
@@ -40,6 +39,10 @@ bindkey '^[[3~' delete-char-or-list
 #bindkey -M vicmd '^U'    backward-kill-line
 #bindkey -M vicmd '/'     vi-history-search-forward
 #bindkey -M vicmd '?'     vi-history-search-backward
+
+# removed keys(for miss typing)
+# I want to bind good function for these keys!!
+bindkey -r '^J'
 
 # Like bash C-u behavior
 bindkey '^U' backward-kill-line
@@ -67,10 +70,10 @@ if is-at-least 5.0.8; then
 fi
 
 # bind P and N for EMACS mode
-has 'history-substring-search-up' &&
-    bindkey -M emacs '^P' history-substring-search-up
-has 'history-substring-search-down' &&
-    bindkey -M emacs '^N' history-substring-search-down
+#has 'history-substring-search-up' &&
+#    bindkey -M emacs '^P' history-substring-search-up
+#has 'history-substring-search-down' &&
+#    bindkey -M emacs '^N' history-substring-search-down
 
 # bind k and j for VI mode
 #has 'history-substring-search-up' &&
@@ -87,7 +90,8 @@ has 'history-substring-search-down' &&
 # Insert a last word
 zle -N insert-last-word smart-insert-last-word
 zstyle :insert-last-word match '*([^[:space:]][[:alpha:]/\\]|[[:alpha:]/\\][^[:space:]])*'
-bindkey -M viins '^]' insert-last-word
+bindkey '^]' insert-last-word
+#bindkey -M viins '^]' insert-last-word
 
 # Surround a forward word by single quote
 quote-previous-word-in-single() {
@@ -95,7 +99,8 @@ quote-previous-word-in-single() {
     zle vi-forward-blank-word
 }
 zle -N quote-previous-word-in-single
-bindkey -M viins '^Q' quote-previous-word-in-single
+bindkey '^Q' quote-previous-word-in-single
+#bindkey -M viins '^Q' quote-previous-word-in-single
 
 # Surround a forward word by double quote
 quote-previous-word-in-double() {
@@ -103,9 +108,11 @@ quote-previous-word-in-double() {
     zle vi-forward-blank-word
 }
 zle -N quote-previous-word-in-double
-bindkey -M viins '^Xq' quote-previous-word-in-double
+bindkey '^Xq' quote-previous-word-in-double
+#bindkey -M viins '^Xq' quote-previous-word-in-double
 
-bindkey -M viins "$terminfo[kcbt]" reverse-menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+#bindkey -M viins "$terminfo[kcbt]" reverse-menu-complete
 
 #bindkey -s 'vv' "!vi\n"
 #bindkey -s ':q' "^A^Kexit\n"
@@ -190,23 +197,41 @@ if ! is_tmux_runnning; then
     bindkey '^T' _start-tmux-if-it-is-not-already-started
 fi
 
-#do-enter() {
-#    if [ -n "$BUFFER" ]; then
-#        zle accept-line
-#        return
-#    fi
+_tmux_pane_words() {
+  local expl
+  local -a w
+  if [[ -z "$TMUX_PANE" ]]; then
+    _message "not running inside tmux!"
+    return 1
+  fi
+  w=( ${(u)=$(tmux capture-pane \; show-buffer \; delete-buffer)} )
+  _wanted values expl 'words from current tmux pane' compadd -a w
+}
+zle -C tmux-pane-words-prefix   complete-word _generic
+zle -C tmux-pane-words-anywhere complete-word _generic
+bindkey '^[/' tmux-pane-words-prefix
+bindkey '^[?' tmux-pane-words-anywhere
+zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' completer _tmux_pane_words
+zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' ignore-line current
+zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=*'
 
-#    echo
-#    if is_git_repo; then
-#        git status
-#    else
-#        ls
-#    fi
+do-enter() {
+    if [ -n "$BUFFER" ]; then
+        zle accept-line
+        return
+    fi
 
-#    zle reset-prompt
-#}
-#zle -N do-enter
-#bindkey '^m' do-enter
+    echo
+    if is_git_repo; then
+        git status
+    else
+        ls
+    fi
+
+    zle reset-prompt
+}
+zle -N do-enter
+bindkey '^m' do-enter
 
 peco-select-gitadd() {
     local selected_file_to_add

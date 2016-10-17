@@ -8,8 +8,8 @@ alias p="print -l"
 
 # For mac, aliases
 if is_osx; then
-    has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
-	has "open" && alias o='open'
+    alias ql='qlmanage -p "$@" >&/dev/null'
+    alias o='open'
 fi
 
 if has 'git'; then
@@ -62,9 +62,17 @@ alias vi="vim"
 # Use plain vim.
 alias nvim='vim -N -u NONE -i NONE'
 
-# The first word of each simple command, if unquoted, is checked to see 
-# if it has an alias. [...] If the last character of the alias value is 
-# a space or tab character, then the next command word following the 
+# Emacs client
+e() {
+    emacsclient ${*:-.} 2>/dev/null && return 0
+    if [ -e $1 ] || touch $1; then
+        open -a emacs ${*:-.}
+    fi
+}
+
+# The first word of each simple command, if unquoted, is checked to see
+# if it has an alias. [...] If the last character of the alias value is
+# a space or tab character, then the next command word following the
 # alias is also checked for alias expansion
 alias sudo='sudo '
 
@@ -75,11 +83,13 @@ alias -g W='| wc'
 alias -g X='| xargs'
 alias -g F='| "$(available $INTERACTIVE_FILTER)"'
 alias -g S="| sort"
+alias -g SE="| sed"
 alias -g V="| tovim"
 alias -g N=" >/dev/null 2>&1"
 alias -g N1=" >/dev/null"
 alias -g N2=" 2>/dev/null"
 alias -g VI='| xargs -o vim'
+alias -g E="| xargs emacsclient -n"
 
 multi_grep() {
     local std_in="$(cat <&0)" word
@@ -90,6 +100,34 @@ multi_grep() {
     done
 
     echo "${std_in}"
+}
+
+# Select all processes
+psa() {
+    ps auxw | grep -v "ps -auxww" | grep -v grep
+}
+
+# Select a process from grep
+psg() {
+    ps auxw | head -n 1
+    ps auxw | grep $* | grep -v "ps -auxww" | grep -v grep
+}
+
+# Select 8 processes in memory
+psm() {
+    ps auxw | head -n 1
+    ps auxw | sort -r -n -k4 | grep -v "ps -auxww" | grep -v grep | head -n 8
+}
+
+# Select processes by nice values
+psn() {
+    ps -acx -o "pid,nice,%cpu,command" | grep -v "ps -acx" | less
+}
+
+# Select 8 processes in CPU
+pst() {
+    ps auxw | head -n 1
+    ps auxw | sort -r -n -k3 | grep -v "ps -auxww" | grep -v grep | head -n 8
 }
 
 (( $+galiases[H] )) || alias -g H='| head'
@@ -103,10 +141,39 @@ if has "jq"; then
     alias -g J='| jq .'
 fi
 
-if is_osx; then
-    alias -g CP='| pbcopy'
-    alias -g CC='| tee /dev/tty | pbcopy'
-fi
+case "$PLATFORM" in
+    osx)
+        if has "brew"; then
+            alias update='brew cask update && brew upgrade && homebrew_cask_upgrade'
+            alias cleanup='brew cleanup && brew cask cleanup'
+        fi
+        alias -g O="| xargs open"
+        alias -g CP='| pbcopy'
+        alias -g CC='| tee /dev/tty | pbcopy'
+        ;;
+    linux)
+        if has "xsel"; then
+            alias pbcopy='xsel --clipboard --input'
+            alias pbpaste='xsel --clipboard --output'
+            alias -g CP='| xsel --clipboard --input'
+            alias -g CC='| tee /dev/tty | xsel --clipboard --input'
+        fi
+        if has "yum"; then
+            alias update='sudo yum -y update'
+            alias cleanup='yum clean all'
+        elif has "apt-get"; then
+            alias update='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade'
+            alias cleanup='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
+        fi
+        ;;
+esac
+
+# My commands
+autoload -Uz homebrew_cask_upgrade
+autoload -Uz cde
+autoload -Uz cdg
+autoload -Uz cdp
+autoload -Uz dired
 
 cat_alias() {
     local i stdin file=0
