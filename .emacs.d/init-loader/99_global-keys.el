@@ -67,6 +67,9 @@
 ;; backward kill
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
 
+;; revert buffer
+(global-set-key (kbd "C-x RET R") 'revert-buffer)
+
 ;; helm
 (global-set-key (kbd "C-;") 'helm-mini)
 (global-set-key (kbd "C-'") 'helm-resume)
