@@ -1888,13 +1888,13 @@ else
     endif
   else
     " Vim for CUI
-    if s:has_plugin('solarized.vim') && $TERM_PROGRAM ==# "Apple_Terminal"
-      try
-        colorscheme solarized-cui
-      catch
-        colorscheme solarized
-      endtry
-    elseif s:has_plugin('jellybeans.vim')
+    " if s:has_plugin('solarized.vim') && $TERM_PROGRAM ==# "Apple_Terminal"
+    "   try
+    "     colorscheme solarized-cui
+    "   catch
+    "     colorscheme solarized
+    "   endtry
+    if s:has_plugin('jellybeans.vim')
       colorscheme jellybeans
     elseif s:has_plugin('vim-hybrid')
       colorscheme hybrid

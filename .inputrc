@@ -1,5 +1,20 @@
+#
+# $URL$
+# $Id$
+
 # Carry out tilde expansion by a tab
 set expand-tilde on
+
+# enable meta key
+set meta-flag on
+
+# activate 8 bit characters
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# suppress bell ringing
+set bell-style none
 
 # Ignore the small and capital letter
 $if Bash
@@ -9,8 +24,13 @@ $endif
 # Auto scroll
 set horizontal-scroll-mode off
 
-# Power up Japanses Input Method
-set meta-flag on
-set input-meta on
-set output-meta on
-set convert-meta off
+# encoding to utf-8
+set kanji-code utf-8
+
+# enable the application keypad
+set enable-keypad on
+
+# enable delete page up/down in readline applications
+"\e[3~": delete-char
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history

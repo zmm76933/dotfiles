@@ -1,0 +1,24 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! rxvt-unicode
+URxvt.termName: rxvt-256color
+URxvt.foreground: White
+URxvt.background: Gray10
+URxvt.geometry: 120x50
+URxvt.scrollBar: false
+URxvt.saveLines: 1000
+
+URxvt.font:\
+    xft:Monaco:style=Regular:size=10:antialias=true,\
+    xft:Osaka:style=Regular-Mono
+URxvt.boldFont:\
+    xft:Monaco:style=Bold,\
+    xft:Osaka:style=Regular-Mono
+URxvt.italicFont:\
+    xft:Monaco:style=Italic,\
+    xft:Osaka:style=Regular-Mono
+URxvt.boldItalicFont:\
+    xft:Monaco:style=Bold Italic,\
+    xft:Osaka:style=Regular-Mono
+
+URxvt.color4: #a9cdeb
+URxvt.color12: #ccfbff
