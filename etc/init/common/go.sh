@@ -33,55 +33,14 @@ case "$(get_os)" in
 
     # Case of Linux
     linux)
-        uri="https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz"
-        tar="${uri##*/}"
-        grt="/usr/local/go"
-        dir="go"
-
-        # exit with true if you have go command
-        if has "go"; then
-            log_pass "go: already installed"
-            exit
-        fi
-
-        if has "wget"; then
-            dler="wget"
-        elif has "curl"; then
-            dler="curl -O"
-        else
-            log_fail "error: require: wget or curl" 1>&2
-            exit 1
-        fi
-
-        # Cleaning
-        command mv -f "$grt"{,.$$} 2>/dev/null && :
-        command mv -f "$tar"{,.$$} 2>/dev/null && :
-        command mv -f "$dir"{,.$$} 2>/dev/null && :
-
-        # Downloading
-        log_echo "Downloading golang..."
-        eval "$dler" "$uri"
-        if [ $? -eq 0 -a -f "$tar" ]; then
-            log_echo "Unzip $tar ..."
-            tar xzf "$tar"
-        else
-            log_fail "error: failed to download from $uri" 1>&2
-            exit 1
-        fi
-
-        if [ ! -d "$dir" ]; then
-            log_fail "error: failed to expand $dir directory" 1>&2
-            exit 1
-        fi
-
-        # Installing
-        sudo cp -f -v "$dir"/bin/go "${PATH%%:*}"
-        sudo mv -f -v "$dir" "$grt"
-        sudo rm -f -v "$tar"
-
-        # Result
-        if eval "${PATH%%:*}/go version"; then
-            log_pass "go: installed successfully"
+        if has "yum"; then
+            if sudo yum install epel-release && yum install -y golang; then
+                log_pass "go: installed successfully"
+            fi
+        elif has "apt-get"; then
+            if sudo apt-get -y install golang; then
+                log_pass "go: installed successfully"
+            fi
         else
             log_fail "go: failed to install golang"
             exit 1

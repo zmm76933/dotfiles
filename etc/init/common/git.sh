@@ -21,7 +21,7 @@ if ! has "git"; then
             if has "brew"; then
                 log_echo "Install git with Homebrew"
                 brew install git
-            elif "port"; then
+            elif has "port"; then
                 log_echo "Install git with MacPorts"
                 sudo port install git
             else
@@ -35,7 +35,7 @@ if ! has "git"; then
             if has "yum"; then
                 log_echo "Install git with Yellowdog Updater Modified"
                 sudo yum -y install git
-            elif "port"; then
+            elif has "apt-get"; then
                 log_echo "Install git with Advanced Packaging Tool"
                 sudo apt-get -y install git
             else

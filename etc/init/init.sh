@@ -32,7 +32,9 @@ for i in "$DOTPATH"/etc/init/"$(get_os)"/*.sh
 do
     if [ -f "$i" ]; then
         log_info "$(e_arrow "$(basename "$i")")"
-        if [ "${DEBUG:-}" != 1 ]; then
+        if [ "${DEBUG:-}" != 1 ] && [ "$(basename "$i")" != "zplug.sh" ]; then
+            bash "$i"
+        else
             zsh "$i"
         fi
     else

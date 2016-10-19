@@ -16,8 +16,14 @@ if ! has "python"; then
 fi
 
 if ! has "easy_install"; then
-    if sudo yum install -y python-setuptools; then
-        log_pass "easy_install: installed successfully"
+    if has "yum"; then
+        if sudo yum install -y python-setuptools; then
+            log_pass "easy_install: installed successfully"
+        fi
+    elif has "apt-get"; then
+        if sudo apt-get -y install python-setuptools; then
+            log_pass "easy_install: installed successfully"
+        fi
     else
         log_fail "error: easy_install: failed to install"
         exit 1
