@@ -45,7 +45,7 @@ alias zmv='noglob zmv -W'
 
 alias du='du -h'
 alias job='jobs -l'
-alias //='quit'
+alias //='exit'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -512,4 +512,3 @@ git_modified_files() {
     done
 }
 #alias -g GG='$(git_modified_files)'
-alias ls='gls --color=auto -F'
