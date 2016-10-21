@@ -1,15 +1,15 @@
-#       ___           ___           ___           ___           ___           ___      
-#      /\  \         /\  \         /\  \         /\__\         /\  \         /\  \     
-#     /::\  \       /::\  \       /::\  \       /:/  /        /::\  \       /::\  \    
-#    /:/\:\  \     /:/\:\  \     /:/\ \  \     /:/__/        /:/\:\  \     /:/\:\  \   
-#   /::\~\:\__\   /::\~\:\  \   _\:\~\ \  \   /::\  \ ___   /::\~\:\  \   /:/  \:\  \  
-#  /:/\:\ \:|__| /:/\:\ \:\__\ /\ \:\ \ \__\ /:/\:\  /\__\ /:/\:\ \:\__\ /:/__/ \:\__\ 
-#  \:\~\:\/:/  / \/__\:\/:/  / \:\ \:\ \/__/ \/__\:\/:/  / \/_|::\/:/  / \:\  \  \/__/ 
-#   \:\ \::/  /       \::/  /   \:\ \:\__\        \::/  /     |:|::/  /   \:\  \       
-#    \:\/:/  /        /:/  /     \:\/:/  /        /:/  /      |:|\/__/     \:\  \      
-#     \::/__/        /:/  /       \::/  /        /:/  /       |:|  |        \:\__\     
-#      ~~            \/__/         \/__/         \/__/         \|__|         \/__/     
-#                                                                                      
+#       ___           ___           ___           ___           ___           ___
+#      /\  \         /\  \         /\  \         /\__\         /\  \         /\  \
+#     /::\  \       /::\  \       /::\  \       /:/  /        /::\  \       /::\  \
+#    /:/\:\  \     /:/\:\  \     /:/\ \  \     /:/__/        /:/\:\  \     /:/\:\  \
+#   /::\~\:\__\   /::\~\:\  \   _\:\~\ \  \   /::\  \ ___   /::\~\:\  \   /:/  \:\  \
+#  /:/\:\ \:|__| /:/\:\ \:\__\ /\ \:\ \ \__\ /:/\:\  /\__\ /:/\:\ \:\__\ /:/__/ \:\__\
+#  \:\~\:\/:/  / \/__\:\/:/  / \:\ \:\ \/__/ \/__\:\/:/  / \/_|::\/:/  / \:\  \  \/__/
+#   \:\ \::/  /       \::/  /   \:\ \:\__\        \::/  /     |:|::/  /   \:\  \
+#    \:\/:/  /        /:/  /     \:\/:/  /        /:/  /      |:|\/__/     \:\  \
+#     \::/__/        /:/  /       \::/  /        /:/  /       |:|  |        \:\__\
+#      ~~            \/__/         \/__/         \/__/         \|__|         \/__/
+#
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -44,6 +44,7 @@ if ! vitalize 2>/dev/null; then
     return 1
 fi
 
+export HOST=`hostname -s`
 export PATH=~/bin:"$PATH"
 export PAGER=less
 export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
@@ -174,7 +175,8 @@ export FZF_DEFAULT_OPTS='--extended'
 bash_alias() {
     # For mac, aliases
     if is_osx; then
-        has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
+        alias ql='qlmanage -p "$@" >&/dev/null'
+        alias o='open'
     fi
 
     if has 'git'; then
@@ -190,7 +192,7 @@ bash_alias() {
     alias ld='ls -ld'          # Show info about the directory
     alias lla='ls -lAF'        # Show hidden all files
     alias ll='ls -lF'          # Show long file information
-    alias l='ls -1F'          # Show long file information
+    alias l='ls -1F'           # Show long file information
     alias la='ls -AF'          # Show hidden files
     alias lx='ls -lXB'         # Sort by extension
     alias lk='ls -lSr'         # Sort by size, biggest last
@@ -223,11 +225,66 @@ bash_alias() {
     # Use plain vim.
     alias nvim='vim -N -u NONE -i NONE'
 
-    # The first word of each simple command, if unquoted, is checked to see 
-    # if it has an alias. [...] If the last character of the alias value is 
-    # a space or tab character, then the next command word following the 
+    # Emacs client
+    e() {
+        emacsclient ${*:-.} 2>/dev/null && return 0
+        if [ -e $1 ] || touch $1; then
+            emacs ${*:-.}
+        fi
+    }
+
+    # The first word of each simple command, if unquoted, is checked to see
+    # if it has an alias. [...] If the last character of the alias value is
+    # a space or tab character, then the next command word following the
     # alias is also checked for alias expansion
     alias sudo='sudo '
+
+    # Select all processes
+    psa() {
+        ps auxw | grep -v "ps -auxww" | grep -v grep
+    }
+
+    # Select a process from grep
+    psg() {
+        ps auxw | head -n 1
+        ps auxw | grep $* | grep -v "ps -auxww" | grep -v grep
+    }
+
+    # Select 8 processes in memory
+    psm() {
+        ps auxw | head -n 1
+        ps auxw | sort -r -n -k4 | grep -v "ps -auxww" | grep -v grep | head -n 8
+    }
+
+    # Select processes by nice values
+    psn() {
+        ps -acx -o "pid,nice,%cpu,command" | grep -v "ps -acx" | less
+    }
+
+    # Select 8 processes in CPU
+    pst() {
+        ps auxw | head -n 1
+        ps auxw | sort -r -n -k3 | grep -v "ps -auxww" | grep -v grep | head -n 8
+    }
+
+    case "$PLATFORM" in
+        osx)
+            if has "brew"; then
+                alias update='brew cask update && brew upgrade && homebrew_cask_upgrade'
+                alias cleanup='brew cleanup && brew cask cleanup'
+            fi
+            ;;
+        linux)
+            if has "yum"; then
+                alias update='sudo yum -y update'
+                alias cleanup='yum clean all'
+            elif has "apt-get"; then
+                alias update='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade'
+                alias cleanup='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
+            fi
+            ;;
+    esac
+
 }
 
 bashrc_shopt() {
@@ -237,7 +294,7 @@ bashrc_shopt() {
     #  shopt [-pqsu] [-o] [optname ...]
     #
     # Toggle the values of settings controlling optional shell behavior.
-    # The settings can be either those listed below, or, if the -o option is used, 
+    # The settings can be either those listed below, or, if the -o option is used,
     # those available with the -o option to the set builtin command (see The Set Builtin).
     # With no options, or with the -p option, a list of all settable options is displayed,
     # with an indication of whether or not each is set. The -p option causes output to be
@@ -350,6 +407,8 @@ bashrc_startup() {
     $DOTPATH/bin/tmuxx
 
     bashrc_loading || return 1
+
+    bash_alias || return 1
 
     echo
     echo -e "${BCyan}This is BASH ${BRed}${BASH_VERSION%.*}${BCyan} - DISPLAY on ${BRed}$DISPLAY${NC}"
