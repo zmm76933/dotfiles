@@ -41,9 +41,15 @@ set_dock_preferences()
     defaults write com.apple.dock wvous-bl-corner -int 2
     defaults write com.apple.dock wvous-bl-modifier -int 0
 
-    # Bottom right screen corner → Launchpad
-    defaults write com.apple.dock wvous-br-corner -int 11
+    # Bottom right screen corner → Show application windows
+    defaults write com.apple.dock wvous-br-corner -int 3
     defaults write com.apple.dock wvous-br-modifier -int 0
+
+    # Wipe all app icons from the Dock
+    #defaults write com.apple.dock persistent-apps -array
+
+    # Add a Recent Applications Folder to Dock
+    defaults write com.apple.dock persistent-others -array-add '{"tile-data" = {"list-type" = 1;}; "tile-type" = "recents-tile";}'
 }
 
 # QuickLook {{{1
@@ -57,6 +63,9 @@ set_quicklook_preferences()
 # Finder {{{1
 set_finder_preferences()
 {
+    # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+    #defaults write com.apple.finder QuitMenuItem -bool true
+
     # Set `${HOME}` as the default location for new Finder windows
     defaults write com.apple.finder NewWindowTarget -string "PfHm"
     defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
@@ -108,7 +117,7 @@ set_finder_preferences()
     defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
     # Use colomn view in all Finder windows by default
-    defaults write com.apple.finder FXPreferredViewStyle -string "ilsv"
+    defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
     # Disable the warning before emptying the Trash
     defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -133,9 +142,17 @@ set_keyboard_preferences()
     # Disable auto-correct
     defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-    # Disable Control-Command-D for Emacs<
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
+    # Disable auto-capitalization
+    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
+    # Disable smart quotes as they’re annoying when typing code
+    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+    # Disable smart dashes as they’re annoying when typing code
+    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+    # Disable Control-Command-D for Emacs
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
 }
 
 # Trackpad {{{1
@@ -146,7 +163,8 @@ set_trackpad_preferences()
     defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
     defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-
+    # Disable “natural” (Lion-style) scrolling
+    defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 }
 
 # Safari.app {{{1
@@ -184,14 +202,14 @@ set_terminal_preferences()
 
     # Use a custom theme
     # Use a modified version of the Solarized Dark theme by default in Terminal.app
-    TERM_PROFILE='~/Downloads/Solarized_Dark.terminal';
-    CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
-    if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
-        open "$TERM_PROFILE"
-        defaults write com.apple.Terminal "Default Window Settings" -string "$TERM_PROFILE"
-        defaults write com.apple.Terminal "Startup Window Settings" -string "$TERM_PROFILE"
-    fi
-    defaults import com.apple.Terminal "$HOME/Library/Preferences/com.apple.Terminal.plist"
+    #TERM_PROFILE='./app/Solarized_Dark.terminal';
+    #CURRENT_PROFILE="$(defaults read com.apple.terminal 'Default Window Settings')";
+    #if [ "${CURRENT_PROFILE}" != "${TERM_PROFILE}" ]; then
+    #    open "$TERM_PROFILE"
+    #    defaults write com.apple.Terminal "Default Window Settings" -string "$TERM_PROFILE"
+    #    defaults write com.apple.Terminal "Startup Window Settings" -string "$TERM_PROFILE"
+    #fi
+    #defaults import com.apple.Terminal "$HOME/Library/Preferences/com.apple.Terminal.plist"
 
     # Enable �gfocus follows mouse�h for Terminal.app and all X11 apps
     # i.e. hover over a window and start typing in it without clicking first
@@ -258,33 +276,36 @@ set_ui_and_ux_preferences()
     # Disable Gatekeeper
     sudo spctl --master-disable
 
-    # Hide the battery percentage from the menu bar
-    #defaults write com.apple.menuextra.battery ShowPercent -string "NO"
-
-    # Disable the "Are you sure you want to open this application?" dialog
-    defaults write com.apple.LaunchServices LSQuarantine -bool false
-
     # Disable `Reopen windows when logging back in`
     #defaults write com.apple.loginwindow TALLogoutSavesState 0
 
-    # Automatically quit the printer app once the print jobs are completed
-    #defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+    # Require password immediately after the computer went into
+    # sleep or screen saver mode
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
 
     # Enable subpixel font rendering on non-Apple LCDs
     defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
     # Expand save panel by default
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
     # Expand print panel by default
     defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
     # Save to disk (not to iCloud) by default
     defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
+    # Automatically quit printer app once the print jobs complete
+    defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+    # Disable the “Are you sure you want to open this application?” dialog
+    defaults write com.apple.LaunchServices LSQuarantine -bool false
+
     # Restart automatically if the computer freezes
     sudo systemsetup -setrestartfreeze on
-
 }
 
 # main {{{1}}}
