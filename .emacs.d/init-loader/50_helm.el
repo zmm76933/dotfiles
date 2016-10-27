@@ -34,7 +34,9 @@
   (remove-hook 'post-self-insert-hook 'helm-find-files--reset-level-tree)
 
   (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-  (define-key helm-find-files-map (kbd "C-M-u") #'helm-find-files-down-one-level)
+  (define-key helm-find-files-map (kbd "C-w") 'editutil-backward-delete-word)
+  (define-key helm-find-files-map (kbd "C-M-u") #'helm-find-files-up-one-level)
+  (define-key helm-find-files-map (kbd "C-M-d") #'helm-find-files-down-last-level)
   (define-key helm-find-files-map (kbd "C-c C-o") #'helm-ff-run-switch-other-window))
 
 ;;; helm.el ends here
