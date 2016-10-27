@@ -138,9 +138,6 @@
 (el-get-bundle fxbois/web-mode)
 (el-get-bundle smihica/emmet)
 
-;; navi2ch
-(el-get-bundle navi2ch)
-
 ;; session
 (el-get-bundle recentf-ext)
 

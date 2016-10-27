@@ -25,9 +25,6 @@
 ;; "{"の後の改行インデント
 (global-set-key (kbd "RET") 'newline-and-insert-newline-and-indent-after-brace)
 
-;; navi2ch
-(global-set-key (kbd "C-c 2") 'navi2ch)
-
 ;; fullscreen を toggle する
 (global-set-key (kbd "C-c m") 'toggle-fullscreen)
 
