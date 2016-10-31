@@ -11,7 +11,7 @@ set -eu
 
 PACKAGES="zsh tmux
     build-essential diffutils autoconf automake silversearcher-ag
-    git rbenv python python-setuptools
+    git rbenv python python-setuptools tree
     emacs vim aspell ispell nkf lv cmigemo
     curl w3m nkf nmap wakeonlan wireshark
     imagemagick
