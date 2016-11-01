@@ -13,6 +13,9 @@ set_dock_preferences()
     # Set the icon size
     defaults write com.apple.dock tilesize -int 20
 
+    # Double-click action when title bar was done
+    defaults write NSGlobalDomain AppleActionOnDoubleClick -string "Minimize"
+
     # Magnificate the Dock
     defaults write com.apple.dock magnification -bool true
 
@@ -44,6 +47,14 @@ set_dock_preferences()
     # Bottom right screen corner → Show application windows
     defaults write com.apple.dock wvous-br-corner -int 3
     defaults write com.apple.dock wvous-br-modifier -int 0
+
+    # Mission Control → F9
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>101</integer><integer>0</integer></array><key>type</key><string>standard</string></dict></dict>"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>101</integer><integer>131072</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+    # Application window → F10
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>109</integer><integer>0</integer></array><key>type</key><string>standard</string></dict></dict>"
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 35 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>109</integer><integer>131072</integer></array><key>type</key><string>standard</string></dict></dict>"
 
     # Wipe all app icons from the Dock
     #defaults write com.apple.dock persistent-apps -array
