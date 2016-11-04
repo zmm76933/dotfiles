@@ -9,6 +9,7 @@ alias p="print -l"
 # For mac, aliases
 if is_osx; then
     alias ql='qlmanage -p "$@" >&/dev/null'
+    alias gvim="open -a MacVim"
     alias o='open'
 fi
 
