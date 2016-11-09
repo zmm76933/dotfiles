@@ -1,3 +1,16 @@
+;;; -*- mode: emacs-lisp; coding: utf-8-emacs-unix; indent-tabs-mode: nil -*-
+;;
+;; init.el -- Emacs init setting elisp file
+;;
+;; $Id$
+
+;;; Commentary:
+;;
+;; emacs package設定
+
+;;; Code:
+;;
+;;
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -181,3 +194,5 @@
 ;; evil
 (when (eq system-type 'darwin)
   (el-get-bundle evil))
+
+;; init-el-get.el ends here
