@@ -170,13 +170,6 @@ case "$PLATFORM" in
         ;;
 esac
 
-# My commands
-autoload -Uz homebrew_cask_upgrade
-autoload -Uz cde
-autoload -Uz cdg
-autoload -Uz cdp
-autoload -Uz dired
-
 cat_alias() {
     local i stdin file=0
     stdin=("${(@f)$(cat <&0)}")
