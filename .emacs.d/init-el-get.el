@@ -63,6 +63,7 @@
 (el-get-bundle popwin)
 (el-get-bundle lukhas/buffer-move)
 (el-get-bundle syohex/emacs-import-popwin :name import-popwin)
+(el-get-bundle syohex/emacs-zoom-window :name zoom-window)
 
 ;; Pair
 (el-get-bundle Fuco1/smartparens)

@@ -16,56 +16,27 @@
 (global-set-key (kbd "C-x c j") 'dired-jump-other-window)
 (global-set-key (kbd "C-x c y") 'clipboard-yank)
 
-;; デフォルトのスクロールキーを変更
-(global-set-key (kbd "C-z") 'scroll-down)
-
-;; "{"の後の改行インデント
+;; global key setting(standard)
 (global-set-key (kbd "RET") 'newline-and-insert-newline-and-indent-after-brace)
-
-;; fullscreen を toggle する
-(global-set-key (kbd "C-c m") 'toggle-fullscreen)
-
-;; popwin
-(global-set-key (kbd "M-z") popwin:keymap)
-
-;; gtag
-(global-set-key (kbd "M-,") 'pop-tag-mark)
-
-;; gtag
-(global-set-key (kbd "M-*") 'tags-loop-continue)
-
-;; next buffer
-(global-set-key (kbd "M-[") 'bs-cycle-next)
-
-;; previous buffer
-(global-set-key (kbd "M-]") 'bs-cycle-previous)
-
-;; window の移動
-(global-set-key (kbd "M-`") 'editutil-other-window)
-
-;; insert parentheses like M-1 M-(
+(global-set-key (kbd "C-z") 'scroll-down)
 (global-set-key (kbd "M-(") 'my/insert-parentheses)
-
-;; yas
-(global-set-key (kbd "M-=") 'yas-insert-snippet)
-
-;; 行移動
 (global-set-key (kbd "C-M-l") 'goto-line)
-
-;; undo-tree
-(global-set-key (kbd "C-M-/") 'undo-tree-redo)
-
-;; 別ウインドウの下スクロール
 (global-set-key (kbd "C-M-z") 'scroll-other-window-down)
-
-;; backward kill
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
-
-;; exchange point and mark
 (global-set-key (kbd "C-x C-x") 'exchange-point-and-mark)
-
-;; revert buffer
 (global-set-key (kbd "C-x RET R") 'revert-buffer)
+(global-set-key (kbd "C-x RET M") 'toggle-fullscreen)
+
+;; global key setting (additional)
+(global-set-key (kbd "M-,") 'pop-tag-mark)
+(global-set-key (kbd "M-*") 'tags-loop-continue)
+(global-set-key (kbd "M-=") 'yas-insert-snippet)
+(global-set-key (kbd "M-'") 'avy-goto-word-1)
+(global-set-key (kbd "M-`") 'editutil-other-window)
+(global-set-key (kbd "M-z") popwin:keymap)
+(global-set-key (kbd "M-z C-i") 'import-popwin)
+(global-set-key (kbd "C-x z") 'zoom-window-zoom)
+(global-set-key (kbd "C-M-/") 'undo-tree-redo)
 
 ;; helm
 (global-set-key (kbd "C-;") 'helm-mini)
@@ -97,11 +68,6 @@
 (smartrep-define-key
  global-map "M-g" '(("-" . 'goto-last-change)
                     ("+" . 'goto-last-change-reverse)))
-
-;; undo tree
-(smartrep-define-key
- undo-tree-map "C-x" '(("u" . 'undo-tree-undo)
-                       ("U" . 'undo-tree-redo)))
 
 ;;; buffer-move
 (global-set-key (kbd "M-g h") 'buf-move-left)
