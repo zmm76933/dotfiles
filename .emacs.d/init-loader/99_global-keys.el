@@ -16,9 +16,6 @@
 (global-set-key (kbd "C-x c j") 'dired-jump-other-window)
 (global-set-key (kbd "C-x c y") 'clipboard-yank)
 
-;; anzu search
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-
 ;; デフォルトのスクロールキーを変更
 (global-set-key (kbd "C-z") 'scroll-down)
 
@@ -96,12 +93,10 @@
 (global-set-key (kbd "M-g M-t") 'ff-find-other-file)
 (global-set-key (kbd "M-g r") #'recompile)
 (global-set-key (kbd "M-g q") #'quickrun)
+
 (smartrep-define-key
  global-map "M-g" '(("-" . 'goto-last-change)
                     ("+" . 'goto-last-change-reverse)))
-(smartrep-define-key
- global-map "M-g" '(("[" . 'point-undo)
-                    ("]" . 'point-redo)))
 
 ;; undo tree
 (smartrep-define-key

@@ -52,7 +52,6 @@
 ;; moving cursor
 (el-get-bundle goto-chg)
 (el-get-bundle abo-abo/avy)
-(el-get-bundle! point-undo)
 
 ;; region
 (el-get-bundle expand-region)
