@@ -20,23 +20,42 @@
 ;; Font coloring
 (global-font-lock-mode +1)
 
-;; @see http://dan-project.blog.so-net.ne.jp/2012-06-04
-(setq backup-directory-alist
-  (cons (cons "\\.*$" (expand-file-name "var/backup" user-emacs-directory))
-    backup-directory-alist))
+;; backup
+(add-to-list 'backup-directory-alist (cons "." my/backup-dir))
 
-;; create auto-save file in ~/.emacs.d/backup
-(setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "var/backup/" user-emacs-directory) t)))
+;; auto-save
+(setq auto-save-file-name-transforms `((".*" ,my/backup-dir t)))
+
+;; bookmark
+(setq bookmark-default-file (concat my/history-dir "bookmarks"))
+
+;; tramp cache
+(setq tramp-persistency-file-name (concat my/history-dir "tramps"))
+
+;; tramp backup
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+;; savehist (minibuffer histoy is saved if savehist-mode is on)
+(setq savehist-file (concat my/history-dir "savehists"))
+(savehist-mode 1)
+
+;; save-place
+(setq save-place-file (concat my/history-dir "places"))
+(save-place-mode +1)
+
+;; save-kill
+(setq save-kill-file-name (concat my/history-dir "kill-ring-saved"))
+
+;; undohist
+(setq undohist-directory (concat my/history-dir "undohist"))
+(setq undohist-ignored-files '("/tmp" "/EDITMSG" "/el-get"))
+(undohist-initialize)
 
 ;; ロックファイルを無効
 (setq create-lockfiles nil)
 
 ;; 自動保存ファイルのリストファイルを無効
 (setq auto-save-list-file-prefix nil)
-
-;; 自動保存ファイルの編集で使用したバッファをsaveまたはkillすると削除される
-(setq delete-auto-save-files t)
 
 ;;ファイルを開く際にシンボリックリンクをすべて辿って解決した絶対パスとして開く
 (setq find-file-visit-truename t)

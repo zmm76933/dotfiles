@@ -11,6 +11,7 @@
 ;;; Code:
 ;;
 ;;
+(setq mc/list-file (concat my/history-dir "mc-lists.el"))
 (declare-function smartrep-define-key "smartrep")
 
 (global-set-key (kbd "C-M-c") 'mc/edit-lines)

@@ -46,7 +46,7 @@ do nothing. And suppress the output from `message' and
                      "\\`/proc/" "\\`/sys/"
                      "CMakeCache.txt" "/bookmarks" "\\.gz$"
                      "COMMIT_EDITMSG" "MERGE_MSG" "git-rebase-todo"))
- `(recentf-save-file ,(concat user-emacs-directory "var/recentf/recentf.cache")))
+ `(recentf-save-file ,(concat my/history-dir "recentfs")))
 
 (run-at-time t 600 #'editutil-recentf-save-list)
 (recentf-mode 1)

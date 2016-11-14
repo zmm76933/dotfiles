@@ -87,5 +87,4 @@
       (run-with-idle-timer 0.03 t 'global-hl-line-timer-function))
 ;; (cancel-timer global-hl-line-timer)
 
-
 ;;; appearance.el ends here

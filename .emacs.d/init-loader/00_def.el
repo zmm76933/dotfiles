@@ -17,6 +17,12 @@
 (defvar linux-p (eq system-type 'gnu/linux))
 (defvar nt-p (eq system-type 'windows-nt))
 
+;; custome path
+(defvar my/history-dir (concat user-emacs-directory "var/hist/"))
+(defvar my/backup-dir (concat user-emacs-directory "var/backup/"))
+(if (not (file-directory-p my/history-dir)) (make-directory my/history-dir))
+(if (not (file-directory-p my/backup-dir))  (make-directory my/backup-dir))
+
 ;; Ctrl-q map
 (defvar my/ctrl-q-map (make-sparse-keymap)
   "My original keymap binded to C-q.")

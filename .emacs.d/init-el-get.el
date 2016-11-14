@@ -36,6 +36,10 @@
 
 ;; undo
 (el-get-bundle undo-tree)
+(el-get-bundle! undohist)
+
+;; save-kill
+(el-get-bundle savekill)
 
 ;; highlighting
 (el-get-bundle vline)
