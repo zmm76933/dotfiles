@@ -20,82 +20,58 @@
 ;; Font coloring
 (global-font-lock-mode +1)
 
-;; backup
-(add-to-list 'backup-directory-alist (cons "." my/backup-dir))
+;; basic customize variables
+(custom-set-variables
+ '(auto-save-file-name-transforms `((".*" ,my/backup-dir t)))
+ '(backup-directory-alist `((".*" . ,my/backup-dir)))
+ '(bookmark-default-file (concat my/history-dir "bookmarks"))
+ '(tramp-persistency-file-name (concat my/history-dir "tramps"))
+ '(tramp-backup-directory-alist backup-directory-alist)
+ '(savehist-file (concat my/history-dir "savehists"))
+ '(save-place-file (concat my/history-dir "places"))
+ '(create-lockfiles nil)
+ '(auto-save-list-file-prefix nil)
+ '(find-file-visit-truename t)
+ '(comment-style 'extra-line)
+ '(inhibit-startup-message t)
+ '(initial-scratch-message nil)
+ '(large-file-warning-threshold (* 25 1024 1024))
+ '(package-enable-at-startup nil)
+ '(set-mark-command-repeat-pop t)
+ '(text-quoting-style 'grave)
+ '(user-full-name "Masato Katayama")
+ '(next-line-add-newlines nil)
+ '(scroll-step 1)
+ '(scroll-preserve-screen-position t)
+ '(comint-scroll-show-maximum-output t)
+ '(next-screen-context-lines 4)
+ '(dabbrev-case-fold-search nil)
+ '(completion-ignore-case t)
+ '(read-file-name-completion-ignore-case t)
+ '(read-buffer-completion-ignore-case t)
+ '(vc-follow-symlinks t)
+ '(imenu-auto-rescan t)
+ '(recursive-minibuffers t)
+ '(backward-delete-char-untabify-method 'hungry)
+ ;; additional
+ '(save-kill-file-name (concat my/history-dir "kill-ring-saved"))
+ '(undohist-directory (concat my/history-dir "undohist"))
+ '(undohist-ignored-files '("/tmp" "/EDITMSG" "/el-get")))
 
-;; auto-save
-(setq auto-save-file-name-transforms `((".*" ,my/backup-dir t)))
+;; Don't disable commands
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
 
-;; bookmark
-(setq bookmark-default-file (concat my/history-dir "bookmarks"))
-
-;; tramp cache
-(setq tramp-persistency-file-name (concat my/history-dir "tramps"))
-
-;; tramp backup
-(setq tramp-backup-directory-alist backup-directory-alist)
-
-;; savehist (minibuffer histoy is saved if savehist-mode is on)
-(setq savehist-file (concat my/history-dir "savehists"))
 (savehist-mode 1)
-
-;; save-place
-(setq save-place-file (concat my/history-dir "places"))
 (save-place-mode +1)
-
-;; save-kill
-(setq save-kill-file-name (concat my/history-dir "kill-ring-saved"))
-
-;; undohist
-(setq undohist-directory (concat my/history-dir "undohist"))
-(setq undohist-ignored-files '("/tmp" "/EDITMSG" "/el-get"))
-(undohist-initialize)
-
-;; ロックファイルを無効
-(setq create-lockfiles nil)
-
-;; 自動保存ファイルのリストファイルを無効
-(setq auto-save-list-file-prefix nil)
-
-;;ファイルを開く際にシンボリックリンクをすべて辿って解決した絶対パスとして開く
-(setq find-file-visit-truename t)
-
-;; コメントスタイルの変更
-(setq comment-style 'extra-line)
-
-;; emacsclient を利用するためにサーバ起動
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-;; 起動時のmessageを表示しない
-(setq inhibit-startup-message t)
-
-;; scratch のメッセージを空にする
-(setq initial-scratch-message nil)
-
-;; 巨大ファイルを開く際に警告
-(setq large-file-warning-threshold (* 25 1024 1024))
-
-;; インストールしたパッケージを自動的にautoloadしない
-(setq package-enable-at-startup nil)
-
-;; 連続でマークを辿れるようにする
-(setq set-mark-command-repeat-pop t)
-
-;; テキストクオート
-(setq text-quoting-style 'grave)
-
-;; ユーザネーム
-(setq user-full-name "Masato Katayama")
 
 ;; cursor
 (blink-cursor-mode t)
 
-;; モードラインにライン数
+;; display line infomation
 (line-number-mode t)
-
-;; モードラインにカラム数
 (column-number-mode t)
 
 ;; リージョンを kill-ring に入れないで削除できるようにする
@@ -103,6 +79,16 @@
 
 ;; info for japanese
 (auto-compression-mode t)
+
+;; バッファ自動再読み込み
+(global-auto-revert-mode 1)
+
+;; which-func
+(which-function-mode +1)
+(setq-default which-func-unknown "")
+
+;; 大文字小文字を区別
+(setq-default case-fold-search nil)
 
 ;; for GC
 (setq-default gc-cons-threshold (* gc-cons-threshold 10))
@@ -123,62 +109,9 @@
 ;; ビープ恩
 (setq-default ring-bell-function #'ignore)
 
-;; クリップボードでコピー＆ペーストできるようにする
-(setq x-select-enable-clipboard t)
-
-;; PRIMARY selectionを使う(Windowsでは対象外)
-(setq x-select-enable-primary t)
-
-;; クリップボードでコピー・カットした文字列をキルリングにも保存させる
-(setq save-interprogram-paste-before-kill t)
-
-;;新規行を作成しない
-(setq next-line-add-newlines nil)
-
-;; スクロール時の移動量を1にする
-(setq scroll-step 1)
-
-;; 上端、下端における余白幅(初期設定 0)
-;; (setq scroll-margin 10)
-
-;; カーソル位置を変更しない
-(setq scroll-preserve-screen-position t)
-
-;; shell-mode において最後の行ができるだけウィンドウの一番下にくるようにする
-(setq comint-scroll-show-maximum-output t)
-
-;; C-v や M-v した時に以前の画面にあった文字を何行分残すか(初期設定 2)
-(setq next-screen-context-lines 4)
-
-;; 大文字小文字を区別
-(setq-default case-fold-search nil)
-
-;;動的略語展開で大文字小文字を区別
-(setq dabbrev-case-fold-search nil)
-
-;; ファイル名の補完で大文字小文字を区別しない
-(setq completion-ignore-case t)
-
-;; ファイル読込み時、大文字小文字を区別しない
-(setq read-file-name-completion-ignore-case t)
-
-;; バッファ読込み時、大文字小文字を区別しない
-(setq read-buffer-completion-ignore-case t)
-
-;; バッファ自動再読み込み
-(global-auto-revert-mode 1)
-
-;; シンボリックリンクを開くときの質問省略
-(setq vc-follow-symlinks t)
-
-;; imenuの再度入力を省略
-(setq imenu-auto-rescan t)
-
 ;; 折り返し有効
-(setq-default truncate-lines t)
-
-;; ウィンドウを左右に分割したときに行を折り返さない
-(setq-default truncate-partial-width-windows t)
+(setq-default truncate-lines t
+              truncate-partial-width-windows t)
 
 ;; アクティブなウィンドウだけにカーソルが出るようにする
 (setq-default cursor-in-non-selected-windows nil)
@@ -186,39 +119,33 @@
 ;; キータイプ中、マウスカーソルを消す
 (setq-default make-pointer-invisible t)
 
-;; タブの削除指定
-(setq backward-delete-char-untabify-method 'hungry)
+;; history
+(setq-default history-length 500
+              history-delete-duplicates t)
 
-;; ミニバッファを再帰的に呼び出せるようにする
-(setq recursive-minibuffers t)
+;; undo setting
+(setq-default undo-no-redo t
+              undo-limit 600000
+              undo-strong-limit 900000)
 
-;; 履歴
-(setq-default history-length 500)
+;; Emacs の質問を y/n に
+(fset 'yes-or-no-p #'y-or-n-p)
 
-;; 重複履歴を削除
-(setq-default history-delete-duplicates t)
+;; ダイアログを使わないようにする
+(setq-default use-dialog-box nil)
+(defalias 'message-box 'message)
 
-;; undo設定
-(setq-default undo-no-redo t)
-
-;; undo上限
-(setq-default undo-limit 600000)
-
-;; undo最上限
-(setq-default undo-strong-limit 900000)
+;; emacsclient を利用するためにサーバ起動
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; undo-tree
 (global-undo-tree-mode)
 
-;; ダイアログを使わないようにする
-(setq use-dialog-box nil)
-(defalias 'message-box 'message)
-
-;; ドラッグ&ドロップ時のファイルオープン動作
-(setq dnd-open-file-other-window nil)
-
-;; Emacs の質問を y/n に
-(fset 'yes-or-no-p #'y-or-n-p)
+;; undohist
+(require 'undohist)
+(undohist-initialize)
 
 ;; fixed line position after scrollup, scrolldown
 (defun my/scroll-move-around (orig-fn &rest args)
@@ -227,19 +154,6 @@
     (move-to-window-line orig-line)))
 (advice-add 'scroll-up :around 'my/scroll-move-around)
 (advice-add 'scroll-down :around 'my/scroll-move-around)
-
-;; which-func
-(which-function-mode +1)
-(setq-default which-func-unknown "")
-
-;; I never use C-x C-c
-;; (defalias 'exit 'save-buffers-kill-emacs)
-
-;; Don't disable commands
-(put 'narrow-to-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'set-goal-column 'disabled nil)
 
 ;; smart repetition
 (require 'smartrep)

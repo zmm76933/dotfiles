@@ -36,7 +36,7 @@
 
 ;; undo
 (el-get-bundle undo-tree)
-(el-get-bundle! undohist)
+(el-get-bundle undohist)
 
 ;; save-kill
 (el-get-bundle savekill)
@@ -170,6 +170,7 @@
 
 ;; VCS
 (el-get-bundle magit)
+(el-get-bundle with-editor)
 (el-get-bundle syohex/emacs-git-gutter :name git-gutter)
 (el-get-bundle syohex/emacs-git-messenger :name git-messenger)
 
