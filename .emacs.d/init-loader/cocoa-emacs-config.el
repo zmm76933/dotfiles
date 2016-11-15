@@ -187,11 +187,4 @@
   (define-key dired-mode-map "z" 'dired-open)
   (define-key dired-mode-map " " 'dired-quickLook))
 
-;; evil
-(custom-set-variables
- '(evil-move-cursor-back nil)
- '(evil-search-module 'evil-search))
-
-(define-key my/ctrl-q-map (kbd "e") 'evil-mode)
-
 ;;; cocoa-emacs-init.el ends here
