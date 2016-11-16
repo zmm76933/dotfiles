@@ -13,8 +13,8 @@ PACKAGES="zsh tmux
     build-essential diffutils autoconf automake silversearcher-ag
     g++ libxml2-dev libssl-dev libsqlite3-dev
     libsensors4-dev libavahi-common-dev libavahi-client-dev
-    git rbenv python python-setuptools tree
-    aspell ispell nkf lv cmigemo
+    git mercurial rbenv python python-setuptools tree
+    aspell ispell nkf lv cmigemo texinfo
     curl w3m nkf nmap wakeonlan wireshark
     imagemagick
     wmctrl xsel
