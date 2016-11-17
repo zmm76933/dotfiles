@@ -197,7 +197,6 @@
 (el-get-bundle ShingoFukuyama/helm-swoop :name helm-swoop)
 
 ;; evil
-(when (eq system-type 'darwin)
-  (el-get-bundle evil))
+(el-get-bundle evil)
 
 ;; init-el-get.el ends here
