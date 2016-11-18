@@ -51,6 +51,11 @@ alias //='exit'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias s='git st '
+alias d='git diff '
+alias dw='git diff --word-diff '
+alias dc='git diff --cached '
+alias cdep='cde >/dev/null && cdp && pwd'
 
 # Use if colordiff exists
 if has 'colordiff'; then
