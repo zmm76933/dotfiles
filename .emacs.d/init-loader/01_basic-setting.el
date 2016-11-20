@@ -14,8 +14,8 @@
 (set-language-environment  "Japanese")
 (prefer-coding-system 'utf-8-unix)
 
-;; C-h に backspace と同じ処理を割り当てる
-(keyboard-translate ?\C-h ?\C-?)
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+(define-key key-translation-map (kbd "<DEL>") (kbd "C-h"))
 
 ;; Font coloring
 (global-font-lock-mode +1)
