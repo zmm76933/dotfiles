@@ -56,7 +56,7 @@
  ;; additional
  '(save-kill-file-name (concat my/history-dir "kill-ring-saved"))
  '(undohist-directory (concat my/history-dir "undohist"))
- '(undohist-ignored-files '("/tmp" "/EDITMSG" "elpa" "/el-get")))
+ '(undohist-ignored-files '("/elpa/" "/el-get/" "MERGE_MSG" "COMMIT_EDITMSG")))
 
 ;; Don't disable commands
 (put 'narrow-to-region 'disabled nil)
