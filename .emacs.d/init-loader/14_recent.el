@@ -40,7 +40,7 @@ do nothing. And suppress the output from `message' and
 (custom-set-variables
  '(recentf-max-saved-items 2000)
  '(recentf-auto-cleanup 600)
- '(recentf-exclude '(".recentf" "/elpa/" "/elisps/" "/site-lisp/" "\\`/tmp/" "/\\.git/" "/\\.cask/"
+ '(recentf-exclude '(".emacs.d/var/hist/recentfs" "/elpa/" "/elisps/" "/site-lisp/" "\\`/tmp/" "/\\.git/" "/\\.cask/"
                      "/tmp/gomi/" "/el-get/" ".loaddefs.el" "/\\.cpanm/"
                      "\\.mime-example" "\\.ido.last" "woman_cache.el"
                      "\\`/proc/" "\\`/sys/"
