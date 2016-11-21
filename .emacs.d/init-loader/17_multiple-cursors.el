@@ -14,13 +14,13 @@
 (setq mc/list-file (concat my/history-dir "mc-lists.el"))
 (declare-function smartrep-define-key "smartrep")
 
-(global-set-key (kbd "C-M-c") 'mc/edit-lines)
-(global-set-key (kbd "C-M-g") 'mc/mark-all-in-region)
+(global-set-key (kbd "<C-M-return>") 'mc/edit-lines)
+(global-set-key (kbd "C-M-.") 'mc/mark-all-in-region)
 
-(global-unset-key "\C-]")
+(global-unset-key (kbd "C-'"))
 
 (smartrep-define-key
-    global-map "C-]"  '(("C-]"      . 'mc/mark-next-like-this)
+    global-map "C-'"  '(("C-'"      . 'mc/mark-next-like-this)
                         ("n"        . 'mc/mark-next-like-this)
                         ("p"        . 'mc/mark-previous-like-this)
                         ("m"        . 'mc/mark-more-like-this-extended)
