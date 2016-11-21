@@ -45,6 +45,7 @@
  '(scroll-preserve-screen-position t)
  '(comint-scroll-show-maximum-output t)
  '(next-screen-context-lines 4)
+ '(linum-format "%4d ")
  '(dabbrev-case-fold-search nil)
  '(completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
@@ -82,6 +83,9 @@
 
 ;; バッファ自動再読み込み
 (global-auto-revert-mode 1)
+
+;; line number
+(global-linum-mode t)
 
 ;; which-func
 (which-function-mode +1)
