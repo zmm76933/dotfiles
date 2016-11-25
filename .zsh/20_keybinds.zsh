@@ -216,16 +216,19 @@ zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' ignore-line current
 zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=*'
 
 do-enter() {
-    if [ -n "$BUFFER" ]; then
+    if [[ -n $BUFFER ]]; then
         zle accept-line
-        return
+        return $status
     fi
 
     echo
     if is_git_repo; then
-        git status
+        if [[ -n "$(git status --short)" ]]; then
+            git status
+        fi
     else
-        ls
+        # do anything
+        : ls
     fi
 
     zle reset-prompt
