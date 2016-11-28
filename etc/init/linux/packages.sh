@@ -16,7 +16,7 @@ PACKAGES="zsh tmux
     git mercurial rbenv python python-setuptools tree
     aspell ispell nkf lv cmigemo texinfo
     curl w3m nkf nmap wakeonlan wireshark
-    xrdp
+    xrdp etckeeper
     imagemagick
     wmctrl xsel
     paco"
