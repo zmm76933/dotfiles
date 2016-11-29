@@ -53,6 +53,7 @@
  '(vc-follow-symlinks t)
  '(imenu-auto-rescan t)
  '(recursive-minibuffers t)
+ '(set-mark-command-repeat-pop t)
  '(backward-delete-char-untabify-method 'hungry)
  ;; additional
  '(save-kill-file-name (concat my/history-dir "kill-ring-saved"))
