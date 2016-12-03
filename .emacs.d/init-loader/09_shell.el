@@ -35,7 +35,8 @@
  '(eshell-banner-message "")
  '(eshell-cmpl-cycle-completions nil)
  '(eshell-hist-ignoredups t)
- '(eshell-scroll-show-maximum-output nil))
+ '(eshell-scroll-show-maximum-output nil)
+ '(eshell-directory-name (concat user-emacs-directory "var/eshell")))
 
 (setq-default eshell-path-env (getenv "PATH"))
 (global-set-key (kbd "M-~") 'eshellutil-popup)
