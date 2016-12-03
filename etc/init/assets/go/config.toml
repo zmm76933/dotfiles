@@ -25,6 +25,7 @@ repos = [
     "github.com/peco/peco/...",
     "github.com/peco/migemogrep",
     "github.com/rbtnn/go-filewatcher/...",
+    "github.com/zmb3/gogetdoc",
 ]
 
 [emoji]
