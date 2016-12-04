@@ -103,35 +103,7 @@
    "xattr" nil 0 nil "-w" "com.apple.TextEncoding" cate buffer-file-name))
 (add-hook 'after-save-hook 'my-set-com.apple.TextEncoding)
 
-;; Dictionary.appを利用する
-(defun dictionary ()
-  "dictionary.app"
-  (interactive)
-
-  (let ((editable (not buffer-read-only))
-        (pt (save-excursion (mouse-set-point last-nonmenu-event)))
-        beg end)
-
-    (if (and mark-active
-             (<= (region-beginning) pt) (<= pt (region-end)) )
-        (setq beg (region-beginning)
-              end (region-end))
-      (save-excursion
-        (goto-char pt)
-        (setq end (progn (forward-word) (point)))
-        (setq beg (progn (backward-word) (point)))
-        ))
-
-    (browse-url
-     (concat "dict:///"
-             (url-hexify-string (buffer-substring-no-properties beg end))))))
-
-(global-set-key (kbd "C-c w") 'dictionary)
-
 ;; dash
-(autoload 'dash-at-point "dash-at-point"
-  "Search the word at point with Dash." t nil)
-
 (global-set-key (kbd "C-c ?") 'dash-at-point)
 
 ;; smooth scroll を on

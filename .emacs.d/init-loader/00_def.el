@@ -28,7 +28,7 @@
   "My original keymap binded to C-q.")
 (defalias 'my/ctrl-q-prefix my/ctrl-q-map)
 
-;; @see https://github.com/hottestseason/dotemacs
+;; @see https://github.com/hottestseason/dotemacs/blob/master/init.d/init-programming.el
 (defun newline-and-insert-newline-and-indent-after-brace ()
   (interactive)
   (if (and (eq (char-before) ?{) (eq (following-char) ?}))
@@ -88,11 +88,6 @@
       (set-frame-parameter nil 'fullscreen nil)
     (set-frame-parameter nil 'fullscreen 'fullboth)
     ))
-
-;; @see http://d.hatena.ne.jp/syohex/20140211/1392087767
-(defun my/insert-parentheses (arg)
-  (interactive "P")
-  (insert-parentheses (or arg 1)))
 
 ;; find-file-sudo
 (defun file-root-p (filename)

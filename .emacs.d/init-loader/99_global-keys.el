@@ -17,9 +17,8 @@
 (global-set-key (kbd "C-x c y") 'clipboard-yank)
 
 ;; global key setting(standard)
-(global-set-key (kbd "RET") 'newline-and-insert-newline-and-indent-after-brace)
+(global-set-key (kbd "RET") 'editutil-newline-and-maybe-indent)
 (global-set-key (kbd "C-z") 'scroll-down)
-(global-set-key (kbd "M-(") 'my/insert-parentheses)
 (global-set-key (kbd "C-M-l") 'goto-line)
 (global-set-key (kbd "C-M-z") 'scroll-other-window-down)
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
@@ -32,7 +31,6 @@
 (global-set-key (kbd "M-*") 'tags-loop-continue)
 (global-set-key (kbd "M-=") 'yas-insert-snippet)
 (global-set-key (kbd "M-'") 'avy-goto-word-1)
-(global-set-key (kbd "M-`") 'editutil-other-window)
 (global-set-key (kbd "M-z") popwin:keymap)
 (global-set-key (kbd "M-z C-i") 'import-popwin)
 (global-set-key (kbd "C-x z") 'zoom-window-zoom)
