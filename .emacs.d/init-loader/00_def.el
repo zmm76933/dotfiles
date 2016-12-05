@@ -28,6 +28,13 @@
   "My original keymap binded to C-q.")
 (defalias 'my/ctrl-q-prefix my/ctrl-q-map)
 
+;; smartparens
+(defun editutil-smartparens-backward-delete ()
+  (interactive)
+  (if (use-region-p)
+      (delete-region (region-beginning) (region-end))
+    (call-interactively 'sp-backward-delete-char)))
+
 ;; @see https://github.com/hottestseason/dotemacs/blob/master/init.d/init-programming.el
 (defun newline-and-insert-newline-and-indent-after-brace ()
   (interactive)

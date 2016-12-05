@@ -21,6 +21,11 @@
 (smartparens-global-mode t)
 (show-smartparens-global-mode t)
 
+(with-eval-after-load 'smartparens
+  (define-key smartparens-mode-map (kbd "C-c l") 'editutil-toggle-let)
+  (define-key smartparens-mode-map (kbd "C-c j") 'editutil-newline-after-sexp)
+  (define-key smartparens-mode-map (kbd "DEL") 'editutil-smartparens-backward-delete))
+
 ;; @See https://github.com/Fuco1/smartparens/issues/286
 (sp-with-modes sp--lisp-modes
   ;; disable ', it's the quote character!
