@@ -212,6 +212,7 @@ bash_alias() {
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+    alias relogin='exec $SHELL -l'
 
     # Use if colordiff exists
     if has 'colordiff'; then
