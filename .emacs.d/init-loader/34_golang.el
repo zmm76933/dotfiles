@@ -36,8 +36,7 @@
 
   (define-key go-mode-map (kbd ":") nil)
 
-  (modify-syntax-entry ?_  "_" go-mode-syntax-table)
-  (progutil-go-setup))
+ (progutil-go-setup))
 
 (defun my/go-mode-hook ()
   (setq-local company-backends '(company-go company-files company-dabbrev))
