@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+# Load vital library that is most important and
+# constructed with many minimal functions
+# For more information, see etc/README.md
+. "$DOTPATH"/etc/lib/vital.sh
+
 # tmux_automatically_attach attachs tmux session automatically
 is_ssh_running && exit 0
 
