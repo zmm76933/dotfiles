@@ -9,7 +9,7 @@ fi
 
 # tmux_automatically_attach attachs tmux session
 # automatically when your are in zsh
-$DOTPATH/bin/tmuxx
+# $DOTPATH/bin/tmuxx
 
 if [[ -f ~/.zplug/init.zsh ]]; then
     export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
@@ -26,7 +26,3 @@ if [[ -f ~/.zplug/init.zsh ]]; then
     fi
     zplug load
 fi
-
-printf "\n"
-printf "$fg_bold[cyan] This is ZSH $fg_bold[red]$ZSH_VERSION"
-printf "$fg_bold[cyan] - DISPLAY on $fg_bold[red]$DISPLAY$reset_color\n\n"
