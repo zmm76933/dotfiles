@@ -271,7 +271,7 @@ bash_alias() {
     case "$PLATFORM" in
         osx)
             if has "brew"; then
-                alias update='brew cask update && brew upgrade && homebrew_cask_upgrade'
+                alias update='brew update && brew upgrade && homebrew_cask_upgrade'
                 alias cleanup='brew cleanup && brew cask cleanup'
             fi
             ;;
