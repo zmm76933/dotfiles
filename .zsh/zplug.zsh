@@ -90,11 +90,6 @@ zplug "reorx/httpstat", \
     rename-to:'$1', \
     if:'(( $+commands[python] ))'
 
-zplug 'kouzoh/mercari', \
-    as:command, \
-    use:'b4b4r07/(*).sh', \
-    rename-to:'$1'
-
 zplug "jhawthorn/fzy", \
     as:command, \
     hook-build:"make && sudo make install"
