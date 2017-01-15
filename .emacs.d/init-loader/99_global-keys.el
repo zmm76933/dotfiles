@@ -25,6 +25,7 @@
 (global-set-key (kbd "C-x C-x") 'exchange-point-and-mark)
 (global-set-key (kbd "C-x RET R") 'revert-buffer)
 (global-set-key (kbd "C-x RET M") 'toggle-fullscreen)
+(global-set-key (kbd "C-x C-b") #'ibuffer)
 
 ;; global key setting (additional)
 (global-set-key (kbd "M-,") 'pop-tag-mark)
