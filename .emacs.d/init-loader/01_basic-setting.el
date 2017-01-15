@@ -78,9 +78,6 @@
 ;; リージョンを kill-ring に入れないで削除できるようにする
 (delete-selection-mode t)
 
-;; info for japanese
-(auto-compression-mode t)
-
 ;; バッファ自動再読み込み
 (global-auto-revert-mode 1)
 
