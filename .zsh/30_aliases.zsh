@@ -87,6 +87,9 @@ e() {
 # a space or tab character, then the next command word following the
 # alias is also checked for alias expansion
 alias sudo='sudo '
+if is_osx; then
+    alias sudo="${ZSH_VERSION:+nocorrect} sudo "
+fi
 
 # Global aliases
 alias -g G='| grep'
@@ -550,6 +553,7 @@ git_modified_files() {
 #         tree -C
 #     fi
 # }
-# alias t="treels"
+
+alias t="tree -C"
 
 alias l="ls -l"

@@ -3,7 +3,7 @@
 ZPLUG_SUDO_PASSWORD=
 ZPLUG_PROTOCOL=ssh
 
-zplug "zplug/zplug"
+zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
 zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
@@ -24,7 +24,7 @@ zplug 'b4b4r07/epoch-cat', \
 zplug "stedolan/jq", \
     as:command, \
     from:gh-r, \
-    frozen:1
+    rename-to:jq
 
 zplug "junegunn/fzf-bin", \
     as:command, \
@@ -115,7 +115,16 @@ zplug 'b4b4r07/zplug-cd', lazy:yes
 zplug 'b4b4r07/zplug-rm', lazy:yes
 
 zplug 'b4b4r07/tmux-powertools', \
-    use:init.zsh, \
+    ignore:init.zsh, \
     hook-load:'tmux-loader'
 
+zplug 'b4b4r07/git-powertools', \
+    as:command, \
+    use:'bin/*'
+
 zplug 'b4b4r07/zls', lazy:yes
+zplug 'b4b4r07/fpath-editor', lazy:yes
+
+zplug 'andialbrecht/sqlparse', \
+    as:command, \
+    hook-build:'python setup.py install'
