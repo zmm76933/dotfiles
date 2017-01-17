@@ -46,7 +46,6 @@
  '(comint-scroll-show-maximum-output t)
  '(next-screen-context-lines 4)
  '(linum-format "%4d ")
- '(dabbrev-case-fold-search nil)
  '(completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(read-buffer-completion-ignore-case t)
@@ -78,9 +77,6 @@
 
 ;; リージョンを kill-ring に入れないで削除できるようにする
 (delete-selection-mode t)
-
-;; info for japanese
-(auto-compression-mode t)
 
 ;; バッファ自動再読み込み
 (global-auto-revert-mode 1)

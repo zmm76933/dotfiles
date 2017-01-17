@@ -79,7 +79,7 @@
           (".*monaco-bold-.*-mac-roman" . 0.9)
           ("-cdac$" . 1.3)))
 
-  (set-face-bold-p 'show-paren-match-face nil))
+  (set-face-bold 'show-paren-match-face nil))
 
 ;; See @http://blog.fenrir-inc.com/jp/2013/04/mac-quicklook-xattr.html
 (defun my-set-com.apple.TextEncoding()
