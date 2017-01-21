@@ -60,20 +60,16 @@
  '(undohist-ignored-files '("/elpa/" "/el-get/" "MERGE_MSG" "COMMIT_EDITMSG")))
 
 ;; Don't disable commands
-(put 'narrow-to-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'set-goal-column 'disabled nil)
+(dolist (cmd '(narrow-to-region upcase-region downcase-region set-goal-column))
+  (put cmd 'disabled nil))
 
 (savehist-mode 1)
 (save-place-mode +1)
 
-;; cursor
+;; Frame and cursor looking
 (blink-cursor-mode t)
-
-;; display line infomation
-(line-number-mode t)
-(column-number-mode t)
+(line-number-mode 1)
+(column-number-mode 1)
 
 ;; リージョンを kill-ring に入れないで削除できるようにする
 (delete-selection-mode t)
