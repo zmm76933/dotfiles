@@ -63,4 +63,6 @@
                       (fset 'makefile-warn-suspicious-lines 'ignore)
                       (setq indent-tabs-mode t))))
 
+(add-to-list 'auto-mode-alist '("\\.mm\\'" . c++-mode))
+
 ;;; c.el ends here
