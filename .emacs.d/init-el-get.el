@@ -80,10 +80,7 @@
 (el-get-bundle company-mode/company-mode :name company-mode)
 
 ;; helm
-(el-get-bundle emacs-helm/helm
-  :autoloads "helm-autoloads"
-  :build (("make"))
-  :build/darwin `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs))))
+(el-get-bundle helm)
 
 ;; key utility
 (el-get-bundle key-chord)
