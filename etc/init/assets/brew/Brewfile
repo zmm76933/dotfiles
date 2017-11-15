@@ -97,5 +97,6 @@ mas 'SoraAnnai', id: 599799247
 mas 'Deliveries', id: 924726344
 mas 'PopClip', id: 445189367
 mas 'Mactracker', id: 430255202
+mas 'Speedtest by Ookla', id: 1153157709
 
 # vim: ft=conf
