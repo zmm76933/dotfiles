@@ -26,14 +26,13 @@
       <appendix>(Pass-Through Tab, Backquote and Command_R + Space)</appendix>
       <identifier>private_remap.app_term_commandR2optionR_except_tab_backquote_commandRspace</identifier>
       <only>TERMINAL</only>
-      <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
+      <autogen>--KeyToKey-- KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
       <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
       <autogen>--KeyToKey-- KeyCode::TAB, ModifierFlag::OPTION_R, KeyCode::TAB, ModifierFlag::COMMAND_R</autogen>
       <autogen>--KeyToKey-- KeyCode::TAB, ModifierFlag::COMMAND_R, KeyCode::TAB, ModifierFlag::OPTION_R</autogen>
       <autogen>--KeyToKey-- KeyCode::BACKQUOTE, ModifierFlag::OPTION_R, KeyCode::BACKQUOTE, ModifierFlag::COMMAND_R</autogen>
       <autogen>--KeyToKey-- KeyCode::BACKQUOTE, ModifierFlag::COMMAND_R, KeyCode::BACKQUOTE, ModifierFlag::OPTION_R</autogen>
       <autogen>__KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::CONTROL_R, KeyCode::SPACE, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R</autogen>
-      <autogen>__KeyToKey__ KeyCode::SPACE, ModifierFlag::COMMAND_R | ModifierFlag::CONTROL_R, KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::OPTION_R</autogen>
     </item>
     <item>
       <name>Swap Command_L to Option_L in Microsoft Remote Desktop</name>
@@ -50,8 +49,10 @@
       <appendix>(Pass-Through Tab and Command_R + Space)</appendix>
       <identifier>private_remap.app_RDC_commandR2optionR_except_tab_commandRspace</identifier>
       <only>REMOTEDESKTOPCONNECTION</only>
+      <autogen>--KeyToKey-- KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
       <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
       <autogen>--KeyToKey-- KeyCode::TAB, ModifierFlag::OPTION_R, KeyCode::TAB, ModifierFlag::COMMAND_R</autogen>
+      <autogen>--KeyToKey-- KeyCode::TAB, ModifierFlag::COMMAND_R, KeyCode::TAB, ModifierFlag::OPTION_R</autogen>
       <autogen>__KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::CONTROL_R, KeyCode::SPACE, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R</autogen>
     </item>
     <item>
