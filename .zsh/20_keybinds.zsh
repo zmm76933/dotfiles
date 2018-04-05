@@ -338,4 +338,4 @@ autosingq() {
     RBUFFER="'$RBUFFER"
 }
 zle -N autosingq
-bindkey "'" autosingq
+# bindkey "'" autosingq

@@ -13,13 +13,12 @@ PACKAGES="zsh tmux
     build-essential diffutils autoconf automake silversearcher-ag
     g++ libxml2-dev libssl-dev libsqlite3-dev
     libsensors4-dev libavahi-common-dev libavahi-client-dev
-    git mercurial rbenv python python-setuptools tree
-    aspell ispell nkf lv cmigemo texinfo
-    curl w3m nkf nmap wakeonlan wireshark
-    xrdp etckeeper
-    imagemagick
-    wmctrl xsel
-    paco"
+    git mercurial rbenv python python-setuptools tree paco
+    aspell ispell nkf lv cmigemo texinfo etckeeper
+    curl w3m wget nkf nmap wakeonlan
+    xrdp xsel rxvt-unicode-256color
+    imagemagick wireshark
+    wmctrl"
 
 if has "yum"; then
     log_echo "Install packages with Yellowdog Updater Modified"
