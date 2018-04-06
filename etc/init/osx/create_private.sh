@@ -15,6 +15,6 @@ if ! is_osx; then
     exit 1
 fi
 
-if has "karabiner"; then
-    ln -sf "$DOTPATH/etc/gui/osx/Karabiner.xml" "$HOME/Library/Application Support/Karabiner/private.xml"
+if has "/Applications/Karabiner-Elements.app/Contents/MacOS/Karabiner-Elements"; then
+    ln -sf "$DOTPATH/etc/gui/osx/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 fi
