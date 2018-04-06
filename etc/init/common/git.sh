@@ -35,9 +35,9 @@ if ! has "git"; then
             if has "yum"; then
                 log_echo "Install git with Yellowdog Updater Modified"
                 sudo yum -y install git
-            elif has "apt-get"; then
+            elif has "apt"; then
                 log_echo "Install git with Advanced Packaging Tool"
-                sudo apt-get -y install git
+                sudo apt -y install git
             else
                 log_fail "error: require: YUM or APT"
                 exit 1

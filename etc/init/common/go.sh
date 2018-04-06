@@ -37,8 +37,8 @@ case "$(get_os)" in
             if sudo yum install epel-release && yum install -y golang; then
                 log_pass "go: installed successfully"
             fi
-        elif has "apt-get"; then
-            if sudo apt-get -y install golang; then
+        elif has "apt"; then
+            if sudo apt -y install golang; then
                 log_pass "go: installed successfully"
             fi
         else

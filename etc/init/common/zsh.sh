@@ -35,9 +35,9 @@ if ! has "zsh"; then
             if has "yum"; then
                 log_echo "Install zsh with Yellowdog Updater Modified"
                 sudo yum -y install zsh
-            elif has "apt-get"; then
+            elif has "apt"; then
                 log_echo "Install zsh with Advanced Packaging Tool"
-                sudo apt-get -y install zsh
+                sudo apt -y install zsh
             else
                 log_fail "error: require: YUM or APT"
                 exit 1

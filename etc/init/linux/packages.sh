@@ -23,9 +23,9 @@ PACKAGES="zsh tmux
 if has "yum"; then
     log_echo "Install packages with Yellowdog Updater Modified"
     sudo yum -y install $PACKAGES
-elif has "apt-get"; then
+elif has "apt"; then
     log_echo "Install packages with Advanced Packaging Tool"
-    sudo apt-get -y install $PACKAGES
+    sudo apt -y install $PACKAGES
 else
     log_fail "error: require: YUM or APT"
     exit 1

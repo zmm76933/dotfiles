@@ -176,9 +176,9 @@ case "$PLATFORM" in
         if has "yum"; then
             alias update='sudo yum -y update'
             alias cleanup='yum clean all'
-        elif has "apt-get"; then
-            alias update='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade'
-            alias cleanup='sudo apt-get -y autoremove && sudo apt-get -y autoclean'
+        elif has "apt"; then
+            alias update='sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade'
+            alias cleanup='sudo apt -y autoremove && sudo apt -y autoclean'
         fi
         ;;
 esac
