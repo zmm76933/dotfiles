@@ -45,7 +45,6 @@ if ! vitalize 2>/dev/null; then
 fi
 
 export HOST=`hostname -s`
-export PATH=~/bin:"$PATH"
 export PAGER=less
 export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 export LESS='-f -N -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
@@ -149,8 +148,8 @@ trap _exit EXIT
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
 
 ### Global
-export GOPATH=~/src
-mkdir -p $GOPATH 2>/dev/null
+export GOPATH="$HOME"
+export GOBIN="$GOPATH/bin"
 export EDITOR=vim
 export LANG=en_US.UTF-8
 

@@ -1,23 +1,16 @@
-typeset -gx -U path
-path=( \
-    /usr/local/bin(N-/) \
-    ~/bin(N-/) \
-    ~/.zplug/bin(N-/) \
-    ~/.tmux/bin(N-/) \
-    "$path[@]" \
-    )
-
 # Add custom path to PATH
 typeset -gx -U path
 path=(
+    ~/.zplug/bin(N-/) \
+    ~/.tmux/bin(N-/) \
     ~/bin(N-/) \
-    /usr/local/bin(N-/) \
-    /usr/bin(N-/) \
-    /bin(N-/) \
     /usr/local/sbin(N-/) \
+    /usr/local/bin(N-/) \
     /usr/sbin(N-/) \
+    /usr/bin(N-/) \
     /sbin(N-/) \
-    $path \
+    /bin(N-/) \
+    "$path[@]" \
     )
 
 # NOTE: set fpath before compinit
