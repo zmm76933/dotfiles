@@ -41,7 +41,3 @@ URxvt.colorBD:              [90]#d5c4a1
 URxvt.colorUL:              [90]#83a598
 URxvt.scrollColor:          [90]#504945
 URxvt.troughColor:          [90]#3C3836
-
-!! Diskable ibus-skk in emacs
-Emacs*useXIM:               false
-Emacs25*useXIM:             false

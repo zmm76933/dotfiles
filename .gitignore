@@ -2,3 +2,5 @@
 *~
 .config/*
 !.config/fish
+.emacs.d/el-get/
+.emacs.d/var/

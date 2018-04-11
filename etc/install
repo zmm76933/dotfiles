@@ -1,13 +1,13 @@
 #!/bin/bash
-#                                    
-#         _ _        _       _       
-#        (_) |      | |     | |      
-#  __   ___| |_ __ _| |  ___| |__    
-#  \ \ / / | __/ _` | | / __| '_ \   
-#   \ V /| | || (_| | |_\__ \ | | |  
-#    \_/ |_|\__\__,_|_(_)___/_| |_|  
-#                                    
-#                                    
+#
+#         _ _        _       _
+#        (_) |      | |     | |
+#  __   ___| |_ __ _| |  ___| |__
+#  \ \ / / | __/ _` | | / __| '_ \
+#   \ V /| | || (_| | |_\__ \ | | |
+#    \_/ |_|\__\__,_|_(_)___/_| |_|
+#
+#
 
 # PLATFORM is the environment variable that
 # retrieves the name of the running platform
@@ -310,6 +310,21 @@ is_screen_or_tmux_running() {
     is_screen_running || is_tmux_runnning
 }
 
+# is_desktop returns true if desktop-system is running
+is_desktop (){
+  displayManager=(
+    'xserver-common' # X Window System (X.Org) infrastructure
+    'xwayland' # Xwayland X server
+  )
+  for i in "${displayManager[@]}"; do
+    dpkg-query --show --showformat='${Status}\n' $i 2> /dev/null | grep "install ok installed" &> /dev/null
+    if [[ $? -eq 0 ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 # shell_has_started_interactively returns true if the current shell is
 # running from command line
 shell_has_started_interactively() {
@@ -461,11 +476,11 @@ DOTFILES_GITHUB="https://github.com/zmm76933/dotfiles.git"; export DOTFILES_GITH
 
 # shellcheck disable=SC1078,SC1079,SC2016
 dotfiles_logo='
-      | |     | |  / _(_) |           
-    __| | ___ | |_| |_ _| | ___  ___  
-   / _` |/ _ \| __|  _| | |/ _ \/ __| 
-  | (_| | (_) | |_| | | | |  __/\__ \ 
-   \__,_|\___/ \__|_| |_|_|\___||___/ 
+      | |     | |  / _(_) |
+    __| | ___ | |_| |_ _| | ___  ___
+   / _` |/ _ \| __|  _| | |/ _ \/ __|
+  | (_| | (_) | |_| | | | |  __/\__ \
+   \__,_|\___/ \__|_| |_|_|\___||___/
 
   *** WHAT IS INSIDE? ***
   1. Download https://github.com/zmm76933/dotfiles.git
