@@ -122,32 +122,44 @@ _delete-char-or-list-expand() {
 zle -N _delete-char-or-list-expand
 bindkey '^D' _delete-char-or-list-expand
 
-# Ctrl-R
-_peco-select-history() {
-    if true; then
-        local filter=peco
-        local args='--layout=bottom-up'
-        BUFFER="$(
-        history 1 \
-            | sort -k1,1nr \
-            | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' \
-            | $filter $args --query "$LBUFFER"
-        )"
-
-        CURSOR=$#BUFFER
-        #zle accept-line
-        #zle clear-screen
-        zle reset-prompt
-    else
-        if is-at-least 4.3.9; then
-            zle -la history-incremental-pattern-search-backward && bindkey "^r" history-incremental-pattern-search-backward
-        else
-            history-incremental-search-backward
-        fi
-    fi
+# CTRL-R - Paste the selected command from history into the command line
+_fzf_use_tmux() {
+  [ -n "$TMUX_PANE" ] && [ "${FZF_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
 }
-zle -N _peco-select-history
-bindkey '^r' _peco-select-history
+
+_fzfcmd() {
+  _fzf_use_tmux &&
+    echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
+
+fzf-history-widget() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
+  selected=( $(fc -rl 1 |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m" $(_fzfcmd)) )
+  local ret=$?
+  if [ -n "$selected" ]; then
+    num=$selected[1]
+    if [ -n "$num" ]; then
+      zle vi-fetch-history -n $num
+    fi
+  fi
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle     -N   fzf-history-widget
+bindkey '^R' fzf-history-widget
+
+insert-fzf-path-in-command-line() {
+        local selected_path
+        echo # Run fzf underneath the current prompt
+        selected_path=$(ag . -l -g '' | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS" $(_fzfcmd)) || return
+        LBUFFER="$LBUFFER${(q)selected_path} " # ${(q)VAR} shell-escapes the string
+        zle reset-prompt
+}
+zle     -N insert-fzf-path-in-command-line
+bindkey "^S" "insert-fzf-path-in-command-line"
 
 _start-tmux-if-it-is-not-already-started() {
     BUFFER="${${${(M)${+commands[tmuxx]}#1}:+tmuxx}:-tmux}"

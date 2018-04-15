@@ -9,7 +9,7 @@ zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
 zplug "b4b4r07/emoji-cli", on:"junegunn/fzf-bin", if:'(( $+commands[jq] ))'
 zplug "b4b4r07/enhancd", use:init.sh
-#zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
+zplug "b4b4r07/zsh-vimode-visual", use:"*.zsh", defer:3
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:2

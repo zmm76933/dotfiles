@@ -2,5 +2,6 @@
 *~
 .config/*
 !.config/fish
+.emacs.d/.python-environments/
 .emacs.d/el-get/
 .emacs.d/var/

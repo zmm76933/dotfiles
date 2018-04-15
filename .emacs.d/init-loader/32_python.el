@@ -12,7 +12,6 @@
 ;;
 ;;
 (defun my/python-mode-hook ()
-  (jedi:setup)
   (setq-local company-backends '(company-jedi company-dabbrev))
 
   ;; flycheck

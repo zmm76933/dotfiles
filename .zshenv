@@ -66,24 +66,12 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 
 setopt no_global_rcs
 
-# Settings for golang
-export GOPATH="$HOME"
-export GOBIN="$GOPATH/bin"
-export PATH="$GOBIN:$PATH"
-
 # declare the environment variables
 export CORRECT_IGNORE='_*'
 export CORRECT_IGNORE_FILE='.*'
 
 export WORDCHARS='*?[]~&;!#$%^(){}<>'
 
-# fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
-export FZF_DEFAULT_OPTS="--extended --ansi --multi"
-
-# Cask
-#export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-# History
 # History file
 export HISTFILE=~/.zsh_history
 # History size in memory
@@ -97,11 +85,3 @@ if [[ $UID == 0 ]]; then
     unset HISTFILE
     export SAVEHIST=0
 fi
-
-# available $INTERACTIVE_FILTER
-export INTERACTIVE_FILTER="fzf:peco:percol:gof:pick"
-
-# keybind ^X^X
-export ONELINER_FILE="$DOTPATH/doc/misc/commands.txt"
-
-[[ -f ~/.secret ]] && source ~/.secret
