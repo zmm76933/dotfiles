@@ -14,8 +14,8 @@ PACKAGES="git zsh tmux
     g++ libxml2-dev libssl-dev libsqlite3-dev libevent-dev
     libsensors4-dev libavahi-common-dev libavahi-client-dev ncurses-dev
     mercurial python python3 python-pip python3-pip gawk tree paco
-    aspell ispell nkf lv cmigemo texinfo etckeeper
-    curl w3m wget nmap wakeonlan testdisk
+    aspell ispell nkf lv cmigemo texinfo etckeeper stress
+    curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
     openssh-server bind9 isc-dhcp-server"
 
 REPOSITORY="vim emacs25"
