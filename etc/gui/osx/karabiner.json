@@ -2429,6 +2429,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2453,6 +2456,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2477,6 +2483,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2504,6 +2513,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2531,6 +2543,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2555,6 +2570,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2579,6 +2597,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2606,6 +2627,9 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
+                                            "^com\\.microsoft\\.rdc$",
+                                            "^com\\.microsoft\\.rdc\\.mac$",
+                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                             "^com\\.microsoft\\.rdc\\.macos$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -2623,35 +2647,6 @@
                                     {
                                         "key_code": "tab",
                                         "modifiers": [
-                                            "right_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc\\.macos$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_option",
-                                            "right_control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": [
-                                            "right_command",
                                             "right_option"
                                         ]
                                     }
@@ -2674,7 +2669,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_control",
+                                        "key_code": "left_control",
                                         "lazy": true
                                     }
                                 ],
