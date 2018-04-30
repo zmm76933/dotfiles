@@ -26,17 +26,20 @@
 (setq ns-command-modifier (quote meta))
 (setq ns-alternate-modifier (quote super))
 
-;; Emacs が保持する terminfo を利用する
+;; emacsが保持するterminfoを利用する
 (setq system-uses-terminfo nil)
 
-;; システムの IM を無視する
+;; システムのIMを無視する
 (setq mac-use-input-method-on-system nil)
 
-;; 起動したら US にする
+;; emacs起動時は英数モードから始める
 (add-hook 'after-init-hook 'mac-change-language-to-us)
 
-;; minibuffer 内は US にする
+;; minibuffer内は英数モードにする
 (add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
+
+;; [migemo]isearchのときIMを英数モードにする
+(add-hook 'isearch-mode-hook 'mac-change-language-to-us)
 
 ;; backslash を優先
 (mac-translate-from-yen-to-backslash)
@@ -105,6 +108,11 @@
 
 ;; dash
 (global-set-key (kbd "C-c ?") 'dash-at-point)
+
+;; migemo
+(custom-set-variables
+  '(migemo-command "cmigemo")
+     `(migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict"))
 
 ;; smooth scroll を on
 (setq mac-mouse-wheel-smooth-scroll t)
