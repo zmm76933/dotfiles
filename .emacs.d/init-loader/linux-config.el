@@ -2,15 +2,6 @@
 (custom-set-variables
  '(browse-url-browser-function #'browse-url-xdg-open))
 
-;; isearch時はIMをオフにする
-(add-hook 'isearch-mode-hook 'ibus-disable)
-
-;; mini bufferではIMをオフにする
-(add-hook 'minibuffer-setup-hook 'ibus-disable)
-
-;; インクリメンタル検索中のカーソル形状を変更する
-(setq ibus-isearch-cursor-type 'hollow)
-
 ;; key config
 (global-set-key (kbd "C-x ?") 'zeal-at-point)
 
