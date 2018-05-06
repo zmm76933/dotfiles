@@ -16,5 +16,8 @@ if ! is_osx; then
 fi
 
 if has "/Applications/Karabiner-Elements.app/Contents/MacOS/Karabiner-Elements"; then
-    ln -sf "$DOTPATH/etc/gui/osx/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
+    if [ ! -d "$HOME/.config/karabiner" ]; then
+        mkdir -p "$HOME/.config/karabiner"
+        ln -sf "$DOTPATH/etc/gui/osx/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
+    fi
 fi
