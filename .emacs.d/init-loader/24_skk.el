@@ -38,7 +38,8 @@
                          '((";" nil nil)
                            (":" nil nil)
                            ("?" nil nil)
-                           ("!" nil nil))))))
+                           ("!" nil nil)
+                           ("\\" nil nil))))))
 
 ;; yatex編集時、句読点を変更
 (add-hook 'yatex-mode-hook

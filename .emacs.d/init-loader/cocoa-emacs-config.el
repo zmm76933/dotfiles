@@ -17,11 +17,6 @@
 (setq file-name-coding-system 'utf-8-hfs)
 (setq locale-coding-system 'utf-8)
 
-;; インプッットメソッドの設定
-;; (setq default-input-method "MacOSX-IM-JP")
-;; インプットメソッド対応パッチにてshiftキーをOS側に渡さない設定
-;; (setq mac-keys-passed-to-system 'shift)
-
 ;; コマンドキーをMetaキーとして利用
 (setq ns-command-modifier (quote meta))
 (setq ns-alternate-modifier (quote super))
@@ -29,20 +24,9 @@
 ;; emacsが保持するterminfoを利用する
 (setq system-uses-terminfo nil)
 
-;; システムのIMを無視する
-(setq mac-use-input-method-on-system nil)
-
-;; emacs起動時は英数モードから始める
-(add-hook 'after-init-hook 'mac-change-language-to-us)
-
-;; minibuffer内は英数モードにする
-(add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
-
-;; [migemo]isearchのときIMを英数モードにする
-(add-hook 'isearch-mode-hook 'mac-change-language-to-us)
-
-;; backslash を優先
-(mac-translate-from-yen-to-backslash)
+;; ミニバッファに入力時、自動的に英語モード
+(when (functionp 'mac-auto-ascii-mode)
+  (mac-auto-ascii-mode 1))
 
 ;; ドラッグ&ドロップで新しくウィンドウ開かない
 (setq ns-pop-up-frames nil)
