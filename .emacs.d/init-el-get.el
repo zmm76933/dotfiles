@@ -69,6 +69,7 @@
 (el-get-bundle Fuco1/smartparens)
 
 ;; Directory
+(el-get-bundle direx)
 (el-get-bundle syohex/emacs-dired-k :name dired-k)
 
 ;; auto-complete

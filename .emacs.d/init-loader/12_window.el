@@ -38,4 +38,8 @@
 ;; quickrun
 (push '("*quickrun*" :stick t) popwin:special-display-config)
 
+;; direx
+(push '(direx:direx-mode :position left :width 30 :dedicated t)
+      popwin:special-display-config)
+
 ;;; window.el ends here

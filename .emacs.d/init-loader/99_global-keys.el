@@ -13,7 +13,6 @@
 ;; editutil mappings
 (editutil-default-setup)
 (global-set-key (kbd "C-x c") ctl-x-4-map)
-(global-set-key (kbd "C-x c j") 'dired-jump-other-window)
 (global-set-key (kbd "C-x c y") 'clipboard-yank)
 
 ;; global key setting(standard)

@@ -36,7 +36,19 @@
  '(dired-recursive-copies 'always)
  '(dired-recursive-deletes 'always))
 
-(autoload 'dired-jump "dired-x" nil t)
-(global-set-key (kbd "C-x C-j") 'dired-jump)
+(defun my/dired-jump ()
+  (interactive)
+  (cond (current-prefix-arg
+         (dired-jump))
+        ((not (one-window-p))
+         (or (ignore-errors
+               (direx-project:jump-to-project-root) t)
+             (direx:jump-to-directory)))
+        (t
+         (or (ignore-errors
+               (direx-project:jump-to-project-root-other-window) t)
+             (direx:jump-to-directory-other-window)))))
+
+(global-set-key (kbd "C-x C-j") 'my/dired-jump)
 
 ;;; dired.el ends here

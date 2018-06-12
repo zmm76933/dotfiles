@@ -15,7 +15,7 @@ PACKAGES="git zsh tmux
     libsensors4-dev libavahi-common-dev libavahi-client-dev ncurses-dev
     mercurial rbenv python python3 python-pip python3-pip gawk tree paco
     aspell ispell nkf lv cmigemo texinfo etckeeper stress smartmontools
-    curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
+    sysstat curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
     openssh-server bind9 isc-dhcp-server"
 
 REPOSITORY="vim emacs25"
