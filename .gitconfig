@@ -44,9 +44,9 @@
     email = zmm76933@gmail.com
 
 [pager]
-    log  = diff-highlight | less -RX
-    show = diff-highlight | less -RX
-    diff = diff-highlight | less -RX
+    log  = ~/bin/diff-highlight | less -RX
+    show = ~/bin/diff-highlight | less -RX
+    diff = ~/bin/diff-highlight | less -RX
 
 [diff]
     tool      = vimdiff
