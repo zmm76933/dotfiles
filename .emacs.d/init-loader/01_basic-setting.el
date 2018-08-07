@@ -78,7 +78,7 @@
 (global-auto-revert-mode 1)
 
 ;; line number
-(global-linum-mode t)
+(global-display-line-numbers-mode t)
 
 ;; which-func
 (which-function-mode +1)

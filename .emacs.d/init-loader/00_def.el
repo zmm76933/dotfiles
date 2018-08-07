@@ -117,24 +117,18 @@
   (set-buffer (find-file (concat "/sudo::" file))))
 
 ;; linum-off
-(defcustom linum-disabled-modes-list '(eshell-mode wl-summary-mode compilation-mode org-mode text-mode dired-mode direx:direx-mode doc-view-mode image-mode)
-  "* List of modes disabled when global linum mode is on"
+(defcustom line-numbers-disabled-modes-list '(eshell-mode wl-summary-mode compilation-mode org-mode text-mode dired-mode direx:direx-mode doc-view-mode image-mode)
+  "* List of modes disabled when display line numbers mode is on"
   :type '(repeat (sexp :tag "Major mode"))
-  :tag " Major modes where linum is disabled: "
-  :group 'linum
+  :tag " Major modes where display line numbers is disabled: "
+  :group 'display-line-numbers
   )
 
-(defadvice linum-on(around linum-off activate)
+(defadvice display-line-numbers--turn-on(around display-line-numbers-off activate)
   (unless (or (minibufferp)
-              (member major-mode linum-disabled-modes-list)
+              (member major-mode line-numbers-disabled-modes-list)
               (string-match "*" (buffer-name))
               (> (buffer-size) 3000000))
-    (linum-mode 1)))
-
-(defadvice linum-update-window (around linum-dynamic activate)
-  (let* ((w (length (number-to-string
-                     (count-lines (point-min) (point-max)))))
-         (linum-format (concat " %" (number-to-string w) "d ")))
-    ad-do-it))
+    (display-line-numbers-mode)))
 
 ;;; def.el ends here
