@@ -2864,6 +2864,14 @@
                             "to": {
                                 "key_code": "right_alt"
                             }
+                        },
+                        {
+                            "from": {
+                                "key_code": "application"
+                            },
+                            "to": {
+                                "key_code": "fn"
+                            }
                         }
                     ]
                 },
@@ -2889,18 +2897,18 @@
                         },
                         {
                             "from": {
-                                "key_code": "left_control"
-                            },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
-                        },
-                        {
-                            "from": {
                                 "key_code": "left_alt"
                             },
                             "to": {
                                 "key_code": "left_gui"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_control"
+                            },
+                            "to": {
+                                "key_code": "caps_lock"
                             }
                         },
                         {
@@ -3033,6 +3041,7 @@
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
+                "country_code": 0,
                 "keyboard_type": "ansi"
             }
         }
