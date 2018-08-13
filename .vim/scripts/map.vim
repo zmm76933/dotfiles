@@ -65,8 +65,8 @@ inoremap <C-h> <BS>
 inoremap <C-d> <Del>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
-inoremap <C-n> <Up>
-inoremap <C-p> <Down>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
 inoremap <C-m> <CR>
 
 nnoremap q: <Nop>
