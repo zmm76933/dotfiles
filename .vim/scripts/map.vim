@@ -39,34 +39,27 @@ if !g:plug.is_installed('lexima.vim')
     inoremap ` ``<LEFT>
 endif
 
-inoremap <C-h> <Backspace>
-inoremap <C-d> <Delete>
+cnoremap <C-h> <Backspace>
+cnoremap <C-d> <Delete>
 cnoremap <C-k> <UP>
-cnoremap <C-j> <DOWN>
-cnoremap <C-l> <RIGHT>
-cnoremap <C-h> <LEFT>
-cnoremap <C-d> <DELETE>
-cnoremap <C-p> <UP>
-cnoremap <C-n> <DOWN>
-cnoremap <C-f> <RIGHT>
-cnoremap <C-b> <LEFT>
-cnoremap <C-a> <HOME>
-cnoremap <C-e> <END>
+cnoremap <C-j> <Down>
+cnoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-d> <Del>
-cnoremap <C-h> <BS>
 
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-h> <BS>
-inoremap <C-d> <Del>
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+inoremap <C-h> <Backspace>
+inoremap <C-d> <Delete>
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 inoremap <C-m> <CR>
 
 nnoremap q: <Nop>
@@ -181,7 +174,7 @@ if g:env.vimrc.goback_to_eof2bof == g:true
         else
             return a:key
         endif
-    endfunction 
+    endfunction
     function! s:down(key)
         if line(".") == line("$")
             return ":call cursor(1, col('.'))\<CR>"
