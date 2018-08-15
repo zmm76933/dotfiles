@@ -12,7 +12,7 @@ cnoremap <C-d> <Delete>
 cnoremap <C-h> <Backspace>
 
 inoremap <C-h> <Backspace>
-inoremap <C-d> <Delete>
+inoremap <C-d> <Del>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-p> <Up>
