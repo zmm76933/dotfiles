@@ -41,10 +41,6 @@ endif
 
 cnoremap <C-h> <Backspace>
 cnoremap <C-d> <Delete>
-cnoremap <C-k> <UP>
-cnoremap <C-j> <Down>
-cnoremap <C-l> <Right>
-cnoremap <C-h> <Left>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-f> <Right>
