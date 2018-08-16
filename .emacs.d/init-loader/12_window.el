@@ -11,9 +11,11 @@
 ;; popwin
 (when (require 'popwin)
 
+  ;; temporary
+  (popwin-mode 1)
   (defvar popwin:special-display-config-backup popwin:special-display-config)
-  (custom-set-variables
-   '(display-buffer-function 'popwin:display-buffer))
+  ;; (custom-set-variables
+  ;;  '(display-buffer-function 'popwin:display-buffer))
 
   ;; remove from default config
   (dolist (stuff '("*vc-diff*" "*vc-change-log*"))
