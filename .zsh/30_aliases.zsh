@@ -160,7 +160,7 @@ case "$PLATFORM" in
     osx)
         if has "brew"; then
             alias update='brew update && brew upgrade && brew cask upgrade'
-            alias cleanup='brew cleanup && brew cask cleanup'
+            alias cleanup='brew cleanup'
         fi
         alias -g O="| xargs open"
         alias -g CP='| pbcopy'

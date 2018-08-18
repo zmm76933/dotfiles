@@ -50,8 +50,6 @@ cnoremap <C-e> <End>
 
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Delete>
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-a> <Home>

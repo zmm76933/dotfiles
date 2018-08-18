@@ -271,7 +271,7 @@ bash_alias() {
         osx)
             if has "brew"; then
                 alias update='brew update && brew upgrade && brew cask upgrade'
-                alias cleanup='brew cleanup && brew cask cleanup'
+                alias cleanup='brew cleanup'
             fi
             ;;
         linux)

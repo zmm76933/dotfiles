@@ -7,8 +7,6 @@ cnoremap <C-b> <Left>
 
 inoremap <C-h> <Backspace>
 inoremap <C-d> <Del>
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-m> <CR>
