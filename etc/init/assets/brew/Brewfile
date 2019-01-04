@@ -34,6 +34,8 @@ brew 'terminal-notifier'
 brew 'the_silver_searcher'
 brew 'tig', args: ['with-docs']
 brew 'tmux'
+brew 'rbenv'
+brew 'ruby-build'
 brew 'tree'
 brew 'vim', args: ['with-lua', 'with-luajit']
 brew 'wakeonlan'

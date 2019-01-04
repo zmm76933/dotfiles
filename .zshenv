@@ -1,6 +1,9 @@
 # Add custom path to PATH
 typeset -gx -U path
 path=(
+    ~/.fastlane/bin(N-/) \
+    ~/.fastlane/bin/bundle/bin(N-/) \
+    ~/.rbenv/bin(N-/) \
     ~/.zplug/bin(N-/) \
     ~/.tmux/bin(N-/) \
     ~/bin(N-/) \
