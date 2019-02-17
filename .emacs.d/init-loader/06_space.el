@@ -54,4 +54,9 @@
 (set-face-attribute 'whitespace-empty nil
                     :background my/bg-color)
 
+;; markdown modeでは無視
+(add-hook 'markdown-mode-hook
+          '(lambda ()
+             (set (make-local-variable 'whitespace-action) nil)))
+
 ;;; space.el ends here

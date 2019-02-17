@@ -79,3 +79,6 @@ nnoremap <Leader>Y :<C-u>%y<CR>
 
 nnoremap <silent> <Leader>l :<C-u>call <SID>toggle_option('cursorline')<CR>
 nnoremap <silent> <Leader>c :<C-u>call <SID>toggle_option('cursorcolumn')<CR>
+
+set clipboard+=unnamed
+set clipboard=unnamed
