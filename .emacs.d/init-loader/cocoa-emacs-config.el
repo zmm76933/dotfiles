@@ -121,6 +121,10 @@
 (when window-system
   (menu-bar-mode t))
 
+;; dark mode
+(add-to-list 'default-frame-alist '(ns-appearance . 'dark))
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+
 ;; dired-x の機能を利用して 特定ファイルだけ「!」や「X」でQuick Look 可能にする
 ;; 以降に定義している dired-quickLook を利用すると何でもQLに渡す
 ;; QL の終了は C-g
