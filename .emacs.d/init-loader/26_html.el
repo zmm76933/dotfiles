@@ -41,10 +41,11 @@
   (define-key web-mode-map (kbd "C-c t p") 'web-mode-tag-previous)
   (define-key web-mode-map (kbd "C-c t s") 'web-mode-tag-select))
 
-;;(add-to-list 'auto-mode-alist '("\\.html?``'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (custom-set-variables
- '(web-mode-css-indent-offset 4))
+ '(web-mode-css-indent-offset 4)
+ '(web-mode-auto-close-style 2))
 
 (defun my/web-mode-hook ()
   (local-unset-key (kbd "C-c C-b"))
