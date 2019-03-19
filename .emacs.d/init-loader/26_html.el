@@ -13,6 +13,16 @@
 ;; web-mode
 (with-eval-after-load 'web-mode
   (add-hook 'web-mode-hook 'my/web-mode-hook)
+
+  (custom-set-variables
+   '(web-mode-attr-indent-offset nil)
+   '(web-mode-markup-indent-offset 2)
+   '(web-mode-css-indent-offset 2)
+   '(web-mode-code-indent-offset 2)
+   '(web-mode-sql-indent-offset 2)
+   '(indent-tabs-mode nil)
+   '(tab-width 2)
+   '(web-mode-auto-close-style 2))
   ;; remap key
   (define-key web-mode-map (kbd "C-c b b") 'web-mode-block-beginning)
   (define-key web-mode-map (kbd "C-c b e") 'web-mode-block-end)
@@ -41,11 +51,9 @@
   (define-key web-mode-map (kbd "C-c t p") 'web-mode-tag-previous)
   (define-key web-mode-map (kbd "C-c t s") 'web-mode-tag-select))
 
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-(custom-set-variables
- '(web-mode-css-indent-offset 4)
- '(web-mode-auto-close-style 2))
+(add-to-list 'auto-mode-alist
+             '("\\.html?\\'" . web-mode)
+             '("\\.js[x]?$" . web-mode))
 
 (defun my/web-mode-hook ()
   (local-unset-key (kbd "C-c C-b"))
