@@ -26,6 +26,15 @@
   (define-key smartparens-mode-map (kbd "C-c j") 'editutil-newline-after-sexp)
   (define-key smartparens-mode-map (kbd "DEL") 'editutil-smartparens-backward-delete))
 
+(defun my-create-newline-and-enter-sexp (&rest _ignored)
+  "Open a new brace or bracket expression, with relevant newlines and indent. "
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(sp-pair "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+
 ;; @See https://github.com/Fuco1/smartparens/issues/286
 (sp-with-modes sp--lisp-modes
   ;; disable ', it's the quote character!
