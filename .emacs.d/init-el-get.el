@@ -174,6 +174,7 @@
 ;; HTML
 (el-get-bundle fxbois/web-mode)
 (el-get-bundle smihica/emmet)
+(el-get-bundle osv/company-web)
 
 ;; session
 (el-get-bundle recentf-ext)

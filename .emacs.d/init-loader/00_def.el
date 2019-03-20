@@ -124,6 +124,14 @@
   :group 'display-line-numbers
   )
 
+;; opne line and indent
+(defun open-line-next-indent ()
+  "Open a line and indent the next line."
+  (interactive)
+  (save-excursion
+    (newline)
+    (indent-for-tab-command)))
+
 (defadvice display-line-numbers--turn-on(around display-line-numbers-off activate)
   (unless (or (minibufferp)
               (member major-mode line-numbers-disabled-modes-list)

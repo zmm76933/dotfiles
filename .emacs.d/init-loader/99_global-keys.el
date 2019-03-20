@@ -17,6 +17,7 @@
 
 ;; global key setting(standard)
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-o") 'open-line-next-indent)
 (global-set-key (kbd "C-z") 'scroll-down)
 (global-set-key (kbd "C-M-l") 'goto-line)
 (global-set-key (kbd "C-M-z") 'scroll-other-window-down)
