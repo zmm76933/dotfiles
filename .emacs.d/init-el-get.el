@@ -125,6 +125,8 @@
   :name company-jedi
   :depends-on (jedi-core company-mode))
 
+;; PHP
+(el-get-bundle php-mode)
 
 ;; Perl
 ;; (el-get-bundle hinrik/perl6-mode)

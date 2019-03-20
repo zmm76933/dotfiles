@@ -11,14 +11,15 @@
 ;;; Code:
 ;;
 ;;
-(autoload 'php-mode "php-mode" "major mode for editing PHP code" t)
-(add-to-list 'auto-mode-alist '("\\.php[s34]?\\'" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-(setq auto-mode-alist (cons '("\\.ctp$" . html-mode) auto-mode-alist))
+(defun my-php-mode-init ()
+  (setq-local ac-disable-faces '(font-lock-comment-face font-lock-string-face))
+  (setq-local indent-tabs-mode nil)
+  (setq-local page-delimiter "\\_<\\(class\\|function\\|namespace\\)\\_>.+$")
 
-(add-hook  'php-mode-hook
-           (lambda ()
-             ;; インデントの設定
-             (setq php-mode-force-pear t)))
+  ;; If you feel phumped and phpcs annoying, invalidate them.
+  (when (boundp 'flycheck-disabled-checkers)
+    (add-to-list 'flycheck-disabled-checkers 'php-phpmd)
+    (add-to-list 'flycheck-disabled-checkers 'php-phpcs)))
 
+(add-hook 'php-mode-hook #'my-php-mode-init)
 ;;; php.el ends here

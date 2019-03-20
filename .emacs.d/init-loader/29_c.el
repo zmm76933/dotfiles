@@ -22,7 +22,7 @@
              (c-set-style "k&r")
 
              ;; tabモード
-             (setq indent-tabs-mode t)
+             (setq indent-tabs-mode nil)
 
              ;; 基本オフセット
              (setq c-basic-offset 4)
