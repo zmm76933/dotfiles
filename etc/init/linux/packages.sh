@@ -16,9 +16,9 @@ PACKAGES="git zsh tmux
     mercurial rbenv python python3 python-pip python3-pip gawk tree paco
     aspell ispell nkf lv cmigemo texinfo etckeeper stress smartmontools
     sysstat curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
-    openssh-server bind9 isc-dhcp-server"
+    openssh-server bind9 isc-dhcp-server nodejs npm"
 
-REPOSITORY="vim emacs25"
+REPOSITORY="vim emacs26"
 
 if has "yum"; then
     log_echo "Install packages with Yellowdog Updater Modified"

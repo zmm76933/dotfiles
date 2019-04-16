@@ -7,14 +7,16 @@ brew 'checkbashisms'
 brew 'cmigemo'
 brew 'coreutils'
 brew 'cowsay'
-brew 'emacs', args: ['with-cocoa', 'with-gnutls']
+tap  'railwaycat/emacsmacport'
+brew 'emacs-mac'
+brew 'docker'
 brew 'doxygen'
 brew 'figlet'
 brew 'fortune'
 brew 'gawk'
 brew 'gdbm'
 brew 'git'
-brew 'go', args: ['cross-compile-common']
+brew 'go'
 brew 'hub'
 brew 'imagemagick'
 brew 'lv'
@@ -32,17 +34,17 @@ brew 'sqlite'
 brew 'stress'
 brew 'terminal-notifier'
 brew 'the_silver_searcher'
-brew 'tig', args: ['with-docs']
+brew 'tig'
 brew 'tmux'
 brew 'rbenv'
 brew 'ruby-build'
 brew 'rbenv-communal-gems'
 brew 'tree'
-brew 'vim', args: ['with-lua', 'with-luajit']
+brew 'vim'
 brew 'wakeonlan'
 brew 'wget'
 brew 'wireshark'
-brew 'zsh', args: ['disable-etcdir']
+brew 'zsh'
 
 cask 'aquaskk'
 cask 'bartender'
@@ -53,14 +55,15 @@ cask 'calibre'
 cask 'clipy'
 #cask 'dropbox'
 cask 'duet'
+cask 'docker'
 #cask 'geekbench'
 #cask 'gemini'
 cask 'google-chrome'
 cask 'google-earth-pro'
 cask 'istat-menus'
 cask 'karabiner-elements'
-cask 'keycue'
 cask 'kindle'
+cask 'logitech-options'
 cask 'onyx'
 cask 'qlcolorcode'
 cask 'qlstephen'
@@ -69,20 +72,15 @@ cask 'quicklook-json'
 cask 'qlimagesize'
 cask 'quicklookase'
 cask 'qlvideo'
-cask 'skype'
-cask 'stay'
+#cask 'skype'
+#cask 'stay'
 cask 'suspicious-package'
 #cask 'textexpander'
 #cask 'totalfinder'
 #cask 'totalterminal'
 #cask 'transmit'
-cask 'vagrant'
-cask 'virtualbox'
 cask 'webpquicklook'
 cask 'xquartz'
-
-tap 'caskroom/drivers'
-cask 'logitech-options'
 
 mas 'LINE', id: 539883307
 mas 'Blackmagic Disk Speed Test', id: 425264550
@@ -95,8 +93,7 @@ mas 'Twitter', id: 409789998
 mas 'WiFi Explorer', id: 494803304
 mas 'GarageBand', id: 682658836
 mas 'The Unarchiver', id:425424353
-mas '1Password', id: 443987910
-mas 'Growl', id: 467939042
+#mas '1Password', id: 443987910
 mas 'Tweetbot', id: 557168941
 mas 'Reeder', id: 880001334
 mas 'Xcode', id: 497799835
