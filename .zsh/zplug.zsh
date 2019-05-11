@@ -150,3 +150,7 @@ zplug 'b4b4r07/ltsv.sh', \
     as:command, \
     use:'(ltsv).sh', \
     rename-to:'$1'
+
+zplug 'docker/cli', \
+    use:'contrib/completion/zsh/_docker', \
+    lazy:yes

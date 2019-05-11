@@ -24,9 +24,6 @@ $endif
 # Auto scroll
 set horizontal-scroll-mode off
 
-# encoding to utf-8
-set kanji-code utf-8
-
 # enable the application keypad
 set enable-keypad on
 
