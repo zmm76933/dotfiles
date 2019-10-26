@@ -76,9 +76,6 @@ export GOBIN="$GOPATH/bin"
 # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS="--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
 
-# enhancd - cd command with an interactive filter (https://github.com/b4b4r07/enhancd)
-export ENHANCD_FILTER="fzf:fzf-tmux:fzy:peco:percol:gof:pick:icepick:sentaku:selecta"
-
 # Cask
 #export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 

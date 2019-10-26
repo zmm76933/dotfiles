@@ -586,7 +586,7 @@ function pet-select() {
 }
 
 zle -N pet-select
-bindkey '^s' pet-select
+bindkey '^Xs' pet-select
 
 function prev-add() {
   local PREV=$(fc -lrn | head -n 1)
