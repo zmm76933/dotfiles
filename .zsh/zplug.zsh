@@ -64,13 +64,8 @@ zplug "fujiwara/nssh", \
     rename-to:"nssh", \
     frozen:1
 
-zplug "tcnksm/ghr", \
-    as:command, \
-    from:gh-r
-
-zplug "b4b4r07/gdate", \
-    as:command, \
-    from:gh-r
+zplug 'tcnksm/ghr',   as:command, hook-build:'go get -d && go build'
+zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
 
 zplug "philovivero/distribution", \
     as:command, \
@@ -87,11 +82,16 @@ zplug "wg/wrk", \
 
 zplug "mattn/jvgrep", as:command, from:gh-r
 
-zplug "reorx/httpstat", \
+#zplug "reorx/httpstat", \
+#    as:command, \
+#    use:'(httpstat).py', \
+#    rename-to:'$1', \
+#    if:'(( $+commands[python] ))'
+
+zplug "b4b4r07/httpstat", \
     as:command, \
-    use:'(httpstat).py', \
-    rename-to:'$1', \
-    if:'(( $+commands[python] ))'
+    use:'(*).sh', \
+    rename-to:'$1'
 
 zplug "jhawthorn/fzy", \
     as:command, \
@@ -105,7 +105,6 @@ zplug "mrowa44/emojify", as:command
 zplug 'b4b4r07/copy', as:command, use:'(*).sh', rename-to:'$1'
 
 zplug "b4b4r07/ultimate", as:theme
-
 if zplug check "b4b4r07/ultimate"; then
     zstyle ':ultimate:prompt:path' mode 'shortpath'
 fi
@@ -159,3 +158,5 @@ zplug 'b4b4r07/ltsv.sh', \
 zplug 'docker/cli', \
     use:'contrib/completion/zsh/_docker', \
     lazy:yes
+
+zplug "akarzim/zsh-docker-aliases"

@@ -1,5 +1,5 @@
 [core]
-    pager = less -q -R
+    # pager = diff-so-fancy | less --tabs=4 -RFX
     excludesfile = ~/.gitignore
     preloadindex = true
 
@@ -28,7 +28,10 @@
     ci = commit
     typechange = status -s | awk '$1=="T"{print $2}' | xargs git checkout
     graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
-    sw = switch
+    br = switch
+    review = diff origin/master...
+    commit-log = log origin/master..
+    delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
 
 [help]
     autocorrect = 1
@@ -47,6 +50,7 @@
     log  = ~/bin/diff-highlight | less -RX
     show = ~/bin/diff-highlight | less -RX
     diff = ~/bin/diff-highlight | less -RX
+    # diff = diff-so-fancy | less --tabs=4 -RFX
 
 [diff]
     tool      = vimdiff
@@ -74,3 +78,5 @@
     action   = status
     tool     = enhancd
     lessopen = "| pygmentize -O style=solarized -f console256 -g %s"
+[github]
+    user = zmm76933
