@@ -190,7 +190,7 @@ bindkey '^[/' tmux-pane-words-prefix
 bindkey '^[?' tmux-pane-words-anywhere
 zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' completer _tmux_pane_words
 zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' ignore-line current
-zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=*'
+zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=* m:{A-Za-z}={a-zA-Z}'
 
 do-enter() {
     if [[ -n $BUFFER ]]; then

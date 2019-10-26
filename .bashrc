@@ -174,7 +174,7 @@ export FZF_DEFAULT_OPTS='--extended'
 bash_alias() {
     # For mac, aliases
     if is_osx; then
-        alias ql='qlmanage -p "$@" >&/dev/null'
+        has "qlmanage" && alias ql='qlmanage -p "$@" >&/dev/null'
         alias o='open'
     fi
 
@@ -211,7 +211,6 @@ bash_alias() {
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    alias relogin='exec $SHELL -l'
 
     # Use if colordiff exists
     if has 'colordiff'; then
@@ -406,8 +405,7 @@ bashrc_loading() {
 
 bashrc_startup() {
     # tmux_automatically_attach attachs tmux session automatically when your are in zsh
-    #tmux_automatically_attach
-    $DOTPATH/bin/tmuxx
+    #$DOTPATH/bin/tmuxx
 
     bashrc_loading || return 1
 

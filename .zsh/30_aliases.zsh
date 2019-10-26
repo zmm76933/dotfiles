@@ -56,6 +56,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias s='git st '
+alias t="tree -C"
 alias d='git diff '
 alias dw='git diff --word-diff '
 alias dc='git diff --cached '
@@ -73,6 +74,10 @@ alias vi="vim"
 
 # Use plain vim.
 alias nvim='vim -N -u NONE -i NONE'
+
+if (( $+commands[kubectl] )); then
+    alias k=kubectl
+fi
 
 # Emacs client
 e() {
@@ -105,6 +110,7 @@ alias -g N1=" >/dev/null"
 alias -g N2=" 2>/dev/null"
 alias -g VI='| xargs -o vim'
 alias -g E="| xargs emacsclient -n"
+alias -g CSV="| sed 's/,,/, ,/g;s/,,/, ,/g' | column -s, -t"
 
 multi_grep() {
     local std_in="$(cat <&0)" word
@@ -153,7 +159,8 @@ if has "emojify"; then
 fi
 
 if has "jq"; then
-    alias -g J='| jq .'
+    alias -g JQ='| jq -C .'
+    alias -g JL='| jq -C . | less -R -X'
 fi
 
 case "$PLATFORM" in
@@ -546,17 +553,72 @@ git_modified_files() {
         esac
     done
 }
-#alias -g GG='$(git_modified_files)'
 
-# treels() {
-#     local -a files=( *(D) )
-#     if (( $#files > $LINES )); then
-#         tree -C -L 1 -a -I .git
-#     else
-#         tree -C
-#     fi
-# }
+alias -g P='$(kubectl get pods | fzf-tmux --header-lines=1 --reverse --multi --cycle | awk "{print \$1}")'
+alias -g F='| fzf --height 30 --reverse --multi --cycle'
+alias -g J='| jq -C . | less -F'
 
-alias t="tree -C"
+function filetime() {
+    zmodload "zsh/stat"
+    zmodload "zsh/datetime"
+    strftime "%F %T" "$(stat +mtime "${1:?}")"
+}
 
-# alias f='fzf --preview="pygmentize {}" --preview-window=right:60% --ansi --bind "enter:execute(vim {})"'
+function _gcloud_change_project() {
+    local proj=$(gcloud projects list | fzf --height 50% --header-lines=1 --reverse --multi --cycle | awk '{print $1}')
+    if [[ -n $proj ]]; then
+        gcloud config set project $proj
+        return $?
+    fi
+}
+alias gcp=_gcloud_change_project
+
+alias yy="fc -ln -1 | tr -d '\n' | pbcopy"
+
+if (( $+commands[iap_curl] )); then
+    alias iap='iap_curl $(iap_curl --list | fzf --height 30% --reverse)'
+fi
+
+function pet-select() {
+    BUFFER="$(pet search --color --query "$LBUFFER")"
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+
+zle -N pet-select
+bindkey '^s' pet-select
+
+function prev-add() {
+  local PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
+
+gchange() {
+    if ! type gcloud &>/dev/null; then
+        echo "gcloud not found" >&2
+        return 1
+    fi
+    gcloud config configurations activate $(gcloud config configurations list | fzf-tmux --reverse --header-lines=1 | awk '{print $1}')
+}
+
+docker-rmi() {
+    docker images \
+        | fzf-tmux --reverse --header-lines=1 --multi --ansi \
+        | awk '{print $3}' \
+        | xargs docker rmi ${1+"$@"}
+}
+
+# source <(kubectl completion zsh)
+# source <(kubectl completion zsh | sed 's/__start_kubectl kubectl/__start_kubectl kube/')
+
+review() {
+    git diff --name-only origin/master... \
+        | fzf \
+        --ansi \
+        --multi \
+        --reverse \
+        --height 70% \
+        --preview-window down:70% \
+        --preview="git diff --color=always origin/master... {}" \
+        --bind "enter:execute-multi(vim {} </dev/tty >/dev/tty)"
+}
