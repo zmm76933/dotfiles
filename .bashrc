@@ -287,6 +287,9 @@ bash_alias() {
             ;;
     esac
 
+    # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
+    export FZF_DEFAULT_OPTS="--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
+
 }
 
 bashrc_shopt() {
