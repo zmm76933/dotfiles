@@ -8,4 +8,6 @@ fi
 
 # set PATH so it includes user's private bin directories
 export PATH=$HOME/.rbenv/bin:$HOME/bin:$PATH
+export PATH=$HOME/.pyenv/bin:$HOME/bin:$PATH
 eval "$(rbenv init -)"
+eval "$(pyenv init -)"

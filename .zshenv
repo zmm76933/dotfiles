@@ -4,6 +4,7 @@ path=(
     ~/.fastlane/bin(N-/) \
     ~/.fastlane/bin/bundle/bin(N-/) \
     ~/.rbenv/bin(N-/) \
+    ~/.pyenv/bin(N-/) \
     ~/.zplug/bin(N-/) \
     ~/.tmux/bin(N-/) \
     ~/bin(N-/) \
@@ -72,6 +73,12 @@ setopt no_global_rcs
 # Settings for golang
 export GOPATH="$HOME"
 export GOBIN="$GOPATH/bin"
+
+# Settings for rbenv
+export RBENV_ROOT="$HOME/.rbenv"
+
+# Settings for pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 
 # fzf - command-line fuzzy finder (https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS="--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"

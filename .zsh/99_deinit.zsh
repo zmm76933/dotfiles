@@ -4,3 +4,4 @@ printf "$fg_bold[cyan] - DISPLAY on $fg_bold[red]$DISPLAY$reset_color\n\n"
 
 # ruby version control
 eval "$(rbenv init - zsh)"
+eval "$(pyenv init - zsh)"
