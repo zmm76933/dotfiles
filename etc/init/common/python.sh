@@ -11,7 +11,14 @@ set -eu
 
 if has "pygmentize"; then
     log_pass "pygmentize: already installed"
-    exit
+fi
+
+if has "pipenv"; then
+    log_pass "pipenv: already installed"
+fi
+
+if has "pyenv"; then
+    log_pass "pyenv: already installed"
 fi
 
 # The script is dependent on pip
