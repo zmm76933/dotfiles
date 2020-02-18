@@ -16,7 +16,7 @@ PACKAGES="git zsh tmux
     mercurial rbenv python python3 python-pip python3-pip gawk tree paco
     aspell ispell nkf lv cmigemo texinfo etckeeper stress smartmontools
     sysstat curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
-    openssh-server bind9 isc-dhcp-server samba"
+    openssh-server bind9 isc-dhcp-server samba cifs-utils"
 
 REPOSITORY="vim emacs26"
 
