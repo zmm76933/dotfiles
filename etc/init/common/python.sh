@@ -21,21 +21,21 @@ if has "pyenv"; then
     log_pass "pyenv: already installed"
 fi
 
-# The script is dependent on pip
-if ! has "pip"; then
-    log_fail "error: require: pip"
+# The script is dependent on pip3
+if ! has "pip3"; then
+    log_fail "error: require: pip3"
     exit 1
 fi
 
 if ! has "pygmentize"; then
-    if sudo pip install Pygments; then
+    if sudo pip3 install Pygments; then
         log_pass "pygmentize: installed successfully"
     else
         log_fail "error: pygmentize: failed to install"
     fi
 
     log_echo "install pygments-style-solarized ..."
-    #pip install pygments-style-solarized
+    #pip3 install pygments-style-solarized
 fi
 
 #if builtin cd "$DOTPATH"/etc/init/assets/pygments/solarized-pygment; then
@@ -44,7 +44,7 @@ fi
 #fi
 
 if ! has "pipenv"; then
-    if sudo pip install pipenv; then
+    if sudo pip3 install pipenv; then
         log_pass "pipenv installed successfully"
     else
         log_fail "error: pipenv: failed to install"
