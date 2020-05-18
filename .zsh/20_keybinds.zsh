@@ -48,6 +48,7 @@ bindkey '^U' backward-kill-line
 bindkey '^[^B' vi-backward-blank-word
 bindkey '^[^F' vi-forward-blank-word
 bindkey '^[^U' backward-delete-word
+bindkey '^[[3~' delete-char
 bindkey '^[^K' delete-word
 
 if is-at-least 5.0.8; then

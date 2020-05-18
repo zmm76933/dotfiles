@@ -10,7 +10,8 @@ define_modmap({
     Key.LEFT_META: Key.LEFT_ALT,
     Key.LEFT_ALT: Key.LEFT_META,
     Key.RIGHT_META: Key.RIGHT_ALT,
-    Key.RIGHT_ALT: Key.RIGHT_META
+    Key.RIGHT_ALT: Key.RIGHT_META,
+    Key.EJECTCD: Key.DELETE
 })
 
 # # [Conditional modmap] Change modifier keys in certain applications
