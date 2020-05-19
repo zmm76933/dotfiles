@@ -17,6 +17,7 @@
    '(migemo-options '("-q" "--emacs"))
    '(migemo-user-dictionary nil)
    '(migemo-regex-dictionary nil)
+   '(migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
    '(migemo-coding-system 'utf-8-unix))
   (load-library "migemo")
   (migemo-init)
