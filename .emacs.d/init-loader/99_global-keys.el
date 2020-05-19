@@ -32,8 +32,6 @@
 (global-set-key (kbd "M-*") 'tags-loop-continue)
 (global-set-key (kbd "M-=") 'yas-insert-snippet)
 (global-set-key (kbd "M-'") 'avy-goto-word-1)
-(global-set-key (kbd "M-z") popwin:keymap)
-(global-set-key (kbd "M-z C-i") 'import-popwin)
 (global-set-key (kbd "C-x z") 'zoom-window-zoom)
 (global-set-key (kbd "C-M-/") 'undo-tree-redo)
 
@@ -45,8 +43,6 @@
 (global-set-key (kbd "C-M-s") 'helm-swoop)
 (global-set-key (kbd "C-h a") 'helm-apropos)
 (global-set-key (kbd "C-h m") 'helm-man-woman)
-(global-set-key (kbd "C-h l")  'popwin:popup-last-buffer)
-(global-set-key (kbd "C-h SPC") 'popwin:select-popup-window)
 (global-set-key (kbd "C-c i") 'helm-imenu)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 

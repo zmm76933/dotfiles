@@ -46,7 +46,7 @@
 (el-get-bundle col-highlight)
 
 ;; Search
-(el-get-bundle syohex/emacs-anzu :name anzu)
+(el-get-bundle syohex/emacs-anzu2 :name anzu2)
 (el-get-bundle emacs-jp/migemo)
 
 ;; moving cursor
@@ -62,7 +62,6 @@
 (el-get-bundle emacs-jp/elscreen)
 (el-get-bundle popwin)
 (el-get-bundle lukhas/buffer-move)
-(el-get-bundle syohex/emacs-import-popwin :name import-popwin)
 (el-get-bundle syohex/emacs-zoom-window :name zoom-window)
 
 ;; Pair
