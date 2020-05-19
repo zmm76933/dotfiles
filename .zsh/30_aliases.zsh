@@ -60,7 +60,6 @@ alias t="tree -C"
 alias d='git diff '
 alias dw='git diff --word-diff '
 alias dc='git diff --cached '
-alias cdep='cde >/dev/null && cdp && pwd'
 alias relogin='exec $SHELL -l'
 
 # Use if colordiff exists
