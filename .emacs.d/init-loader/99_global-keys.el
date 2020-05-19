@@ -32,7 +32,7 @@
 (global-set-key (kbd "M-*") 'tags-loop-continue)
 (global-set-key (kbd "M-=") 'yas-insert-snippet)
 (global-set-key (kbd "M-'") 'avy-goto-word-1)
-(global-set-key (kbd "C-x z") 'zoom-window-zoom)
+(global-set-key (kbd "C-x z") #'zoom-window2-zoom)
 (global-set-key (kbd "C-M-/") 'undo-tree-redo)
 
 ;; helm
