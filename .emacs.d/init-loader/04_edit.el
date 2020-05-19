@@ -17,7 +17,6 @@
 (define-key isearch-mode-map [remap isearch-query-replace]  #'anzu2-isearch-query-replace)
 (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu2-isearch-query-replace-regexp)
 (define-key isearch-mode-map (kbd "C-o") 'helm-occur-from-isearch)
-(define-key isearch-mode-map (kbd "M-a") 'avy-isearch)
 (define-key minibuffer-local-completion-map (kbd "C-w") 'editutil-backward-delete-word)
 
 ;; electrict-mode
