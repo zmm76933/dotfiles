@@ -144,7 +144,7 @@
 (el-get-bundle yatex)
 
 ;; shell
-(el-get-bundle syohex/emacs-quickrun :name quickrun)
+(el-get-bundle syohex/emacs-quickrun2 :name quickrun2)
 
 ;; VCS
 (el-get-bundle syohex/emacs-git-gutter2 :name git-gutter2)
