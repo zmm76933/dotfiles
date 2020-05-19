@@ -90,11 +90,6 @@
    "xattr" nil 0 nil "-w" "com.apple.TextEncoding" cate buffer-file-name))
 (add-hook 'after-save-hook 'my-set-com.apple.TextEncoding)
 
-;; migemo
-(custom-set-variables
-  '(migemo-command "cmigemo")
-     `(migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict"))
-
 ;; smooth scroll を on
 (setq mac-mouse-wheel-smooth-scroll t)
 ;; ホイールスクロールを控えめに

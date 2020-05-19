@@ -2,11 +2,6 @@
 (custom-set-variables
  '(browse-url-browser-function #'browse-url-xdg-open))
 
-;; migemo
-(custom-set-variables
-  '(migemo-command "cmigemo")
-     `(migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict"))
-
 ;; font-setting for Linux(Ubuntu)
 (defun change-font-size (size)
   (interactive
