@@ -11,11 +11,11 @@
 ;;; Code:
 ;;
 ;; Use regexp version as Default
-(global-set-key (kbd "M-%") 'anzu-query-replace-regexp)
-(global-set-key (kbd "ESC M-%") 'anzu-query-replace-at-cursor)
-(global-set-key (kbd "C-x %") 'anzu-replace-at-cursor-thing)
-(define-key isearch-mode-map [remap isearch-query-replace]  #'anzu-isearch-query-replace)
-(define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+(global-set-key (kbd "M-%") 'anzu2-query-replace-regexp)
+(global-set-key (kbd "ESC M-%") 'anzu2-query-replace-at-cursor)
+(global-set-key (kbd "C-x %") 'anzu2-replace-at-cursor-thing)
+(define-key isearch-mode-map [remap isearch-query-replace]  #'anzu2-isearch-query-replace)
+(define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu2-isearch-query-replace-regexp)
 (define-key isearch-mode-map (kbd "C-o") 'helm-occur-from-isearch)
 (define-key isearch-mode-map (kbd "M-a") 'avy-isearch)
 (define-key minibuffer-local-completion-map (kbd "C-w") 'editutil-backward-delete-word)
