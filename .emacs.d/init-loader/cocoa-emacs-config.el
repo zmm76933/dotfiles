@@ -90,9 +90,6 @@
    "xattr" nil 0 nil "-w" "com.apple.TextEncoding" cate buffer-file-name))
 (add-hook 'after-save-hook 'my-set-com.apple.TextEncoding)
 
-;; dash
-(global-set-key (kbd "C-c ?") 'dash-at-point)
-
 ;; migemo
 (custom-set-variables
   '(migemo-command "cmigemo")

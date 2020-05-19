@@ -2,9 +2,6 @@
 (custom-set-variables
  '(browse-url-browser-function #'browse-url-xdg-open))
 
-;; key config
-(global-set-key (kbd "C-x ?") 'zeal-at-point)
-
 ;; migemo
 (custom-set-variables
   '(migemo-command "cmigemo")

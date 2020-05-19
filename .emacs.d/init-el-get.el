@@ -74,8 +74,6 @@
 
 ;; auto-complete
 (el-get-bundle auto-complete/popup-el :name popup)
-;; (el-get-bundle auto-complete/fuzzy-el :name fuzzy)
-;; (el-get-bundle auto-complete/auto-complete)
 
 ;; company
 (el-get-bundle company-mode/company-mode :name company-mode)
@@ -113,17 +111,6 @@
 (el-get-bundle syohex/emacs-go-impl :name go-impl)
 (el-get-bundle syohex/emacs-go-add-tags :name go-add-tags)
 
-;; Python
-(el-get-bundle syohex/emacs-company-jedi
-  :name company-jedi
-  :depends-on (jedi-core company-mode))
-
-;; PHP
-(el-get-bundle php-mode)
-
-;; Perl
-;; (el-get-bundle hinrik/perl6-mode)
-
 ;; Emacs Lisp
 (el-get-bundle purcell/elisp-slime-nav :name elisp-slime-nav)
 
@@ -146,7 +133,6 @@
 
 ;; Markup language
 (el-get-bundle markdown-mode)
-(el-get-bundle markdown-toc)
 (el-get-bundle yoshiki/yaml-mode)
 
 ;; session
@@ -178,8 +164,8 @@
 (el-get-bundle emacs-helm/helm-descbinds)
 (el-get-bundle syohex/emacs-helm-gtags :name helm-gtags)
 (el-get-bundle syohex/emacs-helm-ag :name helm-ag)
-(el-get-bundle syohex/emacs-helm-pydoc :name helm-pydoc)
-(el-get-bundle syohex/emacs-helm-perldoc :name helm-perldoc)
+;; (el-get-bundle syohex/emacs-helm-pydoc :name helm-pydoc)
+;; (el-get-bundle syohex/emacs-helm-perldoc :name helm-perldoc)
 (el-get-bundle syohex/emacs-helm-godoc :name helm-godoc)
 (el-get-bundle ShingoFukuyama/helm-swoop :name helm-swoop)
 
