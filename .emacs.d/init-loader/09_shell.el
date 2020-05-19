@@ -39,6 +39,5 @@
  '(eshell-directory-name (concat user-emacs-directory "var/eshell")))
 
 (setq-default eshell-path-env (getenv "PATH"))
-(global-set-key (kbd "M-~") 'eshellutil-popup)
 
 ;;; shell.el ends here
