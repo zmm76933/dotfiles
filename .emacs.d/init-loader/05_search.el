@@ -15,8 +15,6 @@
 (custom-set-variables
  '(anzu2-mode-lighter "")
  '(anzu2-deactivate-region t)
- '(anzu2-search-threshold 1000)
- '(anzu2-replace-threshold 50)
  '(anzu2-replace-to-string-separator " => "))
 
 ;; search.el ends here
