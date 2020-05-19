@@ -31,10 +31,8 @@ bindkey -M menuselect '^l' vi-forward-char
 #bindkey -M menuselect '^k' accept-and-infer-next-history
 
 autoload -Uz cde
-autoload -Uz cdg
 autoload -Uz cdp
 autoload -Uz cdr
-autoload -Uz dired
 autoload -Uz homebrew_cask_upgrade
 autoload -Uz history-search-end
 autoload -Uz modify-current-argument
