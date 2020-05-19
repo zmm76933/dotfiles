@@ -55,9 +55,9 @@
 (define-key my/ctrl-q-map (kbd "C-m") 'flycheck-mode)
 
 ;; M-g mapping
-(global-set-key (kbd "M-g .") 'helm-ag)
-(global-set-key (kbd "M-g ,") 'helm-ag-pop-stack)
-(global-set-key (kbd "M-g p") 'helm-ag-project-root)
+(global-set-key (kbd "M-g .") 'helm-ag2)
+(global-set-key (kbd "M-g ,") 'helm-ag2-pop-stack)
+(global-set-key (kbd "M-g p") 'helm-ag2-project-root)
 (global-set-key (kbd "M-g M-f") 'ffap)
 (global-set-key (kbd "M-g M-w") 'ffap-copy-string-as-kill)
 (global-set-key (kbd "M-g M-t") 'ff-find-other-file)
