@@ -163,20 +163,13 @@
 (el-get-bundle syohex/emacs-eshellutil :name eshellutil)
 
 ;; VCS
-(el-get-bundle magit)
-(el-get-bundle with-editor)
-(el-get-bundle syohex/emacs-git-gutter :name git-gutter)
+(el-get-bundle syohex/emacs-git-gutter2 :name git-gutter2)
 (el-get-bundle syohex/emacs-git-messenger :name git-messenger)
 
 ;; Documentation
 (if (eq system-type 'darwin)
     (el-get-bundle dash-at-point)
   (el-get-bundle zeal-at-point))
-
-;; auto-complete plugins
-;;(el-get-bundle qoocku/ac-sly)
-;;(el-get-bundle zk-phi/ac-c-headers)
-;;(el-get-bundle syohex/emacs-ac-alchemist :name ac-alchemist)
 
 ;; key
 (el-get-bundle which-key)
@@ -189,8 +182,5 @@
 (el-get-bundle syohex/emacs-helm-perldoc :name helm-perldoc)
 (el-get-bundle syohex/emacs-helm-godoc :name helm-godoc)
 (el-get-bundle ShingoFukuyama/helm-swoop :name helm-swoop)
-
-;; evil
-(el-get-bundle evil)
 
 ;; init-el-get.el ends here
