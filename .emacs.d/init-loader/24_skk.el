@@ -11,6 +11,7 @@
 ;;; Code:
 ;;
 ;; 以下を記述するだけで必要な物は全部ロードする
+(require 'skk nil t)
 (custom-set-variables
  `(skk-user-directory ,(concat user-emacs-directory "var/ddskk"))
  '(skk-preload t)

@@ -136,6 +136,8 @@
 (el-get-bundle syohex/emacs-quickrun2 :name quickrun2)
 
 ;; VCS
+(el-get-bundle magit)
+(el-get-bundle with-editor)
 (el-get-bundle syohex/emacs-git-gutter2 :name git-gutter2)
 (el-get-bundle syohex/emacs-git-messenger2 :name git-messenger2)
 
