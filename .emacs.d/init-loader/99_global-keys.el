@@ -31,7 +31,6 @@
 (global-set-key (kbd "M-,") 'pop-tag-mark)
 (global-set-key (kbd "M-*") 'tags-loop-continue)
 (global-set-key (kbd "M-=") 'yas-insert-snippet)
-(global-set-key (kbd "M-'") 'avy-goto-word-1)
 (global-set-key (kbd "C-x z") #'zoom-window2-zoom)
 (global-set-key (kbd "C-M-/") 'undo-tree-redo)
 
@@ -52,7 +51,6 @@
 (define-key my/ctrl-q-map (kbd "C-c") 'column-highlight-mode)
 (define-key my/ctrl-q-map (kbd "C-a") 'text-scale-adjust)
 (define-key my/ctrl-q-map (kbd "C-f") 'flyspell-mode)
-(define-key my/ctrl-q-map (kbd "C-m") 'flycheck-mode)
 
 ;; M-g mapping
 (global-set-key (kbd "M-g .") 'helm-ag2)
