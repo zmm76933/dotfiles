@@ -164,9 +164,9 @@ fi
 
 case "$PLATFORM" in
     osx)
-        if has "brew" && has "gem"; then
-            alias update='brew update && brew upgrade && brew cask upgrade && gem update'
-            alias cleanup='brew cleanup && gem clean'
+        if has "brew"; then
+            alias update='brew update && brew upgrade && brew cask upgrade'
+            alias cleanup='brew cleanup'
         else
             alias update='brew update && brew upgrade && brew cask upgrade'
             alias cleanup='brew cleanup'
