@@ -298,35 +298,35 @@ autobackq() {
     RBUFFER='`'"$RBUFFER"
 }
 zle -N autobackq
-bindkey '`' autobackq
+# bindkey '`' autobackq
 
 autobrace() {
     LBUFFER+="{"
     RBUFFER="}$RBUFFER"
 }
 zle -N autobrace
-bindkey "{" autobrace
+# bindkey "{" autobrace
 
 autobract() {
     LBUFFER+="["
     RBUFFER="]$RBUFFER"
 }
 zle -N autobract
-bindkey "[" autobract
+# bindkey "[" autobract
 
 autodoubq() {
     LBUFFER+='"'
     RBUFFER='"'"$RBUFFER"
 }
 zle -N autodoubq
-bindkey '"' autodoubq
+# bindkey '"' autodoubq
 
 autoparen() {
     LBUFFER+="("
     RBUFFER=")$RBUFFER"
 }
 zle -N autoparen
-bindkey "(" autoparen
+# bindkey "(" autoparen
 
 autosingq() {
     LBUFFER+="'"
