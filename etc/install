@@ -338,7 +338,11 @@ is_ssh_running() {
 
 # is_vscode_running returns true if the visual studio code is available
 is_vscode_running() {
-    [ ${TERM_PROGRAM} = "vscode" ]
+    if [ "$TERM_PROGRAM" = "vscode" ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # is_ssh_or_vscode_running returns true if ssh or vscode is running
