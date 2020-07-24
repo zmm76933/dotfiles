@@ -338,7 +338,7 @@ is_ssh_running() {
 
 # is_vscode_running returns true if the visual studio code is available
 is_vscode_running() {
-    [ ! -z "$VSCODE_IPC_HOOK_CLI" ]
+    [ ${TERM_PROGRAM} = "vscode" ]
 }
 
 # is_ssh_or_vscode_running returns true if ssh or vscode is running
