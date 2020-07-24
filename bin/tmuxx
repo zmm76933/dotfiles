@@ -6,10 +6,12 @@
 . "$DOTPATH"/etc/lib/vital.sh
 
 # tmux_automatically_attach attachs tmux session automatically
-is_ssh_running && exit 0
+if is_ssh_or_vscode_running; then
+    exit 0
+fi
 
 if is_screen_or_tmux_running; then
-    if is_tmux_runnning; then
+    if is_tmux_running; then
         export DISPLAY="$TMUX"
     elif is_screen_running; then
         : # For GNU screen

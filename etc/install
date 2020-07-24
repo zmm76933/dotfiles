@@ -300,14 +300,14 @@ is_screen_running() {
     [ ! -z "$STY" ]
 }
 
-# is_tmux_runnning returns true if tmux is running
-is_tmux_runnning() {
+# is_tmux_running returns true if tmux is running
+is_tmux_running() {
     [ ! -z "$TMUX" ]
 }
 
 # is_screen_or_tmux_running returns true if GNU screen or tmux is running
 is_screen_or_tmux_running() {
-    is_screen_running || is_tmux_runnning
+    is_screen_running || is_tmux_running
 }
 
 # is_desktop returns true if desktop-system is running
@@ -334,6 +334,16 @@ shell_has_started_interactively() {
 # is_ssh_running returns true if the ssh deamon is available
 is_ssh_running() {
     [ ! -z "$SSH_CLIENT" ]
+}
+
+# is_vscode_running returns true if the visual studio code is available
+is_vscode_running() {
+    [ ! -z "$VSCODE_IPC_HOOK_CLI" ]
+}
+
+# is_ssh_or_vscode_running returns true if ssh or vscode is running
+is_ssh_or_vscode_running() {
+    is_ssh_running || is_vscode_running
 }
 
 # is_debug returns true if $DEBUG is set
