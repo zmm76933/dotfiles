@@ -1,4 +1,5 @@
 tap 'homebrew/bundle'
+tap 'homebrew/cask'
 tap 'homebrew/cask-drivers'
 
 brew 'ack'
@@ -53,15 +54,14 @@ cask 'aquaskk'
 cask 'bartender'
 cask 'bettertouchtool'
 cask 'blueharvest'
-cask 'calibre'
-#cask 'cleanmymac'
-cask 'clipy'
+#cask 'calibre'
+cask 'cleanmymac'
+cask 'copyclip'
 #cask 'dropbox'
 cask 'docker'
-#cask 'geekbench'
-#cask 'gemini'
+cask 'geekbench'
+cask 'gemini'
 cask 'google-chrome'
-cask 'google-earth-pro'
 cask 'istat-menus'
 cask 'visual-studio-code'
 cask 'iterm2'
@@ -80,7 +80,7 @@ cask 'qlvideo'
 #cask 'stay'
 cask 'suspicious-package'
 #cask 'totalfinder'
-#cask 'transmit'
+cask 'transmit'
 cask 'webpquicklook'
 cask 'xquartz'
 
@@ -103,7 +103,6 @@ mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
 mas 'Microsoft Remote Desktop', id: 1295203466
 mas 'SoraAnnai', id: 599799247
-mas 'Deliveries', id: 924726344
 mas 'PopClip', id: 445189367
 mas 'Mactracker', id: 430255202
 mas 'AdBlock for Safari', id: 1402042596

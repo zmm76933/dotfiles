@@ -345,7 +345,6 @@ set_ui_and_ux_preferences
 killall cfprefsd
 killall Dock
 killall Finder
-killall Safari
 killall SystemUIServer
 
 # vim:fdm=marker expandtab fdc=3 ts=4 sw=4 sts=4:
