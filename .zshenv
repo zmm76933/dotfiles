@@ -84,7 +84,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export FZF_DEFAULT_OPTS="--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
 
 # Cask
-#export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # keybind ^X^X
 export ONELINER_FILE="$DOTPATH/doc/misc/commands.txt"

@@ -76,8 +76,6 @@ cask 'quicklook-json'
 cask 'qlimagesize'
 cask 'quicklookase'
 cask 'qlvideo'
-#cask 'skype'
-#cask 'stay'
 cask 'suspicious-package'
 #cask 'totalfinder'
 cask 'transmit'
@@ -97,7 +95,6 @@ mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
 mas 'Speedtest by Ookla', id: 1153157709
 mas 'GarageBand', id: 682658836
-mas 'Xcode', id: 497799835
 mas 'iMovie', id: 408981434
 mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
