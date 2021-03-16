@@ -13,7 +13,7 @@ PACKAGES="git zsh tmux
     build-essential diffutils autoconf automake silversearcher-ag
     g++ libxml2-dev libssl-dev libsqlite3-dev libevent-dev
     libsensors4-dev libavahi-common-dev libavahi-client-dev libncurses-dev libnss-mdns
-    mercurial rbenv python3-pip gawk tree paco
+    zlib1g-dev mercurial gawk tree paco
     aspell ispell nkf lv cmigemo texinfo etckeeper stress smartmontools
     sysstat curl w3m wget nmap wakeonlan testdisk fortunes-ubuntu-server
     openssh-server avahi-daemon isc-dhcp-server samba cifs-utils"

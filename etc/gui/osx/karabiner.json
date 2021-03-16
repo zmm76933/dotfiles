@@ -3435,6 +3435,36 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "AquaSKK for Terminal/iTerm2",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.googlecode\\.iterm2",
+                                            "^com\\.apple\\.Terminal"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "japanese_kana"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -3455,33 +3485,41 @@
                             "from": {
                                 "key_code": "backslash"
                             },
-                            "to": {
-                                "key_code": "delete_or_backspace"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "delete_or_backspace"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "delete_or_backspace"
                             },
-                            "to": {
-                                "key_code": "backslash"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "backslash"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "escape"
                             },
-                            "to": {
-                                "key_code": "grave_accent_and_tilde"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "grave_accent_and_tilde"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "grave_accent_and_tilde"
                             },
-                            "to": {
-                                "key_code": "escape"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "escape"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3501,17 +3539,21 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3531,17 +3573,21 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3561,17 +3607,21 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3591,49 +3641,61 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_alt"
                             },
-                            "to": {
-                                "key_code": "left_gui"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_gui"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_gui"
                             },
-                            "to": {
-                                "key_code": "left_alt"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_alt"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "right_alt"
                             },
-                            "to": {
-                                "key_code": "right_gui"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "right_gui"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "right_gui"
                             },
-                            "to": {
-                                "key_code": "right_alt"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "right_alt"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3653,49 +3715,61 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_alt"
                             },
-                            "to": {
-                                "key_code": "left_gui"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_gui"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_gui"
                             },
-                            "to": {
-                                "key_code": "left_alt"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_alt"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "right_alt"
                             },
-                            "to": {
-                                "key_code": "right_gui"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "right_gui"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "right_gui"
                             },
-                            "to": {
-                                "key_code": "right_alt"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "right_alt"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -3741,17 +3815,21 @@
                             "from": {
                                 "key_code": "caps_lock"
                             },
-                            "to": {
-                                "key_code": "left_control"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "left_control"
+                                }
+                            ]
                         },
                         {
                             "from": {
                                 "key_code": "left_control"
                             },
-                            "to": {
-                                "key_code": "caps_lock"
-                            }
+                            "to": [
+                                {
+                                    "key_code": "caps_lock"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -3761,97 +3839,121 @@
                     "from": {
                         "key_code": "f1"
                     },
-                    "to": {
-                        "consumer_key_code": "display_brightness_decrement"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "display_brightness_decrement"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f2"
                     },
-                    "to": {
-                        "consumer_key_code": "display_brightness_increment"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "display_brightness_increment"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f3"
                     },
-                    "to": {
-                        "key_code": "mission_control"
-                    }
+                    "to": [
+                        {
+                            "key_code": "mission_control"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f4"
                     },
-                    "to": {
-                        "key_code": "launchpad"
-                    }
+                    "to": [
+                        {
+                            "key_code": "launchpad"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f5"
                     },
-                    "to": {
-                        "key_code": "illumination_decrement"
-                    }
+                    "to": [
+                        {
+                            "key_code": "illumination_decrement"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f6"
                     },
-                    "to": {
-                        "key_code": "illumination_increment"
-                    }
+                    "to": [
+                        {
+                            "key_code": "illumination_increment"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f7"
                     },
-                    "to": {
-                        "consumer_key_code": "rewind"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "rewind"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f8"
                     },
-                    "to": {
-                        "consumer_key_code": "play_or_pause"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "play_or_pause"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f9"
                     },
-                    "to": {
-                        "consumer_key_code": "fastforward"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "fastforward"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f10"
                     },
-                    "to": {
-                        "consumer_key_code": "mute"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "mute"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f11"
                     },
-                    "to": {
-                        "consumer_key_code": "volume_decrement"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "volume_decrement"
+                        }
+                    ]
                 },
                 {
                     "from": {
                         "key_code": "f12"
                     },
-                    "to": {
-                        "consumer_key_code": "volume_increment"
-                    }
+                    "to": [
+                        {
+                            "consumer_key_code": "volume_increment"
+                        }
+                    ]
                 }
             ],
             "name": "macto's Profile",
@@ -3863,6 +3965,7 @@
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,
+                "indicate_sticky_modifier_keys_state": true,
                 "keyboard_type": "ansi",
                 "mouse_key_xy_scale": 100
             }
