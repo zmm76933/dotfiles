@@ -19,6 +19,7 @@ if ! has "rbenv"; then
             log_pass "rbenv installed successfully"
         else
             log_fail "error: rbenv: failed to install"
+        fi
     else
         log_fail "error: rbenv: failed to install"
     fi
