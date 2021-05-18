@@ -18,7 +18,7 @@ if has "pipenv"; then
 fi
 
 if ! has "pyenv"; then
-    if git clone https://github.com/pyenv/pyenv.git ~/.pyenv; then
+    if git clone https://github.com/yyuu/pyenv.git ~/.pyenv; then
         log_pass "pyenv installed successfully"
     else
         log_fail "error: pyenv: failed to install"
