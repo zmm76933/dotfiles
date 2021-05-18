@@ -22,7 +22,14 @@ set -gx EDITOR nvim
 set -gx PATH ~/bin $PATH
 set -gx PATH /usr/local/sbin $PATH
 set -gx DOTPATH "$HOME/.dotfiles"
+
+# NodeJS
+set -gx PATH ~/.nodebrew/current/bin $PATH
+
+# homebrew
 set -gx HOMEBREW_CASK_OPTS "--appdir=/Applications"
+
+# fzf
 set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
 
 switch (uname)
