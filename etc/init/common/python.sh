@@ -9,46 +9,12 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-if has "pygmentize"; then
-    log_pass "pygmentize: already installed"
-fi
-
-if has "pipenv"; then
-    log_pass "pipenv: already installed"
-fi
-
 if has "pyenv"; then
     log_pass "pyenv: already installed"
 fi
 
-# The script is dependent on pip3
-if ! has "pip3"; then
-    log_fail "error: require: pip3"
-    exit 1
-fi
-
-if ! has "pygmentize"; then
-    if sudo pip3 install Pygments; then
-        log_pass "pygmentize: installed successfully"
-    else
-        log_fail "error: pygmentize: failed to install"
-    fi
-
-    log_echo "install pygments-style-solarized ..."
-    #pip3 install pygments-style-solarized
-fi
-
-#if builtin cd "$DOTPATH"/etc/init/assets/pygments/solarized-pygment; then
-#    git submodule update
-#    sudo ./setup.py install
-#fi
-
-if ! has "pipenv"; then
-    if sudo pip3 install pipenv; then
-        log_pass "pipenv installed successfully"
-    else
-        log_fail "error: pipenv: failed to install"
-    fi
+if has "pipenv"; then
+    log_pass "pipenv: already installed"
 fi
 
 if ! has "pyenv"; then
@@ -58,3 +24,12 @@ if ! has "pyenv"; then
         log_fail "error: pyenv: failed to install"
     fi
 fi
+
+# if ! has "pipenv"; then
+#     if pip install pipenv; then
+#         log_pass "pipenv installed successfully"
+#     else
+#         log_fail "error: pipenv: failed to install"
+#     fi
+# fi
+
