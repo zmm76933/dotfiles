@@ -1,1 +1,1 @@
-fish.sh
+../common/fish.sh
