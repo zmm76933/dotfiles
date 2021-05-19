@@ -37,7 +37,7 @@ case "$(get_os)" in
     linux)
         if has "curl"; then
             if curl -L git.io/nodebrew | perl - setup; then
-                if nodebrew install-binary latest && nodebrew use latest; then
+                if nodebrew setup && nodebrew install-binary latest && nodebrew use latest; then
                     log_pass "Node: installed successfully"
                 fi
             else

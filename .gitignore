@@ -52,6 +52,7 @@ Pods/
 !.config/fish/functions/fish_prompt.fish
 .config/fish/completions/*
 .config/fish/conf.d/*
+!.config/fish/conf.d/000-env.fish
 !.config/fish/conf.d/fish_user_key_bindings.fish
 
 # Karabiner
