@@ -47,6 +47,10 @@ Pods/
 
 # Fish local config
 .config/fish/fish_variables
+.config/fish/functions/*
+.config/fish/completions/*
+.config/fish/conf.d/*
+!.config/fish/conf.d/fish_user_key_bindings.fish
 
 # Karabiner
 .config/karabiner/automatic_backups
