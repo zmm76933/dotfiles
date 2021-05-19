@@ -9,7 +9,7 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-PACKAGES="git fish tmux exa
+PACKAGES="git fish tmux
     build-essential diffutils autoconf automake silversearcher-ag
     g++ libxml2-dev libssl-dev libsqlite3-dev libevent-dev
     libsensors4-dev libavahi-common-dev libavahi-client-dev libncurses-dev libnss-mdns
