@@ -1,0 +1,18 @@
+#!/bin/bash
+# Load vital library that is most important and
+# constructed with many minimal functions
+# For more information, see etc/README.md
+. "$DOTPATH"/etc/lib/vital.sh
+
+# tmux_automatically_attach attachs tmux session automatically
+if is_ssh_or_vscode_running; then
+    exit 0
+fi
+
+if is_tmux_running; then
+    tmux split-window -v -p 30
+    tmux split-window -h -p 66
+    tmux split-window -h -p 50
+else
+    echo "create tmux new session"
+fi
