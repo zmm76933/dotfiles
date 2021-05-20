@@ -18,6 +18,9 @@ alias g git
 command -qv nvim && alias vi nvim
 command -qv nvim && alias vim nvim
 
+set -gx LANG "en_US.UTF-8"
+set -gx LC_ALL "en_US.UTF-8"
+set -gx LC_CTYPE "en_US.UTF-8"
 set -gx EDITOR nvim
 set -gx PATH ~/bin $PATH
 set -gx PATH /usr/local/sbin $PATH
@@ -26,8 +29,9 @@ set -gx DOTPATH "$HOME/.dotfiles"
 # NodeJS
 set -gx PATH ~/.nodebrew/current/bin $PATH
 
-# homebrew
-set -gx HOMEBREW_CASK_OPTS "--appdir=/Applications"
+# Go
+set -g GOPATH $HOME/go
+set -gx PATH $GOPATH/bin $PATH
 
 # fzf
 set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
