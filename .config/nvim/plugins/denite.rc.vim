@@ -84,8 +84,8 @@ command! Dprev execute(':Denite -resume -buffer-name=grep-buffer-denite -cursor-
 call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 
-nnoremap <silent> ;r :<C-u>Dgrep<CR>
-nnoremap <silent> ;f :<C-u>Denite file/rec<CR>
-nnoremap <silent> ;; :<C-u>Denite command command_history<CR>
-nnoremap <silent> ;p :<C-u>Denite -resume<CR>
+nnoremap <silent> <C-x>r :<C-u>Dgrep<CR>
+nnoremap <silent> <C-x>f :<C-u>Denite file/rec<CR>
+nnoremap <silent> <C-x>; :<C-u>Denite command command_history<CR>
+nnoremap <silent> <C-x>p :<C-u>Denite -resume<CR>
 
