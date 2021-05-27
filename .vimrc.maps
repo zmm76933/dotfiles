@@ -39,9 +39,7 @@ vnoremap <silent> # :<C-U>
 " Tabs
 "-------------------------------------------------------------------------------
 " Open current directory
-nmap <C-x>t :tabedit 
-nmap <S-Tab> :tabprev<Return>
-nmap <Tab> :tabnext<Return>
+nnoremap gk :tabedit<Space>
 
 "-------------------------------------------------------------------------------
 " Windows
