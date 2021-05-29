@@ -45,6 +45,9 @@ DerivedData
 # CocoaPods
 Pods/
 
+# iTerm2
+.config/iterm2/
+
 # Fish local config
 .config/fish/fish_variables
 .config/fish/functions/*
