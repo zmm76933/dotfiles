@@ -17,9 +17,6 @@ nnoremap - <C-x>
 " Select all
 nmap <A-a> gg<S-v>G
 
-" Open BufExplorer
-nmap \\ \be
-
 " Save with root permission
 command! W w !sudo tee > /dev/null %
 
@@ -39,13 +36,11 @@ vnoremap <silent> # :<C-U>
 " Tabs
 "-------------------------------------------------------------------------------
 " Open current directory
-nnoremap gk :tabedit<Space>
+nnoremap \te :tabedit<Space>
 
 "-------------------------------------------------------------------------------
 " Windows
 "-------------------------------------------------------------------------------
-" Move window
-nmap <Space> <C-w>w
 " Resize window
 nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
