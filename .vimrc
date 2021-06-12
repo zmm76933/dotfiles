@@ -14,6 +14,7 @@ set title
 set autoindent
 set background=dark
 set nobackup
+set nowritebackup
 set hlsearch
 set showcmd
 set cmdheight=1
@@ -79,9 +80,6 @@ au BufNewFile,BufRead *.tsx setf typescript
 au BufNewFile,BufRead *.md set filetype=markdown
 " Flow
 au BufNewFile,BufRead *.flow set filetype=javascript
-" Pythohn
-let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
 
 "-------------------------------------------------------------------------------
 " Cursor line
@@ -115,6 +113,10 @@ let g:go_disable_autoinstall = 1
 
 " vim-json
 let g:vim_json_syntax_conceal = 0
+
+" Pythohn
+let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
 
 " Status line
 if !exists('*fugitive#statusline')

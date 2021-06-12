@@ -14,6 +14,9 @@
       "rootPatterns": [".flowconfig"]
     }
   },
+  "python.linting.enabled": false,
+  "python.jediPath": "~/.pyenv/versions/neovim3/lib/python3.8/site-packages/",
+  "diagnostic.enable": false,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "",
   "diagnostic.infoSign": "",
