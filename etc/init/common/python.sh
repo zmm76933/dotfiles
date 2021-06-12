@@ -26,7 +26,7 @@ if ! has "pyenv"; then
 fi
 
 if ! has "pyenv-virtualenv"; then
-    if $ git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv; then
+    if git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv; then
         log_pass "pyenvi-virtualenv installed successfully"
     else
         log_fail "error: pyenv-virtualenv: failed to install"
