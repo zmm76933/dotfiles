@@ -11,6 +11,9 @@ repo = 'tpope/vim-fugitive'
 repo = 'tpope/vim-rhubarb'
 
 [[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]

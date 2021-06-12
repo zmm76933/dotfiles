@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/Users/zmm76933/src/github.com/yochiyochirb/practical-vim/code/auto_complete'
+let g:netrw_dirhist_7='/Users/zmm76933'
+let g:netrw_dirhist_6='/Users/zmm76933/src/github.com/yochiyochirb/practical-vim/code/files/mvc'
+let g:netrw_dirhist_5='/Users/zmm76933/src/github.com/yochiyochirb/practical-vim/code/files'
+let g:netrw_dirhist_4='/Users/zmm76933/src/github.com/yochiyochirb/practical-vim/code/files/mvc'
+let g:netrw_dirhist_3='/Users/zmm76933/.dotfiles/.tmux'
+let g:netrw_dirhist_2='/Users/zmm76933/.tmux'
+let g:netrw_dirhist_1='/Users/zmm76933/.dotfiles/.config/nvim/plugins'
