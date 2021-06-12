@@ -79,6 +79,9 @@ au BufNewFile,BufRead *.tsx setf typescript
 au BufNewFile,BufRead *.md set filetype=markdown
 " Flow
 au BufNewFile,BufRead *.flow set filetype=javascript
+" Pythohn
+let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
 
 "-------------------------------------------------------------------------------
 " Cursor line
