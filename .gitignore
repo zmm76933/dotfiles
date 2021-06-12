@@ -13,6 +13,7 @@ Session.vim
 .vim/syntax/Dockerfile.vim
 .vim/snippets/
 .config/coc/
+.config/nvim/.netrwhist
 
 # emacs
 .emacs.d/.python-environments/
