@@ -4,6 +4,9 @@ set hidden
 " jsonc syntax highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" Resolve workspace folder
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
+
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
@@ -142,7 +145,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier',
   \ 'coc-eslint',
-  \ 'coc-python',
+  \ 'coc-pyright',
   \ ]
 
 " Prettier

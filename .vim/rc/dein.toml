@@ -62,20 +62,16 @@ repo = 'jiangmiao/auto-pairs'
 [[plugins]]
 # Yet Another Remote Plugin Framework for Neovim
 repo = 'roxma/nvim-yarp'
-if = '''!has('nvim')'''
+if = """!has('nvim')"""
 
 [[plugins]]
 repo = 'roxma/vim-hug-neovim-rpc'
-if = '''!has('nvim')'''
+if = """!has('nvim')"""
 
 [[plugins]]
-repo = 'neovim/python-client'
-if = '''!has('nvim')'''
-
-[[plugins]]
-repo = "neoclide/coc.nvim"
+repo = 'neoclide/coc.nvim'
 merged = 0
-rev = "release"
+rev = 'release'
 hook_add = """
 source ~/.config/nvim/plugins/coc.rc.vim
 """
