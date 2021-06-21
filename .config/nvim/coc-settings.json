@@ -1,7 +1,6 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["json", "css", "markdown"],
   "eslint.autoFixOnSave": true,
-  "eslint.autoFix": true,
   "tsserver.enableJavascript": false,
   "languageserver": {
     "flow": {
