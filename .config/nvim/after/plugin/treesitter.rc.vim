@@ -10,7 +10,7 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   indent = {
-    enable = false,
+    enable = true,
     disable = {},
   },
   ensure_installed = {
@@ -18,6 +18,7 @@ require'nvim-treesitter.configs'.setup {
     "toml",
     "fish",
     "php",
+    "python",
     "json",
     "yaml",
     "swift",
