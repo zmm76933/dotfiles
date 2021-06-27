@@ -1,18 +1,6 @@
+" Description: Keymaps
+
 nnoremap <S-C-p> "0p
-inoremap <C-h> <Backspace>
-inoremap <C-d> <Delete>
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-
-" Delete without yank
-nnoremap <leader>d "_d
-nnoremap <leader>x "_x
-
-" Increment/decrement
-nnoremap + <C-a>
-nnoremap - <C-x>
 
 " Select all
 nmap <A-a> gg<S-v>G
@@ -49,10 +37,3 @@ nmap <C-w><left> <C-w><
 nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
-
-"-------------------------------------------------------------------------------
-" Plugins
-"-------------------------------------------------------------------------------
-
-"-- fugitive
-cnoreabbrev gopen Gbrowse

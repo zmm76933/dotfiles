@@ -22,13 +22,13 @@ set -gx LC_CTYPE "en_US.UTF-8"
 set -gx EDITOR nvim
 set -gx PATH ~/bin $PATH
 set -gx PATH /usr/local/sbin $PATH
-set -gx DOTPATH "$HOME/.dotfiles"
+set -gx DOTPATH $HOME/.dotfiles
 
 # NodeJS
 set -gx PATH ~/.nodebrew/current/bin $PATH
 
 # Go
-set -g GOPATH $HOME/go
+set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
 # fzf
