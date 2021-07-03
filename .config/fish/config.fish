@@ -8,10 +8,17 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-alias ls "ls -p -G"
-alias la "ls -A"
-alias ll "ls -l"
-alias lla "ll -A"
+if type -q exa
+  alias ls "exa -g --icons"
+  alias la "exa -a -g --icons"
+  alias ll "exa -l -g --icons"
+  alias lla "ll -a"
+else
+  alias ls "ls -p -G"
+  alias la "ls -A"
+  alias ll "ls -l"
+  alias lla "ll -A"
+end
 alias g git
 command -qv nvim && alias vi nvim
 command -qv nvim && alias vim nvim
