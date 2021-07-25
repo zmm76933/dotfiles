@@ -120,6 +120,10 @@ if has("unix")
   " Do Mac stuff
   if s:uname == "Darwin\n"
     runtime ./macos.vim
+  elseif s:uname == "Linux\n"
+    if system("uname -r | grep microsoft") !=  ""
+      runtime ./windows.vim
+    endif
   endif
 endif
 
