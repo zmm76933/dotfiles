@@ -56,6 +56,7 @@ Pods/
 .config/fish/conf.d/*
 !.config/fish/conf.d/000-env.fish
 !.config/fish/conf.d/fish_user_key_bindings.fish
+!.config/fish/conf.d/tide.fish
 
 # Karabiner
 .config/karabiner/automatic_backups

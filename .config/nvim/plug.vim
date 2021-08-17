@@ -10,7 +10,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-easy-align'
-Plug 'cohama/lexima.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'brglng/vim-im-select'
@@ -29,6 +28,7 @@ if has("nvim")
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'windwp/nvim-autopairs'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
