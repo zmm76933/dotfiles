@@ -38,18 +38,22 @@ set -gx PATH ~/.nodebrew/current/bin $PATH
 set -Ux PYENV_ROOT $HOME/.pyenv
 set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
 if command -v pyenv 1>/dev/null 2>&1
-    if status is-login
-        pyenv init --path fish | source
-    end
+  if status is-login
+      pyenv init --path fish | source
+  end
+  if status is-interactive
     pyenv init - fish | source
     pyenv virtualenv-init - fish | source
+  end
 end
 
 # rbenv
 set -Ux RBENV_ROOT $HOME/.rbenv
 set -U fish_user_paths $RBENV_ROOT/bin $fish_user_paths
 if command -v rbenv 1>/dev/null 2>&1
+  if status is-interactive
     rbenv init - fish | source
+  end
 end
 
 # Go
