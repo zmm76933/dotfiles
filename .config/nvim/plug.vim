@@ -13,6 +13,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'brglng/vim-im-select'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'

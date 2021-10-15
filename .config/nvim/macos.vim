@@ -8,3 +8,4 @@ set clipboard+=unnamedplus
 "
 " Improve Vim/Neovim experience with input methods
 let g:im_select_default = 'jp.sourceforge.inputmethod.aquaskk.Ascii'
+let g:im_select_switch_timeout = 0
