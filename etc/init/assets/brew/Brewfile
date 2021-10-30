@@ -52,9 +52,9 @@ cask 'aquaskk'
 cask 'bartender'
 cask 'bettertouchtool'
 cask 'blueharvest'
-#cask 'calibre'
+cask 'calibre'
 cask 'cleanmymac'
-#cask 'copyclip'
+cask 'copyclip'
 #cask 'dropbox'
 cask 'docker'
 cask 'geekbench'
@@ -74,19 +74,19 @@ cask 'qlimagesize'
 cask 'quicklookase'
 cask 'qlvideo'
 cask 'suspicious-package'
-#cask 'totalfinder'
 cask 'transmit'
 cask 'webpquicklook'
 cask 'font-hack-nerd-font'
 
 mas 'Blackmagic Disk Speed Test', id: 425264550
 mas 'Evernote Web Clipper', id: 1481669779
+mas 'Notion Web Clipper', id: 1559269364
 mas 'Keynote', id: 409183694
 mas 'Twitter', id: 409789998
 mas 'The Unarchiver', id:425424353
 mas 'WiFi Explorer', id: 494803304
 mas 'Skitch', id: 425955336
-mas 'Server', id: 883878097
+#mas 'Server', id: 883878097
 mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
 mas 'Speedtest by Ookla', id: 1153157709
