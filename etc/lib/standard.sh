@@ -167,7 +167,7 @@ function pwf()
 
 function trim()
 {
-    if ! is_osx; then
+    if ! is_macos; then
         return 1
     fi
 

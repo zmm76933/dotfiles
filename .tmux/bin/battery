@@ -103,9 +103,9 @@ get_remain() {
     fi
 }
 
-# this scripts is supported OS X only now
-# if ! is_osx; then
-#     echo "OS X only" 1>&2
+# this scripts is supported macOS only now
+# if ! is_macos; then
+#     echo "macOS only" 1>&2
 #     exit 1
 # fi
 

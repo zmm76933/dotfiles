@@ -16,8 +16,8 @@ if ! has "zsh"; then
 
     # Install zsh
     case "$(get_os)" in
-        # Case of OS X
-        osx)
+        # Case of macOS
+        macos)
             if has "brew"; then
                 log_echo "Install zsh with Homebrew"
                 brew install zsh
@@ -46,7 +46,7 @@ if ! has "zsh"; then
 
         # Other platforms such as BSD are supported
         *)
-            log_fail "error: this script is only supported osx and linux"
+            log_fail "error: this script is only supported macos and linux"
             exit 1
             ;;
     esac

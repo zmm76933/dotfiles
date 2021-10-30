@@ -9,9 +9,9 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-# This script is only supported with OS X
-if ! is_osx; then
-    log_fail "error: this script is only supported with osx"
+# This script is only supported with macOS
+if ! is_macos; then
+    log_fail "error: this script is only supported with macos"
     exit 1
 fi
 

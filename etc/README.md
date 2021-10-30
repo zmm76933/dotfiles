@@ -229,7 +229,7 @@ If you pass the installation command `-s init`, also it will initialize dotfiles
 
 ## vital.sh
 
-`vital.sh` is a simple and powerful shell script library. Besides that, it is provided with a convenient functions `e_anything` (e.g., `e_success`, `e_failure`) that summarize echo command wrappers, and provided with `is_anything` (e.g., `is_osx`) that is used for conditional execution.
+`vital.sh` is a simple and powerful shell script library. Besides that, it is provided with a convenient functions `e_anything` (e.g., `e_success`, `e_failure`) that summarize echo command wrappers, and provided with `is_anything` (e.g., `is_macos`) that is used for conditional execution.
 
 The quick way to test is to run this command:
 
@@ -301,11 +301,11 @@ $ make test
  ➜ check shellcheck...
      ✔ /Users/b4b4r07/.dotfiles/etc/init/init.sh...OK
      ✔ /Users/b4b4r07/.dotfiles/etc/init/common/pygments.sh...OK
-     ✔ /Users/b4b4r07/.dotfiles/etc/init/osx/brew.sh...OK
-     ✔ /Users/b4b4r07/.dotfiles/etc/init/osx/bundle.sh...OK
-     ✔ /Users/b4b4r07/.dotfiles/etc/init/osx/go.sh...OK
-     ✔ /Users/b4b4r07/.dotfiles/etc/init/osx/pygments.sh...OK
-     ✔ /Users/b4b4r07/.dotfiles/etc/init/osx/unlocalize.sh...OK
+     ✔ /Users/b4b4r07/.dotfiles/etc/init/macos/brew.sh...OK
+     ✔ /Users/b4b4r07/.dotfiles/etc/init/macos/bundle.sh...OK
+     ✔ /Users/b4b4r07/.dotfiles/etc/init/macos/go.sh...OK
+     ✔ /Users/b4b4r07/.dotfiles/etc/init/macos/pygments.sh...OK
+     ✔ /Users/b4b4r07/.dotfiles/etc/init/macos/unlocalize.sh...OK
      ✔ /Users/b4b4r07/.dotfiles/etc/init/linux/chsh.sh...OK
      ✔ /Users/b4b4r07/.dotfiles/etc/init/linux/goal.sh...OK
      ✔ /Users/b4b4r07/.dotfiles/etc/init/linux/pygments.sh...OK
@@ -325,12 +325,12 @@ make: *** [test] Error 1
 
 Travis CI is configured by adding a file named .travis.yml, which is a YAML format text file, to the root directory of the GitHub repository.
 
-By setting the `language:` to objective-c, and it is possible to use a test environment in OS X and Homebrew. Otherwise Ubuntu 12.04 is used as it.
+By setting the `language:` to objective-c, and it is possible to use a test environment in macOS and Homebrew. Otherwise Ubuntu 12.04 is used as it.
 
 ```yaml
 language: objective-c
 os:
-    - osx
+    - macos
 before_install:
     - brew update
     - brew install shellcheck
@@ -424,7 +424,7 @@ etc/test
 ├── linux/
 │   ├── init_chsh_test.sh
 │   └── init_go_test.sh@
-├── osx/
+├── macos/
 │   ├── init_brew_test.sh
 │   ├── init_bundle_test.sh
 │   └── init_go_test.sh@
@@ -433,7 +433,7 @@ etc/test
 └── test.sh*
 ```
 
-There is a directory for each platform such as osx and linux, and put the unit tests in those directories. The common file should be placed on the common directory and create a symbolic link to the directory for each platform. For example, `init_go_test.sh` symbolic link exists in the directory of osx and linux.
+There is a directory for each platform such as macos and linux, and put the unit tests in those directories. The common file should be placed on the common directory and create a symbolic link to the directory for each platform. For example, `init_go_test.sh` symbolic link exists in the directory of macos and linux.
 
 An example of `test.sh` is the following:
 

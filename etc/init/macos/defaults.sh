@@ -5,7 +5,7 @@ set -eu
 
 . $DOTPATH/etc/lib/vital.sh
 
-is_osx || die "osx only"
+is_macos || die "macos only"
 
 # Dock {{{1
 set_dock_preferences()
@@ -240,7 +240,7 @@ set_spotlight_preferences()
     sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
     # Change indexing order and disable some search results
-    # Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
+    # Yosemite-specific search results (remove them if your are using macOS 10.9 or older):
     #   MENU_DEFINITION
     #   MENU_CONVERSION
     #   MENU_EXPRESSION
@@ -324,7 +324,7 @@ set_ui_and_ux_preferences()
 # Ask for the administrator password upfront
 sudo -v
 
-# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 #while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 while true
 do

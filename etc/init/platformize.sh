@@ -31,5 +31,5 @@ link_sh() {
     builtin cd "$OLDPWD"
 }
 
-link_sh "osx"
+link_sh "macos"
 link_sh "linux"

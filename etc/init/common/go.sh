@@ -16,8 +16,8 @@ if has "go"; then
 fi
 
 case "$(get_os)" in
-    # Case of OS X
-    osx)
+    # Case of macOS
+    macos)
         if has "brew"; then
             if brew install go; then
                 log_pass "go: installed successfully"
@@ -49,7 +49,7 @@ case "$(get_os)" in
 
     # Other platforms such as BSD are supported
     *)
-        log_fail "error: this script is only supported osx and linux"
+        log_fail "error: this script is only supported macos and linux"
         exit 1
     ;;
 esac

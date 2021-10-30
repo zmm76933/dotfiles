@@ -106,7 +106,7 @@ normalize() {
 }
 
 cpu_cores() {
-    if is_osx; then
+    if is_macos; then
         sysctl -n hw.ncpu
     else
         grep -c "^processor.*[0-9]$" /proc/cpuinfo
