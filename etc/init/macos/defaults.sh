@@ -123,27 +123,27 @@ General() {
   # - 10
   # - 15
   # @string: choose preferred item.
-  osascript -e "
-    tell application \"System Preferences\"
-      activate
-      set current pane to pane \"com.apple.preference.general\"
-    end tell
-    tell application \"System Events\"
-      tell application process \"System Preferences\"
-        repeat while not (window 1 exists)
-        end repeat
-        tell window 1
-          tell pop up button 4
-            delay 1
-            click
-            tell menu 1
-              click menu item \"10\"
-            end tell
-          end tell
-        end tell
-      end tell
-    end tell
-  "
+  # osascript -e "
+  #   tell application \"System Preferences\"
+  #     activate
+  #     set current pane to pane \"com.apple.preference.general\"
+  #   end tell
+  #   tell application \"System Events\"
+  #     tell application process \"System Preferences\"
+  #       repeat while not (window 1 exists)
+  #       end repeat
+  #       tell window 1
+  #         tell pop up button 4
+  #           delay 1
+  #           click
+  #           tell menu 1
+  #             click menu item \"10\"
+  #           end tell
+  #         end tell
+  #       end tell
+  #     end tell
+  #   end tell
+  # "
 
   # ========== Allow Handoff between this Mac and your iCloud devices ==========
   # - Checked
@@ -152,12 +152,6 @@ General() {
   # - Unchecked
   # defaults -currentHost write com.apple.coreservices.useractivityd.plist ActivityReceivingAllowed -bool false
   # defaults -currentHost write com.apple.coreservices.useractivityd.plist ActivityAdvertisingAllowed -bool false
-
-  # ========== Use font smoothing when available ==========
-  # - Checked
-  defaults -currentHost delete .GlobalPreferences AppleFontSmoothing
-  # - Unchecked
-  # defaults -currentHost write .GlobalPreferences AppleFontSmoothing -bool false
 }
 
 DesktopScreenSaver() {
@@ -227,17 +221,17 @@ DesktopScreenSaver() {
   # - Checked
   # defaults -currentHost write com.apple.screensaver showClock -bool true
   # - Unchecked
-  defaults -currentHost delete com.apple.screensaver showClock
+  # defaults -currentHost delete com.apple.screensaver showClock
 
   # ========== Use random screen saver ==========
   # - Checked
-  SPLIST=$(ls ~/Library/Preferences/ByHost/com.apple.screensaver*)
-  /usr/libexec/PlistBuddy \
-    -c "Add moduleDict dict" \
-    -c "Add moduleDict:moduleName string Random" \
-    -c "Add moduleDict:path string /System/Library/Screen\ Savers/Random.saver" \
-    -c "Add moduleDict:type integer 8" \
-    ${SPLIST}
+  # SPLIST=$(ls ~/Library/Preferences/ByHost/com.apple.screensaver*)
+  # /usr/libexec/PlistBuddy \
+  #   -c "Add moduleDict dict" \
+  #   -c "Add moduleDict:moduleName string Random" \
+  #   -c "Add moduleDict:path string /System/Library/Screen\ Savers/Random.saver" \
+  #   -c "Add moduleDict:type integer 8" \
+  #   ${SPLIST}
   # - Unchecked
   # defaults -currentHost delete com.apple.screensaver moduleDict
 }
@@ -261,7 +255,7 @@ Dock() {
   # - Left
   # defaults write com.apple.dock orientation -string "left"
   # - Bottom
-  defaults delete com.apple.dock orientation
+  # defaults delete com.apple.dock orientation
   # - Right
   # defaults write com.apple.dock orientation -string "right"
 
@@ -387,9 +381,9 @@ MissionControl() {
 
   # ========== Displays have separate Spaces ==========
   # - Checked
-  defaults write com.apple.spaces spans-displays -bool true
+  defaults write com.apple.spaces spans-displays -bool false
   # - Unchecked
-  # defaults write com.apple.spaces spans-displays -bool false
+  # defaults write com.apple.spaces spans-displays -bool true
 
   # ========== Hot Corners... ==========
   # Top left screen corner → Desktop
@@ -774,23 +768,23 @@ DateTime() {
   # IS_CLOCK=$(defaults read com.apple.systemuiserver menuExtras | grep "Clock")
   # [[ -n ${IS_CLOCK} ]] && /usr/libexec/PlistBuddy -c "Delete menuExtras:\"/System/Library/CoreServices/Menu Extras/Clock.menu\"" "${HOME}"/Library/Preferences/com.apple.systemuiserver.plist
 
+  # ========== Show the day of the week ==========
+  # - Checked
+  defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  # - Unchecked
+  # defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+
+  # ========== Show date (In BigSur, time always appears) ==========
+  # - Checked
+  defaults write com.apple.menuextra.clock ShowDayOfMonth -bool true
+  # - Unchecked
+  # defaults write com.apple.menuextra.clock ShowDayOfMonth -bool false
+
   # ========== Time options ==========
   # - Digital
   defaults write com.apple.menuextra.clock IsAnalog -bool false
   # - Analog
   # defaults write com.apple.menuextra.clock IsAnalog -bool true
-
-  # ========== Display the time with seconds ==========
-  # - Checked
-  # defaults write com.apple.menuextra.clock ShowSeconds -bool true
-  # - Unchecked
-  defaults write com.apple.menuextra.clock ShowSeconds -bool false
-
-  # ========== Flash the time separators ==========
-  # - Checked
-  # defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
-  # - Unchecked
-  defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 
   # ========== Use a 24-hour clock ==========
   # - Checked
@@ -804,17 +798,17 @@ DateTime() {
   # - Unchecked
   # defaults write com.apple.menuextra.clock ShowAMPM -bool false
 
-  # ========== Show the day of the week ==========
+  # ========== Flash the time separators ==========
   # - Checked
-  defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  # defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
   # - Unchecked
-  # defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+  defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 
-  # ========== Show date (In BigSur, time always appears) ==========
+  # ========== Display the time with seconds ==========
   # - Checked
-  defaults write com.apple.menuextra.clock ShowDayOfMonth -bool true
+  # defaults write com.apple.menuextra.clock ShowSeconds -bool true
   # - Unchecked
-  # defaults write com.apple.menuextra.clock ShowDayOfMonth -bool false
+  defaults write com.apple.menuextra.clock ShowSeconds -bool false
 }
 
 iCloud() {
@@ -1410,15 +1404,15 @@ Finder() {
 
   # ========== Show Toolbar ==========
   # - Checked
-  defaults write com.apple.finder "NSWindowTabbingShoudShowTabBarKey-com.apple.finder.TBrowserWindow" -bool true
+  defaults write com.apple.finder "TB Is Shown" -bool true
   # - Unchecked
-  defaults write com.apple.finder "NSWindowTabbingShoudShowTabBarKey-com.apple.finder.TBrowserWindow" -bool false
+  # defaults write com.apple.finder "TB Is Shown" -bool false
 
   # ========== Show Tab Bar ==========
   # - Checked
-  defaults write com.apple.finder ShowTabView -bool true
+  defaults write com.apple.finder "NSWindowTabbingShoudShowTabBarKey-com.apple.finder.TBrowserWindow" -bool true
   # - Unchecked
-  # defaults write com.apple.finder ShowTabView -bool false
+  # defaults write com.apple.finder "NSWindowTabbingShoudShowTabBarKey-com.apple.finder.TBrowserWindow" -bool false
 
   # ========== Show Path Bar ==========
   # - Checked
@@ -1597,8 +1591,8 @@ ExtraSettings() {
   #     -c "Add persistent-apps:${idx}:tile-data:file-data:_CFURLStringType integer 15" \
   #     ${PLIST}
   # done
-  killall cfprefsd
-  killall Dock
+  # killall cfprefsd
+  # killall Dock
 
   # ========== Default Application ==========
   # - Editor - TextEdit
@@ -1673,10 +1667,10 @@ ExtraSettings() {
 
   # ========== Set Computer Name ==========
   # !!!!! This should not be set !!!!!
-  # sudo scutil --set HostName "ulwlu"
-  # sudo scutil --set ComputerName "ulwlu"
-  # sudo scutil --set LocalHostName "ulwlu"
-  # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "ulwlu"
+  sudo scutil --set HostName "cetus"
+  sudo scutil --set ComputerName "cetus"
+  sudo scutil --set LocalHostName "cetus"
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "cetus"
 
   # ========== Disable Sound on Boot ==========
   sudo nvram SystemAudioVolume=" "
@@ -1699,7 +1693,7 @@ ExtraSettings() {
   defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
   # ========== Show the ~/Library folder ==========
-  chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+  chflags nohidden ~/Library
 
   # ========== Show the /Volumes folder ==========
   sudo chflags nohidden /Volumes
@@ -1710,13 +1704,8 @@ ExtraSettings() {
   # Automatically quit printer app once the print jobs complete
   defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-  # ========== Change Host Name ==========
-  scutil --set ComputerName cetus
-  scutil --set LocalHostName cetus
-  scutil --set HostName cetus
-
   # ========== Restart automatically if the computer freezes ==========
-  sudo systemsetup -setrestartfreeze on
+  # sudo systemsetup -setrestartfreeze on
 }
 
 ## ----------------------------------------
