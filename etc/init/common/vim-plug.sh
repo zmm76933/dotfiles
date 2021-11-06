@@ -9,6 +9,9 @@
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
+if is_linux; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # exit with true if you have anyenv command
 if ! has "nvim"; then
