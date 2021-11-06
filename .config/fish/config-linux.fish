@@ -6,7 +6,7 @@ if type -q apt
 end
 
 # Homebrew for linux
-set -gx PATH /home/linuxbrew/.linuxbrew/Homebrew/bin $PATH
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # wsl-specific configs
 if [ "(uname -r | grep microsoft)" != '' ]

@@ -31,9 +31,6 @@ set -gx PATH ~/bin $PATH
 set -gx PATH /usr/local/sbin $PATH
 set -gx DOTPATH $HOME/.dotfiles
 
-# anyenv
-status --is-interactive; and source (anyenv init -|psub)
-
 # Go
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
@@ -49,3 +46,6 @@ switch (uname)
   case '*'
     # Do nothing
 end
+
+# anyenv
+status --is-interactive; and source (anyenv init -|psub)

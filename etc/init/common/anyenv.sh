@@ -20,6 +20,9 @@ if ! has "anyenv"; then
 fi
 
 anyenv install --force-init
+anyenv install pyenv
+anyenv install rbenv
+anyenv install nodenv
 
 source $DOTPATH/etc/init/assets/anyenv/install.sh
 

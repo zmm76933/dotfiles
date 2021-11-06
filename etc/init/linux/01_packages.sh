@@ -15,7 +15,9 @@ PACKAGES="
     curl
     file
     git
+    libffi-dev
     libssl-dev
+    zlib1g-dev
     avahi-daemon
     cifs-utils
     etckeeper
