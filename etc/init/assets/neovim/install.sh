@@ -1,8 +1,6 @@
 #!/bin/bash
 
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+eval "$(anyenv init -)"
 
 # install Python privider
 pyenv install 2.7.16

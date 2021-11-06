@@ -8,8 +8,8 @@ brew 'aspell'
 brew 'autoconf'
 brew 'cmigemo'
 brew 'coreutils'
-brew 'cpanminus'
 brew 'docker'
+brew 'docker-compose'
 brew 'emacs-mac'
 brew 'exa'
 brew 'fd'
@@ -50,7 +50,6 @@ cask 'blueharvest'
 cask 'calibre'
 cask 'cleanmymac'
 cask 'copyclip'
-#cask 'dropbox'
 cask 'docker'
 cask 'geekbench'
 cask 'google-chrome'
@@ -81,7 +80,7 @@ mas 'Twitter', id: 409789998
 mas 'The Unarchiver', id:425424353
 mas 'WiFi Explorer', id: 494803304
 mas 'Skitch', id: 425955336
-#mas 'Server', id: 883878097
+# mas 'Server', id: 883878097
 mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
 mas 'Speedtest by Ookla', id: 1153157709
@@ -94,5 +93,3 @@ mas 'SoraAnnai', id: 599799247
 mas 'PopClip', id: 445189367
 mas 'Mactracker', id: 430255202
 mas 'AdBlock for Safari', id: 1402042596
-
-# vim: ft=conf

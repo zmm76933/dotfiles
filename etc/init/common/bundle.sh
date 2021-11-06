@@ -9,6 +9,10 @@
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
+if is_linux; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 if has "brew"; then
     if ! brew tap Homebrew/bundle; then
         log_fail "error: failed to tap Homebrew/bundle"
