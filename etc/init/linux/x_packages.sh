@@ -14,10 +14,14 @@ if ! is_desktop; then
     exit 0
 fi
 
-PACKAGES="xrdp xsel rxvt-unicode-256color
-    imagemagick wireshark
-    ibus-skk skkdic
-    wmctrl"
+PACKAGES="
+    xrdp
+    xsel
+    rxvt-unicode-256color
+    ibus-skk
+    skkdic
+    wmctrl
+    "
 
 if has "yum"; then
     log_echo "Install packages with Yellowdog Updater Modified"

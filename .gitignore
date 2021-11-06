@@ -47,6 +47,9 @@ Pods/
 # iTerm2
 .config/iterm2/
 
+# anyenv
+.config/anyenv/
+
 # Fish local config
 .config/fish/fish_variables
 .config/fish/functions/*
