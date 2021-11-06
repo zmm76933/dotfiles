@@ -215,7 +215,7 @@ DesktopScreenSaver() {
 
   # ========== Start After ==========
   # @int: seconds
-  defaults -currentHost write com.apple.screensaver idleTime -int 900
+  defaults -currentHost write com.apple.screensaver idleTime -int 600
 
   # ========== Show with clock ==========
   # - Checked

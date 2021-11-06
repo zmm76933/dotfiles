@@ -9,17 +9,18 @@ set -eu
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
+if ! is_desktop; then
+    log_fail "error: this script is only supported with X windows system"
+    exit 0
+fi
+
 PACKAGES="
-    build-essential 
-    cifs-utils
-    etckeeper
-    g++
-    fortunes-ubuntu-server
-    openssh-server
-    avahi-daemon
-    isc-dhcp-server
-    samba
-    smartmontools
+    xrdp
+    xsel
+    rxvt-unicode-256color
+    ibus-skk
+    skkdic
+    wmctrl
     "
 
 if has "yum"; then
@@ -33,4 +34,12 @@ else
     exit 1
 fi
 
-log_pass "packages: installed successfully"
+if has "pip"; then
+    pip install xkeysnail || log_fail "error: pip: failed to install"
+    if [ ! -d "$HOME/.config/xkeysnail" ]; then
+        mkdir -p "$HOME/.config/xkeysnail"
+        ln -sf "$DOTPATH/etc/gui/linux/xkeysnail.py" "$HOME/.config/xkeysnail/config.py"
+    fi
+fi
+
+log_pass "private packages: installed successfully"
