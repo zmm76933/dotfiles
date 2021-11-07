@@ -1,14 +1,6 @@
 # Homebrew
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-function brew
-    set -xl PATH $PATH # Protect global PATH by local PATH
-    if type -q pyenv; and contains (pyenv root)/shims $PATH
-        set -e PATH[(contains -i (pyenv root)/shims $PATH)]
-    end
-
-    command brew $argv
-end
+alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
 
 if type -q yum
   alias update "sudo yum -y update && yum clean all"
