@@ -39,7 +39,6 @@ set -gx LC_ALL "en_US.UTF-8"
 set -gx LC_CTYPE "en_US.UTF-8"
 set -gx EDITOR nvim
 set -gx DOTPATH $HOME/.dotfiles
-set -gx PATH /usr/local/sbin $PATH
 set -gx PATH ~/bin $PATH
 
 # Go
@@ -51,5 +50,3 @@ status --is-interactive; and source (anyenv init -|psub)
 
 # fzf
 set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
-
-
