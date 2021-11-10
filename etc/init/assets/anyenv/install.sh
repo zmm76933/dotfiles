@@ -14,3 +14,7 @@ rbenv global 3.0.2
 # install nodenv
 nodenv install 17.0.1
 nodenv global 17.0.1
+
+# install plenv
+plenv install 5.34.0
+plenv global 5.34.0

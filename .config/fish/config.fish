@@ -46,7 +46,7 @@ set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
 # anyenv
-status --is-interactive; and source (anyenv init -|psub)
+source (anyenv init -|psub)
 
 # fzf
 set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"

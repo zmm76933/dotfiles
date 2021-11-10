@@ -23,6 +23,7 @@ anyenv install --force-init
 anyenv install pyenv
 anyenv install rbenv
 anyenv install nodenv
+anyenv install plenv
 
 source $DOTPATH/etc/init/assets/anyenv/install.sh
 

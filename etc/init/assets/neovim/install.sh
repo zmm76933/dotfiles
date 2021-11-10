@@ -25,3 +25,7 @@ npm install -g eslint_d
 npm install -g prettier
 npm install -g pyright
 npm install -g commitizen
+
+# install Perl provide
+plenv install-cpanm
+cpanm -n Neovim::Ext
