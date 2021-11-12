@@ -1037,6 +1037,9 @@ Keyboard() {
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><false/></dict>"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><false/></dict>"
 
+  # Turn Do Not Disturb On/Off
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 175 "<dict><key>enabled</key><false/></dict>"
+
   # Application windows
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 33 "<dict><key>enabled</key><false/></dict>"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 35 "<dict><key>enabled</key><false/></dict>"
@@ -1196,10 +1199,10 @@ Trackpad() {
   # ========== Swipe between pages ==========
   # - Checked
   #  - Scroll left or right with two fingers
-  defaults write .GlobalPreferences AppleEnableSwipeNavigateWithScrolls -bool true
-  defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-  defaults write ~/Library/Preferences/ByHost/.GlobalPreferences com.apple.trackpad.threeFingerHorizSwipeGesture -int 0
+  # defaults write .GlobalPreferences AppleEnableSwipeNavigateWithScrolls -bool true
+  # defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+  # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+  # defaults write ~/Library/Preferences/ByHost/.GlobalPreferences com.apple.trackpad.threeFingerHorizSwipeGesture -int 0
   #  - Swipe with three fingers
   # defaults write .GlobalPreferences AppleEnableSwipeNavigateWithScrolls -bool true
   # defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 1
@@ -1219,8 +1222,8 @@ Trackpad() {
   # ========== Swipe between full-screen apps ==========
   # - Checked
   #  - Scroll left or right with three fingers
-  defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 2
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+  # defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+  # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
   #   - Scroll left or right with four fingers
   # defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
   # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
@@ -1232,8 +1235,8 @@ Trackpad() {
 
   # ========== Notification Center ==========
   # - Checked
-  defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+  # defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+  # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
   # - Unchecked
   # defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
   # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
@@ -1241,8 +1244,8 @@ Trackpad() {
   # ========== Mission Control ==========
   # - Checked
   #  - Swipe up with three fingers
-  defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
+  # defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
+  # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
   #   - Swipe up with four fingers
   # defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
   # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
@@ -1267,13 +1270,13 @@ Trackpad() {
 
   # ========== Launchpad ==========
   # - Checked
-  defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
+  # defaults write com.apple.dock showLaunchpadGestureEnabled -bool true
   # - Unchecked
   # defaults write com.apple.dock showLaunchpadGestureEnabled -bool false
 
   # ========== Show Desktop ==========
   # - Checked
-  defaults write com.apple.dock showDesktopGestureEnabled -bool true
+  # defaults write com.apple.dock showDesktopGestureEnabled -bool true
   # - Unchecked
   # defaults write com.apple.dock showDesktopGestureEnabled -bool false
 }
