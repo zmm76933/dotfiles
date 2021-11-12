@@ -1074,6 +1074,14 @@ Keyboard() {
   defaults write -g AppleKeyboardUIMode -int 2
   # - Unchecked
   # defaults write -g AppleKeyboardUIMode -int 0
+
+  # ========== Dictation ==========
+  # Dictation On
+  defaults write com.apple.assistant.support "Dictation Enabled" -bool true
+  defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMIntroMessagePresented -bool true
+  defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs CustomizedDictationHotKey "<dict><key>keyChar</key><integer>65535</integer><key>modifiers</key><integer>1966080</integer><key>virtualKey</key><integer>99</integer></dict> "
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 164 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>99</integer><integer>1966080</integer></array><key>type</key><string>standard</string></dict></dict>"
+
 }
 
 Trackpad() {
@@ -1748,6 +1756,15 @@ Siri
 Spotlight
 # TimeMachine
 Trackpad
+
+# vim-imselect
+curl -Ls https://raw.githubusercontent.com/daipeihust/im-select/master/install_mac.sh | sh
+
+# commitizen
+echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+
+# symbolic link to external hdd
+# ln -s /Volumes/napa/iOSBackup ~/Library/Application\ Support/MobileSync/Backup
 
 ## ----------------------------------------
 ##  Cache Clear
