@@ -36,7 +36,7 @@
   (add-to-list 'custom-theme-load-path default-directory))
 
 ;; undo
-(el-get-bundle undo-tree)
+(el-get-bundle undo-tree :type elpa)
 (el-get-bundle undohist)
 
 ;; save-kill
