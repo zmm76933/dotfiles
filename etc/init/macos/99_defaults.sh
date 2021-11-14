@@ -386,20 +386,20 @@ MissionControl() {
   # defaults write com.apple.spaces spans-displays -bool true
 
   # ========== Hot Corners... ==========
-  # Top left screen corner → Desktop
-  defaults write com.apple.dock wvous-tl-corner -int 4
-  defaults write com.apple.dock wvous-tl-modifier -int 0
+  # Top left screen corner → Disable
+  defaults delete com.apple.dock wvous-tl-corner
+  defaults delete com.apple.dock wvous-tl-modifier
 
-  # Top right screen corner → Put display to sleep
+  # Top right screen corner → Put Display to Sleep
   defaults write com.apple.dock wvous-tr-corner -int 10
   defaults write com.apple.dock wvous-tr-modifier -int 0
 
-  # Bottom left screen corner → Mission Control
-  defaults write com.apple.dock wvous-bl-corner -int 2
+  # Bottom left screen corner → Launchpad
+  defaults write com.apple.dock wvous-bl-corner -int 11
   defaults write com.apple.dock wvous-bl-modifier -int 0
 
-  # Bottom right screen corner → Show application windows
-  defaults write com.apple.dock wvous-br-corner -int 3
+  # Bottom right screen corner → Notification Center
+  defaults write com.apple.dock wvous-br-corner -int 12
   defaults write com.apple.dock wvous-br-modifier -int 0
 }
 
@@ -1047,6 +1047,12 @@ Keyboard() {
   # Show Desktop
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 36 "<dict><key>enabled</key><false/></dict>"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 37 "<dict><key>enabled</key><false/></dict>"
+
+  # Move left a space
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>123</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+  # Move right a space
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>124</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
 
   # Switch to Desktop 1
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 "<dict><key>enabled</key><false/></dict>"
