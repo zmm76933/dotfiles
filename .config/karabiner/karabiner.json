@@ -162,7 +162,7 @@
                         ]
                     },
                     {
-                        "description": "Swap Command and Option in Terminal",
+                        "description": "Swap Command and Option in Terminal/iTerm2",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -545,7 +545,7 @@
                         ]
                     },
                     {
-                        "description": "Swap command and option in Remote Desktop",
+                        "description": "Swap Command and Option in Remote Desktop",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -717,36 +717,6 @@
                                 "to_if_alone": [
                                     {
                                         "key_code": "escape"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "AquaSKK for Terminal/iTerm2",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.googlecode\\.iterm2",
-                                            "^com\\.apple\\.Terminal"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "japanese_kana"
                                     }
                                 ],
                                 "type": "basic"
