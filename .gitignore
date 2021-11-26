@@ -51,6 +51,9 @@ Pods/
 # anyenv
 .config/anyenv/
 
+# eskk
+.config/eskk/
+
 # Fish local config
 .config/fish/fish_variables
 .config/fish/functions/*

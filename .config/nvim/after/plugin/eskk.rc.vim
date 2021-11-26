@@ -40,6 +40,8 @@ function! s:eskk_initial_pre()
   call t.add_map('z)', '）')
   call t.add_map('z[', '「')
   call t.add_map('z]', '」')
+  call t.add_map('z{', '【')
+  call t.add_map('z}', '】')
   call t.add_map('z ', '　')
   " "1." のように数字の後のドットはそのまま入力
   for n in range(10)
