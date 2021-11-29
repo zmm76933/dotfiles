@@ -1004,23 +1004,6 @@ Keyboard() {
   #   end tell
   # "
 
-  # ========== Input Sources ==========
-  # GJIME=$(defaults read com.apple.HIToolbox AppleEnabledInputSources | grep "InputSourceKind = \"Keyboard Input Method\"")
-  # HNUM=$(/usr/libexec/PlistBuddy -c "Print AppleEnabledInputSources" "${PLIST}" | ggrep -cP '^[\s]*Dict')
-  # if [[ -z ${GJIME} ]]; then
-  #   /usr/libexec/PlistBuddy \
-  #     -c "Add AppleEnabledInputSources:${HNUM} dict" \
-  #     -c "Add AppleEnabledInputSources:${HNUM}:InputSourceKind string \"Keyboard Input Method\"" \
-  #     -c "Add AppleEnabledInputSources:${HNUM}:\"Bundle ID\" string \"com.google.inputmethod.Japanese\"" \
-  #     "${HOME}"/Library/Preferences/com.apple.HIToolbox.plist
-  # fi
-
-  # # ========== Show Input menu in menu bar ==========
-  # # - Checked
-  defaults write com.apple.TextInputMenu visible -bool true
-  # # - Unchecked
-  # # defaults write com.apple.TextInputMenu visible -bool false
-
   # ========== Set keyboard shorcuts ==========
   # Turn Dock Hiding On/Off
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "<dict><key>enabled</key><false/></dict>"
@@ -1083,6 +1066,29 @@ Keyboard() {
   defaults write -g AppleKeyboardUIMode -int 2
   # - Unchecked
   # defaults write -g AppleKeyboardUIMode -int 0
+
+  # ========== Input Sources ==========
+  # GJIME=$(defaults read com.apple.HIToolbox AppleEnabledInputSources | grep "InputSourceKind = \"Keyboard Input Method\"")
+  # HNUM=$(/usr/libexec/PlistBuddy -c "Print AppleEnabledInputSources" "${PLIST}" | ggrep -cP '^[\s]*Dict')
+  # if [[ -z ${GJIME} ]]; then
+  #   /usr/libexec/PlistBuddy \
+  #     -c "Add AppleEnabledInputSources:${HNUM} dict" \
+  #     -c "Add AppleEnabledInputSources:${HNUM}:InputSourceKind string \"Keyboard Input Method\"" \
+  #     -c "Add AppleEnabledInputSources:${HNUM}:\"Bundle ID\" string \"com.google.inputmethod.Japanese\"" \
+  #     "${HOME}"/Library/Preferences/com.apple.HIToolbox.plist
+  # fi
+
+  # # ========== Show Input menu in menu bar ==========
+  # # - Checked
+  defaults write com.apple.TextInputMenu visible -bool true
+  # # - Unchecked
+  # # defaults write com.apple.TextInputMenu visible -bool false
+
+  # # ========== Automatically switch to a document's input source ==========
+  # # - Checked
+  defaults write com.apple.HIToolbox AppleGlobalTextInputProperties -dict TextInputGlobalPropertyPerContextInput -bool true
+  # # - Unchecked
+  # defaults write com.apple.HIToolbox AppleGlobalTextInputProperties -dict TextInputGlobalPropertyPerContextInput -bool false
 
   # ========== Dictation ==========
   # Dictation On
@@ -1327,7 +1333,7 @@ Finder() {
   defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 
   # ========== New Finder windows show ==========
-  defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+  defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
 
   # ========== Open folders in tabs instead of new windows ==========
   # - Checked
@@ -1395,15 +1401,14 @@ Finder() {
   # - as Icons
   # defaults write com.apple.Finder FXPreferredViewStyle -string icnv
   # - as Columns
-  # defaults write com.apple.Finder FXPreferredViewStyle -string Nlsv
-  # - as Gallary View
   # defaults write com.apple.Finder FXPreferredViewStyle -string clmv
+  # - as Gallary View
+  # defaults write com.apple.Finder FXPreferredViewStyle -string Flwv
   # - as List
-  defaults write com.apple.Finder FXPreferredViewStyle -string Flwv
+  defaults write com.apple.Finder FXPreferredViewStyle -string Nlsv
 
   # ========== Icon Size ==========
   # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 36" "${HOME}"/Library/Preferences/com.apple.finder.plist
-
   # ========== Text Size ==========
   # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:textSize 12" "${HOME}"/Library/Preferences/com.apple.finder.plist
 
