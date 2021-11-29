@@ -605,9 +605,7 @@ Notifications() {
 SecurityPrivacy() {
   # ========== Require password ~ after sleep or screen saver begins ==========
   # - Checked
-  # @int: seconds
   defaults write com.apple.screensaver askForPassword -bool true
-  defaults write com.apple.screensaver askForPasswordDelay -int 0
   # - Unchecked
   # defaults write com.apple.screensaver askForPassword -bool false
 
