@@ -1333,7 +1333,8 @@ Finder() {
   defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 
   # ========== New Finder windows show ==========
-  defaults write com.apple.finder NewWindowTargetPath -string "PfHm"
+  defaults write com.apple.finder NewWindowTarget -string "PfHm"
+  defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
   # ========== Open folders in tabs instead of new windows ==========
   # - Checked
@@ -1399,13 +1400,13 @@ Finder() {
 
   # ========== View ==========
   # - as Icons
-  # defaults write com.apple.Finder FXPreferredViewStyle -string icnv
+  # defaults write com.apple.Finder FXPreferredViewStyle -string "icnv"
   # - as Columns
-  # defaults write com.apple.Finder FXPreferredViewStyle -string clmv
+  # defaults write com.apple.Finder FXPreferredViewStyle -string "clmv"
   # - as Gallary View
-  # defaults write com.apple.Finder FXPreferredViewStyle -string Flwv
+  # defaults write com.apple.Finder FXPreferredViewStyle -string "Flwv"
   # - as List
-  defaults write com.apple.Finder FXPreferredViewStyle -string Nlsv
+  defaults write com.apple.Finder FXPreferredViewStyle -string "Nlsv"
 
   # ========== Icon Size ==========
   # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 36" "${HOME}"/Library/Preferences/com.apple.finder.plist
