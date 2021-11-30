@@ -13,13 +13,14 @@ if is_linux; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# exit with true if you have anyenv command
+# exit with true if you have nvim command
 if ! has "nvim"; then
     log_fail "error: this script is only supported with nvim"
     exit 1
 fi
 
-sh -c 'curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+/bin/bash -c "curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+nvim +"PlugInstall --sync" +qa
 
 source $DOTPATH/etc/init/assets/neovim/install.sh
 
