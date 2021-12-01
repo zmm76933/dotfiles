@@ -20,6 +20,7 @@ if ! has "tmux"; then
 fi
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source ~/.tmux.conf
 /bin/bash ${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 log_pass "tmux: tpm installed successfully"
