@@ -394,9 +394,9 @@ MissionControl() {
   defaults write com.apple.dock wvous-tr-corner -int 10
   defaults write com.apple.dock wvous-tr-modifier -int 0
 
-  # Bottom left screen corner → Launchpad
-  defaults write com.apple.dock wvous-bl-corner -int 11
-  defaults write com.apple.dock wvous-bl-modifier -int 0
+  # Bottom left screen corner → Disable
+  defaults delete com.apple.dock wvous-bl-corner
+  defaults delete com.apple.dock wvous-bl-modifier
 
   # Bottom right screen corner → Notification Center
   defaults write com.apple.dock wvous-br-corner -int 12
