@@ -7,7 +7,7 @@ switch (uname)
   case Linux
     source (dirname (status --current-filename))/config-linux.fish
   case '*'
-    # Do nothing
+    source (dirname (status --current-filename))/config-windows.fish
 end
 
 # theme
