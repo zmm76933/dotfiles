@@ -6,8 +6,11 @@ switch (uname)
     source (dirname (status --current-filename))/config-macos.fish
   case Linux
     source (dirname (status --current-filename))/config-linux.fish
+    if [ "(uname -r | grep microsoft)" != '' ]
+      source (dirname (status --current-filename))/config-windows.fish
+    end
   case '*'
-    source (dirname (status --current-filename))/config-windows.fish
+    # Do nothing
 end
 
 # theme
