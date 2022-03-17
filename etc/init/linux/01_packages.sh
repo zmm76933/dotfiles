@@ -14,6 +14,7 @@ PACKAGES="
     procps
     curl
     file
+    porg
     git
     libffi-dev
     libssl-dev

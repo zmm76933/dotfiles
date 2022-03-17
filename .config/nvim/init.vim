@@ -124,10 +124,11 @@ if has("unix")
   if s:uname == "Darwin\n"
     runtime ./macos.vim
   elseif s:uname == "Linux\n"
-    if system("uname -r | grep microsoft") !=  ""
-      runtime ./windows.vim
-    endif
+    runtime ./linux.vim
   endif
+endif
+if has('win32')
+  runtime ./windows.vim
 endif
 
 runtime ./maps.vim
