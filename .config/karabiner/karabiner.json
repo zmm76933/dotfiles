@@ -552,7 +552,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\."
+                                            "^com\\.microsoft\\.rdc\\.",
+                                            "^com\\.teamviewer\\.TeamViewer$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -577,7 +578,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\."
+                                            "^com\\.microsoft\\.rdc\\.",
+                                            "^com\\.teamviewer\\.TeamViewer$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -602,7 +604,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\."
+                                            "^com\\.microsoft\\.rdc\\.",
+                                            "^com\\.teamviewer\\.TeamViewer$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -627,7 +630,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\."
+                                            "^com\\.microsoft\\.rdc\\.",
+                                            "^com\\.teamviewer\\.TeamViewer$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -653,16 +657,6 @@
                         "description": "Change return to right_control. (Post return if pressed alone)",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.",
-                                            "^com\\.teamviewer\\.TeamViewer$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
                                 "from": {
                                     "key_code": "return_or_enter",
                                     "modifiers": {
@@ -690,16 +684,6 @@
                         "description": "Change left_control to escape. (Post escape if pressed alone)",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.",
-                                            "^com\\.teamviewer\\.TeamViewer$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
                                 "from": {
                                     "key_code": "left_control",
                                     "modifiers": {
@@ -710,10 +694,13 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_control",
-                                        "lazy": true
+                                        "key_code": "left_control"
                                     }
                                 ],
+                                "parameters":
+                                    {
+                                        "basic.to_if_alone_timeout_milliseconds": 200
+                                    },
                                 "to_if_alone": [
                                     {
                                         "key_code": "escape"
