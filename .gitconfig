@@ -1,6 +1,9 @@
 [user]
-  name  = zmm76933
+  name  = Masato Katayama
   email = zmm76933@gmail.com
+  signingkey = 245A59020A7624EC
+[commit]
+  gpgsign = true
 [core]
   excludesfile = ~/.gitignore
   editor = nvim
@@ -56,5 +59,4 @@
 	required = true
 	process = git-lfs filter-process
 [ghq]
-    root = ~/src
-
+  root = ~/src
