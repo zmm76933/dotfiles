@@ -28,6 +28,7 @@ vnoremap <silent> # :<C-U>
 "-------------------------------------------------------------------------------
 " Open current directory
 nnoremap \te :tabedit<Space>
+nnoremap \tc :tabclose<CR>
 
 "-------------------------------------------------------------------------------
 " Windows

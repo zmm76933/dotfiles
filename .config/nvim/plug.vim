@@ -40,5 +40,6 @@ endif
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'puremourning/vimspector'
 
 call plug#end()
