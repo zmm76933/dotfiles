@@ -21,7 +21,7 @@ Session.vim
 .emacs.d/var/
 
 # tmux
-.tmux/*
+.config/tmux/plugins/*
 
 # Xcode
 build/
@@ -50,9 +50,6 @@ Pods/
 
 # anyenv
 .config/anyenv/
-
-# eskk
-.config/eskk/
 
 # Fish local config
 .config/fish/fish_variables
