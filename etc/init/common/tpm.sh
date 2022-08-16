@@ -19,8 +19,8 @@ if ! has "tmux"; then
     exit 1
 fi
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-tmux source ~/.tmux.conf
-/bin/bash ${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+tmux source ~/.config/tmux/tmux.conf
+/bin/bash ${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 
 log_pass "tmux: tpm installed successfully"
