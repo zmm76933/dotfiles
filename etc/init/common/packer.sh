@@ -19,9 +19,14 @@ if ! has "nvim"; then
     exit 1
 fi
 
-/bin/bash -c "curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-nvim +"PlugInstall --sync" +qa
+if [[ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
+  git clone https://github.com/wbthomason/packer.nvim \
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+
+nvim --headless +PackerInstall +qa
+nvim --headless +TSUpdate +qa
 
 source $DOTPATH/etc/init/assets/neovim/install.sh
 
-log_pass "nvim: vim-plug installed successfully"
+log_pass "nvim: packer installed successfully"
