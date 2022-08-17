@@ -3,13 +3,8 @@
 eval "$(anyenv init -)"
 
 # install Python privider
-pyenv install 2.7.16
-pyenv virtualenv 2.7.16 neovim2
-pyenv activate neovim2
-pip install pynvim
-
-pyenv install 3.8.5
-pyenv virtualenv 3.8.5 neovim3
+pyenv install 3.9.5
+pyenv virtualenv 3.9.5 neovim3
 pyenv activate neovim3
 pip install pynvim
 
@@ -23,6 +18,7 @@ npm install -g typescript-language-server
 npm install -g diagnostic-languageserver
 npm install -g eslint_d 
 npm install -g prettier
+npm install -g @fsouza/prettierd
 npm install -g pyright
 npm install -g commitizen
 npm install -g cz-conventional-changelog
