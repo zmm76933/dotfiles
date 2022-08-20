@@ -553,6 +553,7 @@
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$"
                     ],
                     "type": "frontmost_application_if"
@@ -579,6 +580,7 @@
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$"
                     ],
                     "type": "frontmost_application_if"
@@ -605,6 +607,7 @@
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$"
                     ],
                     "type": "frontmost_application_if"
@@ -631,6 +634,7 @@
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$"
                     ],
                     "type": "frontmost_application_if"
