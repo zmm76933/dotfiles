@@ -5,10 +5,13 @@ eval "$(anyenv init -)"
 # install anyenv update
 git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 
-# install pyenv
+# install pyenv modules
 git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-pyenv install 3.10.0
-pyenv global 3.10.0
+git clone https://github.com/alefpereira/pyenv-pyright.git $(pyenv root)/plugins/pyenv-pyright
+
+pyenv install 3.10.8
+pyenv virtualenv 3.10.8 neovim3
+pyenv global neovim3
 
 # install rbenv
 rbenv install 3.1.2

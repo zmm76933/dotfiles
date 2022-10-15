@@ -9,8 +9,6 @@ brew 'autoconf'
 brew 'bat'
 brew 'cmigemo'
 brew 'coreutils'
-brew 'docker'
-brew 'docker-compose'
 brew 'emacs-mac'
 brew 'exa'
 brew 'fd'
@@ -52,8 +50,6 @@ cask 'bettertouchtool'
 cask 'blueharvest'
 cask 'calibre'
 cask 'cleanmymac'
-cask 'copyclip'
-cask 'docker'
 cask 'font-hack-nerd-font'
 cask 'geekbench'
 cask 'google-chrome'
@@ -84,7 +80,6 @@ mas 'Twitter', id: 409789998
 mas 'The Unarchiver', id:425424353
 mas 'WiFi Explorer', id: 494803304
 mas 'Skitch', id: 425955336
-# mas 'Server', id: 883878097
 mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
 mas 'Speedtest by Ookla', id: 1153157709

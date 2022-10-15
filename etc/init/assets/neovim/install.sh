@@ -3,9 +3,6 @@
 eval "$(anyenv init -)"
 
 # install Python privider
-pyenv install 3.9.5
-pyenv virtualenv 3.9.5 neovim3
-pyenv activate neovim3
 pip install pynvim
 
 # install Ruby provider
