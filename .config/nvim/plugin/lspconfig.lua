@@ -83,7 +83,16 @@ nvim_lsp.tsserver.setup {
 
 nvim_lsp.pyright.setup {
   on_attach = on_attach,
-  capabilities = capabilities
+  capabilities = capabilities,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true
+      },
+    },
+  },
 }
 
 nvim_lsp.sourcekit.setup {
