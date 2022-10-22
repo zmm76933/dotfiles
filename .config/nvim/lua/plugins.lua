@@ -52,8 +52,7 @@ packer.startup(function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-unimpaired'
   use 'junegunn/vim-easy-align'
-  use 'brglng/vim-im-select'
-  use 'tmux-plugins/vim-tmux-focus-events'
+  use 'yoshida-m-3/vim-im-select'
   use 'Vimjas/vim-python-pep8-indent'
   use 'puremourning/vimspector'
 end)
