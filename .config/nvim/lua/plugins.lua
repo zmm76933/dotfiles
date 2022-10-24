@@ -53,6 +53,7 @@ packer.startup(function(use)
   use 'tpope/vim-unimpaired'
   use 'junegunn/vim-easy-align'
   use 'yoshida-m-3/vim-im-select'
+  use 'keaising/im-select.nvim'
   use 'Vimjas/vim-python-pep8-indent'
   use 'puremourning/vimspector'
 end)
