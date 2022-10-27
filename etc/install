@@ -100,7 +100,6 @@ is_macos() {
         return 1
     fi
 }
-alias is_mac=is_macos
 
 # is_linux returns true if running OS is GNU/Linux
 is_linux() {
@@ -130,6 +129,27 @@ get_os() {
             echo $os
         fi
     done
+}
+
+# arch_detect export the ARCHITECT variable as you see fit
+arch_detect() {
+    export ARCHITECT
+    case "$(uname -m)" in
+        *'x86')     ARCHITECT='x86'     ;;
+        *'x86_64'*) ARCHITECT='x64'     ;;
+        *'arm'*)    ARCHITECT='arm'     ;;
+        *)          ARCHITECT='unknown' ;;
+    esac
+}
+
+# is_arm returns true if running CPU ARCHITECT is ARM
+is_arm() {
+    arch_detect
+    if [ "$ARCHITECT" = "arm" ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 e_newline() {
