@@ -13,6 +13,10 @@ if is_linux; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if is_macos && is_arm; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # exit with true if you have tmux command
 if ! has "tmux"; then
     log_fail "error: this script is only supported with tmux"
