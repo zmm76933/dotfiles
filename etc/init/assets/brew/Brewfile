@@ -4,7 +4,7 @@ tap 'homebrew/cask-fonts'
 tap 'railwaycat/emacsmacport'
 tap 'daipeihust/tap'
 
-brew 'anyenv'
+brew 'asdf'
 brew 'aspell'
 brew 'autoconf'
 brew 'bat'

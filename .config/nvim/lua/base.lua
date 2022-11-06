@@ -43,4 +43,4 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 vim.opt.formatoptions:append { 'r' }
 
 -- python3 provider
-vim.api.nvim_set_var('python3_host_prog', os.getenv("HOME") .. '/.anyenv/envs/pyenv/versions/neovim3/bin/python')
+vim.api.nvim_set_var('python3_host_prog', os.getenv("HOME") .. '/.asdf/installs/python/3.11.0/bin/python')

@@ -18,17 +18,29 @@ if is_macos && is_arm; then
 fi
 
 # exit with true if you have anyenv command
-if ! has "anyenv"; then
-    log_fail "error: this script is only supported with anyenv"
+if ! has "asdf"; then
+    log_fail "error: this script is only supported with asdf"
     exit 1
 fi
 
-anyenv install --force-init
-anyenv install pyenv
-anyenv install rbenv
-anyenv install nodenv
-anyenv install plenv
+plugins=(
+    'direnv'
+    'python'
+    'ruby'
+    'nodejs'
+    'perl'
+)
 
-source $DOTPATH/etc/init/assets/anyenv/install.sh
+for index in ${!plugins[*]}
+do
+    plugin=`echo ${plugins[$index]} | cut -d' ' -f 1`
+    asdf plugin add ${plugin}
+    if [ $? -eq 2 ]; then
+      continue
+    fi
 
-log_pass "anyenv: installed successfully"
+    asdf install ${plugin} latest
+    asdf global ${plugin} latest
+done
+
+log_pass "asdf: installed successfully"

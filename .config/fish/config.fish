@@ -48,8 +48,8 @@ set -gx PATH ~/bin $PATH
 set -gx GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
-# anyenv
-source (anyenv init -|psub)
+# asdf
+source (brew --prefix asdf)/libexec/asdf.fish
 
 # direnv
 direnv hook fish | source

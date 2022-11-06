@@ -1,6 +1,6 @@
 #!/bin/bash
 
-eval "$(anyenv init -)"
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 # install Python privider
 pip install pynvim
@@ -21,5 +21,5 @@ npm install -g commitizen
 npm install -g cz-conventional-changelog
 
 # install Perl provide
-plenv install-cpanm
+cpanm -n App::cpanminus
 cpanm -n Neovim::Ext
