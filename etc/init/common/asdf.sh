@@ -26,6 +26,7 @@ fi
 plugins=(
     'direnv'
     'python'
+    'poetry'
     'ruby'
     'nodejs'
     'perl'
