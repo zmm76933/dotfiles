@@ -12,5 +12,13 @@ case arm64
 end
 set -gx HOMEBREW_CASK_OPTS "--appdir=/Applications"
 
-alias brew="env PATH=(string replace (pyenv root)/shims '' \"\$PATH\") brew"
 alias update "brew update && brew upgrade && brew cleanup"
+
+function brew
+    set -xl PATH $PATH
+    if type -q asdf; and contains $HOME/.asdf/shims $PATH
+        set -e PATH[(contains -i $HOME/.asdf/shims $PATH)]
+    end
+
+    command brew $argv
+end
