@@ -9,18 +9,18 @@
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
+# exit with true if you have asdf command
+if ! has "asdf"; then
+    log_fail "error: this script is only supported with asdf"
+    exit 1
+fi
+
 if is_linux; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if is_macos && is_arm; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# exit with true if you have anyenv command
-if ! has "asdf"; then
-    log_fail "error: this script is only supported with asdf"
-    exit 1
 fi
 
 plugins=(
@@ -34,7 +34,7 @@ plugins=(
 
 for index in ${!plugins[*]}
 do
-    plugin=`echo ${plugins[$index]} | cut -d' ' -f 1`
+    plugin=$(echo ${plugins[$index]} | cut -d' ' -f 1)
     asdf plugin add ${plugin}
     if [ $? -eq 2 ]; then
       continue

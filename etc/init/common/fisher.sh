@@ -9,17 +9,17 @@
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
+if has "fisher"; then
+    log_pass "fisher: already installed"
+    exit
+fi
+
 if is_linux; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if is_macos && is_arm; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-if has "fisher"; then
-    log_pass "fisher: already installed"
-    exit
 fi
 
 fish -c "curl -sL git.io/fisher | source && fisher update"
