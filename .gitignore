@@ -48,8 +48,8 @@ Pods/
 # iTerm2
 .config/iterm2/
 
-# anyenv
-.config/anyenv/
+# poetry
+.config/pypoetry/
 
 # Fish local config
 .config/fish/fish_variables
