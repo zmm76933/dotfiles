@@ -55,5 +55,7 @@ packer.startup(function(use)
   use 'yoshida-m-3/vim-im-select'
   use 'keaising/im-select.nvim'
   use 'Vimjas/vim-python-pep8-indent'
-  use 'puremourning/vimspector'
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'https://github.com/mfussenegger/nvim-dap-python'
 end)
