@@ -45,6 +45,10 @@ packer.startup(function(use)
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
+  use {
+    "folke/which-key.nvim",
+    config = function() require("which-key").setup {} end,
+  }
 
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
