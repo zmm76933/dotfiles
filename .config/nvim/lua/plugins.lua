@@ -62,4 +62,10 @@ packer.startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
   use 'https://github.com/mfussenegger/nvim-dap-python'
+  use 'antoinemadec/FixCursorHold.nvim'
+  use 'nvim-neotest/neotest'
+  use 'nvim-neotest/neotest-vim-test'
+  use 'nvim-neotest/neotest-python'
+  use 'nvim-neotest/neotest-plenary'
+
 end)
