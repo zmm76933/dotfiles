@@ -81,6 +81,7 @@ mas 'Keynote', id: 409183694
 mas 'Twitter', id: 409789998
 mas 'The Unarchiver', id:425424353
 mas 'WiFi Explorer', id: 494803304
+mas 'WireGuard', id: 1451685025
 mas 'Skitch', id: 425955336
 mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
@@ -93,4 +94,5 @@ mas 'Microsoft Remote Desktop', id: 1295203466
 mas 'SoraAnnai', id: 599799247
 mas 'PopClip', id: 445189367
 mas 'Mactracker', id: 430255202
+mas 'MindNode', id: 1289197285
 mas 'AdBlock for Safari', id: 1402042596

@@ -27,6 +27,8 @@ PACKAGES="
     openssh-server
     samba
     smartmontools
+    squid
+    wireguard-tools
     "
 
 if has "yum"; then
