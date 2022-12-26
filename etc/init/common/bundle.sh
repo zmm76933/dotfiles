@@ -13,7 +13,7 @@ if is_linux; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-if is_macos && is_arm; then
+if is_macos; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 

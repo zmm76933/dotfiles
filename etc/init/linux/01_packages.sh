@@ -16,8 +16,11 @@ PACKAGES="
     file
     porg
     git
+    libbz2-dev
     libffi-dev
     libssl-dev
+    libncursesw5-dev
+    libreadline-dev
     zlib1g-dev
     avahi-daemon
     cifs-utils

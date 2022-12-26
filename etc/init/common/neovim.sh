@@ -9,27 +9,26 @@
 # For more information, see etc/README.md
 . "$DOTPATH"/etc/lib/vital.sh
 
-# exit with true if you have nvim command
-if ! has "nvim"; then
-    log_fail "error: this script is only supported with nvim"
-    exit 1
+if is_linux; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# exit with true if you have asdf command
+if is_macos; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+. $(brew --prefix asdf)/libexec/asdf.sh
+
 if ! has "asdf"; then
     log_fail "error: this script is only supported with asdf"
     exit 1
 fi
 
-if is_linux; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# exit with true if you have nvim command
+if ! has "nvim"; then
+    log_fail "error: this script is only supported with nvim"
+    exit 1
 fi
-
-if is_macos && is_arm; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-. $(brew --prefix asdf)/libexec/asdf.sh
 
 # install Python privider
 pip install pynvim
