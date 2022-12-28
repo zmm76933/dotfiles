@@ -12,15 +12,23 @@ set -eu
 PACKAGES="
     build-essential 
     procps
+    net-tools
     curl
+    llvm
     file
     porg
     git
     libbz2-dev
     libffi-dev
-    libssl-dev
+    liblzma-dev
     libncursesw5-dev
     libreadline-dev
+    libsqlite3-dev
+    libssl-dev
+    libxml2-dev
+    libxmlsec1-dev
+    tk-dev
+    xz-utils
     zlib1g-dev
     avahi-daemon
     cifs-utils
