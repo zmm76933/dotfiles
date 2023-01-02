@@ -17,8 +17,9 @@ if is_linux; then
 fi
 
 if is_macos; then
-    if has "/opt/homebrew/bin/brew"
+    if has "/opt/homebrew/bin/brew"; then
       log_pass "brew: already installed"
+      exit
     fi
 fi
 
