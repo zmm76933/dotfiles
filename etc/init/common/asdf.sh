@@ -30,6 +30,7 @@ plugins=(
     'ruby'
     'nodejs'
     'perl'
+    'golang'
 )
 
 for index in ${!plugins[*]}

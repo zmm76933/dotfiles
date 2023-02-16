@@ -44,12 +44,12 @@ set -gx EDITOR nvim
 set -gx DOTPATH $HOME/.dotfiles
 set -gx PATH ~/bin $PATH
 
-# Go
-set -gx GOPATH $HOME/go
-set -gx PATH $GOPATH/bin $PATH
-
 # asdf
 source (brew --prefix asdf)/libexec/asdf.fish
+
+# Go
+set -gx GOPATH (go env GOPATH)
+set -gx PATH $GOPATH/bin $PATH
 
 # direnv
 direnv hook fish | source
