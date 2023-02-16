@@ -661,6 +661,15 @@
             "description": "Change return to right_control. (Post return if pressed alone)",
             "manipulators": [
               {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.microsoft\\.rdc$",
+                      "^com\\.microsoft\\.rdc\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
                 "from": {
                   "key_code": "return_or_enter",
                   "modifiers": {
@@ -688,6 +697,15 @@
             "description": "Change left_control to escape. (Post escape if pressed alone)",
             "manipulators": [
               {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.microsoft\\.rdc$",
+                      "^com\\.microsoft\\.rdc\\."
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
                 "from": {
                   "key_code": "left_control",
                   "modifiers": {
