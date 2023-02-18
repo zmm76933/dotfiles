@@ -61,7 +61,6 @@ packer.startup(function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-unimpaired'
   use 'junegunn/vim-easy-align'
-  use 'zhaosheng-pan/vim-im-select'
   use 'keaising/im-select.nvim'
   use 'Vimjas/vim-python-pep8-indent'
   use 'mfussenegger/nvim-dap'
