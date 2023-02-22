@@ -58,7 +58,7 @@ cask 'istat-menus'
 cask 'iterm2'
 cask 'karabiner-elements'
 cask 'kindle'
-cask 'logitech-options'
+cask 'logi-options-plus'
 cask 'onyx'
 cask 'qlcolorcode'
 cask 'qlstephen'
@@ -74,8 +74,6 @@ cask 'vlc'
 cask 'webpquicklook'
 
 mas 'Blackmagic Disk Speed Test', id: 425264550
-mas 'Evernote Web Clipper', id: 1481669779
-mas 'Notion Web Clipper', id: 1559269364
 mas 'Keynote', id: 409183694
 mas 'Twitter', id: 409789998
 mas 'The Unarchiver', id:425424353
@@ -92,6 +90,3 @@ mas 'Numbers', id: 409203825
 mas 'Microsoft Remote Desktop', id: 1295203466
 mas 'SoraAnnai', id: 599799247
 mas 'PopClip', id: 445189367
-mas 'Mactracker', id: 430255202
-mas 'MindNode', id: 1289197285
-mas 'AdBlock for Safari', id: 1402042596
