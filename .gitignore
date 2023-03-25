@@ -23,6 +23,9 @@ Session.vim
 # tmux
 .config/tmux/plugins/*
 
+# libvirt
+.config/libvirt
+
 # Xcode
 build/
 *.pbxuser
