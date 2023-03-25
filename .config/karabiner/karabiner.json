@@ -738,6 +738,115 @@
             ]
           },
           {
+            "description": "Double tap left_shift to iTerm(key conbination)",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.ScreenSharing$",
+                      "^com\\.microsoft\\.rdc$",
+                      "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
+                      "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$"
+                    ],
+                    "type": "frontmost_application_unless"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "left_shift pressed",
+                    "value": 1
+                  }
+                ],
+                "from": {
+                  "key_code": "left_shift",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "f5",
+                    "modifiers": [
+                      "left_control",
+                      "left_option",
+                      "left_shift",
+                      "left_command"
+                    ]
+                  }
+                ],
+                "to_after_key_up": [
+                  {
+                    "set_variable": {
+                      "name": "left_shift pressed",
+                      "value": 0
+                    }
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "parameters": {
+                  "basic.to_delayed_action_delay_milliseconds": 200
+                },
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.ScreenSharing$",
+                      "^com\\.microsoft\\.rdc$",
+                      "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
+                      "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$"
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "left_shift",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "left_shift pressed",
+                      "value": 1
+                    }
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "set_variable": {
+                        "name": "left_shift pressed",
+                        "value": 0
+                      }
+                    }
+                  ],
+                  "to_if_invoked": [
+                    {
+                      "set_variable": {
+                        "name": "left_shift pressed",
+                        "value": 0
+                      }
+                    },
+                    {
+                      "key_code": "left_shift"
+                    }
+                  ]
+                },
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "AquaSKK for Terminal/iTerm2",
             "manipulators": [
               {
