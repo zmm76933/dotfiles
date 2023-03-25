@@ -26,6 +26,7 @@
                       "^org\\.gnu\\.AquamacsEmacs$",
                       "^org\\.gnu\\.Aquamacs$",
                       "^org\\.pqrs\\.unknownapp.conkeror$",
+                      "^com\\.apple\\.ScreenSharing$",
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
                       "^net\\.sf\\.cord$",
@@ -34,7 +35,9 @@
                       "^com\\.nulana\\.remotixmac$",
                       "^com\\.p5sys\\.jump\\.mac\\.viewer$",
                       "^com\\.p5sys\\.jump\\.mac\\.viewer\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$",
                       "^com\\.vmware\\.horizon$",
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
@@ -94,6 +97,7 @@
                       "^org\\.gnu\\.AquamacsEmacs$",
                       "^org\\.gnu\\.Aquamacs$",
                       "^org\\.pqrs\\.unknownapp.conkeror$",
+                      "^com\\.apple\\.ScreenSharing$",
                       "^com\\.microsoft\\.rdc$",
                       "^com\\.microsoft\\.rdc\\.",
                       "^net\\.sf\\.cord$",
@@ -102,7 +106,9 @@
                       "^com\\.nulana\\.remotixmac$",
                       "^com\\.p5sys\\.jump\\.mac\\.viewer$",
                       "^com\\.p5sys\\.jump\\.mac\\.viewer\\.",
+                      "^com\\.philandro\\.anydesk$",
                       "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$",
                       "^com\\.vmware\\.horizon$",
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
@@ -545,16 +551,14 @@
             ]
           },
           {
-            "description": "Swap Command and Option in Remote Desktop",
+            "description": "Swap Command and Option in Microsoft Remote Desktop",
             "manipulators": [
               {
                 "conditions": [
                   {
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\.",
-                      "^com\\.philandro\\.anydesk$",
-                      "^com\\.teamviewer\\.TeamViewer$"
+                      "^com\\.microsoft\\.rdc\\."
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -579,9 +583,7 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\.",
-                      "^com\\.philandro\\.anydesk$",
-                      "^com\\.teamviewer\\.TeamViewer$"
+                      "^com\\.microsoft\\.rdc\\."
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -606,9 +608,7 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\.",
-                      "^com\\.philandro\\.anydesk$",
-                      "^com\\.teamviewer\\.TeamViewer$"
+                      "^com\\.microsoft\\.rdc\\."
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -633,9 +633,7 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\.",
-                      "^com\\.philandro\\.anydesk$",
-                      "^com\\.teamviewer\\.TeamViewer$"
+                      "^com\\.microsoft\\.rdc\\."
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -664,8 +662,12 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
+                      "^com\\.apple\\.ScreenSharing$",
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\."
+                      "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
+                      "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$"
                     ],
                     "type": "frontmost_application_unless"
                   }
@@ -700,8 +702,12 @@
                 "conditions": [
                   {
                     "bundle_identifiers": [
+                      "^com\\.apple\\.ScreenSharing$",
                       "^com\\.microsoft\\.rdc$",
-                      "^com\\.microsoft\\.rdc\\."
+                      "^com\\.microsoft\\.rdc\\.",
+                      "^com\\.philandro\\.anydesk$",
+                      "^com\\.teamviewer\\.TeamViewer$",
+                      "^com\\.realvnc\\.vncviewer$"
                     ],
                     "type": "frontmost_application_unless"
                   }
