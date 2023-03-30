@@ -60,7 +60,7 @@ if grep -vqEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
     if [ ! -d "$HOME/.config/evremap" ]; then
         mkdir -p "$HOME/.config/evremap"
     fi
-    ln -sf "$DOTPATH/etc/config/linux/evremap.toml" "$HOME/.config/evremap/evremap.toml"
+    ln -sf "$DOTPATH/etc/config/linux/evremap/evremap.toml" "$HOME/.config/evremap/evremap.toml"
 fi
 
 log_pass "packages: installed successfully"

@@ -64,4 +64,4 @@ Pods/
 !.config/fish/conf.d/tide.fish
 
 # Karabiner
-.config/karabiner/automatic_backups
+.config/karabiner/

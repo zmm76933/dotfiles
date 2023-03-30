@@ -7,12 +7,6 @@
 
 is_macos || die "macos only"
 
-# karabiner-elements
-if [ ! -d "$HOME/.config/karabiner" ]; then
-    mkdir -p "$HOME/.config/karabiner"
-fi
-ln -sf "$DOTPATH/etc/config/macos/karabiner.json" "$HOME/.config/karabiner.json"
-
 ## ----------------------------------------
 ##  System Preferences
 ## ----------------------------------------
@@ -1776,8 +1770,11 @@ Spotlight
 # TimeMachine
 Trackpad
 
-# vim-imselect
-curl -Ls https://raw.githubusercontent.com/daipeihust/im-select/master/install_mac.sh | sh
+# karabiner-elements
+if [ ! -d "$HOME/.config/karabiner" ]; then
+    mkdir -p "$HOME/.config/karabiner"
+fi
+ln -sf "$DOTPATH/etc/config/macos/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 
 # commitizen
 echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
