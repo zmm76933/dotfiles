@@ -12,6 +12,7 @@ set -eu
 PACKAGES="
     build-essential 
     procps
+    sysstat
     net-tools
     curl
     llvm
@@ -19,6 +20,7 @@ PACKAGES="
     porg
     git
     libbz2-dev
+    libevdev-dev
     libffi-dev
     liblzma-dev
     libncursesw5-dev
@@ -51,6 +53,14 @@ elif has "apt"; then
 else
     log_fail "error: require: YUM or APT"
     exit 1
+fi
+
+if grep -vqEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+    # keyremap for linux
+    if [ ! -d "$HOME/.config/evremap" ]; then
+        mkdir -p "$HOME/.config/evremap"
+    fi
+    ln -sf "$DOTPATH/etc/config/linux/evremap.toml" "$HOME/.config/evremap/evremap.toml"
 fi
 
 log_pass "packages: installed successfully"

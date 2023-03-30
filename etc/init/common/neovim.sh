@@ -58,7 +58,7 @@ if [[ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall'
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 nvim --headless +TSUpdate +qa
 
 source $DOTPATH/etc/init/assets/neovim/install.sh

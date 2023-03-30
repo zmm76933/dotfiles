@@ -7,6 +7,12 @@
 
 is_macos || die "macos only"
 
+# karabiner-elements
+if [ ! -d "$HOME/.config/karabiner" ]; then
+    mkdir -p "$HOME/.config/karabiner"
+fi
+ln -sf "$DOTPATH/etc/config/macos/karabiner.json" "$HOME/.config/karabiner.json"
+
 ## ----------------------------------------
 ##  System Preferences
 ## ----------------------------------------

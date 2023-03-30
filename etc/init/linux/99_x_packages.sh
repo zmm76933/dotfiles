@@ -15,12 +15,9 @@ if ! is_desktop; then
 fi
 
 PACKAGES="
-    xrdp
-    xsel
-    rxvt-unicode-256color
-    ibus-skk
-    skkdic
-    wmctrl
+    wl-clipboard
+    tilix
+    fcitx5-skk
     "
 
 if has "yum"; then
@@ -32,14 +29,6 @@ elif has "apt"; then
 else
     log_fail "error: require: YUM or APT"
     exit 1
-fi
-
-if has "pip"; then
-    pip install xkeysnail || log_fail "error: pip: failed to install"
-    if [ ! -d "$HOME/.config/xkeysnail" ]; then
-        mkdir -p "$HOME/.config/xkeysnail"
-        ln -sf "$DOTPATH/etc/gui/linux/xkeysnail.py" "$HOME/.config/xkeysnail/config.py"
-    fi
 fi
 
 log_pass "private packages: installed successfully"
