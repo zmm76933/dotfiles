@@ -24,7 +24,10 @@ Session.vim
 .config/tmux/plugins/*
 
 # libvirt
-.config/libvirt
+.config/libvirt/
+
+# evremap
+.config/evremap/
 
 # Xcode
 build/

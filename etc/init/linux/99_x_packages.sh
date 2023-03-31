@@ -17,7 +17,9 @@ fi
 PACKAGES="
     wl-clipboard
     tilix
+    fcitx5
     fcitx5-skk
+    gnome-shell-extension-manager
     "
 
 if has "yum"; then
@@ -30,5 +32,8 @@ else
     log_fail "error: require: YUM or APT"
     exit 1
 fi
+
+# emacs keybindings
+gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
 
 log_pass "private packages: installed successfully"

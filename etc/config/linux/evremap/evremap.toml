@@ -7,7 +7,7 @@ device_name = "AT Translated Set 2 keyboard"
 # specify the `phys` value that is printed by the `list-devices` subcommand
 # phys = "usb-0000:07:00.3-2.1.1/input0"
 
-# Configure CAPSLOCK as a Dual Role key.
+# Configure LEFTCTRL as a Dual Role key.
 # Holding it produces LEFTCTRL, but tapping it
 # will produce ESC.
 # Both `tap` and `hold` can expand to multiple output keys.
@@ -16,6 +16,10 @@ input = "KEY_LEFTCTRL"
 hold = ["KEY_LEFTCTRL"]
 tap = ["KEY_ESC"]
 
+# Configure ENTER as a Dual Role key.
+# Holding it produces KEY_RIGHTCTRL, but tapping it
+# will produce ENTER.
+# Both `tap` and `hold` can expand to multiple output keys.
 [[dual_role]]
 input = "KEY_ENTER"
 hold = ["KEY_RIGHTCTRL"]
