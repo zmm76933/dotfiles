@@ -66,5 +66,8 @@ Pods/
 !.config/fish/conf.d/fish_user_key_bindings.fish
 !.config/fish/conf.d/tide.fish
 
+# 1Password
+.config/op/
+
 # Karabiner
 .config/karabiner/

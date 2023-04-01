@@ -1030,10 +1030,10 @@ Keyboard() {
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 37 "<dict><key>enabled</key><false/></dict>"
 
   # Move left a space
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>123</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>123</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 
   # Move right a space
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>124</integer><integer>393216</integer></array><key>type</key><string>standard</string></dict></dict>"
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>124</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 
   # Switch to Desktop 1
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 "<dict><key>enabled</key><false/></dict>"
@@ -1688,9 +1688,9 @@ ExtraSettings() {
 
   # ========== Set Computer Name ==========
   # !!!!! This should not be set !!!!!
-  sudo scutil --set HostName "cetus"
-  sudo scutil --set ComputerName "cetus"
-  sudo scutil --set LocalHostName "cetus"
+  sudo scutil --set HostName "lynx"
+  sudo scutil --set ComputerName "lynx"
+  sudo scutil --set LocalHostName "lynx"
   sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "cetus"
 
   # ========== Disable Sound on Boot ==========
