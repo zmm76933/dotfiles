@@ -24,3 +24,13 @@ tap = ["KEY_ESC"]
 input = "KEY_ENTER"
 hold = ["KEY_RIGHTCTRL"]
 tap = ["KEY_ENTER"]
+
+# Configure F2 and F8 as a Browse Back and Forward key
+# through vnc. Using log options+.
+[[remap]]
+input = ["KEY_F8"]
+output = ["KEY_LEFTALT", "KEY_LEFT"]
+
+[[remap]]
+input = ["KEY_F2"]
+output = ["KEY_RIGHTALT", "KEY_RIGHT"]
