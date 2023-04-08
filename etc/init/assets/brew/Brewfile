@@ -71,6 +71,7 @@ cask 'suspicious-package'
 cask 'transmit'
 cask 'visual-studio-code'
 cask 'vlc'
+cask 'vnc-viewer'
 cask 'webpquicklook'
 
 mas 'Blackmagic Disk Speed Test', id: 425264550
@@ -89,4 +90,3 @@ mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
 mas 'Microsoft Remote Desktop', id: 1295203466
 mas 'SoraAnnai', id: 599799247
-mas 'PopClip', id: 445189367

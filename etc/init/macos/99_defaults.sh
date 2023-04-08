@@ -1688,9 +1688,9 @@ ExtraSettings() {
 
   # ========== Set Computer Name ==========
   # !!!!! This should not be set !!!!!
-  sudo scutil --set HostName "lynx"
-  sudo scutil --set ComputerName "lynx"
-  sudo scutil --set LocalHostName "lynx"
+  sudo scutil --set HostName "cetus"
+  sudo scutil --set ComputerName "cetus"
+  sudo scutil --set LocalHostName "cetus"
   sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "cetus"
 
   # ========== Disable Sound on Boot ==========

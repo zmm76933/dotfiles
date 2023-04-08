@@ -61,6 +61,4 @@ fi
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 nvim --headless +TSUpdate +qa
 
-source $DOTPATH/etc/init/assets/neovim/install.sh
-
 log_pass "nvim: packer installed successfully"
