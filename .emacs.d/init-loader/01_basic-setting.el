@@ -54,6 +54,7 @@
  '(recursive-minibuffers t)
  '(set-mark-command-repeat-pop t)
  '(backward-delete-char-untabify-method 'hungry)
+ '(undo-tree-auto-save-history nil)
  ;; additional
  '(save-kill-file-name (concat my/history-dir "kill-ring-saved"))
  '(undohist-directory (concat my/history-dir "undohist"))
@@ -85,7 +86,7 @@
 (setq-default which-func-unknown "")
 
 ;; 大文字小文字を区別
-(setq-default case-fold-search nil)
+(setq-default case-fold-search t)
 
 ;; for GC
 (setq-default gc-cons-threshold (* gc-cons-threshold 10))

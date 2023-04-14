@@ -117,34 +117,10 @@
 (add-to-list 'default-frame-alist '(ns-appearance . 'dark))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
-;; dired-x の機能を利用して 特定ファイルだけ「!」や「X」でQuick Look 可能にする
-;; 以降に定義している dired-quickLook を利用すると何でもQLに渡す
-;; QL の終了は C-g
-(custom-set-variables
- '(dired-guess-shell-alist-user
-   '(("\\.\\(ppt\\|pptx\\)\\'" "open -a Keynote")
-     ("\\.\\(xls\\|xlsx\\)\\'" "qlmanage -p")
-     ("\\.\\(jpg\\|png\\|pdf\\)\\'" "qlmanage -p")
-     ("\\.\\(m4a\\|mp3\\|wav\\)\\'" "afplay -q 1 * &"))))
-
-;; open コマンドでファイルを開く
-(defun dired-open ()
+(defun dired-open-by-macosx ()
+  "Opens a file in dired with the Mac OS X command 'open'."
   (interactive)
-  (let ((file (dired-get-filename)))
-    (unless (file-directory-p file)
-      ;; file がディレクトリでない場合
-      (start-process "open" "*diredopen" "open" file))))
+  (shell-command (concat "open " (shell-quote-argument (expand-file-name (dired-file-name-at-point))))))
 
-;; QuickLookでファイルを開く
-(defun dired-quickLook ()
-  (interactive)
-  (let ((file (dired-get-filename)))
-    (unless (file-directory-p file)
-      ;; file がディレクトリでない場合
-      (start-process "QuickLook" "*diredQuickLook" "/usr/bin/qlmanage" "-p" (shell-quote-argument file)))))
-
-(with-eval-after-load 'dired
-  (define-key dired-mode-map "z" 'dired-open)
-  (define-key dired-mode-map " " 'dired-quickLook))
-
+(define-key dired-mode-map (kbd "z") 'dired-open-by-macosx)
 ;;; cocoa-emacs-init.el ends here

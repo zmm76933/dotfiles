@@ -70,6 +70,7 @@
 ;; Directory
 (el-get-bundle direx)
 (el-get-bundle syohex/emacs-dired-k2 :name dired-k2)
+(el-get-bundle Fuco1/dired-hacks)
 
 ;; auto-complete
 (el-get-bundle auto-complete/popup-el :name popup)
@@ -88,6 +89,9 @@
 
 ;; snippet
 (el-get-bundle yasnippet)
+
+;; Quick-Preview
+(el-get-bundle myuhe/quick-preview.el :name quick-preview)
 
 ;; C/C++
 (el-get-bundle clang-format
@@ -123,7 +127,7 @@
 (el-get-bundle markdown-mode)
 (el-get-bundle yoshiki/yaml-mode)
 
-;; session
+;; Session
 (el-get-bundle recentf-ext)
 
 ;; skk
