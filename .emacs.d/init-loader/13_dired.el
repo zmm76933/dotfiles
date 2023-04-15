@@ -47,6 +47,7 @@
 
 (custom-set-variables
  '(ls-lisp-dirs-first t)
+ '(dired-listing-switches "-alh")
  '(dired-dwim-target t)
  '(dired-auto-revert-buffer t)
  '(dired-recursive-copies 'always)
