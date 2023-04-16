@@ -50,6 +50,7 @@
  '(dired-listing-switches "-alh")
  '(dired-dwim-target t)
  '(dired-auto-revert-buffer t)
+ '(dired-isearch-filenames 'dwim)
  '(dired-recursive-copies 'always)
  '(dired-recursive-deletes 'always))
 
