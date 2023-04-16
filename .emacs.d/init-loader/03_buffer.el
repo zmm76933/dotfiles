@@ -20,4 +20,8 @@
 (with-eval-after-load 'bs
   (fset 'bs-message-without-log 'ignore))
 
-;;; buffer.el ends here
+(with-eval-after-load 'ibuffer
+  (define-key ibuffer-mode-map (kbd "j") 'ibuffer-forward-line)
+  (define-key ibuffer-mode-map (kbd "k") 'ibuffer-backward-line))
+
+;;; Buffer.el ends here
