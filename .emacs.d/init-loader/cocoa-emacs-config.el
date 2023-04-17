@@ -117,10 +117,12 @@
 (add-to-list 'default-frame-alist '(ns-appearance . 'dark))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
-(defun dired-open-by-macosx ()
-  "Opens a file in dired with the Mac OS X command 'open'."
-  (interactive)
-  (shell-command (concat "open " (shell-quote-argument (expand-file-name (dired-file-name-at-point))))))
+;; Open files in dired mode using 'open'
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map (kbd "z")
+       (lambda () (interactive)
+         (let ((fn (dired-get-file-for-visit)))
+           (start-process "default-app" nil "open" fn))))))
 
-(define-key dired-mode-map (kbd "z") 'dired-open-by-macosx)
 ;;; cocoa-emacs-init.el ends here
