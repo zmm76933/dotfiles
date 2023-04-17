@@ -1047,6 +1047,15 @@ Keyboard() {
   # Select the next source in the Input Menu
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><false/></dict>"
 
+  # Save picture of screen as a file
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 28 "<dict><key>enabled</key><false/></dict>"
+
+  # Save picture of selected area as a file
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 30 "<dict><key>enabled</key><false/></dict>"
+
+  # Screenshot and recording options
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 184 "<dict><key>enabled</key><false/></dict>"
+
   # Show Spotlight search
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
 
