@@ -6,7 +6,7 @@ function fish_user_key_bindings
   bind \cd delete-char
 
   # recend directory search
-  bind \cs fzf_recentd
+  bind \cs fzf_z
 
   # git repository search
   bind \er __ghq_repository_search

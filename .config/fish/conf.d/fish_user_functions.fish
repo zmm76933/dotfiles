@@ -8,7 +8,17 @@ function cde
   cd "$EMACS_CWD"        
 end
 
-function fzf_recentd
-  z -l | awk '{ print $2 }' | fzf | read recentd
-  cd $recentd
+function fzf_z
+  set -l query (commandline)
+
+  if test -n $query
+    set fzf_flags --query "$query"
+  end
+
+  z -l | awk '{ print $2 }' | fzf $fzf_flags | read recent
+  if [ $recent ]
+      cd $recent
+      commandline -r ''
+      commandline -f repaint
+  end
 end
