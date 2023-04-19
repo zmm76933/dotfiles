@@ -59,7 +59,6 @@
 (el-get-bundle multiple-cursors)
 
 ;; Buffer
-(el-get-bundle emacs-jp/elscreen)
 (el-get-bundle popwin)
 (el-get-bundle lukhas/buffer-move)
 (el-get-bundle syohex/emacs-zoom-window :name zoom-window)
