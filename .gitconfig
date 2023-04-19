@@ -44,19 +44,19 @@
 [hub]
   protocol = https
 [github]
-	user = zmm76933
+  user = zmm76933
 [diff]
   tool = nvimdiff
 [difftool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+  path =
 [mergetool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 [ghq]
   root = ~/src

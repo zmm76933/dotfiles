@@ -7,3 +7,8 @@ function cde
   echo "chdir to $EMACS_CWD"
   cd "$EMACS_CWD"        
 end
+
+function fzf_recentd
+  z -l | awk '{ print $2 }' | fzf | read recentd
+  cd $recentd
+end

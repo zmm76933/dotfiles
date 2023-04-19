@@ -64,8 +64,8 @@ Pods/
 .config/fish/conf.d/*
 !.config/fish/conf.d/000-env.fish
 !.config/fish/conf.d/fish_user_key_bindings.fish
+!.config/fish/conf.d/fish_user_functions.fish
 !.config/fish/conf.d/tide.fish
-!.config/fish/conf.d/emacs.fish
 
 # 1Password
 .config/op/
