@@ -125,4 +125,10 @@
          (let ((fn (dired-get-file-for-visit)))
            (start-process "default-app" nil "open" fn))))))
 
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map (kbd "f")
+       (lambda () (interactive)
+         (shell-command "open .")))))
+
 ;;; cocoa-emacs-init.el ends here
