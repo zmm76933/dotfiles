@@ -142,16 +142,6 @@ arch_detect() {
     esac
 }
 
-# is_arm returns true if running CPU ARCHITECT is ARM
-is_arm() {
-    arch_detect
-    if [ "$ARCHITECT" = "arm" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 e_newline() {
     printf "\n"
 }
