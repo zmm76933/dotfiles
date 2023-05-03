@@ -44,6 +44,8 @@ set -gx EDITOR nvim
 set -gx DOTPATH $HOME/.dotfiles
 set -gx PATH ~/bin $PATH
 
+# temporary setting
+set -gx PATH $HOME/.asdf/shims $PATH
 # asdf
 source (brew --prefix asdf)/libexec/asdf.fish
 
