@@ -122,9 +122,7 @@
                            ("melpa"  . "https://melpa.org/packages/")
                            ("org"    . "https://orgmode.org/elpa/")
                            ("nongnu" . "https://elpa.nongnu.org/nongnu/"))
-	package-gnupghome-dir (expand-file-name ".gnupg" (getenv "HOME"))
-        package-quickstart t)
-  (add-hook 'kill-emacs-hook 'package-quickstart-refresh)
+        package-gnupghome-dir (expand-file-name ".gnupg" (getenv "HOME")))
   (if (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
       (setq package-native-compile t)))
@@ -152,6 +150,14 @@
     (leaf-keywords-init)
     )
   )
+
+(leaf leaf
+  :config
+  (leaf leaf-convert :ensure t)
+  (leaf leaf-tree
+    :ensure t
+    :custom ((imenu-list-size . 30)
+             (imenu-list-position . 'left))))
 
 (leaf exec-path-from-shell
   :ensure t
@@ -549,6 +555,7 @@
   (recentf-save-list recentf-cleanup)
   :init
   (leaf recentf-ext :ensure t)
+  (recentf-mode 1)
   :custom
   `((recentf-save-file       . ,(expand-file-name "recentf" my:d:tmp))
     (recentf-max-saved-items . 500)
@@ -557,22 +564,21 @@
                                  "^/tmp\\.*"
                                  "^/private\\.*"
                                  "^/var/folders\\.*"
+                                 "^/ssh:"
                                  "/TAGS$"
                                  "^#\\.*"
-                                 "^/home/uwabami/.emacs.d/tmp/\\.*"
-                                 "^/home/uwabami/.dotfiles/Emacs/tmp/\\.*"
-                                 "^/Users/uwabami/.emacs.d/tmp/\\.*"
-                                 "^/Users/uwabami/.dotfiles/Emacs/tmp/\\.*"
+                                 "^/home/zmm76933/.emacs.d/tmp/\\.*"
+                                 "^/home/zmm76933/.dotfiles/Emacs/tmp/\\.*"
+                                 "^/Users/zmm76933/.emacs.d/tmp/\\.*"
+                                 "^/Users/zmm76933/.dotfiles/Emacs/tmp/\\.*"
                                  "^/[^/:]+:"
                                  "bookmarks"
-                                 "org-recent-headings.dat"
-                                 "^/mnt/c/\\.*"
                                  "\\.*COMMIT_EDITMSG$"
                                  ".*-autoloads.el$"
-                                 "^/home/uwabami/.emacs.d/pkg/\\.*"
-                                 "^/home/uwabami/.cache/\\.*"
-                                 "^/Users/uwabami/.emacs.d/pkg/\\.*"
-                                 "^/Users/uwabami/.cache/\\.*"
+                                 "^/home/zmm76933/.emacs.d/pkg/\\.*"
+                                 "^/home/zmm76933/.cache/\\.*"
+                                 "^/Users/zmm76933/.emacs.d/pkg/\\.*"
+                                 "^/Users/zmm76933/.cache/\\.*"
                                  )))
   )
 
@@ -676,8 +682,7 @@
                 default-directory))))
       (find-file default-directory)))
   ;;
-  :bind (("C-x b"   . ibuffer-other-window)
-         ("C-x C-b" . ibuffer)
+  :bind (("C-x C-b" . ibuffer)
          (:ibuffer-mode-map
           ("C-x C-f" . my:ibuffer-find-file))
          )
@@ -722,9 +727,6 @@
         interprogram-paste-function 'my:copy-from-osx)
   )
 
-(leaf helm :defer-config (helm-mode -1))
-(leaf ivy :defer-config (ivy-mode -1))
-
 (leaf *completion
   :init
   ;; 補完で無視する拡張子の追加．そのうち増える．
@@ -757,49 +759,6 @@
 
 (leaf vertico
   :ensure t
-  :preface
-  (defun my:disable-selection ()
-    (when (eq minibuffer-completion-table #'org-tags-completion-function)
-      (setq-local vertico-map minibuffer-local-completion-map
-                  completion-cycle-threshold nil
-                  completion-styles '(basic))))
-  ;;
-  ;; (defun my:vertico--recompute-candidates (original-fun &rest args)
-  ;;   ;; vertico--update-candidatesの最後の処理を置き換える
-  ;;   (let ((result (apply original-fun args)))
-  ;;     (when result
-  ;;       (unless (nth 3 result) ;;3=index
-  ;;         (setq vertico--lock-candidate nil)
-  ;;         (setf (nth 3 result) ;;3=index
-  ;;               (if (vertico--allow-prompt-selection-p)
-  ;;                   ;; require-matchじゃない場合は現在入力中の文字列を選択する
-  ;;                   -1
-  ;;                 ;; require-matchの場合は最初の候補を選択する
-  ;;                 0))))
-  ;;     result))
-  ;;
-  (defun my:filename-upto-parent ()
-    "Move to parent directory like \"cd ..\" in find-file."
-    (interactive)
-    (let ((sep (eval-when-compile (regexp-opt '("/" "\\")))))
-      (save-excursion
-        (left-char 1)
-        (when (looking-at-p sep)
-          (delete-char 1)))
-      (save-match-data
-        (when (search-backward-regexp sep nil t)
-          (right-char 1)
-          (filter-buffer-substring (point)
-                                   (save-excursion (end-of-line) (point))
-                                   #'delete)))))
-  :advice
-  ((:before vertico--setup
-            my:disable-selection)
-   ;; (:around vertico--recompute-candidates
-   ;;          my:vertico--recompute-candidates)
-   )
-  :bind
-  (:vertico-map (("C-l" . my:filename-upto-parent)))
   :custom-face
   `((vertico-current
      . '((t (:inherit hl-line :background unspecified)))))
@@ -809,8 +768,109 @@
     (vertico-multiline . '(("↓" 0 1 (face vertico-multiline))
                            ("…" 0 1 (face vertico-multiline))))
     )
+  :hook
+  (emacs-startup-hook . vertico-mode)
   :config
-  :hook (emacs-startup-hook . vertico-mode)
+  (leaf vertico-directory
+    :ensure nil
+    :require t
+    :after vertico
+    :bind
+    (:vertico-map
+     ("C-l" . vertico-directory-up)
+     ("\d" . vertico-directory-delete-char))
+    )
+  )
+
+(leaf embark
+  :ensure t
+  :bind
+  (("C-h E" . embark-act)
+   ("C-h B" . embark-bindings))
+  :config
+  (setq prefix-help-command #'embark-prefix-help-command)
+  (setq embark-action-indicator
+        (lambda (map _target)
+          (which-key--show-keymap "Embark" map nil nil 'no-paging)
+          #'which-key--hide-popup-ignore-command)
+        embark-become-indicator embark-action-indicator))
+
+(leaf embark-consult
+  :ensure t
+  :after embark consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
+  )
+
+(leaf consult
+  :ensure t
+  :bind* (("C-x b" . consult-buffer)
+          ("M-g ," . consult-grep)
+          ("M-g ." . consult-ripgrep)
+          ("C-c o" . consult-outline)
+          )
+  :bind (("M-s" . consult-line)
+         ("C-M-s" . consult-line)
+         ("C-x C-r" . consult-recent-file))
+  :config
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-root-function #'projectile-project-root)
+  (setq my-consult--source-project-buffer
+        (plist-put consult--source-project-buffer :hidden nil))
+  (setq my-consult--source-project-file
+        (plist-put consult--source-project-recent-file :hidden nil))
+  (defun my-consult-project ()
+    "my `consult' command for project only"
+    (interactive)
+    (when-let (buffer (consult--multi '(my-consult--source-project-buffer
+                                        my-consult--source-project-file)
+                                      :require-match
+                                      t ;(confirm-nonexistent-file-or-buffer)
+                                      :prompt "(in proj) Switch to: "
+                                      :history nil
+                                      :sort nil))
+      (unless (cdr buffer)
+        (consult--buffer-action (car buffer)))))
+  )
+
+(leaf consult-ls-git
+  :ensure t
+  :bind
+  ("C-x C-a" . consult-ls-git)
+  )
+
+(leaf orderless
+  :require t
+  :ensure t
+  :init
+  (defun orderless-migemo (component)
+    (let ((pattern (migemo-get-pattern component)))
+      (condition-case nil
+          (progn (string-match-p pattern "") pattern)
+        (invalid-regexp nil))))
+  :config
+  (orderless-define-completion-style orderless-default-style
+    (orderless-matching-styles '(orderless-literal
+                                 orderless-regexp)))
+  (orderless-define-completion-style orderless-migemo-style
+    (orderless-matching-styles '(orderless-literal
+                                 orderless-regexp
+                                 orderless-migemo)))
+  (orderless-define-completion-style orderless-initialism-style
+    (orderless-matching-styles '(orderless-initialism
+                                 orderless-literal)))
+  (setq completion-category-overrides
+        '((command (styles orderless-initialism-style))
+          (file (styles orderless-migemo-style))
+          (buffer (styles orderless-migemo-style))
+          (symbol (styles orderless-default-style))
+          (consult-location (styles orderless-migemo-style))
+          (consult-multi (styles orderless-migemo-style))
+          (org-roam-node (styles orderless-migemo-style))
+          (unicode-name (styles orderless-migemo-style))
+          (variable (styles orderless-default-style))))
+  :custom
+  (completion-styles . '(orderless))
   )
 
 (leaf marginalia
@@ -824,61 +884,20 @@
     )
   :bind (("M-A" . marginalia-cycle)
          (:minibuffer-local-map
-          ("M-A" . marginalia-cycle)
-          ))
+          ("M-A" . marginalia-cycle)))
+  :config
+  (add-to-list 'marginalia-prompt-categories '("\\<Heading\\>" . file))
+  (add-to-list 'marginalia-prompt-categories '("\\<Node\\>" . file))
+  (add-to-list 'marginalia-prompt-categories
+               '("\\<Fuzzy grep in.*\\>" . file))
   :custom
   `((marginalia-annotators
      . '(marginalia-annotators-light marginalia-annotators-heavy nil))
     (marginalia-align . 'right)
-    (marginalia-align-offset .  -2) ;; icon 分引いておく
-    )
+    (marginalia-align-offset .  -2))
   :hook
   ((emacs-startup-hook . marginalia-mode)
    (marginalia-mode-hook . all-the-icons-completion-marginalia-setup))
-  )
-
-(leaf consult
-  :ensure t
-  :bind (("C-x C-r" . my:consult-recent-file))
-  :defvar recentf-list
-  :custom
-  `(;; 増やさないと preview 時に theme がロードされない模様.
-    ;; とりあえず default の 10 倍にしている. 1 MB かな?
-    (consult-preview-raw-size . 1024000)
-    (consult-async-refresh-delay . 0.2)
-    (consult-preview-key  . ,(kbd "C-M-p"))
-    (consult-narrow-key   . "<")
-    )
-  :config
-  (defun my:consult-recent-file ()
-    "Find recent using `completing-read' with shorten filename"
-    (interactive)
-    (recentf-mode +1)
-    (let ((files (mapcar (lambda (f)
-                           (cons (my:shorten-file-path f (- (window-width) 2)) f))
-                         recentf-list)))
-      (let ((selected
-             (consult--read (mapcar #'car files)
-                            :prompt "Find recent file: "
-                            :sort nil
-                            :require-match t
-                            :category 'file
-                            :state (consult--file-preview)
-                            :history 'file-name-history)))
-        (find-file (assoc-default selected files)))))
-  )
-
-(leaf orderless
-  :ensure t
-  :custom
-  `((completion-styles . '(orderless))
-    (orderless-matching-styles
-     . '(orderless-prefixes
-         orderless-flex
-         orderless-regexp
-         orderless-initialism
-         orderless-literal))
-    )
   )
 
 (leaf corfu
@@ -1108,11 +1127,6 @@
 ;;     :hook
 ;;     (Info-selection #'info-colors-fontify-node))
 ;;   )
-
-(leaf popwin
-  :ensure t
-  :custom
-  (popwin:popup-window-position . 'bottom))
 
 ;;;###autoload
 (defun my:load-window-config ()
