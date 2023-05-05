@@ -1157,8 +1157,6 @@
   (sp-pair "$" "$" :actions '(wrap))
   )
 
-
-
 (leaf rainbow-mode
   :ensure t
   :blackout `((rainbow-mode . ,(format " %s" "\x1F308")))
@@ -1406,13 +1404,13 @@
     "Custom skkが読み込まれていなくても skk-modeline-input-mode に値を設定"
     (cond
      ((not (boundp 'skk-modeline-input-mode))
-      (setq skk-modeline-input-mode "--SKK"))
+      (setq skk-modeline-input-mode "DDSKK"))
      (t skk-modeline-input-mode)))
   ;;
   (defun my:skk-modeline-input-mode ()
     "Custom: powerline 用に skk の indicator を準備"
     (cond
-     ((string-match "--SKK" skk-modeline-input-mode) "[--]")
+     ((string-match "DDSKK" skk-modeline-input-mode) "[--]")
      ((string-match skk-hiragana-mode-string skk-modeline-input-mode) "[あ]")
      ((string-match skk-katakana-mode-string skk-modeline-input-mode) "[ア]")
      ((string-match skk-latin-mode-string skk-modeline-input-mode)    "[_A]")
