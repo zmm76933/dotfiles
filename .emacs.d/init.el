@@ -93,6 +93,23 @@
             (unless (member "*scratch*" (my:buffer-name-list))
               (my:make-scratch 1))))
 
+;;;###autoload
+(defun my:return-current-working-directory-to-shell ()
+  (expand-file-name
+   (with-current-buffer
+       (if (featurep 'elscreen)
+           (let* ((frame-confs (elscreen-get-frame-confs (selected-frame)))
+                  (num (nth 1 (assoc 'screen-history frame-confs)))
+                  (cur-window-conf
+                   (assoc 'window-configuration
+                          (assoc num (assoc 'screen-property frame-confs))))
+                  (marker (nth 2 cur-window-conf)))
+             (marker-buffer marker))
+         (nth 1
+              (assoc 'buffer-list
+                     (nth 1 (nth 1 (current-frame-configuration))))))
+     default-directory)))
+
 (defvar my:delete-trailing-whitespace-exclude-suffix
   (list "\\.rd$" "\\.md$" "\\.rbt$" "\\.rab$"))
 ;;;###autoload
@@ -507,18 +524,18 @@
 
 (leaf tab-bar-mode
   :init
-  (defvar my:ctrl-o-map (make-sparse-keymap)
+  (defvar my:ctrl-t-map (make-sparse-keymap)
     "My original keymap binded to C-t.")
-  (defalias 'my:ctrl-o-prefix my:ctrl-o-map)
-  (define-key global-map (kbd "C-t") 'my:ctrl-o-prefix)
-  (define-key my:ctrl-o-map (kbd "c")   'tab-new)
-  (define-key my:ctrl-o-map (kbd "C-c") 'tab-new)
-  (define-key my:ctrl-o-map (kbd "k")   'tab-close)
-  (define-key my:ctrl-o-map (kbd "C-k") 'tab-close)
-  (define-key my:ctrl-o-map (kbd "n")   'tab-next)
-  (define-key my:ctrl-o-map (kbd "C-n") 'tab-next)
-  (define-key my:ctrl-o-map (kbd "p")   'tab-previous)
-  (define-key my:ctrl-o-map (kbd "C-p") 'tab-previous)
+  (defalias 'my:ctrl-t-prefix my:ctrl-t-map)
+  (define-key global-map (kbd "C-t") 'my:ctrl-t-prefix)
+  (define-key my:ctrl-t-map (kbd "c")   'tab-new)
+  (define-key my:ctrl-t-map (kbd "C-c") 'tab-new)
+  (define-key my:ctrl-t-map (kbd "k")   'tab-close)
+  (define-key my:ctrl-t-map (kbd "C-k") 'tab-close)
+  (define-key my:ctrl-t-map (kbd "n")   'tab-next)
+  (define-key my:ctrl-t-map (kbd "C-n") 'tab-next)
+  (define-key my:ctrl-t-map (kbd "p")   'tab-previous)
+  (define-key my:ctrl-t-map (kbd "C-p") 'tab-previous)
 ;;;###autoload
 (defun my:tab-bar-tab-name-truncated ()
   "Custom: Generate tab name from the buffer of the selected window."
@@ -549,6 +566,44 @@
 ;;   :config
 ;;   (tab-bar-mode +1)
   )
+
+(leaf dired
+  :if (executable-find "gls")
+  :preface
+  (defun my:dired-mode-open-with()
+    (interactive)
+    (let ((fn (dired-get-file-for-visit)))
+      (start-process "default-app" nil "open" fn)))
+  (defun my:dired-mode-open-finder()
+    (interactive)
+    (shell-command "open ."))
+  :custom
+  ((insert-directory-program . "gls")
+   (ls-lisp-dirs-first . t)
+   (dired-listing-switches . "-alh")
+   (dired-dwim-target . t)
+   (dired-auto-revert-buffer . t)
+   (dired-kill-when-opening-new-dired-buffer . t)
+   (dired-isearch-filenames . 'dwim)
+   (dired-recursive-copies . 'always)
+   (dired-recursive-deletes . 'always))
+  :bind
+  (:dired-mode-map
+   ("z" . my:dired-mode-open-with)
+   ("f" . my:dired-mode-open-finder))
+  :config
+  (leaf all-the-icons-dired
+    :ensure t
+    :hook
+    (dired-mode-hook . all-the-icons-dired-mode))
+  )
+
+(leaf dired-subtree
+  :ensure t
+  :after dired
+  :require t
+  :bind
+  (dired-mode-map ("<tab>" . dired-subtree-toggle)))
 
 (leaf recentf
   :defun
@@ -633,7 +688,6 @@
 (leaf key-settings
   :doc "キー入力設定"
   :config
-  (global-unset-key (kbd "C-x C-z"))
   ;; C-hをバックスペース
   (keyboard-translate ?\C-h ?\C-?)
 
@@ -1390,6 +1444,22 @@
   ((esup-insignificant-time . 0.01)
    (esup-depth              . 0)) ;; 🤔
   )
+
+(leaf popper
+  :ensure t
+  :bind (("C-`" . popper-toggle-latest)
+         ("C-<tab>" . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode)
+  (popper-echo-mode))
 
 (leaf evil
   :ensure t
