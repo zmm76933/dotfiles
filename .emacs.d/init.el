@@ -529,10 +529,20 @@
 
 (leaf undo-tree
   :ensure t
-  :custom
+  :init
+  (let ((undo-tree-history-directory (expand-file-name "undo-tree" my:d:tmp)))
+    (setq undo-tree-history-directory-alist `(("." . ,undo-tree-history-directory))))
+  :config
   (global-undo-tree-mode . t)
   :bind
   ("C-M-/" . undo-tree-redo)
+  )
+
+(leaf expand-region
+  :ensure t
+  :bind
+  (("C-."     . er/expand-region)
+   ("C-,"     . er/contract-region))
   )
 
 (leaf tab-bar-mode
@@ -707,13 +717,11 @@
   )
 
 (leaf key-settings
-  :doc "キー入力設定"
   :config
   ;; C-hをバックスペース
   (keyboard-translate ?\C-h ?\C-?)
 
-  (leaf-keys (("C-?"     . help-for-help)
-              ("C-z"     . scroll-down)
+  (leaf-keys (("C-z"     . scroll-down)
               ("C-M-z"   . scroll-other-window-down)
               ("C-c M-a" . align-regexp)
               ("C-c ;"   . comment-region)
@@ -1318,6 +1326,47 @@
 (leaf *gui
   :if window-system
   :config
+  (cond
+   ;; 4K display
+   ((= (display-pixel-height) 2160)
+    (setq default-frame-alist
+          (append (list
+                   '(width  . 200)
+                   '(height . 80)
+                   '(top    . 22)
+                   '(left   . 0)
+                 )
+                default-frame-alist)))
+   ;; HD display
+   ((= (display-pixel-height) 1080)
+    (setq default-frame-alist
+          (append (list
+                   '(width  . 180)
+                   '(height . 68)
+                   '(top    . 22)
+                   '(left   . 0)
+                   )
+                  default-frame-alist)))
+   ;; MacBook Pro 14inch ディスプレイ
+   ((= (display-pixel-height) 900)
+    (setq default-frame-alist
+          (append (list
+                   '(width  . 140)
+                   '(height . 56)
+                   '(top    . 22)
+                   '(left   . 0)
+                   )
+                  default-frame-alist)))
+   ;; とりあえずその他 完全に未確認で分岐できる事を確認するためのコード
+   (t
+    (setq default-frame-alist
+          (append (list
+                   '(width  . 140)
+                   '(height . 50)
+                   '(top    . 22)
+                   '(left   . 0)
+                   )
+                  default-frame-alist))))
   (set-frame-parameter nil 'alpha 90)
   (setq use-default-font-for-symbols nil)
   (scroll-bar-mode -1)

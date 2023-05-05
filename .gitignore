@@ -14,11 +14,9 @@ Session.vim
 .config/nvim/.netrwhist
 
 # emacs
-.emacs.d/.python-environments/
 .emacs.d/el-get/
 .emacs.d/elpa/
 .emacs.d/transient/
-.emacs.d/var/
 
 # tmux
 .config/tmux/plugins/*
