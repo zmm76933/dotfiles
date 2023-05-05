@@ -532,8 +532,8 @@
   :init
   (let ((undo-tree-history-directory (expand-file-name "undo-tree" my:d:tmp)))
     (setq undo-tree-history-directory-alist `(("." . ,undo-tree-history-directory))))
-  :config
-  (global-undo-tree-mode . t)
+  :hook
+  (emacs-startup-hook . global-undo-tree-mode)
   :bind
   ("C-M-/" . undo-tree-redo)
   )
@@ -586,8 +586,6 @@
    )
   :hook
   (emacs-startup-hook . tab-bar-mode)
-;;   :config
-;;   (tab-bar-mode +1)
   )
 
 (leaf dired
@@ -641,7 +639,8 @@
   (recentf-save-list recentf-cleanup)
   :init
   (leaf recentf-ext :ensure t)
-  (recentf-mode 1)
+  :hook
+  (emacs-startup-hook . recentf-mode)
   :custom
   `((recentf-save-file       . ,(expand-file-name "recentf" my:d:tmp))
     (recentf-max-saved-items . 500)
@@ -1070,8 +1069,9 @@
               evil-respect-visual-line-mode t
               evil-disable-insert-state-bindings t
               evil-want-abbrev-expand-on-insert-exit nil)
+  :hook
+  ;(emacs-startup-hook . evil-mode)
   :config
-  ;(evil-mode)
   (leaf evil-collection
     :ensure t
     :after evil
@@ -1145,7 +1145,6 @@
   )
 
 (leaf smartparens
-  :disabled t
   :ensure t
   :blackout t
   :defun (sp-pair)
@@ -1157,6 +1156,8 @@
   (sp-pair "<" ">" :actions '(wrap))
   (sp-pair "$" "$" :actions '(wrap))
   )
+
+
 
 (leaf rainbow-mode
   :ensure t
@@ -1559,8 +1560,10 @@
           "\\*Async Shell Command\\*"
           help-mode
           compilation-mode))
-  (popper-mode)
-  (popper-echo-mode))
+  :hook
+  (emacs-startup-hook . popper-mode)
+  (emacs-startup-hook . popper-echo-mode)
+  )
 
 (leaf *show-startup-time
   :hook
