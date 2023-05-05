@@ -603,7 +603,15 @@
   :after dired
   :require t
   :bind
-  (dired-mode-map ("<tab>" . dired-subtree-toggle)))
+  (:dired-mode-map ("<tab>" . dired-subtree-toggle))
+  )
+
+(leaf quick-preview
+  :ensure t
+  :require t
+  :bind
+  (:dired-mode-map ("SPC" . quick-preview-at-point))
+)
 
 (leaf recentf
   :defun
@@ -859,7 +867,7 @@
 (leaf consult
   :ensure t
   :bind* (("C-x b" . consult-buffer)
-          ("M-g ," . consult-grep)
+          ("M-g ," . consult-find)
           ("M-g ." . consult-ripgrep)
           ("C-c o" . consult-outline)
           )
@@ -963,12 +971,11 @@
     )
   :bind
   (:corfu-map
-   ("TAB" . corfu-next)
-   ("<tab>" . corfu-next)
-   ("S-TAB" . corfu-previous)
-   ("<backtab>" . corfu-previous)
    ("C-n" . corfu-next)
-   ("C-p" . corfu-previous))
+   ("C-p" . corfu-previous)
+   ("C-y" . corfu-complete)
+   ("C-e" . corfu-quit))
+
   :custom
   `((completion-cycle-threshold . 4)
     (tab-always-indent        . 'complete)
@@ -1023,6 +1030,37 @@
   ;;           (cape-super-capf
   ;;            #'cape-file #'cape-dabbrev #'cape-abbrev #'cape-line)))
 ;;     (funcall my-capf-manual))
+
+(leaf evil
+  :ensure t
+  :init (setq evil-want-keybinding nil
+              evil-want-minibuffer nil
+              evil-mode-line-format 'after
+              evil-want-C-u-scroll t
+              evil-want-C-d-scroll t
+              evil-want-C-i-jump t
+              evil-want-Y-yank-to-eol nil
+              evil-backspace-join-lines nil
+              evil-undo-system 'undo-redo
+              evil-want-fine-undo t
+              evil-move-cursor-back t
+              evil-show-paren-range 1
+              evil-echo-state nil
+              evil-respect-visual-line-mode t
+              evil-disable-insert-state-bindings t
+              evil-want-abbrev-expand-on-insert-exit nil)
+  :config
+  ;(evil-mode)
+  (leaf evil-collection
+    :ensure t
+    :after evil
+    :config
+    (evil-collection-init '(ediff
+                            calendar
+                            info
+                            ibuffer
+                            dired)))
+  )
 
 (leaf *deepl-translate
   :commands my:deepl-translate
@@ -1460,36 +1498,6 @@
           compilation-mode))
   (popper-mode)
   (popper-echo-mode))
-
-(leaf evil
-  :ensure t
-  :init (setq evil-want-keybinding nil
-              evil-want-minibuffer nil
-              evil-mode-line-format 'after
-              evil-want-C-u-scroll t
-              evil-want-C-d-scroll t
-              evil-want-C-i-jump t
-              evil-want-Y-yank-to-eol nil
-              evil-backspace-join-lines nil
-              evil-undo-system 'undo-redo
-              evil-want-fine-undo t
-              evil-move-cursor-back t
-              evil-show-paren-range 1
-              evil-echo-state nil
-              evil-respect-visual-line-mode t
-              evil-disable-insert-state-bindings t
-              evil-want-abbrev-expand-on-insert-exit nil)
-  :config
-  (evil-mode)
-  (leaf evil-collection
-    :ensure t
-    :after evil
-    :config (evil-collection-init '(ediff
-                                    calendar
-                                    info
-                                    ibuffer
-                                    dired)))
-  )
 
 (leaf *show-startup-time
   :hook
