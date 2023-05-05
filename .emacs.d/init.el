@@ -276,6 +276,8 @@
     (history-length          . t)  ;; 無制限(の筈)
     ;; (save-silently           . t)
     (use-short-answers       . t)
+    (scroll-step             . 1)
+    (scroll-preserve-screen-position . t)
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
@@ -306,6 +308,9 @@
   :hook
   (emacs-startup-hook . transient-mark-mode)
   )
+
+(leaf delsel
+  :global-minor-mode delete-selection-mode)
 
 (leaf paren
   :custom
@@ -700,6 +705,8 @@
   (keyboard-translate ?\C-h ?\C-?)
 
   (leaf-keys (("C-?"     . help-for-help)
+              ("C-z"     . scroll-down)
+              ("C-M-z"   . scroll-other-window-down)
               ("C-c M-a" . align-regexp)
               ("C-c ;"   . comment-region)
               ("C-c M-;" . uncomment-region)
@@ -827,8 +834,6 @@
   :custom
   `((vertico-count . 9)
     (vertico-cycle . t)
-    (vertico-multiline . '(("↓" 0 1 (face vertico-multiline))
-                           ("…" 0 1 (face vertico-multiline))))
     )
   :hook
   (emacs-startup-hook . vertico-mode)
