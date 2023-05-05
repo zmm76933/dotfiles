@@ -527,6 +527,14 @@
         )
   )
 
+(leaf undo-tree
+  :ensure t
+  :custom
+  (global-undo-tree-mode . t)
+  :bind
+  ("C-M-/" . undo-tree-redo)
+  )
+
 (leaf tab-bar-mode
   :init
   (defvar my:ctrl-t-map (make-sparse-keymap)
