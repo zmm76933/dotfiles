@@ -1247,41 +1247,42 @@
   (interactive)
   (progn
     (set-face-attribute 'default nil
-                        :family "AGVUDP"
-                        :height 220)
+                        :family "monaco"
+                        :height 120)
     (set-face-attribute 'fixed-pitch nil
-                        :family "AGVUDP"
-                        :height 220)
+                        :family "monaco"
+                        :height 120)
     (set-face-attribute 'variable-pitch nil
-                        :family "AGVUDP"
-                        :height 220)
+                        :family "monaco"
+                        :height 120)
     ;; Japanese
     (set-fontset-font nil
                       'japanese-jisx0213.2004-1
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
     (set-fontset-font nil
                       'japanese-jisx0213-2
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
     (set-fontset-font nil
                       'katakana-jisx0201
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
     ;; Latin with pronounciation annotations
     (set-fontset-font nil
                       '(#x0080 . #x024F)
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "AGVUDP" :height 120))
     ;; Math symbols
     (set-fontset-font nil
                       '(#x2200 . #x22FF)
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "AGVUDP" :height 120))
     ;; Greek
     (set-fontset-font nil
                       '(#x0370 . #x03FF)
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "AGVUDP" :height 120))
     ;; Some Icons
     (set-fontset-font nil
                       '(#xE0A0 . #xEEE0)
-                      (font-spec :family "AGVUDP" :height 220))
+                      (font-spec :family "AGVUDP" :height 120))
     ))
+
 ;;;###autoload
 (defun my:load-side-window-config ()
   "load window-system specific settings"
@@ -1370,7 +1371,7 @@
   (set-frame-parameter nil 'alpha 90)
   (setq use-default-font-for-symbols nil)
   (scroll-bar-mode -1)
-;;  (my:load-window-config)
+  (my:load-window-config)
   )
 
 (leaf modus-themes
@@ -1542,7 +1543,7 @@
   :ensure t
   :custom
   ((esup-insignificant-time . 0.01)
-   (esup-depth              . 0)) ;; 🤔
+   (esup-depth              . 0))
   )
 
 (leaf popper

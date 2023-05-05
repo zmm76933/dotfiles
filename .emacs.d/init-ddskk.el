@@ -6,6 +6,8 @@
 
 (setq skk-japanese-message-and-error nil)
 
+(setq default-input-method "japanese-skk")
+
 (setq skk-show-japanese-menu nil)
 
 (setq skk-show-annotation nil)
@@ -37,7 +39,7 @@
         (en-jp . ("．" . "，"))
         (en    . (". " . ", "))
         ))
-(setq-default skk-kutouten-type 'en)
+(setq-default skk-kutouten-type 'jp)
 
 (setq skk-rom-kana-rule-list
       (append skk-rom-kana-rule-list
@@ -79,8 +81,22 @@
 
 (setq skk-jisyo-code 'utf-8-unix)
 
-(add-hook 'skk-mode-hook
-          (lambda ()
-            (and (skk-in-minibuffer-p)
-                 (skk-mode-exit))))
 (setq skk-isearch-start-mode 'latin)
+
+;;; Isearch setting.
+(defun skk-isearch-setup-maybe ()
+  (require 'skk-vars)
+  (when (or (eq skk-isearch-mode-enable 'always)
+            (and (boundp 'skk-mode)
+                 skk-mode
+                 skk-isearch-mode-enable))
+    (skk-isearch-mode-setup)))
+
+(defun skk-isearch-cleanup-maybe ()
+  (require 'skk-vars)
+  (when (and (featurep 'skk-isearch)
+             skk-isearch-mode-enable)
+    (skk-isearch-mode-cleanup)))
+
+(add-hook 'isearch-mode-hook #'skk-isearch-setup-maybe)
+(add-hook 'isearch-mode-end-hook #'skk-isearch-cleanup-maybe)
