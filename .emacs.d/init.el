@@ -229,6 +229,11 @@
   :hook (emacs-startup-hook . eaw-and-emoji-fullwidth)
   )
 
+(leaf editutil
+  :el-get zmm76933/emacs-editutil
+  :hook (emacs-startup-hook . editutil-default-setup)
+  )
+
 (leaf cus-edit
   :preface
   (setq custom-file (expand-file-name "custom.el" my:d:tmp))
@@ -1053,6 +1058,7 @@
 
 (leaf evil
   :ensure t
+  :disabled t
   :init (setq evil-want-keybinding nil
               evil-want-minibuffer nil
               evil-mode-line-format 'after
@@ -1070,7 +1076,7 @@
               evil-disable-insert-state-bindings t
               evil-want-abbrev-expand-on-insert-exit nil)
   :hook
-  ;(emacs-startup-hook . evil-mode)
+  (emacs-startup-hook . evil-mode)
   :config
   (leaf evil-collection
     :ensure t
