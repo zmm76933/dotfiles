@@ -1073,6 +1073,7 @@
                             calendar
                             info
                             ibuffer
+                            magit
                             dired)))
   (leaf evil-surround
     :ensure t
@@ -1195,6 +1196,12 @@
     (magit-log-buffer-file-locked   . t)
     (magit-revision-show-gravatars  . nil)
     )
+  )
+
+(leaf git-gutter-fringe
+  :ensure t
+  :hook
+  (emacs-startup-hook . global-git-gutter-mode)
   )
 
 (leaf lua-mode :ensure t)
