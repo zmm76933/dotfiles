@@ -706,12 +706,18 @@
 (leaf key-settings
   :config
   (keyboard-translate ?\C-h ?\C-?)
-  (leaf-keys (("C-z"     . scroll-down)
-              ("C-M-z"   . scroll-other-window-down)
-              ("C-/"     . undo)
-              ("C-c M-r" . replace-regexp)
-              ("C-c M-l" . toggle-truncate-lines)
-              ("C-x RET r" . revert-buffer)))
+  (leaf-keys (("C-z"       . scroll-down)
+              ("C-M-z"     . scroll-other-window-down)
+              ("C-/"       . undo)
+              ("C-c M-r"   . replace-regexp)
+              ("C-c M-l"   . toggle-truncate-lines)
+              ("C-x RET r" . revert-buffer)
+              ([wheel-down]        . '(lambda () "" (interactive) (scroll-up 1)))
+              ([wheel-up]          . '(lambda () "" (interactive) (scroll-down 1)))
+              ([double-wheel-down] . '(lambda () "" (interactive) (scroll-up 1)))
+              ([double-wheel-up]   . '(lambda () "" (interactive) (scroll-down 1)))
+              ([triple-wheel-down] . '(lambda () "" (interactive) (scroll-up 2)))
+              ([triple-wheel-up]   . '(lambda () "" (interactive) (scroll-down 2)))))
   )
 
 (leaf migemo
