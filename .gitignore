@@ -17,6 +17,7 @@ Session.vim
 .emacs.d/el-get/
 .emacs.d/elpa/
 .emacs.d/transient/
+.emacs.d/*.elc
 
 # tmux
 .config/tmux/plugins/*

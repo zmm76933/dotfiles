@@ -93,23 +93,6 @@
             (unless (member "*scratch*" (my:buffer-name-list))
               (my:make-scratch 1))))
 
-;;;###autoload
-(defun my:return-current-working-directory-to-shell ()
-  (expand-file-name
-   (with-current-buffer
-       (if (featurep 'elscreen)
-           (let* ((frame-confs (elscreen-get-frame-confs (selected-frame)))
-                  (num (nth 1 (assoc 'screen-history frame-confs)))
-                  (cur-window-conf
-                   (assoc 'window-configuration
-                          (assoc num (assoc 'screen-property frame-confs))))
-                  (marker (nth 2 cur-window-conf)))
-             (marker-buffer marker))
-         (nth 1
-              (assoc 'buffer-list
-                     (nth 1 (nth 1 (current-frame-configuration))))))
-     default-directory)))
-
 (defvar my:delete-trailing-whitespace-exclude-suffix
   (list "\\.rd$" "\\.md$" "\\.rbt$" "\\.rab$"))
 ;;;###autoload
@@ -282,7 +265,7 @@
     ;; (save-silently           . t)
     (use-short-answers       . t)
     (scroll-step             . 1)
-    (scroll-preserve-screen-position . t)
+    (scroll-preserve-screen-position . 'always)
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
@@ -291,7 +274,7 @@
   (when (boundp 'load-prefer-newer)
     (setq load-prefer-newer t))
   ;; yes or no を y or n に
-  (when (< emacs-major-version 28) ;; >
+  (when (< emacs-major-version 28)
     (fset 'yes-or-no-p 'y-or-n-p))
   )
 
@@ -722,18 +705,13 @@
 
 (leaf key-settings
   :config
-  ;; C-hをバックスペース
   (keyboard-translate ?\C-h ?\C-?)
-
   (leaf-keys (("C-z"     . scroll-down)
               ("C-M-z"   . scroll-other-window-down)
-              ("C-c M-a" . align-regexp)
-              ("C-c ;"   . comment-region)
-              ("C-c M-;" . uncomment-region)
               ("C-/"     . undo)
               ("C-c M-r" . replace-regexp)
-              ("C-c r"   . replace-string)
-              ("C-c M-l" . toggle-truncate-lines)))
+              ("C-c M-l" . toggle-truncate-lines)
+              ("C-x RET r" . revert-buffer)))
   )
 
 (leaf migemo
@@ -897,20 +875,19 @@
           ("C-c o" . consult-outline)
           )
   :bind (("M-s" . consult-line)
-         ("C-M-s" . consult-line)
          ("C-x C-r" . consult-recent-file))
   :config
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-root-function #'projectile-project-root)
-  (setq my-consult--source-project-buffer
+  (setq my:consult--source-project-buffer
         (plist-put consult--source-project-buffer :hidden nil))
-  (setq my-consult--source-project-file
+  (setq my:consult--source-project-file
         (plist-put consult--source-project-recent-file :hidden nil))
-  (defun my-consult-project ()
+  (defun my:consult-project ()
     "my `consult' command for project only"
     (interactive)
-    (when-let (buffer (consult--multi '(my-consult--source-project-buffer
-                                        my-consult--source-project-file)
+    (when-let (buffer (consult--multi '(my:consult--source-project-buffer
+                                        my:consult--source-project-file)
                                       :require-match
                                       t ;(confirm-nonexistent-file-or-buffer)
                                       :prompt "(in proj) Switch to: "

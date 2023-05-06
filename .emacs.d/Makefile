@@ -1,14 +1,12 @@
 # -*- mode: makefile -*-
 EMACS	?= emacs
 EL		= init-ddskk.el
-ifneq (,$(wildcard /etc/emacs/site-start.d/65wl-beta.el))
-EL		+= init-wl.el
-endif
 EL		+= early-init.el
 ELC		= $(EL:%.el=%.elc)
 
 all: $(ELC) init.elc
 $(EL): init.el
+init.el:
 	@mkdir -p ~/.cache/emacs
 	@if [ ! -d ~/.cache/emacs/eln-cache ]; then \
 		echo ";; mkdir ~/.cache/emacs/eln-cache"; mkdir ~/.cache/emacs/eln-cache ;\
@@ -25,7 +23,7 @@ $(EL): init.el
 #	@rm -f $<
 
 clean:
-	rm -fr auto-save-list *.el *.elc *~
+	rm -fr auto-save-list *.elc *~
 
 distclean: clean
 	rm -fr elpa
