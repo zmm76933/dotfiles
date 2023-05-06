@@ -617,6 +617,7 @@
 
 (leaf quick-preview
   :ensure t
+  :after dired
   :require t
   :bind
   (:dired-mode-map ("SPC" . quick-preview-at-point))
@@ -880,7 +881,7 @@
           ("M-g ." . consult-ripgrep)
           ("C-c o" . consult-outline)
           )
-  :bind (("M-s" . consult-line)
+  :bind (("M-s"     . consult-line)
          ("C-x C-r" . consult-recent-file))
   :config
   (autoload 'projectile-project-root "projectile")
@@ -1041,26 +1042,29 @@
 
 (leaf evil
   :ensure t
-  :disabled t
-  :init (setq evil-want-keybinding nil
-              evil-want-minibuffer nil
-              evil-mode-line-format 'after
-              evil-want-C-u-scroll t
-              evil-want-C-d-scroll t
-              evil-want-C-i-jump t
-              evil-want-Y-yank-to-eol nil
-              evil-backspace-join-lines nil
-              evil-undo-system 'undo-redo
-              evil-want-fine-undo t
-              evil-move-cursor-back t
-              evil-show-paren-range 1
-              evil-echo-state nil
-              evil-respect-visual-line-mode t
-              evil-disable-insert-state-bindings t
-              evil-want-abbrev-expand-on-insert-exit nil)
+  :init
+  (setq evil-want-keybinding nil
+        evil-want-minibuffer nil
+        evil-mode-line-format 'after
+        evil-want-C-u-scroll t
+        evil-want-C-d-scroll t
+        evil-want-C-i-jump t
+        evil-want-Y-yank-to-eol nil
+        evil-backspace-join-lines nil
+        evil-undo-system 'undo-redo
+        evil-want-fine-undo t
+        evil-move-cursor-back t
+        evil-show-paren-range 1
+        evil-echo-state nil
+        evil-respect-visual-line-mode t
+        evil-disable-insert-state-bindings t
+        evil-want-abbrev-expand-on-insert-exit nil)
   :hook
   (emacs-startup-hook . evil-mode)
+  :bind
+  (([escape] . evil-normal-state))
   :config
+  (setcdr evil-insert-state-map nil)
   (leaf evil-collection
     :ensure t
     :after evil
@@ -1070,6 +1074,11 @@
                             info
                             ibuffer
                             dired)))
+  (leaf evil-surround
+    :ensure t
+    :after evil
+    :config
+    (global-evil-surround-mode))
   )
 
 (leaf *deepl-translate
