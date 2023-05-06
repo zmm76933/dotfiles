@@ -61,3 +61,6 @@ set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bin
 
 # gpg
 set -gx GPG_TTY (tty)
+
+# SKK
+set -gx SKKSERVER localhost
