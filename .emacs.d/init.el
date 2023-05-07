@@ -1081,7 +1081,12 @@
     :after evil
     :config
     (setcdr evil-insert-state-map nil)
-    (define-key evil-insert-state-map [escape] #'evil-normal-state))
+    (define-key evil-insert-state-map [escape] #'evil-normal-state)
+    (evil-define-key 'normal dired-mode-map
+      " " 'quick-preview-at-point
+      "ga" 'my:dired-mode-open-with
+      "gs" 'my:dired-mode-open-finder)
+    )
   )
 
 (leaf *deepl-translate
