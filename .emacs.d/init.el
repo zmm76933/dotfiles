@@ -1212,6 +1212,49 @@
   )
 
 (leaf lua-mode :ensure t)
+
+(leaf markdown-mode :ensure t)
+
+;;; timestamp 更新文字列の変更:
+;;  org-mode では ＃+date: をひっかける用に(＃は小文字)．
+;;;###autoload
+(defun my:org-timestamp-hook ()
+  "Change `time-stamp-start' in org-mode"
+  (set (make-local-variable 'time-stamp-start) "#\\+date: ")
+  (set (make-local-variable 'time-stamp-end)   "\$")
+  )
+(leaf org
+  :ensure t
+  :blackout `((org-mode . ,(all-the-icons-icon-for-mode 'org-mode)))
+  :bind
+  :advice
+  (:before org-calendar-holiday
+           (lambda () (require 'japanese-holidays nil 'noerror)))
+  :hook
+  `((org-mode-hook . my:org-timestamp-hook)
+    )
+  :custom
+  `(;; Nextcloud に保存する
+    ;; (org-directory              . ,(expand-file-name my:d:org))
+    ;; return でリンクを辿る
+    (org-return-follows-link    . t)
+    ;; 折り返し無し
+    (org-startup-truncated      . t)
+    ;; インデントする
+    (org-adapt-indentation      . t)
+    ;; link handler → xdg-open 任せ
+    (org-file-apps-defaults     . '((remote . emacs)
+                                    (system . "xdg-open %s")
+                                    (t      . "xdg-open %s")))
+    (org-file-apps-defaults-gnu . '((remote . emacs)
+                                    (system . "xdg-open %s")
+                                    (t      . "xdg-open %s")))
+    (org-file-apps              . '((auto-mode . emacs)
+                                    ("\\.mm\\'" . default)
+                                    ("\\.x?html?\\'" . "xdg-open %s")
+                                    ("\\.pdf\\'" . "xdg-open %s"))))
+  )
+
 (leaf ssh-config-mode :ensure t)
 ;; (leaf *misc-mode
 ;;   :init
