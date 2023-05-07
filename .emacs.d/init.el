@@ -1070,6 +1070,7 @@
                             calendar
                             info
                             ibuffer
+                            org
                             magit
                             dired)))
   (leaf evil-surround
