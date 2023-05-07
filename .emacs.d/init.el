@@ -1038,7 +1038,7 @@
   ;;           ;; いろんな補完候補を合成する。
   ;;           (cape-super-capf
   ;;            #'cape-file #'cape-dabbrev #'cape-abbrev #'cape-line)))
-;;     (funcall my-capf-manual))
+  ;;     (funcall my-capf-manual))
 
 (leaf evil
   :ensure t
@@ -1061,10 +1061,7 @@
         evil-want-abbrev-expand-on-insert-exit nil)
   :hook
   (emacs-startup-hook . evil-mode)
-  :bind
-  (([escape] . evil-normal-state))
   :config
-  (setcdr evil-insert-state-map nil)
   (leaf evil-collection
     :ensure t
     :after evil
@@ -1080,6 +1077,11 @@
     :after evil
     :config
     (global-evil-surround-mode))
+  (leaf key-bindings
+    :after evil
+    :config
+    (setcdr evil-insert-state-map nil)
+    (define-key evil-insert-state-map [escape] #'evil-normal-state))
   )
 
 (leaf *deepl-translate
