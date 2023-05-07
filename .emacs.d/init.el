@@ -9,7 +9,9 @@
   (defconst my:d:share
     (expand-file-name "share/" user-emacs-directory))
   (defconst my:d:tmp
-    (expand-file-name ".cache/emacs/" (getenv "HOME"))))
+    (expand-file-name ".cache/emacs/" (getenv "HOME")))
+   (defconst my:d:org
+    (expand-file-name "~/Dropbox/org")))
 
 (eval-when-compile (require 'cl-lib nil t))
 
@@ -1228,6 +1230,11 @@
   :ensure t
   :blackout `((org-mode . ,(all-the-icons-icon-for-mode 'org-mode)))
   :bind
+  (("C-c l" . org-store-link)
+   ("C-c c" . org-capture)
+   ("C-c a" . org-agenda)
+   )
+
   :advice
   (:before org-calendar-holiday
            (lambda () (require 'japanese-holidays nil 'noerror)))
@@ -1235,8 +1242,11 @@
   `((org-mode-hook . my:org-timestamp-hook)
     )
   :custom
-  `(;; Nextcloud に保存する
-    ;; (org-directory              . ,(expand-file-name my:d:org))
+  `(;; Dropbox に保存する
+    (org-directory              . ,(expand-file-name my:d:org))
+    ;; note ファイル
+    (org-default-notes-file     . "notes.org"
+                                )
     ;; return でリンクを辿る
     (org-return-follows-link    . t)
     ;; 折り返し無し
