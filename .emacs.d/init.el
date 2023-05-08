@@ -712,6 +712,7 @@
   (leaf-keys (("C-z"       . scroll-down)
               ("C-M-z"     . scroll-other-window-down)
               ("C-/"       . undo)
+              ("C-x K"     . kill-buffer)
               ("C-c M-r"   . replace-regexp)
               ("C-c M-l"   . toggle-truncate-lines)
               ("C-x RET r" . revert-buffer)
@@ -1616,7 +1617,6 @@
   :bind (("C-`" . popper-toggle-latest)
          ("C-<tab>" . popper-cycle)
          ("C-M-`" . popper-toggle-type))
-
   :init
   (setq popper-reference-buffers
         '("\\*Messages\\*"
@@ -1624,9 +1624,10 @@
           "\\*Async Shell Command\\*"
           help-mode
           compilation-mode))
-  :hook
-  (emacs-startup-hook . popper-mode)
-  (emacs-startup-hook . popper-echo-mode)
+  :hook (emacs-startup-hook
+         . (lambda ()
+             (popper-mode)
+             (popper-echo-mode)))
   )
 
 (leaf *show-startup-time
