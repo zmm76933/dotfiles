@@ -591,7 +591,7 @@
   :custom
   ((insert-directory-program . "gls")
    (ls-lisp-dirs-first . t)
-   (dired-listing-switches . "-alh")
+   (dired-listing-switches . "-alhL --group-directories-first")
    (dired-dwim-target . t)
    (dired-auto-revert-buffer . t)
    (dired-kill-when-opening-new-dired-buffer . t)
@@ -986,7 +986,9 @@
    ("C-n" . corfu-next)
    ("C-p" . corfu-previous)
    ("C-y" . corfu-complete)
-   ("C-e" . corfu-quit))
+   ("C-e" . corfu-quit)
+   ("<return>" . corfu-complete)
+   ("RET" . corfu-complete))
 
   :custom
   `((completion-cycle-threshold . 4)
@@ -1396,6 +1398,16 @@
   (cond
    ;; 4K display
    ((= (display-pixel-height) 2160)
+    (setq default-frame-alist
+          (append (list
+                   '(width  . 200)
+                   '(height . 80)
+                   '(top    . 22)
+                   '(left   . 0)
+                 )
+                default-frame-alist)))
+   ;; 2K display
+   ((= (display-pixel-height) 1440)
     (setq default-frame-alist
           (append (list
                    '(width  . 200)
