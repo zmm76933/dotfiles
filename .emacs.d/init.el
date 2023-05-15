@@ -776,6 +776,8 @@
   :init
   (setq skk-init-file (concat user-emacs-directory "init-ddskk")
         default-input-method "japanese-skk" )
+  :hook
+  (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
 (leaf xclip
@@ -1397,23 +1399,13 @@
   :config
   (cond
    ;; 4K display
-   ((= (display-pixel-height) 2160)
+   ((= (display-pixel-height) 1692)
     (setq default-frame-alist
           (append (list
                    '(width  . 200)
                    '(height . 80)
-                   '(top    . 22)
-                   '(left   . 0)
-                 )
-                default-frame-alist)))
-   ;; 2K display
-   ((= (display-pixel-height) 1440)
-    (setq default-frame-alist
-          (append (list
-                   '(width  . 200)
-                   '(height . 80)
-                   '(top    . 22)
-                   '(left   . 0)
+                   '(top    . 322)
+                   '(left   . 10)
                  )
                 default-frame-alist)))
    ;; HD display
