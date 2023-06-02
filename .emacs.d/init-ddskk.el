@@ -32,6 +32,18 @@
 
 (setq skk-auto-insert-paren t)
 
+(setq skk-auto-paren-string-alist
+      '(
+        ("「" . "」")
+        ("『" . "』")
+        ("（" . "）")
+        ("｛" . "｝")
+        ("〈" . "〉")
+        ("《" . "》")
+        ("［" . "］")
+        ("〔" . "〕")
+        ("【" . "】")))
+
 (setq skk-kuten-touten-alist
       '(
         (jp    . ("。" . "、"))
@@ -43,15 +55,31 @@
 
 (setq skk-rom-kana-rule-list
       (append skk-rom-kana-rule-list
-              '(("!" nil "!")
+              '((";" nil ";")
                 (":" nil ":")
-                (";" nil ";")
+                ("!" nil "!")
                 ("?" nil "?")
-                ("z " nil "　")
+                ("~" nil "~")
+                ("-" nil "ー")
+;;                ("(" nil "(")
+;;                (")" nil ")")
+;;                ("[" nil "[")
+;;                ("]" nil "]")
+                ("z;" nil "；")
+                ("z:" nil "：")
+                ("z!" nil "！")
+                ("z?" nil "？")
+                ("z~" nil "～")
+                ("z-" nil "-")
+                ("z(" nil "（")
+                ("z)" nil "）")
+                ("z[" nil "「")
+                ("z]" nil "」")
+                ("z{" nil "【")
+                ("z}" nil "】")
                 ("z<" nil "＜")
                 ("z>" nil "＞")
-                ("\\" nil "\\")
-                ("@" nil "@")
+                ("z " nil "　")
                 )))
 
 (setq skk-henkan-strict-okuri-precedence t)
