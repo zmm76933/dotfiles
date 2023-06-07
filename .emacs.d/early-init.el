@@ -1,6 +1,4 @@
 ;; -*- lexical-binding: nil -*-
-(set-language-environment "Japanese")
-(prefer-coding-system 'utf-8)
 
 (setq gc-cons-threshold most-positive-fixnum)
 

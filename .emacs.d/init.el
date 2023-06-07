@@ -724,6 +724,12 @@
               ([triple-wheel-up]   . '(lambda () "" (interactive) (scroll-down 2)))))
   )
 
+(leaf ediff
+  :custom
+  (ediff-split-window-function . 'split-window-horizontally)
+  (ediff-window-setup-function . 'ediff-setup-windows-plain)
+  (ediff-diff-options          . "-twB"))
+
 (leaf migemo
   :if (executable-find "cmigemo")
   :ensure t
@@ -945,6 +951,7 @@
           (org-roam-node (styles orderless-migemo-style))
           (unicode-name (styles orderless-migemo-style))
           (variable (styles orderless-default-style))))
+  (setq orderless-matching-styles '(orderless-literal orderless-regexp orderless-migemo))
   :custom
   (completion-styles . '(orderless))
   )
@@ -1249,15 +1256,12 @@
   :custom
   `(;; Dropbox に保存する
     (org-directory              . ,(expand-file-name my:d:org))
-    ;; note ファイル
-    (org-default-notes-file     . "notes.org"
-                                )
-    ;; return でリンクを辿る
-    (org-return-follows-link    . t)
+    ;; インデントする
+    (org-adapt-indentation      . nil)
     ;; 折り返し無し
     (org-startup-truncated      . t)
-    ;; インデントする
-    (org-adapt-indentation      . t)
+    ;; DONEの時刻を記録
+    (org-log-done               . 'time)
     ;; link handler → xdg-open 任せ
     (org-file-apps-defaults     . '((remote . emacs)
                                     (system . "xdg-open %s")
@@ -1268,7 +1272,30 @@
     (org-file-apps              . '((auto-mode . emacs)
                                     ("\\.mm\\'" . default)
                                     ("\\.x?html?\\'" . "xdg-open %s")
-                                    ("\\.pdf\\'" . "xdg-open %s"))))
+                                    ("\\.pdf\\'" . "xdg-open %s")))
+    (org-todo-keywords          . '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
+  ;; Archive.org の位置指定
+  (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org)))
+  )
+
+(leaf org-agenda
+  :if (file-directory-p my:d:org)
+  :defer-config
+  (defvar my:org-agenda-files nil)
+  (dolist (file
+           '("work.org"
+             "home.org"
+             "scrach.org"
+             ))
+    (add-to-list 'my:org-agenda-files (expand-file-name file my:d:org)))
+  :config
+  (setq org-agenda-files (list my:d:org))
+  :bind
+  (:org-agenda-mode-map
+   ("j" . org-agenda-next-line)
+   ("k" . org-agenda-previous-line)
+   ("n" . org-agenda-goto-date)
+   ("p" . org-agenda-capture))
   )
 
 (leaf ssh-config-mode :ensure t)
