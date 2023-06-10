@@ -184,6 +184,7 @@
   :if (and (getenv "GPG_KEY_ID")
            my:d:password-store)
   :init
+  (setq epa-pinentry-mode 'loopback)
   (setq leaf-default-plstore
      (plstore-open
          (expand-file-name "plstore.plist" my:d:password-store)))
@@ -750,6 +751,56 @@
   (emacs-startup-hook . migemo-init)
   )
 
+(leaf eww
+  :preface
+  (unless (file-directory-p (expand-file-name "eww" my:d:tmp))
+    (make-directory (expand-file-name "eww" my:d:tmp)))
+  :init
+  (leaf ace-link :ensure t)
+  (leaf shr
+    :custom
+    ((shr-use-colors    . nil)
+     (shr-use-fonts     . nil)
+     (shr-image-animate . nil)
+     (shr-width         . 72))
+    )
+  :bind
+  ("<f2>" . eww)
+  :custom
+  `((eww-bookmarks-directory
+     . ,(expand-file-name "eww" my:d:tmp))
+    (eww-search-prefix
+     . "https://www.google.com/search?&gws_rd=cr&complete=0&pws=0&tbs=li:1&q=")
+    )
+  ;; :advice (:around eww-colorize-region
+  ;;                  my:shr-colorize-region--disable)
+  :config
+  (ace-link-setup-default)
+  )
+
+(leaf emacs-w3m
+  :if (and (executable-find "w3m")
+           (file-directory-p "/opt/homebrew/share/emacs/site-lisp/w3m/"))
+  :preface
+  (defun my:w3m-open-current-page-in-firefox ()
+    "Open the current URL in Mozilla Firefox."
+    (interactive)
+    (browse-url-firefox w3m-current-url))
+
+  (defun my:w3m-open-link-or-image-in-firefox ()
+    "Open the current link or image in Firefox."
+    (interactive)
+    (browse-url-firefox (or (w3m-anchor)
+                            (w3m-image))))
+  :bind
+  ((:w3m-mode-map
+    ("f" . my:w3m-open-current-page-in-firefox)
+    ("F" . my:w3m-open-link-or-image-in-firefox))
+   )
+  :custom
+  `((w3m-fill-column . 72))
+  )
+
 (leaf ibuffer
   :defun (ibuffer-current-buffer)
   :defvar (ibuffer-formats)
@@ -1054,6 +1105,94 @@
   ;;            #'cape-file #'cape-dabbrev #'cape-abbrev #'cape-line)))
   ;;     (funcall my-capf-manual))
 
+(leaf mu4e
+  :if (executable-find "mu")
+  :bind
+  ("<f3>" . mu4e)
+  :init
+  (require 'mu4e)
+  ;; default
+  (setq mu4e-maildir "~/Test")
+  (setq mu4e-drafts-folder "/Drafts")
+  (setq mu4e-sent-folder   "/Sent Messages")
+  (setq mu4e-trash-folder  "/Trash")
+
+  ;; 添付ファイルの保存先を"~/Downloads"に変更
+  (setq mu4e-attachment-dir "~/Downloads")
+
+  ;; use 'fancy' non-ascii characters in various places in mu4e
+  (setq mu4e-use-fancy-chars t)
+  ;; Header Viewの行数を10 -> 20に変更（バッファ内だとC-+, C-- で増減可能）
+  (setq mu4e-headers-visible-lines 20)
+  ;; 重複するメッセージは表示しない（バッファ内だと V で切替可能）
+  (setq mu4e-headers-skip-duplicates t)
+
+  ;; 送信済みメールを "Sent Messages" から削除する
+  ;; Gmail/IMAP がうまいことやってくれる
+  (setq mu4e-sent-messages-behavior 'delete)
+
+  ;; ショートカットの設定
+  ;; "Inbox"への切り替え -- press ``ji''
+  ;; then, when you want archive some messages, move them to
+  ;; the 'All Mail' folder by pressing ``ma''.
+  ;; (setq mu4e-maildir-shortcuts
+  ;;   '(("/Gmail/INBOX"   . ?i)
+  ;;   ))
+  ;; ;; メールアカウント毎の設定
+  (setq mu4e-contexts
+    `( ,(make-mu4e-context
+          :name "work"
+          :enter-func (lambda () (mu4e-message "Entering WORK context"))
+          :leave-func (lambda () (mu4e-message "Leaving WORK context"))
+          ;; メールの連絡先でマッチしてcontextを切り替え
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches msg
+                            :to "katayama@web-tips.co.jp")
+                            ))
+          :vars '( ( user-mail-address      . "katayama@web-tips.co.jp")
+                   ( user-full-name         . "片山 雅仁")
+                   ( mu4e-compose-signature . (concat
+                                               "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                                               "株式会社ウェブチップス\n"
+                                               "片山 雅仁 (かたやま まさと)\n"
+                                               "Email: katayama@web-tips.co.jp\n"
+                                               "…………………………………………………………………\n"
+                                               "〒770-0865 徳島市南末広町4番53号 エコービル4階\n"
+                                               "TEL: 088-678-6619\n"
+                                               "URL: https://www.web-tips.co.jp/\n"
+                                               "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                                                ))))
+           ,(make-mu4e-context
+             :name "Gmail"
+             :enter-func (lambda () (mu4e-message "Switch to the Gmail context"))
+             ;; no :leave-func
+             ;; メールの連絡先でマッチング
+             :match-func (lambda (msg)
+                           (when msg
+                             (mu4e-message-contact-field-matches msg
+                                    :to "Gmailのメールアドレス")
+                             ))
+             :vars '( ( user-mail-address      . "Gmailのメールアドレス")
+                      ( user-full-name         . "名前")
+                      ( mu4e-compose-signature . (concat
+                                                  "名前\n"
+                                                  "追加する情報"
+                                                  ))))
+           ))
+  ;; 受信トレイの更新に offlineimap を使う（using 'U' in the main view）
+  (setq mu4e-get-mail-command "offlineimap -o")
+  ;; don't keep message buffers around
+  (setq message-kill-buffer-on-exit t)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;; 送信設定（MSMTPを使う）
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
+  (setq sendmail-program "msmtp")
+  (setq message-sendmail-extra-arguments '("--read-envelope-from"))
+  (setq message-sendmail-f-is-evil 't)
+  (setq message-kill-buffer-on-exit t)
+  )
+
 (leaf evil
   :ensure t
   :init
@@ -1081,11 +1220,13 @@
     :after evil
     :config
     (evil-collection-init '(ediff
+                            eww
                             calendar
                             info
                             ibuffer
                             org
                             magit
+                            mu4e
                             dired)))
   (leaf evil-surround
     :ensure t
