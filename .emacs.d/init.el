@@ -10,7 +10,11 @@
     (expand-file-name "share/" user-emacs-directory))
   (defconst my:d:tmp
     (expand-file-name ".cache/emacs/" (getenv "HOME")))
-   (defconst my:d:org
+  (defconst my:d:backup
+    (expand-file-name "backup-file" my:d:tmp))
+  (defconst my:d:auto-save
+    (expand-file-name "auto-save-list" my:d:tmp))
+  (defconst my:d:org
     (expand-file-name "~/Dropbox/org")))
 
 (eval-when-compile (require 'cl-lib nil t))
@@ -248,14 +252,14 @@
     (read-file-name-completion-ignore-case . t)  ; 大文字小文字区別無し
     (save-abbrevs           . 'silent)
     ;; backup
-    (auto-save-list-file-prefix . ,(expand-file-name ".saves-" my:d:tmp))
+    (auto-save-list-file-prefix . ,(expand-file-name "saves-" my:d:auto-save))
     (auto-save-default       . t)
-    (auto-save-timeout       . 15)
-    (auto-save-interval      . 60)
+    (auto-save-timeout       . 60)
+    (auto-save-interval      . 360)
     (make-backup-files       . t)
     (backup-by-copying       . t)  ;; symlink は使わない
-    (backup-directory-alist  . '(("." . ,my:d:tmp)))
-    (auto-save-file-name-transforms . '((".*" ,my:d:tmp t)))
+    (backup-directory-alist  . '((".*" . ,my:d:backup)))
+    (auto-save-file-name-transforms . '((".*" ,my:d:auto-save t)))
     (version-control         . nil)
     (kept-new-versions       . 2)
     (kept-old-versions       . 2)
@@ -1606,7 +1610,7 @@
                    '(left   . 0)
                    )
                   default-frame-alist))))
-  (set-frame-parameter nil 'alpha 90)
+  (set-frame-parameter nil 'alpha 100)
   (setq use-default-font-for-symbols nil)
   (scroll-bar-mode -1)
   (my:load-window-config)
