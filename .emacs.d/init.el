@@ -839,6 +839,7 @@
         default-input-method "japanese-skk" )
   :hook
   (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (mu4e-compose-mode-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
 (leaf xclip
@@ -1134,6 +1135,8 @@
   ;; 送信済みメールを "Sent Messages" から削除する
   ;; Gmail/IMAP がうまいことやってくれる
   (setq mu4e-sent-messages-behavior 'delete)
+  ;; attempt to show images when viewing messages
+  (setq mu4e-view-show-images t)
 
   ;; ショートカットの設定
   ;; "Inbox"への切り替え -- press ``ji''
@@ -1146,8 +1149,8 @@
   (setq mu4e-contexts
     `( ,(make-mu4e-context
           :name "work"
-          :enter-func (lambda () (mu4e-message "Entering WORK context"))
-          :leave-func (lambda () (mu4e-message "Leaving WORK context"))
+          :enter-func (lambda () (mu4e-message "Entering work context"))
+          :leave-func (lambda () (mu4e-message "Leaving work context"))
           ;; メールの連絡先でマッチしてcontextを切り替え
           :match-func (lambda (msg)
                         (when msg
@@ -1167,23 +1170,15 @@
                                                "URL: https://www.web-tips.co.jp/\n"
                                                "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                                                 ))))
-           ,(make-mu4e-context
-             :name "Gmail"
-             :enter-func (lambda () (mu4e-message "Switch to the Gmail context"))
-             ;; no :leave-func
-             ;; メールの連絡先でマッチング
-             :match-func (lambda (msg)
-                           (when msg
-                             (mu4e-message-contact-field-matches msg
-                                    :to "Gmailのメールアドレス")
-                             ))
-             :vars '( ( user-mail-address      . "Gmailのメールアドレス")
-                      ( user-full-name         . "名前")
-                      ( mu4e-compose-signature . (concat
-                                                  "名前\n"
-                                                  "追加する情報"
-                                                  ))))
            ))
+  ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+  ;; guess or ask the correct context, e.g.
+  ;; start with the first (default) context;
+  ;; default is to ask-if-none (ask when there's no context yet, and none match)
+  (setq mu4e-context-policy 'pick-first)
+  ;; compose with the current context is no context matches;
+  ;; default is to ask
+   (setq mu4e-compose-context-policy nil)
   ;; 受信トレイの更新に offlineimap を使う（using 'U' in the main view）
   (setq mu4e-get-mail-command "offlineimap -o")
   ;; don't keep message buffers around
@@ -1195,6 +1190,7 @@
   (setq message-sendmail-extra-arguments '("--read-envelope-from"))
   (setq message-sendmail-f-is-evil 't)
   (setq message-kill-buffer-on-exit t)
+
   )
 
 (leaf evil
@@ -1779,8 +1775,11 @@
   (vterm-mode-hook
    . (lambda () (setq-local global-hl-line-mode nil)))
   )
+
 (leaf keg :ensure t)
+
 (leaf keg-mode :ensure t)
+
 (leaf esup
   :ensure t
   :custom

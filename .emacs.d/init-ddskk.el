@@ -22,7 +22,12 @@
 
 (setq skk-status-indicator 'left)
 
-(setq skk-use-color-cursor nil)
+(setq skk-use-color-cursor t)
+(setq skk-cursor-hiragana-color "orange")
+(setq skk-cursor-katakana-color "green")
+(setq skk-cursor-latin-color "cyan")
+(setq skk-cursor-jisx0208-latin-color "yellow")
+(setq skk-cursor-jisx0201-color "purple")
 
 (global-set-key "\C-\\" 'skk-mode)
 
