@@ -20,7 +20,7 @@
 ;; (setq skk-abbrev-mode-string "[aA]")
 ;; (setq skk-indicator-use-cursor-color nil)
 
-(setq skk-status-indicator 'left)
+(setq skk-status-indicator 'minor-mode)
 
 (setq skk-use-color-cursor t)
 (setq skk-cursor-hiragana-color "orange")

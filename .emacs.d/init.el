@@ -1414,9 +1414,20 @@
                                     ("\\.mm\\'" . default)
                                     ("\\.x?html?\\'" . "xdg-open %s")
                                     ("\\.pdf\\'" . "xdg-open %s")))
-    (org-todo-keywords          . '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
-  ;; Archive.org の位置指定
-  (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org)))
+    (org-todo-keywords          . '((sequence "Open(o)" "In Progress(p)" "|" "Resolved(r)" "Closed(c)")))
+    (org-todo-keyword-faces     . '(("Open"        . (:foreground "#ff4500" :weight bold))
+                                    ("In Progress" . (:foreground "#4169e1" :weight bold))
+                                    ("Resolved"    . (:foreground "#008000" :weight bold))
+                                    ("Closed"      . (:foreground "#9acd32" :weight bold))))
+    ;; GTD: タグの追加
+    (org-tag-alist              . '(("Work"       . ?w)
+                                    ("Home"       . ?h)
+                                    ("Windows"    . ?d)
+                                    ("MacOS"      . ?m)
+                                    ("Linux"      . ?l)
+                                    ))
+    ;; Archive.org の位置指定
+    (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org)))
   )
 
 (leaf org-agenda
@@ -1620,15 +1631,6 @@
 
 (leaf powerline
   :ensure t
-  :defvar
-  (skk-indicator-alist
-   skk-hiragana-mode-string
-   skk-katakana-mode-string
-   skk-latin-mode-string
-   skk-jisx0208-latin-mode-string
-   skk-jisx0201-mode-string
-   skk-abbrev-mode-string
-   )
   :init
   (defun my:major-mode-icon (mode)
     "Update file icon in mode-line, just display major-mode icon. not filename."
@@ -1638,50 +1640,12 @@
                                 :face 'all-the-icons-dsilver
                                 :height 1.0)
         icon)))
-  ;;
-  (defun my:skk-init-modeline-input-mode ()
-    "Custom skkが読み込まれていなくても skk-modeline-input-mode に値を設定"
-    (cond
-     ((not (boundp 'skk-modeline-input-mode))
-      (setq skk-modeline-input-mode "DDSKK"))
-     (t skk-modeline-input-mode)))
-  ;;
-  (defun my:skk-modeline-input-mode ()
-    "Custom: powerline 用に skk の indicator を準備"
-    (cond
-     ((string-match "DDSKK" skk-modeline-input-mode) "[--]")
-     ((string-match skk-hiragana-mode-string skk-modeline-input-mode) "[あ]")
-     ((string-match skk-katakana-mode-string skk-modeline-input-mode) "[ア]")
-     ((string-match skk-latin-mode-string skk-modeline-input-mode)    "[_A]")
-     ((string-match skk-jisx0208-latin-mode-string skk-modeline-input-mode) "[Ａ]")
-     ((string-match skk-jisx0201-mode-string skk-modeline-input-mode) "[_ｱ]")
-     ((string-match skk-abbrev-mode-string skk-modeline-input-mode)   "[aA]")
-     (t "[--]")
-     )
-    )
-  ;;
-  (defun my:skk-setup-modeline ()
-    "skk-setup-modeline による modeline の更新を無効化"
-    (setq skk-indicator-alist (skk-make-indicator-alist))
-    (force-mode-line-update t))
-  ;;
-  :advice (:override skk-setup-modeline my:skk-setup-modeline)
-  :custom
-  `((powerline-buffer-size-suffix    . nil)
-    (powerline-display-hud           . nil)
-    (powerline-display-buffer-size   . nil)
-    (powerline-text-scale-factor     .  1)
-    (powerline-default-separator     . 'utf-8)
-    (powerline-utf-8-separator-left  . #xe0b0)
-    (powerline-utf-8-separator-right . #xe0b2)
-    )
   :hook (emacs-startup-hook . my:powerline-theme)
   :config
 ;;;###autoload
   (defun my:powerline-theme ()
     "Setup the default mode-line."
     (interactive)
-    (my:skk-init-modeline-input-mode)
     (setq-default
      mode-line-format
      '("%e"
@@ -1698,31 +1662,30 @@
                (separator-right (intern (format "powerline-%s-%s"
                                                 (powerline-current-separator)
                                                 (cdr powerline-default-separator-dir))))
-               (lhs (list (powerline-raw (format "%s" (my:skk-modeline-input-mode)) mode-line 'l)
-                          (powerline-raw "%*" mode-line 'l)
+               (lhs (list (powerline-raw "%*" mode-line 'l)
                           (powerline-raw mode-line-mule-info mode-line 'l)
                           (powerline-raw (my:major-mode-icon major-mode) mode-line 'l)
                           (powerline-buffer-id mode-line-buffer-id 'l)
                           (powerline-raw " ")
-                          ;; (funcall separator-left face0 face1)
                           ))
                (rhs (list (powerline-raw global-mode-string face1 'r)
-                          ;; (funcall separator-right face2 face1)
                           (powerline-vc face1 'r)
-                          (powerline-raw mode-line-misc-info 'r)
                           (powerline-raw " ")
+                          (powerline-raw "%4l" face1 'l)
+                          (powerline-raw ":" face1 'l)
+                          (powerline-raw "%3c" face1 'r)
+                          (powerline-raw " " face1)
                           (powerline-raw "%6p" mode-line 'r)
                           )))
           (concat (powerline-render lhs)
                   (powerline-fill face2 (powerline-width rhs))
-                  (powerline-render rhs))))))
-    )
-  ;; (my:powerline-theme)
+                  (powerline-render rhs)))))))
   )
 
 (defun my:debug-on-quit-if-scratch (&rest _args)
   (setq debug-on-quit (string= (buffer-name) "*scratch*")))
 (add-hook 'window-selection-change-functions 'my:debug-on-quit-if-scratch)
+
 (leaf which-key
   :ensure t
   :custom
