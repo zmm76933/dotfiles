@@ -175,6 +175,7 @@
                                          "PATH"
                                          "SHELL"
                                          "SKKSERVER"
+                                         "XAPIAN_CJK_NGRAM"
 					                     "VIRTUAL_ENV"
                                          "WSL_DISTRO_NAME"))
   (when (window-system) (exec-path-from-shell-initialize))
@@ -835,10 +836,12 @@
   :commands skk-make-indicator-alist
   :bind (("C-\\"    . skk-mode))
   :init
+  (setq skk-preload t)
   (setq skk-init-file (concat user-emacs-directory "init-ddskk")
-        default-input-method "japanese-skk" )
+        default-input-method "japanese-skk")
   :hook
   (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (minibuffer-setup-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   (mu4e-compose-mode-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
@@ -1116,11 +1119,36 @@
   ("<f3>" . mu4e)
   :init
   (require 'mu4e)
-  ;; default
-  (setq mu4e-maildir "~/Test")
-  (setq mu4e-drafts-folder "/Drafts")
-  (setq mu4e-sent-folder   "/Sent Messages")
-  (setq mu4e-trash-folder  "/Trash")
+  ;; use mu4e for e-mail in emacs
+  (setq mail-user-agent 'mu4e-user-agent)
+
+  ;; the next are relative to the root maildir
+  ;; (see `mu info`).
+  ;; instead of strings, they can be functions too, see
+  ;; their docstring or the chapter 'Dynamic folders'
+  (setq mu4e-maildir (expand-file-name "mu4e" my:d:tmp)
+        mu4e-sent-folder   "/Sent"
+        mu4e-drafts-folder "/Drafts"
+        mu4e-trash-folder  "/Trash"
+        mu4e-refile-folder "/Archive")
+
+  ;; the maildirs you use frequently; access them with 'J' ('jump')
+  (setq mu4e-maildir-shortcuts
+        '(
+          (:maildir "/Inbox"   :key ?i)
+          (:maildir "/Sent"    :key ?s)
+          (:maildir "/Drafts"  :key ?d)
+          (:maildir "/Archive" :key ?a)
+          (:maildir "/Trash"   :key ?t)))
+  ;; the headers to show in the headers list -- a pair of a field
+  ;; and its width, with `nil' meaning 'unlimited'
+  ;; (better only use that for the last field.
+  ;; These are the defaults:
+  (setq mu4e-headers-fields
+        '( (:date          .  12)    ;; alternatively, use :human-date
+           (:flags         .   6)
+           (:from          .  35)
+           (:subject       .  nil))) ;; alternatively, use :thread-subject
 
   ;; 添付ファイルの保存先を"~/Downloads"に変更
   (setq mu4e-attachment-dir "~/Downloads")
@@ -1132,19 +1160,9 @@
   ;; 重複するメッセージは表示しない（バッファ内だと V で切替可能）
   (setq mu4e-headers-skip-duplicates t)
 
-  ;; 送信済みメールを "Sent Messages" から削除する
-  ;; Gmail/IMAP がうまいことやってくれる
-  (setq mu4e-sent-messages-behavior 'delete)
   ;; attempt to show images when viewing messages
   (setq mu4e-view-show-images t)
 
-  ;; ショートカットの設定
-  ;; "Inbox"への切り替え -- press ``ji''
-  ;; then, when you want archive some messages, move them to
-  ;; the 'All Mail' folder by pressing ``ma''.
-  ;; (setq mu4e-maildir-shortcuts
-  ;;   '(("/Gmail/INBOX"   . ?i)
-  ;;   ))
   ;; ;; メールアカウント毎の設定
   (setq mu4e-contexts
     `( ,(make-mu4e-context
@@ -1171,16 +1189,20 @@
                                                "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
                                                 ))))
            ))
+
   ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
   ;; guess or ask the correct context, e.g.
   ;; start with the first (default) context;
   ;; default is to ask-if-none (ask when there's no context yet, and none match)
   (setq mu4e-context-policy 'pick-first)
+
   ;; compose with the current context is no context matches;
   ;; default is to ask
-   (setq mu4e-compose-context-policy nil)
-  ;; 受信トレイの更新に offlineimap を使う（using 'U' in the main view）
-  (setq mu4e-get-mail-command "offlineimap -o")
+  (setq mu4e-compose-context-policy nil)
+
+  ;; If you get your mail without an explicit command,
+  ;; use "true" for the command (this is the default)
+  (setq mu4e-get-mail-command "offlineimap")
   ;; update every 5 minutes
   (setq mu4e-update-interval 300)
   ;; don't keep message buffers around
@@ -1192,7 +1214,6 @@
   (setq message-sendmail-extra-arguments '("--read-envelope-from"))
   (setq message-sendmail-f-is-evil 't)
   (setq message-kill-buffer-on-exit t)
-
   )
 
 (leaf evil
