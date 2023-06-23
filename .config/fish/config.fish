@@ -64,3 +64,6 @@ set -gx GPG_TTY (tty)
 
 # SKK
 set -gx SKKSERVER localhost
+
+# Xapian
+set -gx XAPIAN_CJK_NGRAM japanese
