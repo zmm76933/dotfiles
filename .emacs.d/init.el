@@ -1144,9 +1144,11 @@
   ;; and its width, with `nil' meaning 'unlimited'
   ;; (better only use that for the last field.
   ;; These are the defaults:
+  (setq mu4e-headers-date-format "%F %T")
   (setq mu4e-headers-fields
-        '( (:date          .  12)    ;; alternatively, use :human-date
+        '( (:human-date    .  20)    ;; alternatively, use :human-date
            (:flags         .   6)
+           (:mailing-list  .  20)
            (:from          .  35)
            (:subject       .  nil))) ;; alternatively, use :thread-subject
 
@@ -1154,7 +1156,7 @@
   (setq mu4e-attachment-dir "~/Downloads")
 
   ;; use 'fancy' non-ascii characters in various places in mu4e
-  (setq mu4e-use-fancy-chars t)
+  (setq mu4e-use-fancy-chars nil)
   ;; Header Viewの行数を10 -> 20に変更（バッファ内だとC-+, C-- で増減可能）
   (setq mu4e-headers-visible-lines 20)
   ;; 重複するメッセージは表示しない（バッファ内だと V で切替可能）
@@ -1187,8 +1189,7 @@
                                                "TEL: 088-678-6619\n"
                                                "URL: https://www.web-tips.co.jp/\n"
                                                "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                                                ))))
-           ))
+                                                ))))))
 
   ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
   ;; guess or ask the correct context, e.g.
