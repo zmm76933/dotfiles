@@ -1408,6 +1408,7 @@
   :blackout `((org-mode . ,(all-the-icons-icon-for-mode 'org-mode)))
   :bind
   (("C-c l" . org-store-link)
+   ("C-c z" . org-toggle-link-display)
    ("C-c c" . org-capture)
    ("C-c a" . org-agenda)
    )
@@ -1460,6 +1461,101 @@
                                     ))
     ;; Archive.org の位置指定
     (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org)))
+  )
+
+(leaf org-id
+  :commands
+  (my:org-id-add-custom-id
+   my:org-id-get-custom-id
+   my:org-custom-id-get
+   my:org-id-add-to-headlines-in-file
+   my:org-id-delete-all-id-in-file
+   )
+  :init
+  (leaf org-macs :commands org-with-point-at)
+  :custom
+  `((org-id-locations-file
+     . ,(expand-file-name "org-id-locations" my:d:tmp))
+    (org-id-link-to-org-use-id . 'create-if-interactive-and-no-custom-id)
+    )
+  :config
+  (defun my:org-id-add-custom-id ()
+    "Add \"CUSTOM_ID\" to the current tree if not assigned yet."
+    (interactive)
+    (my:org-custom-id-get nil t))
+  ;;
+  (defun my:org-id-get-custom-id ()
+    "Return a part of UUID with an \"org\" prefix.
+e.g. \"org3ca6ef0c\"."
+    (let* ((id (org-id-new "")))
+      (when (org-uuidgen-p id)
+        (downcase (concat "org"  (substring (org-id-new "") 0 8))))))
+  ;;
+  (defun my:org-custom-id-get (&optional pom create)
+    "Get the CUSTOM_ID property of the entry at point-or-marker POM.
+See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
+    (interactive)
+    (eval-when-compile (require 'org-macs))
+    (org-with-point-at pom
+      (let ((id (org-entry-get nil "CUSTOM_ID")))
+        (cond
+         ((and id (stringp id) (string-match "\\S-" id))
+          id)
+         (create
+          (setq id (my:org-id-get-custom-id))
+          (unless id
+            (error "Invalid ID"))
+          (org-entry-put pom "CUSTOM_ID" id)
+          (message "--- CUSTOM_ID assigned: %s" id)
+          (org-id-add-location id (buffer-file-name (buffer-base-buffer)))
+          id)))))
+  ;;
+  (defun my:org-id-delete-all-id-in-file ()
+    (interactive)
+    (goto-char 1)
+    (while (not (eq (point) (point-max)))
+      (org-next-visible-heading 1)
+      (let ((id (org-entry-get (point) "ID")))
+        (when id
+          (message "ID: %s" id)
+          (org-delete-property "ID"))))
+    (message "--- done."))
+  ;;
+  (defun my:org-id-add-to-headlines-in-file ()
+    "Add CUSTOM_ID properties to all headlines in the current file.
+See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
+    (interactive)
+    (save-excursion
+      (widen)
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+options:.*auto-id:t" (point-max) t)
+        (org-map-entries
+         (lambda () (my:org-custom-id-get (point) 'create))))))
+  ;;
+  :hook (before-save-hook
+         . (lambda ()
+             (when (and (eq major-mode 'org-mode)
+                        (eq buffer-read-only nil))
+               (my:org-id-add-to-headlines-in-file))))
+  )
+
+(leaf org-babel
+  :blackout `((org-src-mode . ,(format " %s" (all-the-icons-octicon "code"))))
+  :custom
+  `(;; font-lock
+   (org-src-fontify-natively         . t)
+   ;; TAB の挙動
+   (org-src-tab-acts-natively        . t)
+   ;; インデント
+   (org-edit-src-content-indentation . 2)
+   ;; インデントを残す
+   (org-src-preserve-indentation     . t)
+   ;; load languages
+   (org-babel-load-languages
+    . '((emacs-lisp . t)
+        (shell . t)
+        (python . t)
+        (ruby . t))))
   )
 
 (leaf org-roam
