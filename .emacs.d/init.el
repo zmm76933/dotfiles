@@ -1788,84 +1788,13 @@ tasks."
   "load window-system specific settings"
   (interactive)
   (progn
-    (set-face-attribute 'default nil
-                        :family "monaco"
-                        :height 120)
-    (set-face-attribute 'fixed-pitch nil
-                        :family "monaco"
-                        :height 120)
-    (set-face-attribute 'variable-pitch nil
-                        :family "monaco"
-                        :height 120)
-    ;; Japanese
-    (set-fontset-font nil
-                      'japanese-jisx0213.2004-1
-                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
-    (set-fontset-font nil
-                      'japanese-jisx0213-2
-                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
-    (set-fontset-font nil
-                      'katakana-jisx0201
-                      (font-spec :family "Hiragino Maru Gothic Pro" :height 120))
-    ;; Latin with pronounciation annotations
-    (set-fontset-font nil
-                      '(#x0080 . #x024F)
-                      (font-spec :family "AGVUDP" :height 120))
-    ;; Math symbols
-    (set-fontset-font nil
-                      '(#x2200 . #x22FF)
-                      (font-spec :family "AGVUDP" :height 120))
-    ;; Greek
-    (set-fontset-font nil
-                      '(#x0370 . #x03FF)
-                      (font-spec :family "AGVUDP" :height 120))
-    ;; Some Icons
-    (set-fontset-font nil
-                      '(#xE0A0 . #xEEE0)
-                      (font-spec :family "AGVUDP" :height 120))
-    ))
-
-;;;###autoload
-(defun my:load-side-window-config ()
-  "load window-system specific settings"
-  (interactive)
-  (progn
-    (set-face-attribute 'default nil
-                        :family "AGVUDP"
-                        :height 180)
-    (set-face-attribute 'fixed-pitch nil
-                        :family "AGVUDP"
-                        :height 180)
-    (set-face-attribute 'variable-pitch nil
-                        :family "AGVUDP"
-                        :height 180)
-    ;; Japanese
-    (set-fontset-font nil
-                      'japanese-jisx0213.2004-1
-                      (font-spec :family "AGVUDP" :height 180))
-    (set-fontset-font nil
-                      'japanese-jisx0213-2
-                      (font-spec :family "AGVUDP" :height 180))
-    (set-fontset-font nil
-                      'katakana-jisx0201
-                      (font-spec :family "AGVUDP" :height 180))
-    ;; Latin with pronounciation annotations
-    (set-fontset-font nil
-                      '(#x0080 . #x024F)
-                      (font-spec :family "AGVUDP" :height 180))
-    ;; Math symbols
-    (set-fontset-font nil
-                      '(#x2200 . #x22FF)
-                      (font-spec :family "AGVUDP" :height 180))
-    ;; Greek
-    (set-fontset-font nil
-                      '(#x0370 . #x03FF)
-                      (font-spec :family "AGVUDP" :height 180))
-    ;; Some Icons
-    (set-fontset-font nil
-                      '(#xE0A0 . #xEEE0)
-                      (font-spec :family "AGVUDP" :height 180))
-    ))
+    (set-face-attribute 'default nil :family "monaco" :height 120)
+    (set-fontset-font (frame-parameter nil 'font)
+                      'japanese-jisx0208
+                      (font-spec :family "Hiragino Maru Gothic ProN"))
+    (add-to-list 'face-font-rescale-alist
+                 '(".*Hiragino Maru Gothic ProN.*" . 1.2)))
+  )
 (leaf *gui
   :if window-system
   :config
