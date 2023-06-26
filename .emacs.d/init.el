@@ -584,6 +584,12 @@
   (emacs-startup-hook . tab-bar-mode)
   )
 
+(leaf all-the-icons
+  :require t
+  :ensure t
+  :custom
+  (all-the-icons-scale-factor . 1.0))
+
 (leaf dired
   :if (executable-find "gls")
   :preface
@@ -1788,12 +1794,10 @@ tasks."
   "load window-system specific settings"
   (interactive)
   (progn
-    (set-face-attribute 'default nil :family "monaco" :height 120)
+    (set-face-attribute 'default nil :family "HackGen Console NF" :height 130)
     (set-fontset-font (frame-parameter nil 'font)
                       'japanese-jisx0208
-                      (font-spec :family "Hiragino Maru Gothic ProN"))
-    (add-to-list 'face-font-rescale-alist
-                 '(".*Hiragino Maru Gothic ProN.*" . 1.2)))
+                      (font-spec :family "HackGen Console NF")))
   )
 (leaf *gui
   :if window-system
