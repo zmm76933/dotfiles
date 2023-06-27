@@ -673,10 +673,10 @@
 (leaf calendar
   :custom
   (;; 月と曜日の表示調整
-   (calendar-month-name-array . ["01" "02" "03" "04" "05" "06"
-                                 "07" "08" "09" "10" "11" "12" ])
-   (calendar-day-name-array   . ["日" "月" "火" "水" "木" "金" "土"])
-   (calendar-day-header-array . ["日" "月" "火" "水" "木" "金" "土"])
+   ;; (calendar-month-name-array . ["01" "02" "03" "04" "05" "06"
+   ;;                               "07" "08" "09" "10" "11" "12" ])
+   ;; (calendar-day-name-array   . ["日" "月" "火" "水" "木" "金" "土"])
+   ;; (calendar-day-header-array . ["日" "月" "火" "水" "木" "金" "土"])
    ;; 日曜開始
    (calendar-week-start-day   . 0)
    ;; 祝日をカレンダーに表示
@@ -1167,7 +1167,8 @@
   (setq mu4e-headers-visible-lines 20)
   ;; 重複するメッセージは表示しない（バッファ内だと V で切替可能）
   (setq mu4e-headers-skip-duplicates t)
-
+  ;; Header Viewのメーッセージ数
+  (setq mu4e-headers-results-limit 1000)
   ;; attempt to show images when viewing messages
   (setq mu4e-view-show-images t)
 
@@ -1257,7 +1258,8 @@
                             org
                             magit
                             mu4e
-                            dired)))
+                            dired
+                            vterm)))
   (leaf evil-surround
     :ensure t
     :after evil
@@ -1736,7 +1738,7 @@ tasks."
   (dolist (file
            '("work.org"
              "home.org"
-             "scrach.org"
+             "scratch.org"
              ))
     (add-to-list 'my:org-agenda-files (expand-file-name file my:d:org)))
   :config
