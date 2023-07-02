@@ -1274,6 +1274,8 @@
       " " 'quick-preview-at-point
       "ga" 'my:dired-mode-open-with
       "gs" 'my:dired-mode-open-finder)
+    (evil-define-key 'normal calendar-mode-map
+      "C" 'my:org-archive-find-date)
     )
   )
 
@@ -1408,7 +1410,6 @@
   :blackout `((org-mode . ,(all-the-icons-icon-for-mode 'org-mode)))
   :preface
   (require 'cl)
-
   (defconst org-relate-property "PARENT"
     "Property name for child nodes to look up parent node.")
   (defcustom org-relate-parent-tag-list
@@ -1540,8 +1541,7 @@ This command must be called in parent node which should have one of `org-relate-
    ("C-c a"     . org-agenda)
    ("C-c C-x %" . #'org-relate-search)
    ("C-c C-x &" . #'org-relate-interrelate)
-   )
-
+   ("C-c C-x $" . my:org-archive-subtree))
   :advice
   (:before org-calendar-holiday
            (lambda () (require 'japanese-holidays nil 'noerror)))
@@ -1573,6 +1573,9 @@ This command must be called in parent node which should have one of `org-relate-
     (org-file-apps-gnu          . '((remote . emacs)
                                     (system . "xdg-open %s")
                                     (t      . "xdg-open %s")))
+    ;; Archive.org の位置指定
+    (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org))
+
     (org-todo-keywords          . '((sequence "Open(o)" "In Progress(p)" "|" "Resolved(r)" "Closed(c)")))
     (org-todo-keyword-faces     . '(("Open"        . (:foreground "#ff4500" :weight bold))
                                     ("In Progress" . (:foreground "#4169e1" :weight bold))
@@ -1584,9 +1587,7 @@ This command must be called in parent node which should have one of `org-relate-
                                     ("Kitting"     . ?k)
                                     ("Survey"      . ?s)
                                     ("Office"      . ?o)
-                                    ))
-    ;; Archive.org の位置指定
-    (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org)))
+                                    )))
   )
 
 (leaf org-id
@@ -1867,7 +1868,151 @@ tasks."
    ("k" . org-agenda-previous-line)
    ("n" . org-agenda-goto-date)
    ("p" . org-agenda-capture)
-   ("&" . org-agenda-relation-interrelate))
+   ("&" . org-agenda-relation-interrelate)
+   ("$" . my:org-agenda-archive-subtree)
+   ("C" . my:org-archive-find-date))
+  )
+
+(leaf org-ql
+  :ensure t
+  :preface
+;; TODO: This function can be rewritten with org-ml
+;;;###autoload
+  (defun org-timestamps-in-entry ()
+    "Return timestamp objects for all Org timestamps in entry."
+    (interactive (list current-prefix-arg))
+    (save-excursion
+      (goto-char (org-entry-beginning-position))
+      (org-show-entry)
+      (org-narrow-to-element)
+      (let* ((parsetree (org-element-parse-buffer))
+             (ts-list nil))
+        (org-element-map parsetree '(planning clock timestamp)
+          (lambda (elm)
+            (case (org-element-type elm)
+              ('planning
+               (add-to-list 'ts-list (ts-parse-org-element (or (org-element-property :closed elm)
+                                                               (org-element-property :scheduled elm)
+                                                               (org-element-property :deadline elm)))
+                            t))
+              ('clock
+               (add-to-list 'ts-list (ts-parse-org-element (org-element-property :value elm)) t))
+              ('timestamp
+               (add-to-list 'ts-list (ts-parse-org-element elm) t)))))
+        (widen)
+        ts-list)))
+  :preface
+  (require 'ts)
+  (require 'org)
+  (require 'org-ql-search)
+  ;;; my:org-archived
+  (defvar org-agenda-files-default
+    (file-expand-wildcards (concat my:d:org "/*.org")))
+  (defun my:org-archive-file (&optional year)
+    "Return a path of archive f
+
+If optional argument `YEAR' is passed that year's file is returned instead of current year's."
+    (let* ((record-year (or year (ts-year (ts-now))))
+           (record-file-cand (format "%s/archive/archive_%s.org" my:d:org record-year))
+           (record-file
+            (if (file-exists-p record-file-cand)
+                record-file-cand
+              (expand-file-name "archive/archive_0000.org" my:d:org))))
+      (if (or (file-exists-p record-file)
+              (file-symlink-p record-file))
+          record-file
+        nil)))
+
+  (defvar my:org-archive-file (my:org-archive-file))
+
+  (defun my:org-archive-files ()
+    "Return list of archive files."
+    (append (sort (file-expand-wildcards (format "%s/archive/archive_*.org" my:d:org)) 'string<)
+            org-agenda-files-default))
+
+  (defvar my:org-archive-files (my:org-archive-files))
+
+  (defun my:org-archive-find-date (date)
+    "Find and visit the location of DATE in archivee file.
+
+DATE must be a string representing the date to find and parsable with `format-time-string'.
+
+If called interactively, it prompt the user to select the date to find."
+    (interactive
+     (cond
+      ((eq major-mode 'calendar-mode)
+       (list (calendar-date-string (calendar-cursor-to-date))))
+      ((eq major-mode 'org-agenda-mode)
+       (let* ((day (or (get-text-property (min (1- (point-max)) (point)) 'day)
+                       (user-error "Don't know which date to open in calendar")))
+              (date (calendar-gregorian-from-absolute day)))
+         (list (calendar-date-string date))))
+      (t (let ((date-select (org-read-date)))
+           (list date-select)))))
+    (let* ((d (parse-time-string date))
+           (day (decoded-time-day d))
+           (month (decoded-time-month d))
+           (year (decoded-time-year d)))
+      (find-file (my:org-archive-file year))
+      (org-datetree-find-iso-week-create `(,month ,day ,year))))
+
+  (defun my:org-archive-subtree ()
+    "Refile current subtree to archive file using latest timestamp."
+    (interactive)
+    (let* ((ts (car (sort (org-timestamps-in-entry) #'ts>)))
+           (year (ts-year (or ts (ts-now))))
+           (save-file (my:org-archive-file year)))
+      (when-let* ((pos (with-current-buffer (find-file-noselect save-file)
+                         (save-excursion
+                           (if (and (member "Office" (org-get-local-tags))
+                                    (member (org-get-todo-state) '("Resolved" "Closed")))
+                               (org-find-exact-headline-in-buffer "untouched items")
+                             (org-datetree-find-iso-week-create `(,(ts-month ts)
+                                                                  ,(ts-day ts)
+                                                                  ,(ts-year ts)))
+                           (point))))))
+        (org-refile nil nil (list nil save-file nil pos)))
+      (org-save-all-org-buffers)
+      (setq this-command 'my:org-archive-subtree)))
+
+  (defun my:org-agenda-archive-subtree ()
+    "Refile the entry or subtree belonging to the current agenda entry."
+    (interactive)
+    (org-agenda-archive-with 'my:org-archive-subtree))
+
+  (defun my:org-ql-view-archive-subtree ()
+    "Refile the entry or subtree belonging to the current agenda entry."
+    (interactive)
+    (org-agenda-archive-with 'my:org-archive-subtree)
+    (org-ql-view-refresh))
+
+  (defun my:org-archive-search (query)
+    "Search org entries matched QUERY in archive files using `org-ql-search'."
+    (interactive (list (read-string "Query: ")))
+    (let ((files (my:org-archive-files)))
+      (org-ql-search files query)))
+
+  (push '("Archive entries" . my:org-archive-search)
+        org-ql-views)
+
+  (defun my:lookup-org-archive (word &optional arg)
+    "Look up WORD in my archive files using `org-ql-search'."
+    (interactive (list (if (use-region-p)
+                           (buffer-substring (region-beginning) (region-end))
+                         (read-string "Word: "))
+                       current-prefix-arg))
+    (org-ql-search
+      my:org-archive-files
+      (cond
+       ((equal arg '(4)) `(heading ,word))
+       (t `(regexp ,word)))))
+
+  :bind
+  (:org-ql-view-map
+   ("$" . my:org-ql-view-archive-subtree))
+  :custom
+  `(;; 再帰的に検索
+    (org-ql-search-directories-files-recursive  . t))
   )
 
 (leaf ssh-config-mode :ensure t)
