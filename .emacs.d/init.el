@@ -1235,7 +1235,7 @@
         evil-want-C-i-jump t
         evil-want-Y-yank-to-eol nil
         evil-backspace-join-lines nil
-        evil-undo-system 'undo-redo
+        evil-undo-system 'undo-tree
         evil-want-fine-undo t
         evil-move-cursor-back t
         evil-show-paren-range 1
@@ -1256,6 +1256,7 @@
                             info
                             ibuffer
                             org
+                            org-roam
                             magit
                             mu4e
                             dired
@@ -1531,12 +1532,10 @@ This command must be called in parent node which should have one of `org-relate-
           (call-interactively 'org-relate-interrelate)
           (end-of-line 1)
           (setq newhead (org-get-heading))))))
-
   :bind
   (("M-p"       . org-shiftup)
    ("M-n"       . org-shiftdown)
    ("C-c l"     . org-store-link)
-   ("C-c z"     . org-toggle-link-display)
    ("C-c c"     . org-capture)
    ("C-c a"     . org-agenda)
    ("C-c C-x %" . #'org-relate-search)
@@ -1586,8 +1585,13 @@ This command must be called in parent node which should have one of `org-relate-
                                     ("Document"    . ?d)
                                     ("Kitting"     . ?k)
                                     ("Survey"      . ?s)
-                                    ("Office"      . ?o)
-                                    )))
+                                    ("Office"      . ?o)))
+    (org-refile-targets         .  `((org-agenda-files :tag . "Office")
+                                     (,(file-expand-wildcards (concat my:d:org "/**/*.org")) :tag . "refile")))
+    (org-global-properties      . '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 1:30 2:00 3:00 4:00 6:00 8:00")))
+    (org-highest-priority       . ?A)
+    (org-lowest-priority        . ?Z)
+    (org-default-priority       . ?E))
   )
 
 (leaf org-id
@@ -1853,15 +1857,10 @@ tasks."
 (leaf org-agenda
   :if (file-directory-p my:d:org)
   :defer-config
-  (defvar my:org-agenda-files nil)
-  (dolist (file
-           '("work.org"
-             "home.org"
-             "scratch.org"
-             ))
-    (add-to-list 'my:org-agenda-files (expand-file-name file my:d:org)))
-  :config
-  (setq org-agenda-files (list my:d:org))
+  (defvar org-agenda-files-default
+    (file-expand-wildcards (concat my:d:org "/agenda/*.org"))
+    "Default org-agenda-files.")
+  (setq org-agenda-files (append org-agenda-files-default))
   :bind
   (:org-agenda-mode-map
    ("j" . org-agenda-next-line)
@@ -2013,6 +2012,135 @@ If called interactively, it prompt the user to select the date to find."
   :custom
   `(;; 再帰的に検索
     (org-ql-search-directories-files-recursive  . t))
+  )
+
+(leaf *org-clock
+  :after org
+  :preface
+  (defun org-clock-sum-all ()
+    "Sum the times for all agenda files."
+    (interactive)
+    (save-excursion
+      (mapc (lambda (file)
+              (with-current-buffer (or (org-find-base-buffer-visiting file)
+                                       (find-file-noselect file))
+                (org-clock-sum)
+                (org-clock-sum-today)))
+            (org-agenda-files))))
+  :hook
+  ((org-clock-out org-clock-cancel) .
+   (lambda () (and (boundp 'org-timer-countdown-timer)
+                   org-timer-countdown-timer
+                   (org-timer-stop))))
+  ((org-clock-in org-clock-out org-clock-cancel) . save-buffer)
+  (org-clock-in . (lambda ()
+                    (let* ((opt '(4))
+                           (attention-span (org-entry-get (point) "ATTENTION_SPAN" 'selective))
+                           (effort (org-entry-get (point) "Effort" 'selective))
+                           (org-timer-default-timer
+                            (if (and (stringp attention-span)
+                                     (< 0 (length attention-span)))
+                                (progn
+                                  (setq opt '(64))
+                                  attention-span)
+                              (default-value 'org-timer-default-timer)))
+                           (time-default (decode-time (current-time))))
+                      (when (or
+                             ;; if "Effort" is less than 1:40 it's useless as timer value
+                             (and (stringp effort)
+                                  (apply #'time-less-p
+                                         (mapcar (lambda (time)
+                                                   (apply 'encode-time (mapcar* (lambda (x y) (or x y))
+                                                                                (parse-time-string time)
+                                                                                time-default)))
+                                                 `(,effort "1:40"))))
+                             attention-span)
+                        (org-timer-set-timer opt)))))
+  :custom
+  (org-clock-out-when-done . t)
+  (org-clock-persist . t)
+  (org-clock-persist-query-resume . nil)
+  (org-clock-string-limit . 20)
+  ;(org-clock-continuously . t)
+  (org-clock-ask-before-exiting . nil)
+  (org-clock-mode-line-total . 'today)
+  :bind
+  `(("C-c C-x ="   . org-clock-sum-all)
+    ("C-c C-x C-j" . org-clock-goto))
+  :defer-config
+  (defconst org-clock-ts-line-re
+    (concat "^[ \t]*" org-clock-string "[ \t]*" org-tsr-regexp-both)
+    "Matches a line with clock time stamp.")
+  :config
+  (org-clock-persistence-insinuate)
+  )
+
+(leaf *org-life
+  :after org org-ql
+  :config
+  (setq org-agenda-start-on-weekday 1)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-include-diary t)
+  (setq org-agenda-custom-commands
+        `(("n" "Agenda and all TODOs"
+           ((agenda #1="")
+            (alltodo #1#)))
+          ;; KEEP IN MIND
+          ;; invoking `org-clock-sum-all' is required before showing effort table
+          ("E" . "Effort table")
+           ("Et" "today"
+            ((org-ql-search-block `(or (todo ,"Open")
+                                       (todo ,"In Progress")
+                                       (and (clocked :on today)
+                                            (or (todo) (done))
+                                            (not (habit))
+                                            (not (tags "web"))))
+                                  ((org-ql-block-header "Today's task"))))
+            ((org-agenda-overriding-header "Today's Task")
+             (org-overriding-columns-format "%46ITEM(Task) %Effort(Effort){:} %CLOCKSUM_T(Today){:} %CLOCKSUM(Total)")
+             (org-agenda-view-columns-initially t)
+             (org-agenda-sorting-strategy '(todo-state-up priority-down deadline-up))))
+           ("Ew" "this week"
+            ((org-ql-search-block `(or (todo ,"Open")
+                                       (todo ,"In Progress"))
+                                  ((org-ql-block-header "This Week's task"))))
+            ((org-agenda-overriding-header "This Week's Task")
+             (org-overriding-columns-format "%46ITEM(Task) %Effort(Effort){:} %CLOCKSUM_T(Today){:} %CLOCKSUM(Total)")
+             (org-agenda-view-columns-initially t)
+             (org-agenda-sorting-strategy '(todo-state-up priority-down deadline-up))))
+           ("Ed" "done task"
+            ((org-ql-search-block `(or (todo ,"Resolved")
+                                       (todo ,"Closed"))
+                                  ((org-ql-block-header "Done task"))))
+            ((org-agenda-overriding-header "Done Task")
+             (org-overriding-columns-format "%46ITEM(Task) %Effort(Effort){:} %CLOCKSUM(Total){:}")
+             (org-agenda-view-columns-initially t)
+             (org-agenda-sorting-strategy '(todo-state-up priority-down deadline-up))))))
+
+  (defvar org-capture-todo-file (concat my:d:org "/priv_a/life.org"))
+
+  (defun org-goto-clocking-or-today ()
+    "Go to currently clocking entry.
+
+If no entry is clocked or CATEGORY on clocking entry is \"Cyclic\",
+go to today's entry in record file."
+    (if (and (org-clocking-p)
+             (save-excursion
+               (with-current-buffer (org-clocking-buffer)
+                 (org-clock-jump-to-current-clock)
+                 (org-back-to-heading)
+                 (not (string=
+                       (org-entry-get (point) "CATEGORY" t)
+                       "Cyclic")))))
+        (org-clock-goto)
+      (let* ((now (decode-time (current-time)))
+             (day (nth 3 now))
+             (month (nth 4 now))
+             (year (nth 5 now))
+             (org-refile-targets
+              `((,my:org-archive-file :regexp . ,(format "%04d-%02d-%02d" year month day)))))
+        (find-file my/org-archive-file)
+        (org-datetree-find-iso-week-create `(,month ,day ,year) nil))))
   )
 
 (leaf ssh-config-mode :ensure t)
