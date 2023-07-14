@@ -17,8 +17,8 @@ function fzf_z
 
   z -l | awk '{ print $2 }' | fzf $fzf_flags | read recent
   if [ $recent ]
-      cd $recent
-      commandline -r ''
-      commandline -f repaint
+    cd $recent
+    commandline -r ''
+    commandline -f repaint
   end
 end
