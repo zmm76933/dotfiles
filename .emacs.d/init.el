@@ -1251,6 +1251,7 @@
     :after evil
     :config
     (evil-collection-init '(ediff
+                            elfeed
                             eww
                             calendar
                             info
@@ -1278,6 +1279,133 @@
     (evil-define-key 'normal calendar-mode-map
       "C" 'my:org-archive-find-date)
     )
+  )
+
+(leaf elfeed
+  :ensure t
+  :bind
+  (("<f4>" . elfeed))
+  ;; :init
+  ;; (setq elfeed-feeds
+  ;;     '("http://nullprogram.com/feed/"
+  ;;       "https://planet.emacslife.com/atom.xml"))
+  :custom
+  `((elfeed-db-directory           . ,(expand-file-name "elfeed" my:d:tmp))
+    (elfeed-enclosure-default-dir  . "~/Downloads/"))
+  :config
+  (leaf elfeed-goodies
+    :ensure t
+    :custom
+    `((elfeed-goodies/entry-pane-position  . 'bottom))
+    :config
+    (elfeed-goodies/setup)
+    )
+  ;;
+  (leaf elfeed-org
+    :ensure t
+    :init
+    (setq rmh-elfeed-org-files (list (format "%s/index/elfeed.org" my:d:org)))
+    ; elfeed dynamic tagging rules
+
+    (with-eval-after-load 'elfeed
+      ;; for shizuoka-shinbun
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.at-s.com")
+                                    :entry-link
+                                    (rx (or "news/article/shizuoka"
+                                            "news/article/social/shizuoka"
+                                            "news/article/politics/shizuoka"
+                                            "news/article/topics/shizuoka"
+                                            "news/article/culture/shizuoka"
+                                            "news/article/local/west"
+                                            "news/article/local/central"
+                                            "news/article/local/east"))
+                                    :add 'regional))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.at-s.com")
+                                    :entry-link
+                                    (rx (or "sports/article/shizuoka"
+                                            "sports/article/national"
+                                            "sports/article/soccer/national"))
+                                    :add 'sports))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.at-s.com")
+                                    :entry-link
+                                    (rx "news/article/science")
+                                    :add 'science))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.at-s.com")
+                                    :entry-link
+                                    (rx (or "news/article/topics/national"
+                                            "news/article/culture/national"
+                                            "news/article/politics/national"
+                                            "news/article/social/national"
+                                            "news/article/economy/national"
+                                            "news/article/health/national"
+                                            "news/article/international"
+                                            "sports/article/sumo"
+                                            "sports/article/golf"
+                                            "sports/article/baseball"))
+                                    :remove 'unread))
+      ;; workaround for bug
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.city.shimada.shizuoka.jp")
+                                    :remove 'checked))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "www.city.shimada.shizuoka.jp")
+                                    :add 'unread))
+      ;; for favorite entries
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-url (rx "pc.watch.impress.co.jp")
+                                    :entry-title
+                                    (rx "【山田祥平のRe:config.sys】")
+                                    :add 'prime))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "デモクラシータイムス.")
+                                    :entry-title
+                                    (rx "WeN")
+                                    :add 'prime))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "Jリーグ ニュース")
+                                    :entry-title
+                                    (rx (or "入籍" "子が誕生"))
+                                    :remove 'unread))
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "BSAsahi")
+                                    :entry-title
+                                    (rx "町山智浩のアメリカの今を知るTV")
+                                    :add 'unread)
+                20)
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "BSAsahi")
+                                    :remove 'unread)
+                10)
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "DAZN Japan")
+                                    :entry-title
+                                    (rx (and "ハイライト"
+                                             (0+ anychar)
+                                             "明治安田生命J1リーグ"))
+                                    :add 'unread)
+                20)
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "DAZN Japan")
+                                    :remove 'unread)
+                10)
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "Jリーグ公式チャンネル")
+                                    :entry-title
+                                    (rx (and "ハイライト"
+                                             (0+ anychar)
+                                             "ジュビロ磐田"))
+                                    :add 'unread)
+                20)
+      (add-hook 'elfeed-new-entry-hook
+                (elfeed-make-tagger :feed-title (rx "Jリーグ公式チャンネル")
+                                    :remove 'unread)
+                10))
+    :config
+    (elfeed-org))
   )
 
 (leaf *deepl-translate
@@ -1417,7 +1545,7 @@
     '("Office" "refile")
     "A list of tags all parent nodes must have one of them.")
   (defcustom org-relate-target-files
-    (file-expand-wildcards (concat my:d:org "/*.org"))
+    (file-expand-wildcards (concat my:d:org "/**/*.org"))
     "A list of target files to search relation nodes.")
 
   (defun org-relate-search ()
@@ -2322,36 +2450,7 @@ go to today's entry in record file."
   :if (executable-find "rg")
   :ensure t
   )
-;;(leaf emacs
-;;  :preface
-;;  (defun my-advice/window-width (fn &rest args)
-;;    (- (apply fn args) 1))
-;;  :advice (:around window-width my-advice/window-width))
-;;
-;; (leaf elfeed
-;;   :if (file-directory-p my:d:password-store)
-;;   :ensure t
-;;   :custom
-;;   `((elfeed-set-timeout  . 36000)
-;;     (elfeed-db-directory . "~/.cache/elfeed"))
-;;   :config
-;;   (leaf elfeed-goodies
-;;     :ensure t
-;;     :config
-;;     (elfeed-goodies/setup))
-;;   ;;
-;;   (leaf elfeed-protocol
-;;     :ensure t
-;;     :config
-;;     (setq elfeed-feeds
-;;           '(("owncloud+https://uwabami@uwabami.junkhub.org/nextcloud"
-;;              :password (password-store-get "Web/uwabami.junkhub.org/nextcloud")
-;;              )
-;;             ))
-;;     (elfeed-protocol-enable)
-;;     )
-;;   )
-;;
+
 (leaf vterm
   :ensure t
   :hook
