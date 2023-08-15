@@ -272,6 +272,7 @@
     (history-length          . t)  ;; 無制限(の筈)
     ;; (save-silently           . t)
     (use-short-answers       . t)
+    (split-height-threshold  . nil)
     (scroll-step             . 1)
     (scroll-preserve-screen-position . 'always)
     ;;
@@ -1123,6 +1124,10 @@
   :if (executable-find "mu")
   :bind
   ("<f3>" . mu4e)
+  :hook
+  (mu4e-compose-mode-hook
+   . (lambda ()
+         (auto-save-mode -1)))
   :init
   (require 'mu4e)
   ;; use mu4e for e-mail in emacs
@@ -1716,7 +1721,7 @@ This command must be called in parent node which should have one of `org-relate-
                                     ("Office"      . ?o)))
     (org-refile-targets         .  `((org-agenda-files :tag . "Office")
                                      (,(file-expand-wildcards (concat my:d:org "/**/*.org")) :tag . "refile")))
-    (org-global-properties      . '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 1:30 2:00 3:00 4:00 6:00 8:00")))
+    (org-global-properties      . '(("Effort_ALL". "0:00 0:10 0:20 0:30 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00")))
     (org-highest-priority       . ?A)
     (org-lowest-priority        . ?Z)
     (org-default-priority       . ?E))
@@ -2213,10 +2218,35 @@ If called interactively, it prompt the user to select the date to find."
         `(("n" "Agenda and all TODOs"
            ((agenda #1="")
             (alltodo #1#)))
+          ("l" "Log entries in a week"
+           agenda ""
+           ((org-agenda-span (if (equal current-prefix-arg '(4))
+                                 'day 'week))
+            (org-agenda-start-with-log-mode t)
+            (org-agenda-include-inactive-timestamps nil)
+            (org-agenda-include-diary t)
+            (org-agenda-sorting-strategy
+             '(time-up
+               deadline-up
+               todo-state-up
+               priority-down))))
+          ("L" "Log entry timeline on today with default org-agenda-prefix-format"
+           agenda ""
+           ((org-agenda-prefix-format (eval (car (get 'org-agenda-prefix-format 'standard-value))))
+            (org-agenda-span (if (equal current-prefix-arg '(4))
+                                 'day 'week))
+            (org-agenda-start-with-log-mode t)
+            (org-agenda-include-inactive-timestamps nil)
+            (org-agenda-include-diary t)
+            (org-agenda-sorting-strategy
+             '(time-up
+               deadline-up
+               todo-state-up
+               priority-down))))
           ;; KEEP IN MIND
           ;; invoking `org-clock-sum-all' is required before showing effort table
-          ("E" . "Effort table")
-           ("Et" "today"
+          ("k" . "Effort table")
+           ("kt" "today"
             ((org-ql-search-block `(or (todo ,"Open")
                                        (todo ,"In Progress")
                                        (and (clocked :on today)
@@ -2228,7 +2258,7 @@ If called interactively, it prompt the user to select the date to find."
              (org-overriding-columns-format "%46ITEM(Task) %Effort(Effort){:} %CLOCKSUM_T(Today){:} %CLOCKSUM(Total)")
              (org-agenda-view-columns-initially t)
              (org-agenda-sorting-strategy '(todo-state-up priority-down deadline-up))))
-           ("Ew" "this week"
+           ("kw" "this week"
             ((org-ql-search-block `(or (todo ,"Open")
                                        (todo ,"In Progress"))
                                   ((org-ql-block-header "This Week's task"))))
@@ -2236,7 +2266,7 @@ If called interactively, it prompt the user to select the date to find."
              (org-overriding-columns-format "%46ITEM(Task) %Effort(Effort){:} %CLOCKSUM_T(Today){:} %CLOCKSUM(Total)")
              (org-agenda-view-columns-initially t)
              (org-agenda-sorting-strategy '(todo-state-up priority-down deadline-up))))
-           ("Ed" "done task"
+           ("kd" "done task"
             ((org-ql-search-block `(or (todo ,"Resolved")
                                        (todo ,"Closed"))
                                   ((org-ql-block-header "Done task"))))
@@ -2330,8 +2360,8 @@ go to today's entry in record file."
     (setq default-frame-alist
           (append (list
                    '(width  . 200)
-                   '(height . 80)
-                   '(top    . 322)
+                   '(height . 100)
+                   '(top    . 72)
                    '(left   . 10)
                  )
                 default-frame-alist)))
