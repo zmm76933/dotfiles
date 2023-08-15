@@ -1253,7 +1253,6 @@
   :config
   (leaf evil-collection
     :ensure t
-    :after evil
     :config
     (evil-collection-init '(ediff
                             elfeed
@@ -1267,13 +1266,15 @@
                             mu4e
                             dired
                             vterm)))
+  (leaf evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode))
   (leaf evil-surround
     :ensure t
-    :after evil
     :config
     (global-evil-surround-mode))
   (leaf key-bindings
-    :after evil
     :config
     (setcdr evil-insert-state-map nil)
     (define-key evil-insert-state-map [escape] #'evil-normal-state)
@@ -1282,8 +1283,7 @@
       "ga" 'my:dired-mode-open-with
       "gs" 'my:dired-mode-open-finder)
     (evil-define-key 'normal calendar-mode-map
-      "C" 'my:org-archive-find-date)
-    )
+      "C" 'my:org-archive-find-date))
   )
 
 (leaf elfeed
