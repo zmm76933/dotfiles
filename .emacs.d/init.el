@@ -1259,20 +1259,6 @@
   )
 
 (leaf tab-bar-mode
-  :preface
-  (defun my:tab-bar-tab-name-truncated ()
-    "Custom: Generate tab name from the buffer of the selected window."
-    (let ((tab-name (buffer-name (window-buffer (minibuffer-selected-window))))
-          (ellipsis (cond
-                     (tab-bar-tab-name-ellipsis)
-                     ((char-displayable-p ?…) "…")
-                     ("..."))))
-      (if (< (length tab-name) tab-bar-tab-name-truncated-max) ;; >
-          (format "%-12s" tab-name)
-        (propertize (truncate-string-to-width
-                     tab-name tab-bar-tab-name-truncated-max nil nil
-                     ellipsis)
-                    'help-echo tab-name))))
   :after general
   :custom
   ((tab-bar-close-button-show      . nil)
@@ -1281,13 +1267,9 @@
    (tab-bar-history-mode           . nil)
    (tab-bar-new-tab-choice         . "*scratch*")
    (tab-bar-new-button-show        . nil)
-   (tab-bar-tab-name-function      . 'my:tab-bar-tab-name-truncated)
-   (tab-bar-tab-name-truncated-max . 12)
-   (tab-bar-separator              . "|")
    )
   :hook
   (emacs-startup-hook . tab-bar-mode)
-  :config
   )
 
 (leaf elfeed
