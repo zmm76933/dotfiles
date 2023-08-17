@@ -542,49 +542,6 @@
    ("C-,"     . er/contract-region))
   )
 
-(leaf tab-bar-mode
-  :init
-  (defvar my:ctrl-t-map (make-sparse-keymap)
-    "My original keymap binded to C-t.")
-  (defalias 'my:ctrl-t-prefix my:ctrl-t-map)
-  (define-key global-map (kbd "C-t") 'my:ctrl-t-prefix)
-  (define-key my:ctrl-t-map (kbd "c")   'tab-new)
-  (define-key my:ctrl-t-map (kbd "C-c") 'tab-new)
-  (define-key my:ctrl-t-map (kbd "k")   'tab-close)
-  (define-key my:ctrl-t-map (kbd "C-k") 'tab-close)
-  (define-key my:ctrl-t-map (kbd "n")   'tab-next)
-  (define-key my:ctrl-t-map (kbd "C-n") 'tab-next)
-  (define-key my:ctrl-t-map (kbd "p")   'tab-previous)
-  (define-key my:ctrl-t-map (kbd "C-p") 'tab-previous)
-;;;###autoload
-(defun my:tab-bar-tab-name-truncated ()
-  "Custom: Generate tab name from the buffer of the selected window."
-  (let ((tab-name (buffer-name (window-buffer (minibuffer-selected-window))))
-        (ellipsis (cond
-                   (tab-bar-tab-name-ellipsis)
-                   ((char-displayable-p ?…) "…")
-                   ("..."))))
-    (if (< (length tab-name) tab-bar-tab-name-truncated-max) ;; >
-        (format "%-12s" tab-name)
-      (propertize (truncate-string-to-width
-                   tab-name tab-bar-tab-name-truncated-max nil nil
-                   ellipsis)
-                  'help-echo tab-name))))
-  :custom
-  ((tab-bar-close-button-show      . nil)
-   (tab-bar-close-last-tab-choice  . nil)
-   (tab-bar-close-tab-select       . 'left)
-   (tab-bar-history-mode           . nil)
-   (tab-bar-new-tab-choice         . "*scratch*")
-   (tab-bar-new-button-show        . nil)
-   (tab-bar-tab-name-function      . 'my:tab-bar-tab-name-truncated)
-   (tab-bar-tab-name-truncated-max . 12)
-   (tab-bar-separator              . "|")
-   )
-  :hook
-  (emacs-startup-hook . tab-bar-mode)
-  )
-
 (leaf all-the-icons
   :require t
   :ensure t
@@ -1124,10 +1081,6 @@
   :if (executable-find "mu")
   :bind
   ("<f3>" . mu4e)
-  :hook
-  (mu4e-compose-mode-hook
-   . (lambda ()
-         (auto-save-mode -1)))
   :init
   (require 'mu4e)
   ;; use mu4e for e-mail in emacs
@@ -1284,6 +1237,57 @@
       "gs" 'my:dired-mode-open-finder)
     (evil-define-key 'normal calendar-mode-map
       "C" 'my:org-archive-find-date))
+  )
+
+(leaf general
+  :after evil
+  :ensure t
+  :config
+  (general-evil-setup t)
+  (general-def
+   :states '(insert emacs normal visual motion)
+   :keymaps 'override
+   :prefix "C-t"
+   "c"    'tab-new
+   "C-c"  'tab-new
+   "k"    'tab-close
+   "C-k"  'tab-close
+   "n"    'tab-next
+   "C-n"  'tab-next
+   "p"    'tab-previous
+   "C-p"  'tab-previous)
+  )
+
+(leaf tab-bar-mode
+  :preface
+  (defun my:tab-bar-tab-name-truncated ()
+    "Custom: Generate tab name from the buffer of the selected window."
+    (let ((tab-name (buffer-name (window-buffer (minibuffer-selected-window))))
+          (ellipsis (cond
+                     (tab-bar-tab-name-ellipsis)
+                     ((char-displayable-p ?…) "…")
+                     ("..."))))
+      (if (< (length tab-name) tab-bar-tab-name-truncated-max) ;; >
+          (format "%-12s" tab-name)
+        (propertize (truncate-string-to-width
+                     tab-name tab-bar-tab-name-truncated-max nil nil
+                     ellipsis)
+                    'help-echo tab-name))))
+  :after general
+  :custom
+  ((tab-bar-close-button-show      . nil)
+   (tab-bar-close-last-tab-choice  . nil)
+   (tab-bar-close-tab-select       . 'left)
+   (tab-bar-history-mode           . nil)
+   (tab-bar-new-tab-choice         . "*scratch*")
+   (tab-bar-new-button-show        . nil)
+   (tab-bar-tab-name-function      . 'my:tab-bar-tab-name-truncated)
+   (tab-bar-tab-name-truncated-max . 12)
+   (tab-bar-separator              . "|")
+   )
+  :hook
+  (emacs-startup-hook . tab-bar-mode)
+  :config
   )
 
 (leaf elfeed
@@ -1521,6 +1525,8 @@
        . ,(expand-file-name "transient-values.el" my:d:tmp))
       (transient-force-fixed-pitch . t))
     )
+  (leaf orgit
+    :ensure t)
   :custom
   `((magit-completing-read-function . 'magit-builtin-completing-read)
     (magit-refs-show-commit-count   . 'all)
