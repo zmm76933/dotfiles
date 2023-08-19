@@ -1486,17 +1486,24 @@
     )
   )
 
-(leaf consult-ghq
-  :el-get uwabami/consult-ghq
-  :bind (("C-x f" . consult-ghq-open))
-  :custom
-  `((consult-ghq-short-list . t))
-  )
+(leaf git
+  :config
+  (leaf consult-ghq
+    :el-get uwabami/consult-ghq
+    :bind (("C-x g f" . consult-ghq-open))
+    :custom
+    `((consult-ghq-short-list . t)))
 
-(leaf magit
-  :bind (("C-x g" . magit-status))
-  :ensure t
-  :init
+  (leaf magit
+    :bind
+    (("C-x g s" . magit-status))
+    :ensure t
+    :custom
+    `((magit-completing-read-function . 'magit-builtin-completing-read)
+      (magit-refs-show-commit-count   . 'all)
+      (magit-log-buffer-file-locked   . t)
+      (magit-revision-show-gravatars  . nil)))
+
   (leaf transient
     :custom
     `((transient-history-file
@@ -1505,22 +1512,20 @@
        . ,(expand-file-name "transient-levels.el" my:d:tmp))
       (transient-values-file
        . ,(expand-file-name "transient-values.el" my:d:tmp))
-      (transient-force-fixed-pitch . t))
-    )
+      (transient-force-fixed-pitch . t)))
+
   (leaf orgit
     :ensure t)
-  :custom
-  `((magit-completing-read-function . 'magit-builtin-completing-read)
-    (magit-refs-show-commit-count   . 'all)
-    (magit-log-buffer-file-locked   . t)
-    (magit-revision-show-gravatars  . nil)
-    )
-  )
 
-(leaf git-gutter-fringe
-  :ensure t
-  :hook
-  (emacs-startup-hook . global-git-gutter-mode)
+  (leaf browse-at-remote
+    :ensure t
+    :bind
+    (("C-x g g" . browse-at-remote)))
+
+  (leaf git-gutter-fringe
+    :ensure t
+    :hook
+    (emacs-startup-hook . global-git-gutter-mode))
   )
 
 (leaf lua-mode :ensure t)
@@ -2457,7 +2462,7 @@ go to today's entry in record file."
   :custom
   `((which-key-show-early-on-C-h    . t)
     (which-key-idle-delay           . 10000)
-    (which-key-idle-secondary-delay . 0.05)
+    (which-key-idle-secondary-delay . 0.5)
     (which-key-popup-type           . 'minibuffer)
     )
   :hook (emacs-startup-hook . which-key-mode)
