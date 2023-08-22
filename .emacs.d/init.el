@@ -910,7 +910,7 @@
 
 (leaf consult
   :ensure t
-  :bind* (("C-x b" . consult-buffer)
+  :bind* (("C-;"   . consult-buffer)
           ("M-g ," . consult-find)
           ("M-g ." . consult-ripgrep)
           ("C-c o" . consult-outline)
@@ -937,6 +937,11 @@
       (unless (cdr buffer)
         (consult--buffer-action (car buffer)))))
   )
+
+(leaf consult-dir
+  :ensure t
+  :bind
+  (("C-x C-d" . consult-dir)))
 
 (leaf consult-ls-git
   :ensure t
@@ -1274,6 +1279,45 @@
 
 (leaf elfeed
   :ensure t
+  :preface
+  (defun my:elfeed-mark-as-read ()
+    "Mark all items in the elfeed buffer as read."
+    (interactive)
+    (my:mark-line 0)
+    (elfeed-search-untag-all-unread))
+
+  (defun my:elfeed-mark-all-as-read ()
+    "Mark all items in the elfeed buffer as read."
+    (interactive)
+    (mark-whole-buffer)
+    (elfeed-search-untag-all-unread))
+
+  (defun my:elfeed-mark-current-as-read ()
+    (interactive)
+    "Mark current entry as read."
+    (let ((current (elfeed-search-selected :ignore-region)))
+      (elfeed-untag current 'unread)
+      (elfeed-search-update-entry current)
+      (elfeed-db-save-safe)))
+
+  (defun my:elfeed-open-in-eww (entry)
+    "Display the currently selected item in eww."
+    (interactive (list (elfeed-search-selected :ignore-region)))
+    (require 'elfeed-show)
+    (my:elfeed-mark-current-as-read)
+    (when (elfeed-entry-p entry)
+      (let ((link (elfeed-entry-link entry)))
+        (eww link)
+        (rename-buffer (format "*elfeed eww %s*" link)))))
+
+  (defun my:elfeed-show-in-eww ()
+    "Display the currently shown item in eww."
+    (interactive)
+    (require 'elfeed-show)
+    (when (elfeed-entry-p elfeed-show-entry)
+      (let ((link (elfeed-entry-link elfeed-show-entry)))
+        (eww link)
+        (rename-buffer (format "*elfeed eww %s*" link)))))
   :bind
   (("<f4>" . elfeed))
   ;; :init
@@ -2201,7 +2245,7 @@ If called interactively, it prompt the user to select the date to find."
   (org-clock-persistence-insinuate)
   )
 
-(leaf *org-life
+(leaf org-life
   :after org org-ql
   :config
   (setq org-agenda-start-on-weekday 1)
@@ -2292,6 +2336,23 @@ go to today's entry in record file."
               `((,my:org-archive-file :regexp . ,(format "%04d-%02d-%02d" year month day)))))
         (find-file my/org-archive-file)
         (org-datetree-find-iso-week-create `(,month ,day ,year) nil))))
+
+  (leaf org-capture
+    :init
+    (setq org-capture-templates
+          `(("p" "Project"
+             entry (id "0A6350F7-CD44-4B14-B8CB-E01EE068D242")
+             "* %? [/] :project:\n %U\n  - [ ] insert ID property if necessary"
+             :prepend t :jump-to-captured t)
+            ("D" "Drill")
+            ("Dd" "Drill entry in currently clocking or today's entry."
+             entry (function org-goto-clocking-or-today)
+             "* %i :drill:\n[%?]")
+            ("De" "English drill entry in currently clocking or today's entry."
+             entry (function org-goto-clocking-or-today)
+             "* %i :drill:fd_en:\n[%^C%?]\n- %a")))
+    :custom
+    (org-capture-bookmark . nil))
   )
 
 (leaf ssh-config-mode :ensure t)
