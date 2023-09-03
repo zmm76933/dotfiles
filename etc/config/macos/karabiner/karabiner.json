@@ -970,7 +970,36 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": [
-                      "left_control"
+                      "control"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "japanese_kana"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+            {
+            "description": "AquaSKK for PowerPoint",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": [
+                      "^com\\.microsoft\\.Powerpoint"
+                    ],
+                    "type": "frontmost_application_if"
+                  }
+                ],
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": [
+                      "control"
                     ]
                   }
                 },
