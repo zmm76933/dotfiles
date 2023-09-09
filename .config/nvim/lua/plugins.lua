@@ -68,7 +68,7 @@ packer.startup(function(use)
   use 'Vimjas/vim-python-pep8-indent'
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
-  use 'https://github.com/mfussenegger/nvim-dap-python'
+  use 'mfussenegger/nvim-dap-python'
   use 'antoinemadec/FixCursorHold.nvim'
   use 'nvim-neotest/neotest'
   use 'nvim-neotest/neotest-vim-test'
