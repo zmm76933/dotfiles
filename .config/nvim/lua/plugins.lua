@@ -42,8 +42,8 @@ packer.startup(function(use)
   use 'norcalli/nvim-colorizer.lua'
   use 'folke/zen-mode.nvim'
   use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end,
   })
   use 'akinsho/nvim-bufferline.lua'
   -- use 'github/copilot.vim'
@@ -51,8 +51,8 @@ packer.startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
   use {
-    "folke/which-key.nvim",
-    config = function() require("which-key").setup {} end,
+    'folke/which-key.nvim',
+    config = function() require('which-key').setup {} end,
   }
 
   use 'tpope/vim-fugitive'
