@@ -21,10 +21,10 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-if type -q exa
-  alias ls "exa -g --icons"
-  alias la "exa -a -g --icons"
-  alias ll "exa -l -g --icons"
+if type -q eza
+  alias ls "eza -g --icons"
+  alias la "eza -a -g --icons"
+  alias ll "eza -l -g --icons"
   alias lla "ll -a"
 else
   alias ls "ls -p -G"
