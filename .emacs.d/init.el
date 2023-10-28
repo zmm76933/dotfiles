@@ -1224,6 +1224,14 @@
                             mu4e
                             dired
                             vterm)))
+  (leaf evil-org
+    :ensure t
+    :hook
+	(org-mode-hook . evil-org-mode)
+	(org-agenda-mode-hook . evil-org-mode)
+	:config
+	(require 'evil-org-agenda)
+	(evil-org-agenda-set-keys))
   (leaf evil-commentary
     :ensure t
     :config
@@ -1745,7 +1753,7 @@ This command must be called in parent node which should have one of `org-relate-
     ;; Archive.org の位置指定
     (org-archive-location       . ,(expand-file-name "Archive.org::" my:d:org))
 
-    (org-todo-keywords          . '((sequence "Open(o)" "In Progress(p)" "|" "Resolved(r)" "Closed(c)")))
+    (org-todo-keywords          . '((sequence "Open(o)" "In Progress(p!/@)" "|" "Resolved(r!)" "Closed(c@)")))
     (org-todo-keyword-faces     . '(("Open"        . (:foreground "#ff4500" :weight bold))
                                     ("In Progress" . (:foreground "#4169e1" :weight bold))
                                     ("Resolved"    . (:foreground "#008000" :weight bold))
@@ -2033,10 +2041,6 @@ tasks."
   (setq org-agenda-files (append org-agenda-files-default))
   :bind
   (:org-agenda-mode-map
-   ("j" . org-agenda-next-line)
-   ("k" . org-agenda-previous-line)
-   ("n" . org-agenda-goto-date)
-   ("p" . org-agenda-capture)
    ("&" . org-agenda-relation-interrelate)
    ("$" . my:org-agenda-archive-subtree)
    ("C" . my:org-archive-find-date))
