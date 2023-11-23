@@ -1718,7 +1718,10 @@ This command must be called in parent node which should have one of `org-relate-
    ("C-c a"     . org-agenda)
    ("C-c C-x %" . #'org-relate-search)
    ("C-c C-x &" . #'org-relate-interrelate)
-   ("C-c C-x $" . my:org-archive-subtree))
+   ("C-c C-x $" . my:org-archive-subtree)
+   (:org-mode-map
+   ("C-c j h"   . consult-org-heading)
+   ("C-c j a"   . consult-org-agenda)))
   :advice
   (:before org-calendar-holiday
            (lambda () (require 'japanese-holidays nil 'noerror)))
@@ -1883,8 +1886,7 @@ See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
    ("C-c n t" . org-roam-tag-add)
    ("C-c n l" . org-roam-buffer-toggle)
    (:org-mode-map
-    ("C-M-i"   . completion-at-point))
-   )
+    ("C-M-i"   . completion-at-point)))
   :custom
   `((org-roam-db-location . ,(expand-file-name "org-roam.db" my:d:tmp))
     (org-roam-directory   . ,(expand-file-name "roam" my:d:org))
