@@ -70,5 +70,8 @@ Pods/
 # 1Password
 .config/op/
 
+# github-copilot
+.config/github-copilot/
+
 # Karabiner
 .config/karabiner/
