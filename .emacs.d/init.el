@@ -1257,6 +1257,10 @@
   :ensure t
   :config
   (general-evil-setup t)
+  (general-nmap
+    :prefix "SPC"
+    "o" 'evil-open-below
+    "O" 'evil-open-above)
   (general-def
    :states '(insert emacs normal visual motion)
    :keymaps 'override
