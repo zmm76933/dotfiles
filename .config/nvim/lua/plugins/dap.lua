@@ -78,8 +78,9 @@ return {
           { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
         },
 				config = function()
-					local path = require("mason-registry").get_package("debugpy"):get_install_path()
-					require("dap-python").setup(path .. "/venv/bin/python")
+					local venv = os.getenv("VIRTUAL_ENV")
+					local command = string.format("%s/bin/python", venv)
+					require("dap-python").setup(command)
 				end,
 			},
 		},

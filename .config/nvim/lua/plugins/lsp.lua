@@ -13,6 +13,7 @@ return {
 				"typescript-language-server",
 				"css-lsp",
 				"pyright",
+				"ruff",
 			})
 		end,
 	},

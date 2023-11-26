@@ -65,7 +65,7 @@ return {
 				desc = "Find Plugin File",
 			},
 			{
-				"<C-k>f",
+				"<localleader>f",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.find_files({
@@ -76,7 +76,7 @@ return {
 				desc = "Lists files in your current working directory, respects .gitignore",
 			},
 			{
-				"<C-k>g",
+				"<localleader>g",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.live_grep()
@@ -84,7 +84,7 @@ return {
 				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
 			},
 			{
-				"<C-k>b",
+				"<localleader>b",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.buffers()
@@ -92,7 +92,7 @@ return {
 				desc = "Lists open buffers",
 			},
 			{
-				"<C-k>t",
+				"<localleader>t",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.help_tags()
@@ -100,7 +100,7 @@ return {
 				desc = "Lists available help tags and opens a new window with the relevant help info on <cr>",
 			},
 			{
-				"<C-k>;",
+				"<localleader>;",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.resume()
@@ -108,7 +108,7 @@ return {
 				desc = "Resume the previous telescope picker",
 			},
 			{
-				"<C-k>e",
+				"<localleader>e",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.diagnostics()
@@ -116,7 +116,7 @@ return {
 				desc = "Lists Diagnostics for all open buffers or a specific buffer",
 			},
 			{
-				"<C-k>s",
+				"<localleader>s",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.treesitter()
@@ -124,7 +124,7 @@ return {
 				desc = "Lists Function names, variables, from Treesitter",
 			},
 			{
-				"<C-k>l",
+				"<localleader>l",
 				function()
 					local telescope = require("telescope")
 
@@ -210,6 +210,19 @@ return {
 			require("telescope").load_extension("file_browser")
 		end,
 	},
+
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({ map_c_h = true })
+		end,
+	},
+
+	{
+		enabled = false,
+		"echasnovski/mini.pairs",
+	},
+
 	{
 		"keaising/im-select.nvim",
 		config = function()

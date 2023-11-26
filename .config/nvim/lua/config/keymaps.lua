@@ -13,10 +13,9 @@ keymap.set("n", "<A-a>", "gg<S-v>G")
 -- Save with root permission (not working for now)
 vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})
 
--- Tab
-keymap.set("n", "\\te", ":tabedit<Space>")
-keymap.set("n", "\\tn", ":tabnew<CR>")
-keymap.set("n", "\\tc", ":tabclose<CR>")
+-- Disable continuations
+keymap.set("n", "<Leader>o", "o<Esc>^Da", opts)
+keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
 -- Resize window
 keymap.set("n", "<C-w><left>", "<C-w><")
