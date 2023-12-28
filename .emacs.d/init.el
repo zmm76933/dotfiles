@@ -278,6 +278,8 @@
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
+    (mac-pass-command-to-system . nil)
+    (mac-pass-control-to-system . nil)
     )
   :config
   (when (boundp 'load-prefer-newer)
@@ -807,6 +809,7 @@
   (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
   (minibuffer-setup-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   (mu4e-compose-mode-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (evil-normal-state-entry-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
 (leaf xclip
