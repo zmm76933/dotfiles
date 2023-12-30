@@ -32,6 +32,7 @@ vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.splitkeep = "cursor"
 vim.opt.relativenumber = false
+vim.opt.clipboard:append({ "unnamedplus" })
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
@@ -49,3 +50,19 @@ end
 
 -- python3 provider
 vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/python")
+
+-- Use windows clipboard to copy and to paste
+if vim.fn.has("macunix") == false then
+	vim.api.nvim_set_var("clipboard", {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+			["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+			["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+		},
+		cache_enabled = 0,
+	})
+end
