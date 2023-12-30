@@ -52,7 +52,7 @@ end
 vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/python")
 
 -- Use windows clipboard to copy and to paste
-if vim.fn.has("macunix") == false then
+if vim.fn.has("macunix") == 0 then
 	vim.api.nvim_set_var("clipboard", {
 		name = "win32yank-wsl",
 		copy = {

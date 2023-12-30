@@ -286,7 +286,7 @@ return {
 					-- are triggered, if you don't want to restore previous used im in Insert mode,
 					-- e.g. deprecated `disable_auto_restore = 1`, just let it empty
 					-- as `set_previous_events = {}`
-					set_previous_events = {},
+					set_previous_events = { "InsertEnter" },
 
 					-- Show notification about how to install executable binary when binary missed
 					keep_quiet_on_no_binary = false,
