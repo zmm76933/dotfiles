@@ -38,10 +38,10 @@ gem install neovim
 
 # install Node.js provider
 npm install -g neovim
-npm install -g typescript 
+npm install -g typescript
 npm install -g typescript-language-server
 npm install -g diagnostic-languageserver
-npm install -g eslint_d 
+npm install -g eslint_d
 npm install -g prettier
 npm install -g @fsouza/prettierd
 npm install -g pyright
@@ -52,13 +52,4 @@ npm install -g cz-conventional-changelog
 cpanm -n App::cpanminus
 cpanm -n Neovim::Ext
 
-
-if [[ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
-  git clone https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-fi
-
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-nvim --headless +TSUpdate +qa
-
-log_pass "nvim: packer installed successfully"
+log_pass "nvim: installed successfully"
