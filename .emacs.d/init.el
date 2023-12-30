@@ -2536,9 +2536,7 @@ go to today's entry in record file."
   :custom
   `((which-key-show-early-on-C-h    . t)
     (which-key-idle-delay           . 10000)
-    (which-key-idle-secondary-delay . 0.5)
-    (which-key-popup-type           . 'minibuffer)
-    )
+    (which-key-idle-secondary-delay . 0.05))
   :hook (emacs-startup-hook . which-key-mode)
   )
 ;; (leaf tree-sitter :ensure t)
