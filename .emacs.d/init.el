@@ -1334,7 +1334,9 @@
         (eww link)
         (rename-buffer (format "*elfeed eww %s*" link)))))
   :bind
-  (("<f4>" . elfeed))
+  (("<f4>" . elfeed)
+   (:elfeed-search-mode-map
+    ("C-c C-u" . elfeed-update)))
   ;; :init
   ;; (setq elfeed-feeds
   ;;     '("http://nullprogram.com/feed/"
@@ -1589,7 +1591,13 @@
 
 (leaf lua-mode :ensure t)
 
-(leaf markdown-mode :ensure t)
+(leaf markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . gfm-mode)
+  :config
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
+  (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-indent-on-enter 'indent-and-new-item))
 
 (leaf org
   :ensure t
