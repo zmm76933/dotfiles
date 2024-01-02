@@ -45,24 +45,24 @@ vim.cmd([[au BufNewFile,BufRead *.astro setf astro]])
 vim.cmd([[au BufNewFile,BufRead Podfile setf ruby]])
 
 if vim.fn.has("nvim-0.8") == 1 then
-	vim.opt.cmdheight = 0
+  vim.opt.cmdheight = 0
 end
 
 -- python3 provider
 vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/python")
 
 -- Use windows clipboard to copy and to paste
-if vim.fn.has("macunix") == 0 then
-	vim.api.nvim_set_var("clipboard", {
-		name = "win32yank-wsl",
-		copy = {
-			["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
-			["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
-		},
-		paste = {
-			["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
-			["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
-		},
-		cache_enabled = 0,
-	})
+if vim.fn.has("wsl") == 1 then
+  vim.api.nvim_set_var("clipboard", {
+    name = "win32yank-wsl",
+    copy = {
+        ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+        ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+    },
+    paste = {
+        ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+        ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  })
 end
