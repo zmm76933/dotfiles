@@ -10,34 +10,34 @@
 . "$DOTPATH"/etc/lib/vital.sh
 
 if is_linux; then
-    if has "/home/linuxbrew/.linuxbrew/bin/brew"; then
-      log_pass "brew: already installed"
-      exit
-    fi
+	if has "/home/linuxbrew/.linuxbrew/bin/brew"; then
+		log_pass "brew: already installed"
+		exit
+	fi
 fi
 
 if is_macos; then
-    if has "/opt/homebrew/bin/brew"; then
-      log_pass "brew: already installed"
-      exit
-    fi
+	if has "/opt/homebrew/bin/brew"; then
+		log_pass "brew: already installed"
+		exit
+	fi
 fi
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 if is_linux; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if is_macos; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 if has "brew"; then
-    brew doctor
+	brew doctor
 else
-    log_fail "error: brew: failed to install"
-    exit 1
+	log_fail "error: brew: failed to install"
+	exit 1
 fi
 
 log_pass "brew: installed successfully"

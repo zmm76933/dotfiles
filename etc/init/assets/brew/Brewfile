@@ -62,7 +62,6 @@ cask 'google-chrome'
 cask 'istat-menus'
 cask 'iterm2'
 cask 'karabiner-elements'
-cask 'kindle'
 cask 'logi-options-plus'
 cask 'onyx'
 cask 'qlcolorcode'
@@ -88,6 +87,7 @@ mas 'WireGuard', id: 1451685025
 mas 'Skitch', id: 425955336
 mas 'Apple configurator 2', id: 1037126344
 mas 'Amphetamine', id: 937984704
+mas 'Kindle', id: 302584613
 mas 'Speedtest by Ookla', id: 1153157709
 mas 'GarageBand', id: 682658836
 mas 'iMovie', id: 408981434
