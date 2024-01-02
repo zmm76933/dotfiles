@@ -23,7 +23,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = true },
-      autoformat = false,
       ---@type lspconfig.options
       servers = {
         cssls = {},
