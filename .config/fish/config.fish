@@ -2,15 +2,15 @@ set fish_greeting ""
 
 # platform
 switch (uname)
-  case Darwin
-    source (dirname (status --current-filename))/config-macos.fish
-  case Linux
-    source (dirname (status --current-filename))/config-linux.fish
-    if [ "(uname -r | grep microsoft)" != '' ]
-      source (dirname (status --current-filename))/config-windows.fish
-    end
-  case '*'
-    # Do nothing
+    case Darwin
+        source (dirname (status --current-filename))/config-macos.fish
+    case Linux
+        source (dirname (status --current-filename))/config-linux.fish
+        if [ "(uname -r | grep microsoft)" != '' ]
+          source (dirname (status --current-filename))/config-windows.fish
+        end
+    case '*'
+      # Do nothing
 end
 
 # theme
@@ -22,15 +22,15 @@ set -g theme_hostname always
 
 # aliases
 if type -q eza
-  alias ls "eza -g --icons"
-  alias la "eza -a -g --icons"
-  alias ll "eza -l -g --icons"
-  alias lla "ll -a"
+    alias ls "eza -g --icons"
+    alias la "eza -a -g --icons"
+    alias ll "eza -l -g --icons"
+    alias lla "ll -a"
 else
-  alias ls "ls -p -G"
-  alias la "ls -A"
-  alias ll "ls -l"
-  alias lla "ll -A"
+    alias ls "ls -p -G"
+    alias la "ls -A"
+    alias ll "ls -l"
+    alias lla "ll -A"
 end
 alias g git
 command -qv nvim && alias vi nvim

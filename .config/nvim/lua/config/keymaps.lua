@@ -25,9 +25,9 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 
 -- Diagnostics
 keymap.set("n", "<C-l>", function()
-	vim.diagnostic.goto_next()
+  vim.diagnostic.goto_next()
 end, opts)
 
 keymap.set("n", "<leader>r", function()
-	require("zmm76933.utils").replaceHexWithHSL()
+  require("zmm76933.utils").replaceHexWithHSL()
 end)

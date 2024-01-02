@@ -22,14 +22,14 @@ PACKAGES="
     gnome-shell-extension-manager
     "
 
-if has "yum"; then
+if has "dnf"; then
     log_echo "Install packages with Yellowdog Updater Modified"
-    sudo yum -y install $PACKAGES
+    sudo dnf -y install $PACKAGES
 elif has "apt"; then
     log_echo "Install packages with Advanced Packaging Tool"
     sudo apt -y install $PACKAGES
 else
-    log_fail "error: require: YUM or APT"
+    log_fail "error: require: DNF or APT"
     exit 1
 fi
 

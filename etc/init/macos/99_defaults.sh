@@ -1798,9 +1798,9 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 ##  Cache Clear
 ## ----------------------------------------
 for app in \
-  "cfprefsd" \
-  "Dock" \
-  "Finder" \
-  "SystemUIServer"; do
-  killall "${app}"
+    "cfprefsd" \
+    "Dock" \
+    "Finder" \
+    "SystemUIServer"; do
+    killall "${app}"
 done
