@@ -23,6 +23,17 @@ function fzf_z
     end
 end
 
+function tmuxpopup -d "toggle tmux popup window"
+    set width '75%'
+    set height '75%'
+    set session (tmux display-message -p -F "#{session_name}")
+    if contains "popup" $session
+        tmux detach-client
+    else
+        tmux popup -d '#{pane_current_path}' -xC -yC -w$width -h$height -E "tmux attach -t popup || tmux new -s popup"
+    end
+end
+
 function ssh
     if test -n (printenv TMUX)
         set -l pane_id (tmux display -p '#{pane_id}')
