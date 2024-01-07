@@ -1250,7 +1250,7 @@
     (evil-define-key 'normal dired-mode-map
       " " 'quick-preview-at-point
       "ga" 'my:dired-mode-open-with
-      "gs" 'my:dired-mode-open-finder)
+      "go" 'my:dired-mode-open-finder)
     (evil-define-key 'normal calendar-mode-map
       "C" 'my:org-archive-find-date))
   )
@@ -1334,9 +1334,7 @@
         (eww link)
         (rename-buffer (format "*elfeed eww %s*" link)))))
   :bind
-  (("<f4>" . elfeed)
-   (:elfeed-search-mode-map
-    ("C-c C-u" . elfeed-update)))
+  (("<f4>" . elfeed))
   ;; :init
   ;; (setq elfeed-feeds
   ;;     '("http://nullprogram.com/feed/"
