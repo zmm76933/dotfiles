@@ -416,9 +416,12 @@ is_enter_pressed()
 ; Windows Terminal
 ; double tap Left Shift
 ;
-~LShift Up::
+~LShift::
     If (A_PriorHotkey == A_ThisHotkey And A_TimeSincePriorHotkey < 200) {
         Send ^+{F12}
+    } Else {
+        KeyWait LShift
+        Return
     }
     Return
 
@@ -426,15 +429,16 @@ is_enter_pressed()
 ; Explorer
 ; double tap Right Shift
 ;
-~RShift Up::
+~RShift::
     If (A_PriorHotkey == A_ThisHotkey And A_TimeSincePriorHotkey < 200) {
         If (WinExist("ahk_class CabinetWClass")) {
             WinActivate
         } Else If ("C:\Windows\explorer.exe") {
             run "C:\Windows\explorer.exe"
         }
-    }
-    Return
+    } Else {
+        KeyWait RShift
+        Return
 
 ;
 ; Mouse operation
