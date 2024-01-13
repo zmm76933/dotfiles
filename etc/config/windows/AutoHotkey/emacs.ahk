@@ -439,6 +439,8 @@ is_enter_pressed()
     } Else {
         KeyWait RShift
         Return
+    }
+    Return
 
 ;
 ; Mouse operation
