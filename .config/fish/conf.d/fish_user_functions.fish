@@ -35,7 +35,7 @@ function tmuxpopup -d "toggle tmux popup window"
 end
 
 function ssh
-    if test -n (printenv TMUX)
+    if test -n "$TMUX"
         set -l pane_id (tmux display -p '#{pane_id}')
         command ssh $argv
         tmux select-pane -t $pane_id -P default
