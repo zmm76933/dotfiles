@@ -44,14 +44,8 @@ set -gx EDITOR nvim
 set -gx DOTPATH $HOME/.dotfiles
 set -gx PATH ~/bin $PATH
 
-# temporary setting
-set -gx PATH $HOME/.asdf/shims $PATH
 # asdf
 source (brew --prefix asdf)/libexec/asdf.fish
-
-# Go
-set -gx GOPATH (go env GOPATH)
-set -gx PATH $GOPATH/bin $PATH
 
 # direnv
 direnv hook fish | source
@@ -65,5 +59,5 @@ set -gx GPG_TTY (tty)
 # SKK
 set -gx SKKSERVER localhost
 
-# Xapian
+# Xapian for mu4e
 set -gx XAPIAN_CJK_NGRAM japanese
