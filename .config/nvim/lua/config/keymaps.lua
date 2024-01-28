@@ -33,5 +33,5 @@ keymap.set("n", "<leader>r", function()
 end)
 
 keymap.set("n", "<leader>i", function()
-	require("zmm76933.lsp").toggleInlayHints()
+  require("zmm76933.lsp").toggleInlayHints()
 end)
