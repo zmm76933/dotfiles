@@ -29,5 +29,9 @@ keymap.set("n", "<C-l>", function()
 end, opts)
 
 keymap.set("n", "<leader>r", function()
-  require("zmm76933.utils").replaceHexWithHSL()
+  require("zmm76933.hsl").replaceHexWithHSL()
+end)
+
+keymap.set("n", "<leader>i", function()
+	require("zmm76933.lsp").toggleInlayHints()
 end)
