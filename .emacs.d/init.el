@@ -173,12 +173,14 @@
         exec-path-from-shell-variables '("GPG_KEY_ID"
                                          "PASSWORD_STORE_DIR"
                                          "PATH"
+                                         "MANPATH"
                                          "SHELL"
                                          "SKKSERVER"
                                          "XAPIAN_CJK_NGRAM"
 					                     "VIRTUAL_ENV"
                                          "WSL_DISTRO_NAME"))
-  (when (window-system) (exec-path-from-shell-initialize))
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
   (defconst my:d:password-store
     (if (getenv "PASSWORD_STORE_DIR")
         (expand-file-name (concat "Emacs/" (system-name))
@@ -1212,6 +1214,15 @@
   :hook
   (emacs-startup-hook . evil-mode)
   :config
+  (evil-add-command-properties #'isearch-forward :jump t)
+  (evil-add-command-properties #'consult-line :jump t)
+  (evil-add-command-properties #'consult-org-heading :jump t)
+  (evil-add-command-properties #'consult-org-agenda :jump t)
+  (evil-set-command-properties #'org-open-at-point :jump t)
+  (evil-set-command-properties #'org-backward-heading-same-level :jump t)
+  (evil-set-command-properties #'org-forward-heading-same-level :jump t)
+  (evil-set-command-properties #'org-previous-visible-heading :jump t)
+  (evil-set-command-properties #'org-next-visible-heading :jump t)
   (leaf evil-collection
     :ensure t
     :config
