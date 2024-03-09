@@ -174,6 +174,8 @@
                                          "PASSWORD_STORE_DIR"
                                          "PATH"
                                          "MANPATH"
+                                         "LANG"
+                                         "LC_CTYPE"
                                          "SHELL"
                                          "SKKSERVER"
                                          "XAPIAN_CJK_NGRAM"
