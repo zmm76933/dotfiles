@@ -41,6 +41,35 @@
           (lambda ()
             (setq file-name-handler-alist my:saved-file-name-handler-alist)))
 
+(defvar network-drives '(("/Volumes" . "//nas01")
+                         ("/Volumes" . "/nas01")
+                         ("/Volumes" . "//192.168.32.11")
+                         ("/Volumes" . "/192.168.32.11")))
+
+;;;###autoload
+(defun my:put-current-path-to-clipboard ()
+  (interactive)
+  (let ((file-path buffer-file-name)
+        (dir-path default-directory))
+    (defun convert-path-as-windows(path)
+      (let ((a path)
+            (number 0))
+        (while (< number (length network-drives))
+          (when (string-match (car (nth number network-drives)) a)
+            (setq a (s-replace (car (nth number network-drives)) (cdr (nth number network-drives)) a))
+            (setq number (length network-drives))
+            )
+          (setq number (1+ number)))
+        (s-replace "/" "\\" a)))
+    (cond (file-path
+           (kill-new (convert-path-as-windows file-path))
+           (message "(%s) --> clipboard" (convert-path-as-windows file-path)))
+          (dir-path
+           (kill-new (convert-path-as-windows dir-path))
+           (message "(%s) --> clipboard" (convert-path-as-windows dir-path)))
+          (t
+           (error-message-string "Fail to get path name.")))))
+
 ;;;###autoload
 (defun my:shorten-file-path (fpath max-length)
   "Show up to `max-length' characters of a directory name `fpath' like zsh"
@@ -326,6 +355,30 @@
   :custom
   ((linum-format     . "%5d ")
    (line-number-mode . nil))
+  )
+
+(leaf minibuffer
+  :hook
+  (minibuffer-inactive-mode-hook . (lambda ()
+                                     (let ((clipbord (gui-selection-value)))
+                                       (unless (null clipbord)
+                                         (setq kill-ring (cons clipbord kill-ring))
+                                         (setq kill-ring-yank-pointer kill-ring)))
+                                     (unless (null kill-ring)
+                                       (unless (null kill-ring-yank-pointer)
+                                         (let ((a (s-replace "\\" "/" (car kill-ring)))
+                                               (number 0))
+                                           (while (< number (length network-drives))
+                                             (case (string-match (cdr (nth number network-drives)) a)
+                                               (0
+                                                (setq kill-ring (cons (s-replace (cdr (nth number network-drives)) (car (nth number network-drives)) a) kill-ring ))
+                                                (setq number (length network-drives)))
+                                               (t
+                                                (setq kill-ring (cons a kill-ring))
+                                                (setq number (1+ number))
+                                                ))
+                                             (setq kill-ring-yank-pointer kill-ring)
+                                             ))))))
   )
 
 (leaf autorevert
