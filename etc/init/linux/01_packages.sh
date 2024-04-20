@@ -10,37 +10,29 @@ set -eu
 . "$DOTPATH"/etc/lib/vital.sh
 
 PACKAGES="
+    coreutils
     build-essential
+    net-tools
     procps
     sysstat
-    net-tools
+    iproute2
+    iputils-ping
+    traceroute
+    tcpdump
+    netcat-openbsd
+    nmap
+    bridge-utils
+    grep
+    lsof
     curl
-    llvm
-    file
+    wget
+    iptables
     porg
     git
-    libbz2-dev
-    libevdev-dev
-    libffi-dev
-    liblzma-dev
-    libncursesw5-dev
-    libreadline-dev
-    libsqlite3-dev
-    libssl-dev
-    libxml2-dev
-    libxmlsec1-dev
-    tk-dev
-    xz-utils
-    zlib1g-dev
     avahi-daemon
     cifs-utils
-    etckeeper
-    fortunes-ubuntu-server
-    isc-dhcp-server
-    openssh-server
     samba
     smartmontools
-    squid
     wireguard-tools
     "
 
