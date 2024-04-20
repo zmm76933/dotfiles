@@ -1812,6 +1812,8 @@ This command must be called in parent node which should have one of `org-relate-
     ;; 折り返し無し
     (org-startup-truncated      . t)
     ;; DONEの時刻を記録
+    (org-startup-folded         . 'show2levels)
+    ;; 見出しの初期状態(見出しだけ表示)
     (org-log-done               . 'time)
     ;; link handler → xdg-open 任せ
     (org-file-apps              . '((auto-mode . emacs)
