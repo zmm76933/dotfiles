@@ -1309,6 +1309,9 @@
                             mu4e
                             dired
                             vterm)))
+  (leaf evil-surround
+            :config
+            (global-evil-surround-mode))
   (leaf evil-org
     :ensure t
     :hook
