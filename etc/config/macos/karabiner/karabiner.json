@@ -42,6 +42,7 @@
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$",
                       "^co\\.zeit\\.hyperterm$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
@@ -115,6 +116,7 @@
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$",
                       "^co\\.zeit\\.hyperterm$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
@@ -172,14 +174,15 @@
             ]
           },
           {
-            "description": "For Terminal/iTerm2: Swap Command and Option",
+            "description": "For Terminals: Swap Command and Option",
             "manipulators": [
               {
                 "conditions": [
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -204,7 +207,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -229,7 +233,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -260,7 +265,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -291,7 +297,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -322,7 +329,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -353,7 +361,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -378,7 +387,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -403,7 +413,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -434,7 +445,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -465,7 +477,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -496,7 +509,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -527,7 +541,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$"
+                      "^com\\.googlecode\\.iterm2$",
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -954,14 +969,15 @@
             ]
           },
           {
-            "description": "For Terminal/iTerm2: AquaSKK keybindings",
+            "description": "For Terminals: AquaSKK keybindings",
             "manipulators": [
               {
                 "conditions": [
                   {
                     "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal",
                       "^com\\.googlecode\\.iterm2",
-                      "^com\\.apple\\.Terminal"
+                      "^com\\.github\\.wez\\.wezterm$"
                     ],
                     "type": "frontmost_application_if"
                   }
