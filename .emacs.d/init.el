@@ -1177,9 +1177,25 @@
   (setq mu4e-headers-fields
         '( (:human-date    .  20)    ;; alternatively, use :human-date
            (:flags         .   6)
+           (:tags          .  10)
            (:mailing-list  .  20)
            (:from          .  35)
            (:subject       .  nil))) ;; alternatively, use :thread-subject
+
+  ;; Marks
+  ;; See: https://www.djcbsoftware.nl/code/mu/mu4e/Adding-a-new-kind-of-mark.html
+  (add-to-list 'mu4e-marks
+               '(tag
+                 :char       "g"
+                 :prompt     "gtag"
+                 :ask-target (lambda () (read-string "What tag do you want to add?"))
+                 :action     (lambda (docid msg target)
+                               (mu4e-action-retag-message msg (concat "+" target)))))
+  (mu4e~headers-defun-mark-for tag)
+  (add-to-list 'mu4e-headers-actions
+               '("retag message" . mu4e-action-retag-message) t)
+  (add-to-list 'mu4e-view-actions
+               '("retag message" . mu4e-action-retag-message) t)
 
   ;; 添付ファイルの保存先を"~/Downloads"に変更
   (setq mu4e-attachment-dir "~/Downloads")
