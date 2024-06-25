@@ -1951,6 +1951,10 @@ See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
                (my:org-id-add-to-headlines-in-file))))
   )
 
+(leaf ob-yaml
+  :el-get llhotka/ob-yaml
+  )
+
 (leaf org-babel
   :blackout `((org-src-mode . ,(format " %s" (all-the-icons-octicon "code"))))
   :custom
@@ -1959,15 +1963,15 @@ See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
    ;; TAB の挙動
    (org-src-tab-acts-natively        . t)
    ;; インデント
-   (org-edit-src-content-indentation . 2)
-   ;; インデントを残す
-   (org-src-preserve-indentation     . t)
+   (org-edit-src-content-indentation . 0)
    ;; load languages
    (org-babel-load-languages
     . '((emacs-lisp . t)
         (shell . t)
         (python . t)
-        (ruby . t))))
+        (ruby . t)
+        (yaml . t)
+        (org . t))))
   )
 
 (leaf org-roam
@@ -2649,6 +2653,8 @@ go to today's entry in record file."
 (leaf keg :ensure t)
 
 (leaf keg-mode :ensure t)
+
+(leaf yaml-mode :ensure t)
 
 (leaf esup
   :ensure t
