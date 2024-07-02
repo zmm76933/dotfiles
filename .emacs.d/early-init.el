@@ -1,7 +1,8 @@
-;; -*- lexical-binding: nil -*-
+;; -*- lexical-binding: t -*-
+;; (require 'profiler)    ;; 必要に応じて有効化
+;; (profiler-start 'cpu)
 
 (setq gc-cons-threshold most-positive-fixnum)
-
 (setq package-enable-at-startup nil
       package-quickstart nil)
 ;;
@@ -20,9 +21,7 @@
 ;; (setq file-name-handler-alist nil) ;; 🤔
 (setq use-file-dialog nil)
 ;;
-(when (featurep 'native-compile)
-  (setq native-comp-async-report-warnings-errors nil
-        native-comp-deferred-compilation t)
-  )
+;; (setq native-comp-speed 2
+;;       native-compile-target-directory (expand-file-name "eln-cache" user-emacs-directory))
 (provide 'early-init)
 ;;; early-init.el ends here

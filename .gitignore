@@ -100,3 +100,6 @@ Pods/
 # nvim
 .config/nvim/lazyvim.json
 .config/nvim/lazy-lock.json
+
+# peazip
+.config/peazip/

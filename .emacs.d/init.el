@@ -1,11 +1,13 @@
 ;; -*- lexical-binding: nil -*-
-;; (require 'profiler)
-;; (profiler-start 'cpu)
+;; (eval-when-compile
+;;   (require 'profiler)
+;;   (profiler-start 'cpu)
+;;   )
 
-(when load-file-name
-  (setq user-emacs-directory
-        (expand-file-name (file-name-directory load-file-name))))
 (eval-and-compile
+  (when load-file-name
+    (setq user-emacs-directory
+          (expand-file-name (file-name-directory load-file-name))))
   (defconst my:d:share
     (expand-file-name "share/" user-emacs-directory))
   (defconst my:d:tmp
@@ -17,15 +19,23 @@
   (defconst my:d:org
     (expand-file-name "~/Dropbox/org")))
 
-(eval-when-compile (require 'cl-lib nil t))
+(eval-when-compile
+  (require 'cl-lib nil t))
 
 (eval-and-compile
-  (setq byte-compile-warnings '(not cl-functions obsolete free-vars))
+  (setq byte-compile-warnings t)
+  ;; (setq byte-compile-warnings '(not cl-functions free-vars docstrings unresolved))
+  )
+
+(eval-and-compile
   (if (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
       (setq native-comp-speed  2
-            native-comp-async-report-warnings-errors 'silent))
-  (setq debug-on-error  t))
+            native-comp-async-report-warnings-errors nil ;; 'silent
+            native-compile-target-directory (expand-file-name "eln-cache" user-emacs-directory)
+            native-comp-jit-compilation-deny-list '(".*-\\(loaddefs\\|autoloads\\)\\.\\(el\\.gz\\|el\\)")
+            ))
+  (setq debug-on-error t))
 
 (setq gc-cons-threshold most-positive-fixnum)
 ;; Run GC every 60 seconds if emacs is idle.
@@ -45,6 +55,52 @@
                          ("/Volumes" . "/nas01")
                          ("/Volumes" . "//192.168.32.11")
                          ("/Volumes" . "/192.168.32.11")))
+
+;; elpa/gnutls workaround
+(eval-and-compile
+;;  (when (version<=  emacs-version "26.2")  ;; => for syntax hightlight
+;;    (customize-set-variable 'gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+  (setq package-archives '(("gnu"    . "https://elpa.gnu.org/packages/")
+                           ("melpa"  . "https://melpa.org/packages/")
+                           ("org"    . "https://orgmode.org/elpa/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           )
+        package-gnupghome-dir (expand-file-name ".gnupg" (getenv "HOME"))
+        package-quickstart nil
+        ;; package-quickstart-file (expand-file-name "package-quickstart.el" my:d:tmp)
+        )
+  ;; (add-hook 'kill-emacs-hook 'package-quickstart-refresh)
+  (if (and (fboundp 'native-comp-available-p)
+           (native-comp-available-p))
+      (setq package-native-compile t))
+  (package-initialize)
+  (unless (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf t)
+    )
+  )
+
+(leaf leaf-convert
+  :ensure t)
+
+(leaf leaf-tree
+  :ensure t
+  :custom ((imenu-list-size . 30)
+           (imenu-list-position . 'left)))
+
+(leaf leaf-keywords
+  :doc "Use leaf as a package manager"
+  :url "https://github.com/conao3/leaf.el"
+  :ensure t
+  :init
+  (leaf blackout :ensure t)
+  (leaf hydra :ensure t)
+  (leaf el-get
+    :ensure t
+    :init (setq el-get-git-shallow-clone t))
+  :config
+  (leaf-keywords-init)
+  )
 
 ;;;###autoload
 (defun my:put-current-path-to-clipboard ()
@@ -113,6 +169,7 @@
           (switch-to-buffer "*scratch*")))
     (cond ((= arg 0) (message "*scratch* is cleared up."))
           ((= arg 1) (message "another *scratch* is created")))))
+
 ;;;###autoload
 (defun my:buffer-name-list ()
   "buffer 一覧の取得"
@@ -130,6 +187,7 @@
 
 (defvar my:delete-trailing-whitespace-exclude-suffix
   (list "\\.rd$" "\\.md$" "\\.rbt$" "\\.rab$"))
+
 ;;;###autoload
 (defun my:delete-trailing-whitespace ()
   (interactive)
@@ -141,102 +199,38 @@
     (delete-trailing-whitespace))))
 (add-hook 'before-save-hook 'my:delete-trailing-whitespace)
 
+;;;###autoload
 ; cargo cult adaptation of event-apply-control-modifier
 (defun my:event-apply-control-meta-modifiers (ignore-prompt)
+  (ignore ignore-prompt)
   (vector
    (event-apply-modifier (event-apply-modifier (read-event)
                                                'control 26 "C-")
                          'meta 27 "M-")))
 (define-key function-key-map (kbd "C-x @") 'my:event-apply-control-meta-modifiers)
 
-;; elpa/gnutls workaround
-(eval-and-compile
-  (when (version<=  emacs-version "26.2")  ;; => for syntax hightlight
-    (customize-set-variable 'gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
-  (setq package-archives '(("gnu"    . "https://elpa.gnu.org/packages/")
-                           ("melpa"  . "https://melpa.org/packages/")
-                           ("org"    . "https://orgmode.org/elpa/")
-                           ("nongnu" . "https://elpa.nongnu.org/nongnu/"))
-        package-gnupghome-dir (expand-file-name ".gnupg" (getenv "HOME")))
-  (if (and (fboundp 'native-comp-available-p)
-           (native-comp-available-p))
-      (setq package-native-compile t)))
-(eval-when-compile
-  (unless (file-exists-p (expand-file-name "bootstrap-stamp" my:d:tmp))
-    (package-refresh-contents)
-    (with-temp-buffer
-      (write-file (expand-file-name "bootstrap-stamp" my:d:tmp)))
-    ))
-(eval-and-compile (package-initialize))
-
-(eval-and-compile
-  (unless (package-installed-p 'leaf)
-    (package-refresh-contents)
-    (package-install 'leaf t))
-  (leaf leaf-keywords
-    :ensure t
-    :init
-    (leaf blackout :ensure t)
-    (leaf el-get
-      :ensure t
-      :init (setq el-get-git-shallow-clone t)
-      )
-    :config
-    (leaf-keywords-init)
-    )
-  )
-
-(leaf leaf
-  :config
-  (leaf leaf-convert :ensure t)
-  (leaf leaf-tree
-    :ensure t
-    :custom ((imenu-list-size . 30)
-             (imenu-list-position . 'left))))
-
 (leaf exec-path-from-shell
   :ensure t
+  :custom
+  `((exec-path-from-shell-variables
+     . '("GPG_KEY_ID"
+         "PASSWORD_STORE_DIR"
+         "PATH"
+         "MANPATH"
+         "LANG"
+         "LC_CTYPE"
+         "SHELL"
+         "SKKSERVER"
+         "XAPIAN_CJK_NGRAM"
+         "VIRTUAL_ENV"
+         "WSL_DISTRO_NAME"))
+    (exec-path-from-shell-arguments . nil))
   :config
-  (setq exec-path-from-shell-check-startup-files nil
-        exec-path-from-shell-arguments nil
-        exec-path-from-shell-variables '("GPG_KEY_ID"
-                                         "PASSWORD_STORE_DIR"
-                                         "PATH"
-                                         "MANPATH"
-                                         "LANG"
-                                         "LC_CTYPE"
-                                         "SHELL"
-                                         "SKKSERVER"
-                                         "XAPIAN_CJK_NGRAM"
-					                     "VIRTUAL_ENV"
-                                         "WSL_DISTRO_NAME"))
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
   (defconst my:d:password-store
     (if (getenv "PASSWORD_STORE_DIR")
         (expand-file-name (concat "Emacs/" (system-name))
                           (getenv "PASSWORD_STORE_DIR")) nil))
-  )
-
-(leaf *authentication
-  :if (and (getenv "GPG_KEY_ID")
-           my:d:password-store)
-  :init
-  (setq epa-pinentry-mode 'loopback)
-  (setq leaf-default-plstore
-     (plstore-open
-         (expand-file-name "plstore.plist" my:d:password-store)))
-  (add-to-list 'vc-directory-exclusion-list
-               (expand-file-name my:d:password-store))
-  (leaf auth-source
-    :init
-    (setq auth-source-gpg-encrypt-to '(getenv "GPG_KEY_ID")))
-  (leaf password-store :ensure t)
-  (leaf auth-source-pass :ensure t)
-  (leaf plstore
-    :init
-    (setq plstore-secret-keys 'silent
-          plstore-encrypt-to  (getenv "GPG_KEY_ID")))
   )
 
 (leaf cp5022x
@@ -342,7 +336,9 @@
   )
 
 (leaf delsel
-  :global-minor-mode delete-selection-mode)
+  :hook
+  (emacs-startup-hook . delete-selection-mode)
+  )
 
 (leaf paren
   :custom
@@ -442,20 +438,24 @@
   )
 
 (leaf whitespace
-  :blackout ((global-whitespace-mode . "")
-             (whitespace-mode        . ""))
+  ;; :blackout ((global-whitespace-mode . "")
+  ;;            (whitespace-mode        . ""))
   :hook (emacs-startup-hook . global-whitespace-mode)
   :custom
   ((whitespace-line-column      . 72)
    (whitespace-style
-    . '(face        ; faceを使う
+    . '(face        ; faceを使う. *-mark に必要
         trailing    ; 行末の空白を対象.
         tabs        ; tab
         spaces      ; space
+        empty       ; 前後の空行
+        space-mark  ; 可視化の際の置き換えを有効化
+        tab-mark    ; 可視化の際の置き換えを有効化
         ))
    (whitespace-display-mappings . '((space-mark ?\u3000 [?\□])
                                     (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
    (whitespace-space-regexp     . "\\(\u3000+\\)")
+   (whitespace-trailing-regexp  . "\\([ \u00A0]+\\)$")
    (whitespace-global-modes     . '(not eww-mode
                                         term-mode
                                         eshell-mode
@@ -488,10 +488,9 @@
 
 (leaf tramp
   :preface
-  (setq tramp-persistency-file-name (expand-file-name "tramp" my:d:tmp))
+  (defvar tramp-persistency-file-name (expand-file-name "tramp" my:d:tmp))
   :custom
-  `((tramp-persistency-file-name
-     . ,(expand-file-name "tramp" my:d:tmp))
+  `((tramp-persistency-file-name . ,(expand-file-name "tramp" my:d:tmp))
     (tramp-completion-reread-directory-timeout . nil)
     (remote-file-name-inhibit-cache . nil)
     (vc-ignore-dir-regexp
@@ -500,10 +499,9 @@
                 tramp-file-name-regexp))
     )
   :hook
-  (kill-emacs-hook
-   . (lambda ()
-       (if (file-exists-p tramp-persistency-file-name)
-           (delete-file tramp-persistency-file-name))))
+  (kill-emacs-hook . (lambda ()
+                       (if (file-exists-p tramp-persistency-file-name)
+                           (delete-file tramp-persistency-file-name))))
   )
 
 (leaf browse-url
@@ -558,29 +556,69 @@
   :hook
   (defalias 'ps-mule-header-string-charset 'ignore)
   :config
-  (setq ps-mule-font-info-database-default
-        '((iso-8859-1
-           (normal nil nil))
-          (katakana-jisx0201
-           (normal builtin "Ryumin-Light-Katakana")
-           (bold builtin "GothicBBB-Medium-Katakana"))
-          (latin-jisx0201
-           (normal builtin "Ryumin-Light-Hankaku")
-           (bold builtin "GothicBBB-Medium-Hankaku"))
-          (japanese-jisx0208
-           (normal builtin "Ryumin-Light-Ext-H")
-           (bold builtin "GothicBBB-Medium-Ext-H"))
-          (japanese-jisx0213-2
-           (normal builtin "Ryumin-Light-Ext-H")
-           (bold builtin "GothicBBB-Medium-Ext-H"))
-          (japanese-jisx0213.2004-1
-           (normal builtin "Ryumin-Light-2004-H")
-           (bold builtin "GothicBBB-Medium-H"))
-          (unicode-bmp
-           (normal builtin "Ryumin-Light-Ext-H")
-           (bold builtin "GothicBBB-Medium-Ext-H"))
-          )
-        )
+  ;; (setq ps-mule-font-info-database-default
+  ;;       '((iso-8859-1
+  ;;          (normal nil nil))
+  ;;         (katakana-jisx0201
+  ;;          (normal builtin "Ryumin-Light-Katakana")
+  ;;          (bold builtin "GothicBBB-Medium-Katakana"))
+  ;;         (latin-jisx0201
+  ;;          (normal builtin "Ryumin-Light-Hankaku")
+  ;;          (bold builtin "GothicBBB-Medium-Hankaku"))
+  ;;         (japanese-jisx0208
+  ;;          (normal builtin "Ryumin-Light-Ext-H")
+  ;;          (bold builtin "GothicBBB-Medium-Ext-H"))
+  ;;         (japanese-jisx0213-2
+  ;;          (normal builtin "Ryumin-Light-Ext-H")
+  ;;          (bold builtin "GothicBBB-Medium-Ext-H"))
+  ;;         (japanese-jisx0213.2004-1
+  ;;          (normal builtin "Ryumin-Light-2004-H")
+  ;;          (bold builtin "GothicBBB-Medium-H"))
+  ;;         (unicode-bmp
+  ;;          (normal builtin "Ryumin-Light-Ext-H")
+  ;;          (bold builtin "GothicBBB-Medium-Ext-H"))
+  ;;         )
+  ;;       )
+  )
+
+(leaf *authentication
+  :if (and (getenv "GPG_KEY_ID")
+           my:d:password-store)
+  :init
+  (setq leaf-default-plstore
+     (plstore-open
+         (expand-file-name "plstore.plist" my:d:password-store)))
+  (add-to-list 'vc-directory-exclusion-list
+               (expand-file-name my:d:password-store))
+  (leaf auth-source
+    :init
+    (setq auth-source-gpg-encrypt-to '(getenv "GPG_KEY_ID")))
+  (leaf password-store :ensure t)
+  (leaf auth-source-pass :ensure t)
+  (leaf plstore
+    :custom
+    `((plstore-secret-keys . 'silent)
+      (plstore-encrypt-to  . ,(getenv "GPG_KEY_ID")))
+    )
+  )
+
+(defvar skk-user-directory (concat my:d:tmp "skk"))
+(unless (file-directory-p skk-user-directory)
+  (make-directory skk-user-directory))
+(unless (locate-library "skk")
+  (package-install 'ddskk t))
+(leaf skk
+  :commands skk-make-indicator-alist
+  :bind (("C-\\"    . skk-mode))
+  :init
+  (setq skk-preload t)
+  (setq skk-init-file (concat user-emacs-directory "init-ddskk")
+        default-input-method "japanese-skk")
+  :hook
+  (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (minibuffer-setup-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (mu4e-compose-mode-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
+  (evil-normal-state-entry-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
 (leaf undo-tree
@@ -657,6 +695,10 @@
 (leaf recentf
   :defun
   (recentf-save-list recentf-cleanup)
+  :preface
+  (defun my:recentf-track-visited-file (_prev _curr)
+    (and buffer-file-name
+         (recentf-add-file buffer-file-name)))
   :init
   (leaf recentf-ext :ensure t)
   :hook
@@ -672,22 +714,17 @@
                                  "^/ssh:"
                                  "/TAGS$"
                                  "^#\\.*"
-                                 "^/home/zmm76933/.emacs.d/tmp/\\.*"
-                                 "^/home/zmm76933/.dotfiles/Emacs/tmp/\\.*"
-                                 "^/Users/zmm76933/.emacs.d/tmp/\\.*"
-                                 "^/Users/zmm76933/.dotfiles/Emacs/tmp/\\.*"
                                  "^/[^/:]+:"
                                  "bookmarks"
                                  "\\.*COMMIT_EDITMSG$"
-                                 ".*-autoloads.el$"
-                                 "^/home/zmm76933/.emacs.d/pkg/\\.*"
                                  "^/home/zmm76933/.cache/\\.*"
-                                 "^/Users/zmm76933/.emacs.d/pkg/\\.*"
                                  "^/Users/zmm76933/.cache/\\.*"
-                                 )))
+                                 ))
+    )
   )
 
 (leaf calendar
+  :defvar calendar-holidays japanese-holidays
   :custom
   (;; 月と曜日の表示調整
    ;; (calendar-month-name-array . ["01" "02" "03" "04" "05" "06"
@@ -700,39 +737,39 @@
    (calendar-mark-holidays-flag . t)
    )
   :config
-  (leaf japanese-holidays
-    :ensure t
-    :require t
-    :after calendar
-    :custom
-    ((japanese-holiday-weekend         . '(0 6))
-     (japanese-holiday-weekend-marker
-      . '(holiday  ;; 日
-          nil      ;; 月
-          nil      ;; 火
-          nil      ;; 水
-          nil      ;; 木
-          nil      ;; 金
-          japanese-holiday-saturday))
-     )
-    :config
-    (setq calendar-holidays ; 他の国の祝日も表示させたい場合は適当に調整
-          (append japanese-holidays holiday-local-holidays))
-    ;;
-    (defun my:japanese-holiday-show (&rest _args)
-      (let* ((date (calendar-cursor-to-date t))
-             (calendar-date-display-form '((format "%s年 %s月 %s日（%s）" year month day dayname)))
-             (date-string (calendar-date-string date))
-             (holiday-list (calendar-check-holidays date)))
-        (when holiday-list
-          (message "%s: %s" date-string (mapconcat #'identity holiday-list "; ")))))
-    ;;
-    :hook
-    ((calendar-move-hook . my:japanese-holiday-show)
-     (calendar-today-visible-hook . japanese-holiday-mark-weekend)
-     (calendar-today-invisible-hook . japanese-holiday-mark-weekend)
-     (calendar-today-visible-hook . calendar-mark-today))
+  (with-eval-after-load 'japanese-holidays
+    (setq calendar-holidays (append japanese-holidays holiday-local-holidays)))
+  )
+
+(leaf japanese-holidays
+  :ensure t
+  :after calendar
+  :require t
+  :custom
+  `((japanese-holiday-weekend         . '(0 6))
+    (japanese-holiday-weekend-marker
+     . '(holiday  ;; 日
+         nil      ;; 月
+         nil      ;; 火
+         nil      ;; 水
+         nil      ;; 木
+         nil      ;; 金
+         japanese-holiday-saturday))
     )
+  :config
+  ;; autoload
+  (defun my:japanese-holiday-show (&rest _args)
+    (let* ((date (calendar-cursor-to-date t))
+           ;; (calendar-date-display-form '((format "%s年 %s月 %s日（%s）" year month day dayname)))
+           (date-string (calendar-date-string date))
+           (holiday-list (calendar-check-holidays date)))
+      (when holiday-list
+        (message "%s: %s" date-string (mapconcat #'identity holiday-list "; ")))))
+  :hook
+  ((calendar-move-hook            . my:japanese-holiday-show)
+   (calendar-today-visible-hook   . japanese-holiday-mark-weekend)
+   (calendar-today-invisible-hook . japanese-holiday-mark-weekend)
+   (calendar-today-visible-hook   . calendar-mark-today))
   )
 
 (leaf key-settings
@@ -795,8 +832,7 @@
   :bind
   ("<f2>" . eww)
   :custom
-  `((eww-bookmarks-directory
-     . ,(expand-file-name "eww" my:d:tmp))
+  `((eww-bookmarks-directory . ,(expand-file-name "eww" my:d:tmp))
     (eww-search-prefix
      . "https://www.google.com/search?&gws_rd=cr&complete=0&pws=0&tbs=li:1&q=")
     )
@@ -848,25 +884,6 @@
          (:ibuffer-mode-map
           ("C-x C-f" . my:ibuffer-find-file))
          )
-  )
-
-(defvar skk-user-directory (concat my:d:tmp "skk"))
-(unless (file-directory-p skk-user-directory)
-  (make-directory skk-user-directory))
-(unless (locate-library "skk")
-  (package-install 'ddskk t))
-(leaf skk
-  :commands skk-make-indicator-alist
-  :bind (("C-\\"    . skk-mode))
-  :init
-  (setq skk-preload t)
-  (setq skk-init-file (concat user-emacs-directory "init-ddskk")
-        default-input-method "japanese-skk")
-  :hook
-  (find-file-hooks . (lambda () (skk-mode) (skk-latin-mode-on)))
-  (minibuffer-setup-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
-  (mu4e-compose-mode-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
-  (evil-normal-state-entry-hook . (lambda () (skk-mode) (skk-latin-mode-on)))
   )
 
 (leaf xclip
@@ -1089,10 +1106,10 @@
 
   :custom
   `((completion-cycle-threshold . 4)
-    (tab-always-indent        . 'complete)
-    (corfu-cycle              . t)    ;; Enable cycling for `corfu-next/previous'
-    (corfu-auto               . t)    ;; Enable auto completion
-    (corfu-preselect-first    . nil)  ;; Disable candidate preselection
+    (tab-always-indent          . 'complete)
+    (corfu-cycle                . t)    ;; Enable cycling for `corfu-next/previous'
+    (corfu-auto                 . t)    ;; Enable auto completion
+    (corfu-preselect-first      . nil)  ;; Disable candidate preselection
     ;; (corfu-separator          . ?\s)  ;; Orderless field separator
     ;; (corfu-quit-at-boundary   . nil)  ;; Never quit at completion boundary
     ;; (corfu-quit-no-match      . nil)  ;; Never quit, even if there is no match
@@ -1309,9 +1326,6 @@
                             mu4e
                             dired
                             vterm)))
-  (leaf evil-surround
-            :config
-            (global-evil-surround-mode))
   (leaf evil-org
     :ensure t
     :hook
