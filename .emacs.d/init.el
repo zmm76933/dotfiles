@@ -23,8 +23,8 @@
   (require 'cl-lib nil t))
 
 (eval-and-compile
-  (setq byte-compile-warnings t)
-  ;; (setq byte-compile-warnings '(not cl-functions free-vars docstrings unresolved))
+  ;; (setq byte-compile-warnings t)
+  (setq byte-compile-warnings '(cl-functions free-vars docstrings unresolved))
   )
 
 (eval-and-compile
@@ -602,14 +602,15 @@
     )
   )
 
-(defvar skk-user-directory (concat my:d:tmp "skk"))
-(unless (file-directory-p skk-user-directory)
-  (make-directory skk-user-directory))
-(unless (locate-library "skk")
-  (package-install 'ddskk t))
 (leaf skk
   :commands skk-make-indicator-alist
-  :bind (("C-\\"    . skk-mode))
+  :bind (("C-\\" . skk-mode))
+  :preface
+  (defvar skk-user-directory (concat my:d:tmp "skk"))
+  (unless (file-directory-p skk-user-directory)
+    (make-directory skk-user-directory))
+  (unless (locate-library "skk")
+    (package-install 'ddskk t))
   :init
   (setq skk-preload t)
   (setq skk-init-file (concat user-emacs-directory "init-ddskk")
@@ -1124,7 +1125,7 @@
              (global-corfu-mode)))
   )
 
-(leaf cape :ensure t)
+;; (leaf cape :ensure t)
   ;; ;; 補完候補を出すときの文脈を特定
 
   ;; (defvar my-capf-context nil)
@@ -1618,6 +1619,57 @@
   (add-to-list 'ispell-skip-region-alist '("[^\000-\377]+"))
   )
 
+(leaf lookup
+  :if (and (file-exists-p "/etc/emacs/site-start.d/50lookup-el.el")
+           (file-exists-p "/usr/local/share/dict/lookup-enabled"))
+  :commands (lookup lookup-region lookup-pattern)
+  :bind (("C-c w" . lookup-pattern)
+         ("C-c W" . lookup-word))
+  :custom
+  (lookup-search-agents
+   . '((ndeb "/usr/local/share/dict/eijiro" :alias "英辞郎")
+       (ndeb "/usr/local/share/dict/waeijiro" :alias "和英辞郎")
+       (ndeb "/usr/local/share/dict/rikagaku5" :alias "理化学辞典 第5版")
+       (ndeb "/usr/local/share/dict/koujien4" :alias "広辞苑 第4版")
+       (ndeb "/usr/local/share/dict/wadai5" :alias "研究社 和英大辞典 第5版")
+       ;; (ndeb "/usr/local/share/dict/eidai6" :alias "研究社 英和大辞典 第6版")
+       ;; (ndeb "/usr/local/share/dict/colloc" :alias "研究社 英和活用大辞典 ")
+       ))
+  )
+
+(leaf text-adjust :vc (:url "https://github.com/uwabami/text-adjust.el"))
+
+(leaf flycheck
+  :ensure t
+  :disabled t
+  ;; :hook (prog-mode-hook . flycheck-mode)
+  :custom ((flycheck-display-errors-delay . 0.3))
+  :config
+  (leaf flycheck-popup-tip
+    :ensure t
+    :hook (flycheck-mode-hook . flycheck-popup-tip-mode))
+  ;; (leaf flycheck-inline
+  ;;   :ensure t
+  ;;   :hook (flycheck-mode-hook . flycheck-inline-mode))
+  ;;
+  (flycheck-define-checker textlint
+    "A linter for text."
+    :command ("textlint-wrapper.sh" source)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message (one-or-more not-newline)
+                       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+              line-end))
+    :modes (text-mode markdown-mode gfm-mode org-mode wl-draft-mode draft-mode))
+  :hook
+  ((text-mode-hook        . flycheck-mode)
+   (markdown-mode-hook    . flycheck-mode)
+   (gfm-mode-hook         . flycheck-mode)
+   (org-mode-hook         . flycheck-mode)
+   (mu4e-compose-mode-hook . flycheck-mode))
+  )
+
 (leaf smartparens
   :ensure t
   :blackout t
@@ -1633,7 +1685,7 @@
 
 (leaf rainbow-mode
   :ensure t
-  :blackout `((rainbow-mode . ,(format " %s" "\x1F308")))
+  ;; :blackout `((rainbow-mode . ,(format " %s" "\x1F308")))
   )
 
 (leaf project
@@ -1687,6 +1739,49 @@
   )
 
 (leaf lua-mode :ensure t)
+(leaf ssh-config-mode :ensure t)
+(leaf fish-mode :ensure t :mode "\\.fish\\'")
+(leaf rd-mode
+  :mode "\\.rd\\'"
+  :hook
+  (rd-mode-hook . rd-show-other-block-all))
+(leaf scss-mode
+  :ensure t
+  :init
+  (leaf css-mode :custom (css-indent-offset . 2))
+  :mode "\\.sass\\'" "\\.scss\\'")
+(leaf generic-x)
+(leaf systemd :ensure t)
+;; (leaf *misc-mode
+;;   :init
+;;   (leaf systemd :ensure t)
+;;   (leaf debian-el
+;;     :custom
+;;     `((debian-bug-download-directory . "~/Downloads"))
+;;     )
+(leaf yaml-mode :ensure t :mode "\\.yml\\'" "\\.yaml\\'")
+;;   (leaf textile-mode :ensure t)
+;;   (leaf dpkg-dev-el)
+;;   (leaf sh-mode
+;;     :custom ((system-uses-terminfo . nil))
+;;     )
+;;   (leaf apt-sources-list
+;;     :custom
+;;     ((apt-sources-list-suites
+;;       . '("stable" "stable-backports"
+;;           "testing" "testing-backports"
+;;           "unstable" "experimental"
+;;           "jessie" "jessie-backports"
+;;           "stretch" "stretch-backports"
+;;           "buster" "buster-backports"
+;;           "bullseye" "bullseye-backports"
+;;           "sid")))
+;;     )
+;;   (leaf info-colors
+;;     :ensure t
+;;     :hook
+;;     (Info-selection #'info-colors-fontify-node))
+;;   )
 
 (leaf markdown-mode
   :ensure t
@@ -1694,7 +1789,8 @@
   :config
   (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   (setq markdown-fontify-code-blocks-natively t)
-  (setq markdown-indent-on-enter 'indent-and-new-item))
+  (setq markdown-indent-on-enter 'indent-and-new-item)
+  )
 
 (leaf org
   :ensure t
@@ -2479,46 +2575,6 @@ go to today's entry in record file."
     (org-capture-bookmark . nil))
   )
 
-(leaf ssh-config-mode :ensure t)
-;; (leaf *misc-mode
-;;   :init
-;;   (leaf systemd :ensure t)
-;;   (leaf debian-el
-;;     :custom
-;;     `((debian-bug-download-directory . "~/Downloads"))
-;;     )
-;;   (leaf rd-mode
-;;     :mode "\\.rd$"
-;;     :hook
-;;     (rd-mode-hook . rd-show-other-block-all))
-;;   (leaf yaml-mode
-;;     :ensure t
-;;     :mode "\\(\.yml\\|\.yaml\\)"
-;;     )
-;;   (leaf generic-x)
-;;   (leaf textile-mode :ensure t)
-;;   (leaf dpkg-dev-el)
-;;   (leaf sh-mode
-;;     :custom ((system-uses-terminfo . nil))
-;;     )
-;;   (leaf apt-sources-list
-;;     :custom
-;;     ((apt-sources-list-suites
-;;       . '("stable" "stable-backports"
-;;           "testing" "testing-backports"
-;;           "unstable" "experimental"
-;;           "jessie" "jessie-backports"
-;;           "stretch" "stretch-backports"
-;;           "buster" "buster-backports"
-;;           "bullseye" "bullseye-backports"
-;;           "sid")))
-;;     )
-;;   (leaf info-colors
-;;     :ensure t
-;;     :hook
-;;     (Info-selection #'info-colors-fontify-node))
-;;   )
-
 ;;;###autoload
 (defun my:load-window-config ()
   "load window-system specific settings"
@@ -2659,17 +2715,17 @@ go to today's entry in record file."
 
 (leaf vterm
   :ensure t
+  :custom
+  `((vterm-always-compile-module . t))
   :hook
   (vterm-mode-hook
    . (lambda () (setq-local global-hl-line-mode nil)))
   )
 
+(leaf nginx-mode :ensure t)
+(leaf apache-mode :ensure t)
 (leaf keg :ensure t)
-
 (leaf keg-mode :ensure t)
-
-(leaf yaml-mode :ensure t)
-
 (leaf esup
   :ensure t
   :custom
