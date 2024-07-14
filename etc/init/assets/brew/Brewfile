@@ -2,6 +2,7 @@ tap 'homebrew/cask-fonts'
 tap 'railwaycat/emacsmacport'
 tap 'daipeihust/tap'
 
+brew 'ansifilter'
 brew 'asdf'
 brew 'aspell'
 brew 'autoconf'
