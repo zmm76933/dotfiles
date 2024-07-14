@@ -962,7 +962,7 @@
     :bind
     (:vertico-map
      ("C-l" . vertico-directory-up)
-     ("\d" . vertico-directory-delete-char))
+     ("<backspace>" . vertico-directory-delete-char))
     )
   )
 
