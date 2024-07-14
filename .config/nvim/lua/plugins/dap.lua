@@ -31,6 +31,12 @@ return {
         end,
       },
 
+      -- A library for asynchronous IO
+      {
+        "nvim-neotest/nvim-nio",
+        opts = {},
+      },
+
       -- virtual text for the debugger
       {
         "theHamsta/nvim-dap-virtual-text",
@@ -42,7 +48,7 @@ return {
         "folke/which-key.nvim",
         optional = true,
         opts = {
-          defaults = {
+          spec = {
             ["<leader>d"] = { name = "+debug" },
           },
         },

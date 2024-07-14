@@ -123,7 +123,7 @@ return {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = {
+      spec = {
         ["<leader>t"] = { name = "+test" },
       },
     },
