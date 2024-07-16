@@ -214,6 +214,7 @@
   :custom
   `((exec-path-from-shell-variables
      . '("GPG_KEY_ID"
+         "GPG_TTY"
          "PASSWORD_STORE_DIR"
          "PATH"
          "MANPATH"
@@ -300,6 +301,7 @@
     ;; (save-silently           . t)
     (use-short-answers       . t)
     (split-height-threshold  . nil)
+    (epg-pinentry-mode       . 'loopback)
     (scroll-step             . 1)
     (scroll-preserve-screen-position . 'always)
     ;;
@@ -1699,7 +1701,7 @@
 (leaf git
   :config
   (leaf consult-ghq
-    :el-get uwabami/consult-ghq
+    :vc (:url "https://github.com/uwabami/consult-ghq")
     :bind (("C-x g f" . consult-ghq-open))
     :custom
     `((consult-ghq-short-list . t)))
@@ -1722,7 +1724,8 @@
        . ,(expand-file-name "transient-levels.el" my:d:tmp))
       (transient-values-file
        . ,(expand-file-name "transient-values.el" my:d:tmp))
-      (transient-force-fixed-pitch . t)))
+      (transient-force-fixed-pitch . t)
+      (transient-default-level . 5)))
 
   (leaf orgit
     :ensure t)
