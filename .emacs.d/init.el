@@ -1365,7 +1365,12 @@
   (general-nmap
     :prefix "SPC"
     "o" 'evil-open-below
-    "O" 'evil-open-above)
+    "O" 'evil-open-above
+    "gj" 'git-gutter:next-hunk
+    "gk" 'git-gutter:previous-hunk
+    "gs" 'git-gutter:stage-hunk
+    "gr" 'git-gutter:revert-hunk
+    "gp" 'git-gutter:popup-hunk)
   (general-def
    :states '(insert emacs normal visual motion)
    :keymaps 'override
@@ -1737,6 +1742,9 @@
 
   (leaf git-gutter-fringe
     :ensure t
+    :custom
+    `((git-gutter:update-interval . 0.02)
+      (git-gutter:update-hooks . '(after-save-hook after-revert-hook)))
     :hook
     (emacs-startup-hook . global-git-gutter-mode))
   )
