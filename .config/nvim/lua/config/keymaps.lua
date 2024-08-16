@@ -35,3 +35,7 @@ end)
 keymap.set("n", "<leader>i", function()
   require("zmm76933.lsp").toggleInlayHints()
 end)
+
+-- Unset keymap
+keymap.set("n", "<A-j>", "<NOP>")
+keymap.set("n", "<A-k>", "<NOP>")
