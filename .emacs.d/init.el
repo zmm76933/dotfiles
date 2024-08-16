@@ -1670,10 +1670,10 @@
               line-end))
     :modes (text-mode markdown-mode gfm-mode org-mode wl-draft-mode draft-mode))
   :hook
-  ((text-mode-hook        . flycheck-mode)
-   (markdown-mode-hook    . flycheck-mode)
-   (gfm-mode-hook         . flycheck-mode)
-   (org-mode-hook         . flycheck-mode)
+  ((text-mode-hook         . flycheck-mode)
+   (markdown-mode-hook     . flycheck-mode)
+   (gfm-mode-hook          . flycheck-mode)
+   (org-mode-hook          . flycheck-mode)
    (mu4e-compose-mode-hook . flycheck-mode))
   )
 
@@ -2605,7 +2605,7 @@ go to today's entry in record file."
     (setq default-frame-alist
           (append (list
                    '(width  . 200)
-                   '(height . 100)
+                   '(height . 106)
                    '(top    . 72)
                    '(left   . 10)
                  )
