@@ -33,6 +33,7 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.splitkeep = "cursor"
 vim.opt.relativenumber = false
 vim.opt.clipboard:append({ "unnamedplus" })
+vim.opt.iskeyword:remove("_")
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
