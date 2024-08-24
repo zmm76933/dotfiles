@@ -5,6 +5,9 @@ discipline.cowboy()
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+keymap.set("i", "<C-f>", "<right>")
+keymap.set("i", "<C-b>", "<left>")
+
 keymap.set("n", "x", '"_x')
 
 -- Select all
