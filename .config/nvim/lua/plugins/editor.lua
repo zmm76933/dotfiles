@@ -217,15 +217,13 @@ return {
   },
 
   {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({ map_c_h = true })
-    end,
-  },
-
-  {
-    enabled = false,
     "echasnovski/mini.pairs",
+    config = function()
+      local map_bs = function(lhs, rhs)
+        vim.keymap.set('i', lhs, rhs, { expr = true, replace_keycodes = false })
+      end
+      require("mini.pairs").setup({ map_bs('<C-h>', 'v:lua.MiniPairs.bs()') })
+    end,
   },
 
   {

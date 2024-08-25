@@ -14,6 +14,8 @@ return {
         "css-lsp",
         "pyright",
         "ruff",
+        "ansible-language-server",
+        "ansible-lint",
       })
     end,
   },

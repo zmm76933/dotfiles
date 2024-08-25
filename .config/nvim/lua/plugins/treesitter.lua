@@ -28,7 +28,7 @@ return {
       },
 
       -- matchup = {
-      --  enable = true,
+      --   enable = true,
       -- },
 
       -- https://github.com/nvim-treesitter/playground#query-linter
