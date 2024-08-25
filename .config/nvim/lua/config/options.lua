@@ -54,9 +54,13 @@ end
 vim.g.lazyvim_python_lsp = "pyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 vim.g.lazyvim_python_ruff = "ruff"
-
 -- Set python3 provider
 vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/python")
+
+-- LSP Server to use for Ruby.
+-- Set to "solargraph" to use solargraph instead of ruby_lsp.
+vim.g.lazyvim_ruby_lsp = "ruby_lsp"
+vim.g.lazyvim_ruby_formatter = "rubocop"
 
 -- Use windows clipboard to copy and to paste
 if vim.fn.has("wsl") == 1 then
