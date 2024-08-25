@@ -21,9 +21,7 @@ return {
         "scss",
         "sql",
         "svelte",
-        "ninja",
         "python",
-        "rst",
         "toml",
       },
 
