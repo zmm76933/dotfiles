@@ -5,9 +5,11 @@ discipline.cowboy()
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Emacs keybindings
 keymap.set("i", "<C-f>", "<right>")
 keymap.set("i", "<C-b>", "<left>")
 
+-- Do things without affecting the registers
 keymap.set("n", "x", '"_x')
 
 -- Select all
@@ -27,10 +29,6 @@ keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
 -- Diagnostics
-keymap.set("n", "<C-l>", function()
-  vim.diagnostic.goto_next()
-end, opts)
-
 keymap.set("n", "<leader>r", function()
   require("zmm76933.hsl").replaceHexWithHSL()
 end)
@@ -40,5 +38,26 @@ keymap.set("n", "<leader>i", function()
 end)
 
 -- Unset keymap
-keymap.set("n", "<A-j>", "<NOP>")
-keymap.set("n", "<A-k>", "<NOP>")
+keymap.del("n", "<A-j>")
+keymap.del("n", "<A-k>")
+keymap.del("n", "<C-h>")
+keymap.del("n", "<C-j>")
+keymap.del("n", "<C-k>")
+keymap.del("n", "<C-l>")
+
+-- Unset keymap in terminal
+vim.cmd([[
+  tunmap <C-h>
+  tunmap <C-j>
+  tunmap <C-k>
+  tunmap <C-l>
+]])
+
+-- Add border in terminal
+local Util = require("lazyvim.util")
+local map = vim.keymap.set
+local lazyterm = function()
+  Util.terminal(nil, { cwd = Util.root(), border = "rounded" })
+end
+map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
+map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
