@@ -63,18 +63,20 @@ vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/pyt
 vim.g.lazyvim_ruby_lsp = "ruby_lsp"
 vim.g.lazyvim_ruby_formatter = "rubocop"
 
--- Use windows clipboard to copy and to paste
-if vim.fn.has("wsl") == 1 then
-  vim.api.nvim_set_var("clipboard", {
-    name = "win32yank-wsl",
+--  OSC52 over ssh
+if os.getenv("SSH_TTY") == nil then
+  vim.opt.clipboard:append("unnamedplus")
+else
+  vim.opt.clipboard:append("unnamedplus")
+  vim.g.clipboard = {
+    name = "OSC 52",
     copy = {
-        ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
-        ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+      ["+"] = require('vim.ui.clipboard.osc52').copy('+'),
+      ["*"] = require('vim.ui.clipboard.osc52').copy('*'),
     },
     paste = {
-        ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
-        ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+      ["+"] = require('vim.ui.clipboard.osc52').paste('+'),
+      ["*"] = require('vim.ui.clipboard.osc52').paste('*'),
     },
-    cache_enabled = 0,
-  })
+  }
 end
