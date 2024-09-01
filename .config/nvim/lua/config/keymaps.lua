@@ -38,8 +38,12 @@ keymap.set("n", "<leader>i", function()
 end)
 
 -- Unset keymap
+keymap.del("i", "<A-j>")
+keymap.del("i", "<A-k>")
 keymap.del("n", "<A-j>")
 keymap.del("n", "<A-k>")
+keymap.del("v", "<A-j>")
+keymap.del("v", "<A-k>")
 keymap.del("n", "<C-h>")
 keymap.del("n", "<C-j>")
 keymap.del("n", "<C-k>")

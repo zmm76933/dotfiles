@@ -66,6 +66,20 @@ vim.g.lazyvim_ruby_formatter = "rubocop"
 --  OSC52 over ssh
 if os.getenv("SSH_TTY") == nil then
   vim.opt.clipboard:append("unnamedplus")
+  if vim.fn.has("wsl") == 1 then
+    vim.api.nvim_set_var("clipboard", {
+      name = "win32yank-wsl",
+      copy = {
+          ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+          ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -i --crlf",
+      },
+      paste = {
+          ["+"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+          ["*"] = "/mnt/c/ProgramData/win32yank/win32yank.exe -o --lf",
+      },
+      cache_enabled = 0,
+    })
+  end
 else
   vim.opt.clipboard:append("unnamedplus")
   vim.g.clipboard = {
