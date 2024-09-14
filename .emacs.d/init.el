@@ -971,8 +971,9 @@
 (leaf embark
   :ensure t
   :bind
-  (("C-h E" . embark-act)
-   ("C-h B" . embark-bindings))
+  (("M-g e" . embark-act)
+   ("C-'"   . embark-dwim)
+   ("M-g b" . embark-bindings))
   :config
   (setq prefix-help-command #'embark-prefix-help-command)
   (setq embark-action-indicator
@@ -1332,11 +1333,11 @@
   (leaf evil-org
     :ensure t
     :hook
-	(org-mode-hook . evil-org-mode)
-	(org-agenda-mode-hook . evil-org-mode)
-	:config
-	(require 'evil-org-agenda)
-	(evil-org-agenda-set-keys))
+    (org-mode-hook . evil-org-mode)
+    (org-agenda-mode-hook . evil-org-mode)
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
   (leaf evil-commentary
     :ensure t
     :config
@@ -1940,7 +1941,8 @@ This command must be called in parent node which should have one of `org-relate-
    ("C-c C-x $" . my:org-archive-subtree)
    (:org-mode-map
    ("C-c j h"   . consult-org-heading)
-   ("C-c j a"   . consult-org-agenda)))
+   ("C-c j a"   . consult-org-agenda)
+   ("C-'"       . embark-dwim)))
   :advice
   (:before org-calendar-holiday
            (lambda () (require 'japanese-holidays nil 'noerror)))
