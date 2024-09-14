@@ -64,8 +64,8 @@ vim.g.lazyvim_ruby_lsp = "ruby_lsp"
 vim.g.lazyvim_ruby_formatter = "rubocop"
 
 --  OSC52 over ssh
+vim.opt.clipboard:append("unnamedplus")
 if os.getenv("SSH_TTY") == nil then
-  vim.opt.clipboard:append("unnamedplus")
   if vim.fn.has("wsl") == 1 then
     vim.api.nvim_set_var("clipboard", {
       name = "win32yank-wsl",
@@ -81,7 +81,6 @@ if os.getenv("SSH_TTY") == nil then
     })
   end
 else
-  vim.opt.clipboard:append("unnamedplus")
   vim.g.clipboard = {
     name = "OSC 52",
     copy = {
