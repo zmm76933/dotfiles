@@ -10,7 +10,7 @@ if is_ssh_or_vscode_running; then
 fi
 
 if is_tmux_running; then
-    tmux split-window -v -l 35%
+    tmux split-window -v -l 40%
     tmux split-window -h -l 50%
     tmux select-pane -t 0
 else

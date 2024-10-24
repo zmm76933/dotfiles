@@ -1383,7 +1383,11 @@
    "n"    'tab-next
    "C-n"  'tab-next
    "p"    'tab-previous
-   "C-p"  'tab-previous)
+   "C-p"  'tab-previous
+   "t"    'tab-last
+   "C-t"  'tab-last
+   "x"    'tab-move
+   "C-x"  'tab-move)
   )
 
 (leaf tab-bar-mode
