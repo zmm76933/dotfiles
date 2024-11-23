@@ -1093,6 +1093,7 @@
   )
 
 (leaf corfu
+  :disabled t
   :ensure t
   :init
   (leaf corfu-terminal
@@ -1107,7 +1108,6 @@
    ("C-e" . corfu-quit)
    ("<return>" . corfu-complete)
    ("RET" . corfu-complete))
-
   :custom
   `((completion-cycle-threshold . 4)
     (tab-always-indent          . 'complete)
