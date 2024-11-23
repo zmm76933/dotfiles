@@ -48,20 +48,3 @@ keymap.del("n", "<C-h>")
 keymap.del("n", "<C-j>")
 keymap.del("n", "<C-k>")
 keymap.del("n", "<C-l>")
-
--- Unset keymap in terminal
-vim.cmd([[
-  tunmap <C-h>
-  tunmap <C-j>
-  tunmap <C-k>
-  tunmap <C-l>
-]])
-
--- Add border in terminal
-local Util = require("lazyvim.util")
-local map = vim.keymap.set
-local lazyterm = function()
-  Util.terminal(nil, { cwd = Util.root(), border = "rounded" })
-end
-map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
-map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
