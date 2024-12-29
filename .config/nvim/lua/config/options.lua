@@ -65,6 +65,13 @@ vim.g.lazyvim_ruby_formatter = "rubocop"
 
 --  OSC52 over ssh
 vim.opt.clipboard:append("unnamedplus")
+local function paste()
+  return {
+    vim.fn.split(vim.fn.getreg(""), "\n"),
+    vim.fn.getregtype(""),
+  }
+end
+
 if os.getenv("SSH_TTY") == nil then
   if vim.fn.has("wsl") == 1 then
     vim.api.nvim_set_var("clipboard", {
@@ -88,8 +95,8 @@ else
       ["*"] = require('vim.ui.clipboard.osc52').copy('*'),
     },
     paste = {
-      ["+"] = require('vim.ui.clipboard.osc52').paste('+'),
-      ["*"] = require('vim.ui.clipboard.osc52').paste('*'),
+      ["+"] = paste,
+      ["*"] = paste,
     },
   }
 end
