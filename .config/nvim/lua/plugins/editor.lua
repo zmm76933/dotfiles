@@ -217,6 +217,25 @@ return {
   },
 
   {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        menu = {
+          winblend = vim.o.pumblend,
+        },
+        documentation = {
+          winblend = vim.o.pumblend,
+        },
+      },
+      signature = {
+        window = {
+          winblend = vim.o.pumblend,
+        },
+      },
+    },
+  },
+
+  {
     "echasnovski/mini.pairs",
     config = function()
       local map_bs = function(lhs, rhs)
