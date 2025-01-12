@@ -29,11 +29,7 @@ PACKAGES="
     iptables
     porg
     git
-    avahi-daemon
     cifs-utils
-    samba
-    smartmontools
-    wireguard-tools
     "
 
 if has "dnf"; then

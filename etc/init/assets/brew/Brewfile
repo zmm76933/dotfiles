@@ -1,7 +1,7 @@
-tap 'homebrew/cask-fonts'
 tap 'railwaycat/emacsmacport'
 tap 'daipeihust/tap'
 tap 'laishulu/homebrew'
+tap hashicorp/tap
 
 brew 'ansifilter'
 brew 'asdf'
@@ -57,6 +57,7 @@ brew 'tree'
 brew 'tree-sitter'
 brew 'w3m'
 brew 'wget'
+brew 'hashicorp/tap/terraform'
 
 cask 'alfred'
 cask 'aquaskk'

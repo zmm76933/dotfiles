@@ -45,6 +45,7 @@ npm install -g eslint_d
 npm install -g prettier
 npm install -g @fsouza/prettierd
 npm install -g pyright
+npm install -g commitizen 
 npm install -g cz-git
 
 # install Perl provide
