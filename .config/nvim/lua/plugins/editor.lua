@@ -229,6 +229,20 @@ return {
           winblend = vim.o.pumblend,
         },
       },
+      keymap = {
+        preset = "enter",
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<CR>'] = { 'fallback' },
+        ['<Tab>'] = {
+          function(cmp)
+            if cmp.snippet_active() then return cmp.accept()
+            else return cmp.select_and_accept() end
+          end,
+          'snippet_forward',
+          'fallback'
+        },
+      },
     },
   },
 
