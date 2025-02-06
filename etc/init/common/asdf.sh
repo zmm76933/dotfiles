@@ -23,6 +23,11 @@ if ! has "asdf"; then
     exit 1
 fi
 
+# Set up shell completions
+if has "fish"; then
+    asdf completion fish > ${HOME}/.config/fish/completions/asdf.fish
+fi
+
 plugins=(
     'direnv'
     'python'
