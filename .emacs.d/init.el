@@ -307,6 +307,7 @@
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
+    (inhibit-message            . t)
     (mac-pass-command-to-system . nil)
     (mac-pass-control-to-system . nil)
     )
