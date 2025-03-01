@@ -37,6 +37,10 @@ keymap.set("n", "<leader>i", function()
   require("zmm76933.lsp").toggleInlayHints()
 end)
 
+vim.api.nvim_create_user_command("ToggleAutoformat", function()
+  require("craftzdog.lsp").toggleAutoformat()
+end, {})
+
 -- Unset keymap
 keymap.del("i", "<A-j>")
 keymap.del("i", "<A-k>")
