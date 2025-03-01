@@ -43,7 +43,7 @@ Session.vim
 .emacs.d/*.elc
 
 # tmux
-.config/tmux/plugins/*
+.config/tmux/plugins/
 
 # libvirt
 .config/libvirt/
