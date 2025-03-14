@@ -12,3 +12,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.conceallevel = 0
   end,
 })
+
+-- Turn off auto comment
+vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('turn_off_auto_commenting', {}),
+    pattern = '*',
+    command = [[setlocal fo-=cro]]
+})
