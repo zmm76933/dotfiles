@@ -128,6 +128,14 @@ return {
         end,
         desc = "Lists Function names, variables, from Treesitter",
       },
+			{
+        "<localleader>c",
+        function()
+          local builtin = require("telescope.builtin")
+          builtin.lsp_incoming_calls()
+          end,
+          desc = "Lists LSP incoming calls for word under the cursor",
+      },
       {
         "<localleader>l",
         function()
