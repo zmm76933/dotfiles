@@ -219,7 +219,10 @@
          "PATH"
          "MANPATH"
          "LANG"
+         "LC_COLLATE"
          "LC_CTYPE"
+         "LC_MONETARY"
+         "LC_NUMERIC"
          "SHELL"
          "SKKSERVER"
          "XAPIAN_CJK_NGRAM"
@@ -662,7 +665,7 @@
   :custom
   ((insert-directory-program . "gls")
    (ls-lisp-dirs-first . t)
-   (dired-listing-switches . "-alhL --group-directories-first")
+   (dired-listing-switches . "-AlhL --group-directories-first")
    (dired-dwim-target . t)
    (dired-auto-revert-buffer . t)
    (dired-kill-when-opening-new-dired-buffer . t)
