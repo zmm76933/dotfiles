@@ -310,7 +310,6 @@
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
-    (inhibit-message            . t)
     (mac-pass-command-to-system . nil)
     (mac-pass-control-to-system . nil)
     )
@@ -360,6 +359,9 @@
   )
 
 (leaf minibuffer
+  :custom
+  (inhibit-message-regexps . '("^Saving file" "^Wrote" "^\\[mu4e\\]"))
+  (set-message-functions . '(inhibit-message))
   :hook
   (minibuffer-inactive-mode-hook . (lambda ()
                                      (let ((clipbord (gui-selection-value)))
