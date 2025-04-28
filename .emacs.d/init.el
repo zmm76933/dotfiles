@@ -360,7 +360,7 @@
 
 (leaf minibuffer
   :custom
-  (inhibit-message-regexps . '("^Saving file" "^Wrote" "^\\[mu4e\\]"))
+  (inhibit-message-regexps . '("^Saving file" "^Wrote"))
   (set-message-functions . '(inhibit-message))
   :hook
   (minibuffer-inactive-mode-hook . (lambda ()
@@ -1237,6 +1237,8 @@
   (setq mu4e-headers-results-limit 1000)
   ;; attempt to show images when viewing messages
   (setq mu4e-view-show-images t)
+  ;; Update process warnings
+  (setq mu4e-index-update-error-warning nil)
 
   ;; ;; メールアカウント毎の設定
   (setq mu4e-contexts
