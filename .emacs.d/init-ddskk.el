@@ -64,6 +64,7 @@
                 (":" nil ":")
                 ("!" nil "!")
                 ("?" nil "?")
+                ("$" nil "$")
                 ("~" nil "~")
                 ("-" nil "ー")
                 ("(" nil nil)
@@ -98,6 +99,7 @@
  ((getenv "SKKSERVER")
   (setq skk-server-host (getenv "SKKSERVER")
         skk-server-portnum "1178"
+        skk-jisyo (concat my:d:lib "/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8")
         skk-large-jisyo nil)
   (add-to-list 'skk-search-prog-list
                '(skk-server-completion-search) t)

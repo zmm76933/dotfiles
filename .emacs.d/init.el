@@ -17,7 +17,9 @@
   (defconst my:d:auto-save
     (expand-file-name "auto-save-list" my:d:tmp))
   (defconst my:d:org
-    (expand-file-name "~/Dropbox/org")))
+    (expand-file-name "~/Dropbox/org"))
+  (defconst my:d:lib
+    (expand-file-name "~/Library")))
 
 (eval-when-compile
   (require 'cl-lib nil t))
