@@ -969,15 +969,14 @@
             ]
           },
           {
-            "description": "For Terminals: AquaSKK keybindings",
+            "description": "For Terminals: macSKK keybindings",
             "manipulators": [
               {
                 "conditions": [
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal",
-                      "^com\\.googlecode\\.iterm2",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.googlecode\\.iterm2"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -1000,7 +999,7 @@
             ]
           },
           {
-            "description": "For Microsoft Office: AquaSKK keybindings",
+            "description": "For Microsoft Office: macSKK keybindings",
             "manipulators": [
               {
                 "conditions": [

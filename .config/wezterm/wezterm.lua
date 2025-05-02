@@ -16,5 +16,9 @@ config.color_scheme = 'Tokyo Night'
 
 config.hide_tab_bar_if_only_one_tab = true
 
+-- IME settings
+config.use_ime = true
+config.macos_forward_to_ime_modifier_mask = 'SHIFT|CTRL'
+
 -- and finally, return the configuration to wezterm
 return config
