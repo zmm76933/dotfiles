@@ -29,8 +29,6 @@
 (setq skk-cursor-jisx0208-latin-color "yellow")
 (setq skk-cursor-jisx0201-color "purple")
 
-(global-set-key "\C-\\" 'skk-mode)
-
 (setq skk-use-jisx0201-input-method t)
 
 (setq skk-egg-like-newline t)
@@ -64,6 +62,8 @@
                 (":" nil ":")
                 ("!" nil "!")
                 ("?" nil "?")
+                ("@" nil "@")
+                ("$" nil "$")
                 ("~" nil "~")
                 ("-" nil "ー")
                 ("(" nil nil)
@@ -107,6 +107,8 @@
   (setq skk-get-jisyo-directory (concat my:d:tmp "skk-jisyo")
         skk-large-jisyo (concat skk-get-jisyo-directory "/SKK-JISYO.L")))
  )
+
+(setq skk-inhibit-ja-dic-search t)
 
 (setq skk-check-okurigana-on-touroku 'auto)
 
