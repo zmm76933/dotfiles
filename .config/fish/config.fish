@@ -38,6 +38,7 @@ command -qv nvim && alias vim nvim
 
 # environments
 set -gx LANG "en_US.UTF-8"
+set -gx LC_ALL "en_US.UTF-8"
 set -gx LC_COLLATE "ja_JP.UTF-8"
 set -gx LC_CTYPE "ja_JP.UTF-8"
 set -gx LC_MONETARY "ja_JP.UTF-8"
