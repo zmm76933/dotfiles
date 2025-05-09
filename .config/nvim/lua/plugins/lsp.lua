@@ -1,7 +1,8 @@
 return {
   -- tools
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
+    version = "^1.0.0",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "stylua",
@@ -17,6 +18,11 @@ return {
   },
 
   -- lsp servers
+  { 
+    "mason-org/mason-lspconfig.nvim",
+    version = "^1.0.0"
+  },
+
   {
     "neovim/nvim-lspconfig",
     opts = {
