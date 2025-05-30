@@ -360,7 +360,7 @@
 
 (leaf minibuffer
   :custom
-  (inhibit-message-regexps . '("^Saving file" "^Wrote"))
+  (inhibit-message-regexps . '("^Saving file" "^Wrote" "^Cleaning up"))
   (set-message-functions . '(inhibit-message))
   :hook
   (minibuffer-inactive-mode-hook . (lambda ()
