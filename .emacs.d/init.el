@@ -1281,14 +1281,10 @@
   (setq mu4e-get-mail-command "offlineimap")
   ;; update every 5 minutes
   (setq mu4e-update-interval 300)
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;; 送信設定（MSMTPを使う）
+  ;; use msmtp
   (setq message-send-mail-function 'message-send-mail-with-sendmail)
   (setq sendmail-program "msmtp")
-  (setq message-sendmail-extra-arguments '("--read-envelope-from"))
-  (setq message-sendmail-f-is-evil 't)
+  ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
   )
 
