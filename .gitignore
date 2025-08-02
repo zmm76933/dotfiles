@@ -43,7 +43,7 @@ Session.vim
 .emacs.d/*.elc
 
 # tmux
-.config/tmux/plugins/
+.config/tmux/plugins
 
 # libvirt
 .config/libvirt/
@@ -98,9 +98,12 @@ Pods/
 # Karabiner
 .config/karabiner/
 
+# Lazygit
+.config/lazygit/state.yml
+
 # nvim
-.config/nvim/lazyvim.json
 .config/nvim/lazy-lock.json
+.config/nvim/lazyvim.json
 
 # peazip
 .config/peazip/
