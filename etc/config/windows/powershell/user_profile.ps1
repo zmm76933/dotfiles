@@ -1,6 +1,3 @@
-# set PowerShell to UTF-8
-[console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
-
 Import-Module posh-git
 $omp_config = Join-Path $PSScriptRoot ".\zmm76933.omp.json"
 oh-my-posh init pwsh --config $omp_config | Invoke-Expression
@@ -15,18 +12,22 @@ Set-PSReadLineOption -PredictionSource History
 
 # Fzf
 Import-Module PSFzf
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # Env
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
 # Alias
-Set-Alias -Name vi -Value nvim
+Set-Alias -Name vim -Value nvim
 Set-Alias ll ls
 Set-Alias g git
 Set-Alias grep findstr
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
+
+# Paths
+$env:PATH += ';.\node_modules\.bin'
+$env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64'
 
 # Utilities
 function which ($command) {
