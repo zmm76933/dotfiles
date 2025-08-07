@@ -17,12 +17,12 @@ if is_macos; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-. $(brew --prefix asdf)/libexec/asdf.sh
-
-if ! has "asdf"; then
-    log_fail "error: this script is only supported with asdf"
+if ! has "mise"; then
+    log_fail "error: this script is only supported with mise"
     exit 1
 fi
+
+eval "$(mise activate bash --shims)"
 
 # exit with true if you have nvim command
 if ! has "nvim"; then
@@ -31,25 +31,18 @@ if ! has "nvim"; then
 fi
 
 # install Python privider
-pip install pynvim
+pip install pynvim > /dev/null
 
 # install Ruby provider
-gem install neovim
+gem install neovim > /dev/null
 
 # install Node.js provider
-npm install -g neovim
-npm install -g typescript
-npm install -g typescript-language-server
-npm install -g diagnostic-languageserver
-npm install -g eslint_d
-npm install -g prettier
-npm install -g @fsouza/prettierd
-npm install -g pyright
-npm install -g commitizen 
-npm install -g cz-git
+npm install -g neovim > /dev/null
+npm install -g commitizen > /dev/null
+npm install -g cz-git > /dev/null
 
 # install Perl provide
-cpanm -n App::cpanminus
-cpanm -n Neovim::Ext
+cpanm -n App::cpanminus > /dev/null
+cpanm -n Neovim::Ext > /dev/null
 
 log_pass "nvim: installed successfully"

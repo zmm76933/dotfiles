@@ -57,6 +57,13 @@ vim.filetype.add({
   },
 })
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
+-- Set python3 provider
+vim.api.nvim_set_var("python3_host_prog", vim.env.HOME .. "/.local/share/mise/shims/python")
+
+-- lazynvim settings
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_picker = "telescope"
 vim.g.lazyvim_cmp = "blink.cmp"
@@ -66,8 +73,6 @@ vim.g.lazyvim_cmp = "blink.cmp"
 vim.g.lazyvim_python_lsp = "pyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 vim.g.lazyvim_python_ruff = "ruff"
--- Set python3 provider
-vim.api.nvim_set_var("python3_host_prog", os.getenv("HOME") .. "/.asdf/shims/python")
 
 -- LSP Server to use for Ruby.
 -- Set to "solargraph" to use solargraph instead of ruby_lsp.

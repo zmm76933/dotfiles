@@ -1,0 +1,17 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["python"]
+[tools]
+gh = "latest"
+ghq = "latest"
+go = "latest"
+node = "latest"
+"npm:neovim" = "latest"
+"npm:commitizen" = "latest"
+"npm:cz-git" = "latest"
+python = "latest"
+perl = "latest"
+ruby = "latest"
+rust = "latest"
+terraform = "latest"
+uv = "latest"

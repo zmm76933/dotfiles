@@ -18,11 +18,6 @@ if is_macos; then
 fi
 
 if has "brew"; then
-    if ! brew tap Homebrew/bundle; then
-        log_fail "error: failed to tap Homebrew/bundle"
-        exit 1
-    fi
-
     builtin cd "$DOTPATH"/etc/init/assets/brew
     if [ ! -f Brewfile ]; then
         brew bundle dump

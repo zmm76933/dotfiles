@@ -17,37 +17,34 @@ if is_macos; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# exit with true if you have asdf command
-if ! has "asdf"; then
-    log_fail "error: this script is only supported with asdf"
+# exit with true if you have mise command
+if ! has "mise"; then
+    log_fail "error: this script is only supported with mise"
     exit 1
 fi
 
 # Set up shell completions
 if has "fish"; then
-    asdf completion fish > ${HOME}/.config/fish/completions/asdf.fish
+    mise completion fish > ${HOME}/.config/fish/completions/mise.fish
 fi
 
 plugins=(
-    'direnv'
+    'gh'
+    'ghq'
+    'go'
+    'node'
     'python'
-    'poetry'
-    'ruby'
-    'nodejs'
     'perl'
-    'golang'
+    'ruby'
+    'rust'
+    'terraform'
+    'uv'
 )
 
 for index in ${!plugins[*]}
 do
     plugin=$(echo ${plugins[$index]} | cut -d' ' -f 1)
-    asdf plugin add ${plugin}
-    if [ $? -eq 2 ]; then
-      continue
-    fi
-
-    asdf install ${plugin} latest
-    asdf global ${plugin} latest
+    mise use -g ${plugin}@latest
 done
 
-log_pass "asdf: installed successfully"
+log_pass "mise: installed successfully"
