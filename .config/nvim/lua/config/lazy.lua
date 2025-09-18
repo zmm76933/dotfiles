@@ -23,6 +23,10 @@ require("lazy").setup({
           lazyvim = true,
           neovim = true,
         },
+        checker = {
+          enabled = true,
+          notify = false,
+        },
       },
     },
     -- import any extras modules here

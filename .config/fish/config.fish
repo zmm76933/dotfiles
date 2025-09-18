@@ -49,9 +49,9 @@ set -gx PATH ~/bin $PATH
 
 # mise configuration code
 if status is-interactive
-  mise activate fish | source
+    mise activate fish | source
 else
-  mise activate fish --shims | source
+    mise activate fish --shims | source
 end
 
 # fzf
