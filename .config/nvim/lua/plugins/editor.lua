@@ -270,7 +270,7 @@ return {
   },
 
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     config = function()
       local map_bs = function(lhs, rhs)
         vim.keymap.set('i', lhs, rhs, { expr = true, replace_keycodes = false })
