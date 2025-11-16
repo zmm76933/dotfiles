@@ -726,8 +726,7 @@
                                  "^/[^/:]+:"
                                  "bookmarks"
                                  "\\.*COMMIT_EDITMSG$"
-                                 "^/home/zmm76933/.cache/\\.*"
-                                 "^/Users/zmm76933/.cache/\\.*"
+                                 "~/.cache/"
                                  ))
     )
   )
@@ -2107,166 +2106,24 @@ See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
 
 (leaf org-roam
   :if (and (file-directory-p my:d:org)
-           (and (executable-find "rg")
-                (executable-find "sqlite3")))
+           (executable-find "rg")
+           (executable-find "sqlite3"))
   :ensure t
-  :init
-  (setq org-roam-v2-ack t)
   :commands (org-roam-db-query)
+  :init
+  (setq org-roam-v2-ack t
+        org-roam-db-location (expand-file-name "org-roam.db" my:d:tmp)
+        org-roam-directory   (expand-file-name "roam" my:d:org))
+  ;;
   :bind
   (("C-c n a" . org-roam-alias-add)
    ("C-c n f" . org-roam-node-find)
    ("C-c n i" . org-roam-node-insert)
-   ("C-c n o" . org-id-get-create)
    ("C-c n t" . org-roam-tag-add)
    ("C-c n l" . org-roam-buffer-toggle)
-   (:org-mode-map
-    ("C-M-i"   . completion-at-point)))
-  :custom
-  `((org-roam-db-location . ,(expand-file-name "org-roam.db" my:d:tmp))
-    (org-roam-directory   . ,(expand-file-name "roam" my:d:org))
-    ;; (org-roam-mode-section-functions
-    ;;  . (list #'org-roam-backlinks-section
-    ;;          #'org-roam-reflinks-section
-    ;;         ;; #'org-roam-unlinked-references-section
-    ;;         ))
-    ;; (org-roam-db-update-on-save . t)
-    )
+   )
   :defer-config
   (org-roam-db-autosync-enable)
-  )
-;;
-(leaf org-roam-dailies
-  :commands (org-roam-dailies--capture)
-  :preface
-  (defun my:org-roam-dailies-capture-without-templates ()
-    (interactive)
-    (org-roam-dailies--capture (current-time) nil "m"))
-  :pl-setq
-  (my:org:calendar1 my:org:calendar2 my:org:calendar3)   ;; 名前がイケてないっ!
-  :bind
-  `(("C-c n d" . org-roam-dailies-map)
-    ("C-x M"   . org-roam-dailies-capture-today)
-    ("C-x m"   . my:org-roam-dailies-capture-without-templates)
-   (:org-roam-dailies-map
-    ("Y" . org-roam-dailies-capture-yesterday)
-    ("T" . org-roam-dailies-capture-tomorrow))
-   )
-  :custom
-  `(
-    (org-roam-dailies-directory . "") ;; relative path→flatten!
-    (org-roam-dailies-capture-templates
-     . '(
-         ("m" "memo" entry "* MEMO <%<%Y-%m-%d %H:%M>> %^{title}\n  %?"
-          :target (file+head "%<%Y-%m-%d>.org"
-                             "#+title: %<%Y年%m月%d日(%a)>")
-          :prepend nil
-          :kill-buffer t
-          )
-         ("t" "ToDo" entry "* TODO <%<%Y-%m-%d %H:%M>> %^{title}\n  %?"
-          :target (file+head "%<%Y-%m-%d>.org"
-                             "#+title: %<%Y年%m月%d日(%a)>")
-          :prepend nil
-          :kill-buffer t
-          )
-         ("s" "Schedule: 個人スケジュール" entry
-          "* %^{title}\n  :PROPERTIES:\n  :calendar-id: %(format \"%s\" my:org:calendar1)\n  :org-gcal-managed: org\n  :END:\n  :org-gcal:\n%?\n%i\n  :END:"
-          :target (file ,(expand-file-name "Schedule.org" my:d:org))
-          :prepend t   ;; prepend nil としたいが, 末尾まで行ってくれないので諦める.
-          :kill-buffer t
-          )
-         ("u" "Univ: 大学関連 スケジュール" entry
-          "* %^{title}\n  :PROPERTIES:\n  :calendar-id: %(format \"%s\" my:org:calendar2)\n  :org-gcal-managed: org\n  :END:\n  :org-gcal:\n%?\n%i\n  :END:"
-          :target (file ,(expand-file-name "Univ.org" my:d:org))
-          :prepend t   ;; prepend nil としたいが, 末尾まで行ってくれないので諦める.
-          :kill-buffer t
-          )
-         ("g" "GFD 関連 スケジュール" entry
-          "* %^{title}\n  :PROPERTIES:\n  :calendar-id: %(format \"%s\" my:org:calendar3)\n  :org-gcal-managed: org\n  :END:\n  :org-gcal:\n%?\n%i\n  :END:"
-          :target (file ,(expand-file-name "GFD.org" my:d:org))
-          :prepend t   ;; prepend nil としたいが, 末尾まで行ってくれないので諦める.
-          :kill-buffer t
-          )
-         ))
-    )
-  )
-
-(leaf vulpea
-  :if (and (file-directory-p my:d:org)
-           (and (executable-find "rg")
-                (executable-find "sqlite3")))
-  :doc "https://d12frosted.io/posts/2021-01-16-task-management-with-roam-vol5.html"
-  :ensure t
-  :commands
-  (vulpea-buffer-prop-get
-   vulpea-buffer-tags-get
-   my:vulpea-project-p
-   my:vulpea-project-update-tag
-   my:vulpea-buffer-p
-   my:vulpea-project-files
-   my:vulpea-agenda-files-update
-   )
-  :preface
-  (defun my:vulpea-project-p ()
-    "Return non-nil if current buffer has any todo entry.
-
-TODO entries marked as done are ignored, meaning the this
-function returns nil if current buffer contains only completed
-tasks."
-    (org-element-map
-        (org-element-parse-buffer 'headline)
-        'headline
-      (lambda (h)
-        (eq (org-element-property :todo-type h)
-            'todo))
-      nil 'first-match))
-
-  (defun my:vulpea-project-update-tag ()
-    "Update PROJECT tag in the current buffer."
-    (when (and (not (active-minibuffer-window))
-               (my:vulpea-buffer-p))
-      (save-excursion
-        (goto-char (point-min))
-        (let* ((tags (vulpea-buffer-tags-get))
-               (original-tags tags))
-          (if (my:vulpea-project-p)
-              (setq tags (cons "project" tags))
-            (setq tags (remove "project" tags)))
-
-          ;; cleanup duplicates
-          (setq tags (seq-uniq tags))
-
-          ;; update tags if changed
-          (when (or (seq-difference tags original-tags)
-                    (seq-difference original-tags tags))
-            (apply #'vulpea-buffer-tags-set tags))))))
-
-  (defun my:vulpea-buffer-p ()
-    "Return non-nil if the currently visited buffer is a note."
-    (and buffer-file-name
-         (string-prefix-p
-          (expand-file-name (file-name-as-directory org-roam-directory))
-          (file-name-directory buffer-file-name))))
-
-  (defun my:vulpea-project-files ()
-    "Return a list of note files containing 'project' tag." ;
-    (seq-uniq
-     (seq-map
-      #'car
-      (org-roam-db-query
-       [:select [nodes:file]
-                :from tags
-                :left-join nodes
-                :on (= tags:node-id nodes:id)
-                :where (like tag (quote "%\"project\"%"))]))))
-
-  (defun my:vulpea-agenda-files-update (&rest _)
-    "Update the value of `org-agenda-files'."
-    (setq org-agenda-files (append my:org-agenda-files (my:vulpea-project-files))))
-  :hook
-  ((find-file-hook . my:vulpea-project-update-tag)
-   (before-save-hook . my:vulpea-project-update-tag)
-   (org-roam-db-autosync-mode . vulpea-db-autosync-enable))
   )
 
 (leaf org-agenda
