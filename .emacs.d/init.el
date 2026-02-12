@@ -644,8 +644,8 @@
 (leaf expand-region
   :ensure t
   :bind
-  (("C-."     . er/expand-region)
-   ("C-,"     . er/contract-region))
+  (("C-="     . er/expand-region)
+   ("C--"     . er/contract-region))
   )
 
 (leaf all-the-icons
@@ -1104,6 +1104,19 @@
   (leaf corfu-terminal
     :ensure t
     :custom (corfu-terminal-disable-on-gui . nil)
+    )
+  (leaf corfu-popupinfo
+    :ensure nil
+    :hook
+    (corfu-mode . corfu-popupinfo-mode)
+    )
+  (leaf corfu-history
+    :ensure nil
+    :init
+    (with-eval-after-load 'savehist
+      (add-to-list 'savehist-additional-variables 'corfu-history))
+    :hook
+    (emacs-startup-hook . corfu-history-mode)
     )
   :bind
   (:corfu-map
