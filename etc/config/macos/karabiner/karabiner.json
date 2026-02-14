@@ -42,7 +42,7 @@
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$",
+                      "^com\\.mitchellh\\.ghostty$",
                       "^co\\.zeit\\.hyperterm$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
@@ -116,7 +116,7 @@
                       "^com\\.2X\\.Client\\.Mac$",
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$",
+                      "^com\\.mitchellh\\.ghostty$",
                       "^co\\.zeit\\.hyperterm$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
@@ -182,7 +182,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -208,7 +208,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -234,7 +234,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -266,7 +266,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -298,7 +298,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -330,7 +330,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -362,7 +362,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -388,7 +388,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -414,7 +414,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -446,7 +446,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -478,7 +478,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -510,7 +510,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -542,7 +542,7 @@
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
-                      "^com\\.github\\.wez\\.wezterm$"
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }
@@ -976,7 +976,8 @@
                   {
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal",
-                      "^com\\.googlecode\\.iterm2"
+                      "^com\\.googlecode\\.iterm2",
+                      "^com\\.mitchellh\\.ghostty$"
                     ],
                     "type": "frontmost_application_if"
                   }

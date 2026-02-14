@@ -68,6 +68,7 @@ cask 'cleanshot'
 cask 'font-hack-nerd-font'
 cask 'firefox'
 cask 'geekbench'
+cask 'ghostty'
 cask 'google-chrome'
 cask 'hhkb-keymap-tool'
 cask 'input-source-pro'
@@ -82,14 +83,11 @@ cask 'transmit'
 cask 'visual-studio-code'
 cask 'vlc'
 cask 'vnc-viewer'
-cask 'webpquicklook'
-cask 'wezterm'
 cask 'zoom'
 
 mas 'Blackmagic Disk Speed Test', id: 425264550
 mas 'Keynote', id: 409183694
 mas 'The Unarchiver', id:425424353
-mas 'Skitch', id: 425955336
 mas 'Amphetamine', id: 937984704
 mas 'Kindle', id: 302584613
 mas 'Speedtest by Ookla', id: 1153157709
@@ -97,4 +95,3 @@ mas 'iHosts', id: 1102004240
 mas 'Pages', id: 409201541
 mas 'Numbers', id: 409203825
 mas 'Windows App', id: 1295203466
-mas 'SoraAnnai', id: 599799247

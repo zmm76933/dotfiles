@@ -76,8 +76,8 @@ Pods/
 # iTerm2
 .config/iterm2/
 
-# poetry
-.config/pypoetry/
+# docker
+.config/cagent/
 
 # Fish local config
 .config/fish/fish_variables
@@ -107,3 +107,5 @@ Pods/
 
 # peazip
 .config/peazip/
+
+

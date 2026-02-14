@@ -1,0 +1,23 @@
+# macOS settings
+keybind = ctrl+j=ignore
+#macos-hidden = "always"
+
+# quick-terminal settings
+quick-terminal-position = "top"
+quick-terminal-size = "100%,100%"
+quick-terminal-screen = "main"
+quick-terminal-animation-duration = 0.1
+quick-terminal-autohide = false
+#initial-window = false
+
+# keybind settings
+keybind = "global:ctrl+space=toggle_quick_terminal"
+
+# cursor settings
+cursor-style = block
+cursor-style-blink = true
+
+# corlor settings
+theme = "TokyoNight"
+background-opacity = 0.9
+background-opacity-cells = true
