@@ -310,6 +310,7 @@
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
+    (image-transform-smoothing  . nil)
     (mac-pass-command-to-system . nil)
     (mac-pass-control-to-system . nil)
     )
@@ -2013,6 +2014,7 @@ This command must be called in parent node which should have one of `org-relate-
     (org-refile-targets         .  `((org-agenda-files :tag . "Office")
                                      (,(file-expand-wildcards (concat my:d:org "/**/*.org")) :tag . "refile")))
     (org-global-properties      . '(("Effort_ALL". "0:00 0:10 0:20 0:30 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00")))
+    (org-image-actual-width     . nil)
     (org-highest-priority       . ?A)
     (org-lowest-priority        . ?Z)
     (org-default-priority       . ?E))
