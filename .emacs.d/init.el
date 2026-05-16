@@ -649,11 +649,9 @@
    ("C--"     . er/contract-region))
   )
 
-(leaf all-the-icons
-  :require t
+(leaf nerd-icons
   :ensure t
-  :custom
-  (all-the-icons-scale-factor . 1.0))
+  )
 
 (leaf dired
   :if (executable-find "gls")
@@ -680,10 +678,10 @@
    ("z" . my:dired-mode-open-with)
    ("f" . my:dired-mode-open-finder))
   :config
-  (leaf all-the-icons-dired
+  (leaf nerd-icons-dired
     :ensure t
     :hook
-    (dired-mode-hook . all-the-icons-dired-mode))
+    (dired-mode-hook . nerd-icons-dired-mode))
   )
 
 (leaf dired-subtree
@@ -997,32 +995,85 @@
 
 (leaf consult
   :ensure t
+  :preface
+  ;; -------------------------------------------------------------------------
+;;;###autoload
+  (defvar-local consult-toggle-preview-orig nil)
+  (defun consult-toggle-preview ()
+    "Command to enable/disable preview.
+https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-session"
+    (interactive)
+    (if consult-toggle-preview-orig
+        (setq consult--preview-function consult-toggle-preview-orig
+              consult-toggle-preview-orig nil)
+      (setq consult-toggle-preview-orig consult--preview-function
+            consult--preview-function #'ignore)))
+;;;###autoload
+  (defun my:buffer-remote-p (buf)
+    "Return t when BUF is remote."
+    ;; (message "HERE [%s - %s]" buf (buffer-file-name buf))
+    (if-let ((fp (buffer-file-name buf)))
+        (file-remote-p fp)
+      nil))
   :bind* (("C-;"   . consult-buffer)
           ("M-g ," . consult-find)
           ("M-g ." . consult-ripgrep)
           ("C-c o" . consult-outline)
           )
   :bind (("M-s"     . consult-line)
-         ("C-x C-r" . consult-recent-file))
+         ("C-x C-r" . my:consult-recent-file)
+           (:vertico-map
+            ("C-l"  . consult-toggle-preview)
+            ))
+  :init
+  (setq xref-show-xref-funcion          #'consult-xref
+        xref-show-definitions-function  #'consult-xref
+        consult-preview-excluded-files '("\\`/[^/|:]+:" "\\.gpg\\'" "\\.plist\\'")
+        ;; consult-preview-key  "C-l"
+        ;; consult-async-refresh-delay 0.2
+        ;; consult-narrow-key  "<"
+        consult-preview-partial-size (* 5 1024 1024) ;; ← (* 1024 1024)
+        consult-preview-partial-chunk (* 50 1024)    ;; ← (* 10 1024)
+        consult-preview-exclude-buffers #'my:buffer-remote-p
+        ;;
+        project-read-file-name-function #'consult-project-find-file-with-preview
+        )
   :config
-  (autoload 'projectile-project-root "projectile")
-  (setq consult-project-root-function #'projectile-project-root)
-  (setq my:consult--source-project-buffer
-        (plist-put consult--source-project-buffer :hidden nil))
-  (setq my:consult--source-project-file
-        (plist-put consult--source-project-recent-file :hidden nil))
-  (defun my:consult-project ()
-    "my `consult' command for project only"
+  (defun consult-project-find-file-with-preview (prompt all-files &optional pred hist _mb)
+    (let ((prompt (if (and all-files
+                           (file-name-absolute-p (car all-files)))
+                      prompt
+                    (concat prompt
+                            (format " in %s"
+                                    (consult--fast-abbreviate-file-name default-directory)))))
+          (minibuffer-completing-file-name t))
+      (consult--read (mapcar (lambda (file)
+                               (file-relative-name file))
+                             all-files)
+                     :state (consult--file-preview)
+                     :prompt (concat prompt ": ")
+                     :require-match t
+                     :history hist
+                     :category 'file
+                     :predicate pred)))
+  ;; -------------------------------------------------------------------------
+  (defun my:consult-recent-file ()
+    "Find recent using `completing-read' with shorten filename"
     (interactive)
-    (when-let (buffer (consult--multi '(my:consult--source-project-buffer
-                                        my:consult--source-project-file)
-                                      :require-match
-                                      t ;(confirm-nonexistent-file-or-buffer)
-                                      :prompt "(in proj) Switch to: "
-                                      :history nil
-                                      :sort nil))
-      (unless (cdr buffer)
-        (consult--buffer-action (car buffer)))))
+    (eval-when-compile (require 'recentf))
+    (recentf-mode +1)
+    (let ((files (mapcar (lambda (f)
+                           (cons (my:shorten-file-path f (/ (window-width) 2)) f))
+                         recentf-list)))
+      (let ((selected
+             (consult--read (mapcar #'car files)
+                            :prompt "Find recent file: "
+                            :sort nil
+                            :require-match t
+                            :category 'file
+                            :state (consult--file-preview)
+                            :history 'file-name-history)))
+        (find-file (assoc-default selected files)))))
   )
 
 (leaf consult-dir
@@ -1075,27 +1126,22 @@
   :ensure t
   :init
   ;; 補完でも icon 表示
-  (leaf all-the-icons-completion
-    :ensure t
-    :hook
-    (emacs-startup-hook . all-the-icons-completion-mode)
-    )
+  (leaf nerd-icons-completion
+   :ensure t
+   :config
+   (setq nerd-icons-completion-icon-size 1)
+   :hook
+   (emacs-startup-hook . nerd-icons-completion-mode)
+   )
   :bind (("M-A" . marginalia-cycle)
          (:minibuffer-local-map
           ("M-A" . marginalia-cycle)))
-  :config
-  (add-to-list 'marginalia-prompt-categories '("\\<Heading\\>" . file))
-  (add-to-list 'marginalia-prompt-categories '("\\<Node\\>" . file))
-  (add-to-list 'marginalia-prompt-categories
-               '("\\<Fuzzy grep in.*\\>" . file))
-  :custom
-  `((marginalia-annotators
-     . '(marginalia-annotators-light marginalia-annotators-heavy nil))
-    (marginalia-align . 'right)
-    (marginalia-align-offset .  -2))
+  :init
+  (setq marginalia-align         'right
+        marginalia-align-offset  -2)
   :hook
   ((emacs-startup-hook . marginalia-mode)
-   (marginalia-mode-hook . all-the-icons-completion-marginalia-setup))
+   (marginalia-mode-hook . nerd-icons-completion-marginalia-setup))
   )
 
 (leaf corfu
@@ -1291,7 +1337,7 @@
 
   ;; If you get your mail without an explicit command,
   ;; use "true" for the command (this is the default)
-  (setq mu4e-get-mail-command "offlineimap")
+  (setq mu4e-get-mail-command "offlineimap -o")
   ;; update every 5 minutes
   (setq mu4e-update-interval 300)
   ;; use msmtp
@@ -1827,7 +1873,6 @@
 
 (leaf org
   :ensure t
-  :blackout `((org-mode . ,(all-the-icons-icon-for-mode 'org-mode)))
   :preface
   (require 'cl)
   (defconst org-relate-property "PARENT"
@@ -2101,7 +2146,6 @@ See https://writequit.org/articles/emacs-org-mode-generate-ids.html"
   )
 
 (leaf org-babel
-  :blackout `((org-src-mode . ,(format " %s" (all-the-icons-octicon "code"))))
   :custom
   `(;; font-lock
    (org-src-fontify-natively         . t)
@@ -2539,10 +2583,10 @@ go to today's entry in record file."
   :init
   (defun my:major-mode-icon (mode)
     "Update file icon in mode-line, just display major-mode icon. not filename."
-    (let* ((icon (all-the-icons-icon-for-mode mode)))
+    (let* ((icon (nerd-icons-icon-for-mode mode)))
       (if (symbolp icon)
-          (all-the-icons-faicon "file-code-o"
-                                :face 'all-the-icons-dsilver
+          (nerd-icons-faicon "file-code-o"
+                                :face 'nerd-icons-dsilverh
                                 :height 1.0)
         icon)))
   :hook (emacs-startup-hook . my:powerline-theme)
