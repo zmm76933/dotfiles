@@ -237,13 +237,21 @@
                           (getenv "PASSWORD_STORE_DIR")) nil))
   )
 
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8-unix)
+(set-file-name-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(set-selection-coding-system 'utf-8-unix)
+(set-default 'buffer-file-coding-system 'utf-8-unix)
+
 (leaf cp5022x
   :ensure t
   :require t
   :config
   (set-charset-priority 'ascii 'japanese-jisx0208 'latin-jisx0201
                         'katakana-jisx0201 'iso-8859-1 'unicode)
-  (set-coding-system-priority 'utf-8 'euc-jp 'iso-2022-jp 'cp932)
+  (set-coding-system-priority 'utf-8-unix 'euc-jp 'iso-2022-jp 'cp932)
   )
 
 (leaf locale-eaw-emoji
@@ -310,7 +318,6 @@
     ;;
     (safe-local-variable-values
      . '((org-link-file-path-type . absolute)))
-    (image-transform-smoothing  . nil)
     (mac-pass-command-to-system . nil)
     (mac-pass-control-to-system . nil)
     )
@@ -2059,7 +2066,6 @@ This command must be called in parent node which should have one of `org-relate-
     (org-refile-targets         .  `((org-agenda-files :tag . "Office")
                                      (,(file-expand-wildcards (concat my:d:org "/**/*.org")) :tag . "refile")))
     (org-global-properties      . '(("Effort_ALL". "0:00 0:10 0:20 0:30 1:00 1:30 2:00 3:00 4:00 5:00 6:00 8:00")))
-    (org-image-actual-width     . nil)
     (org-highest-priority       . ?A)
     (org-lowest-priority        . ?Z)
     (org-default-priority       . ?E))
