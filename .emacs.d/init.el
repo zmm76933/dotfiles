@@ -237,6 +237,7 @@
                           (getenv "PASSWORD_STORE_DIR")) nil))
   )
 
+(set-locale-environment nil)
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
 (set-file-name-coding-system 'utf-8-unix)
@@ -1352,6 +1353,8 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   (setq sendmail-program "msmtp")
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
+  ;; hide message buffers
+  (setq mu4e-hide-index-messages t)
   )
 
 (leaf evil
