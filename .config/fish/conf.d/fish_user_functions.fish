@@ -11,13 +11,13 @@ end
 function fzf_z
     set -l query (commandline)
 
-    if test -n $query
+    if test -n "$query"
         set fzf_flags --query "$query"
     end
 
     z -l | awk '{ print $2 }' | fzf $fzf_flags | read recent
-    if [ $recent ]
-        cd $recent
+    if test "$recent"
+        cd "$recent"
         commandline -r ''
         commandline -f repaint
     end
@@ -26,9 +26,9 @@ end
 function ssh
     if test -n "$TMUX"
         set -l pane_id (tmux display -p '#{pane_id}')
-        command ssh $argv
-        tmux select-pane -t $pane_id -P default
+        command ssh "$argv"
+        tmux select-pane -t "$pane_id" -P default
     else
-        command ssh $argv
+        command ssh "$argv"
     end
 end

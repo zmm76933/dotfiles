@@ -79,7 +79,7 @@ vim.g.lazyvim_python_ruff = "ruff"
 vim.g.lazyvim_ruby_lsp = "ruby_lsp"
 vim.g.lazyvim_ruby_formatter = "rubocop"
 
---  OSC52 over ssh
+-- OSC52 over ssh
 vim.opt.clipboard:append("unnamedplus")
 local function paste()
   return {
