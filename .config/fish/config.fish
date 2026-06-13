@@ -33,6 +33,8 @@ else
     alias lla "ll -A"
 end
 alias g git
+alias c claude
+alias claude-yolo "claude --dangerously-skip-permissions"
 command -qv nvim && alias vi nvim
 command -qv nvim && alias vim nvim
 

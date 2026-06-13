@@ -29,6 +29,8 @@ if has "fish"; then
 fi
 
 plugins=(
+    'copier'
+    'cmake'
     'gh'
     'ghq'
     'go'
@@ -37,6 +39,7 @@ plugins=(
     'perl'
     'ruby'
     'rust'
+    'task'
     'terraform'
     'uv'
 )
