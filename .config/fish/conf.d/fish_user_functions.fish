@@ -8,6 +8,15 @@ function cde
     cd "$EMACS_CWD"
 end
 
+function cdv
+    if test -n "$TMPDIR"
+        set -l sockets (find $TMPDIR /tmp -type s -name "nvim*" 2>/dev/null)
+        set -l NVIM_CWD (nvim --server "$sockets[1]" --remote-expr "expand('%:p:h')" 2>&1 >/dev/null)
+        echo "chdir to $NVIM_CWD"
+        cd "$NVIM_CWD"
+    end
+end
+
 function fzf_z
     set -l query (commandline)
 
