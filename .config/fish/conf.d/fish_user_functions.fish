@@ -17,21 +17,6 @@ function cdv
     end
 end
 
-function fzf_z
-    set -l query (commandline)
-
-    if test -n "$query"
-        set fzf_flags --query "$query"
-    end
-
-    z -l | awk '{ print $2 }' | fzf $fzf_flags | read recent
-    if test "$recent"
-        cd "$recent"
-        commandline -r ''
-        commandline -f repaint
-    end
-end
-
 function ssh
     if test -n "$TMUX"
         set -l pane_id (tmux display -p '#{pane_id}')
@@ -39,5 +24,12 @@ function ssh
         tmux select-pane -t "$pane_id" -P default
     else
         command ssh "$argv"
+    end
+end
+
+function remove_failed_command_from_history --on-event fish_postexec
+    set -l last_status $status
+    if test $last_status -ne 0
+        history delete --case-sensitive --exact -- "$argv[1]"
     end
 end

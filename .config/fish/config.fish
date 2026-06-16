@@ -59,6 +59,12 @@ end
 # fzf
 set -gx FZF_DEFAULT_OPTS "--height 40% --reverse --extended --ansi --multi --bind=ctrl-u:page-up --bind=ctrl-d:page-down --bind=ctrl-z:toggle-all"
 
+# task
+set -gx GO_TASK_PROGNAME task
+
+# zoxide
+zoxide init fish  --cmd cd | source
+
 # gpg
 set -gx GPG_TTY (tty)
 
