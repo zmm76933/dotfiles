@@ -108,4 +108,8 @@ Pods/
 # peazip
 .config/peazip/
 
+# packer
+.config/packer/
 
+# claude
+**/.claude/settings.local.json
