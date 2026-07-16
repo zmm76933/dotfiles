@@ -91,6 +91,7 @@ Pods/
 
 # 1Password
 .config/op/
+.config/1Password/
 
 # github-copilot
 .config/github-copilot/
