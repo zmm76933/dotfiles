@@ -8,6 +8,9 @@ function fish_user_key_bindings
     # move the word to the left of the cursor to the killring. The “word” here is everything up to punctuation or whitespace. 
     bind \cw backward-kill-word
 
+    # zi directory history search
+    bind \cs __zoxide_zi
+
     # git repository search
     bind \er __ghq_repository_search
 end
