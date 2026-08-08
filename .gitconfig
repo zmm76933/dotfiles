@@ -66,3 +66,6 @@
   gpgsign = true
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
+
+[includeIf "gitdir:~/work/"]
+  path = ~/.gitconfig.work

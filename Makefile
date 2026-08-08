@@ -11,7 +11,7 @@ list: ## Show dot files in this repo
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
 deploy: ## Create symlink to home directory
-	@echo 'Copyright (c) 2013-2021 zmm76933 All Rights Reserved.'
+	@echo 'Copyright (c) 2013-2026 zmm76933 All Rights Reserved.'
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
