@@ -1,9 +1,9 @@
 [user]
   name  = Masato Katayama
-  email = zmm76933@gmail.com
-  signingkey = 245A59020A7624EC
+  email = zmm76933@mac.com
+  signingkey = ~/.ssh/id_ed25519.pub
 [commit]
-  gpgsign = true
+	gpgsign = true
 [core]
   excludesfile = ~/.gitignore
   editor = nvim
@@ -60,3 +60,9 @@
   process = git-lfs filter-process
 [ghq]
   root = ~/src
+[gpg]
+  format = ssh
+[tag]
+  gpgsign = true
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
