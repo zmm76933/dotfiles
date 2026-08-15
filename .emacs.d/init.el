@@ -1034,16 +1034,16 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
             ("C-l"  . consult-toggle-preview)
             ))
   :init
-  (setq xref-show-xref-funcion          #'consult-xref
+  (setq xref-show-xrefs-funcion         #'consult-xref
         xref-show-definitions-function  #'consult-xref
         consult-preview-excluded-files '("\\`/[^/|:]+:" "\\.gpg\\'" "\\.plist\\'")
         ;; consult-preview-key  "C-l"
         ;; consult-async-refresh-delay 0.2
         ;; consult-narrow-key  "<"
-        consult-preview-partial-size (* 5 1024 1024) ;; ← (* 1024 1024)
-        consult-preview-partial-chunk (* 50 1024)    ;; ← (* 10 1024)
-        consult-preview-exclude-buffers #'my:buffer-remote-p
-        ;;
+        consult-preview-partial-size 1048576
+        consult-preview-partial-chunk 102400
+        consult-preview-key '(:debounce 0.2 any)
+        consult-preview-excluded-buffers #'my:buffer-remote-p
         project-read-file-name-function #'consult-project-find-file-with-preview
         )
   :config
@@ -1100,10 +1100,12 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   :ensure t
   :init
   (defun orderless-migemo (component)
-    (let ((pattern (migemo-get-pattern component)))
-      (condition-case nil
-          (progn (string-match-p pattern "") pattern)
-        (invalid-regexp nil))))
+    (when (and (>= (length component) 2)
+               (string-match-p "\\`[a-z]+\\'" component))
+      (let ((pattern (migemo-get-pattern component)))
+        (condition-case nil
+            (progn (string-match-p pattern "") pattern)
+          (invalid-regexp nil)))))
   :config
   (orderless-define-completion-style orderless-default-style
     (orderless-matching-styles '(orderless-literal
@@ -1125,7 +1127,7 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
           (org-roam-node (styles orderless-migemo-style))
           (unicode-name (styles orderless-migemo-style))
           (variable (styles orderless-default-style))))
-  (setq orderless-matching-styles '(orderless-literal orderless-regexp orderless-migemo))
+  (setq orderless-matching-styles '(orderless-literal orderless-regexp))
   :custom
   (completion-styles . '(orderless))
   )
