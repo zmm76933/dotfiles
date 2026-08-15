@@ -1,6 +1,7 @@
 [user]
   email = katayama@web-tips.co.jp
   signingkey = ~/.ssh/id_rsa_webtips.pub
-
+[github]
+	user = katayama-webtips
 [url "git@github.com.webtips:"]
   insteadOf = git@github.com:
