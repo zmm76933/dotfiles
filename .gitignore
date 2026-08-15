@@ -24,6 +24,9 @@ Gemfile.lock
 node_modules
 bower_components
 fishd.*
+Brewfile.lock.json
+.env*
+*.bak
 
 # Vim
 Session.vim
@@ -34,7 +37,7 @@ Session.vim
 .vim/snippets/
 .luarc.json
 
-# emacs
+# Emacs
 .emacs.d/el-get/
 .emacs.d/eln-cache
 .emacs.d/elpa/
@@ -42,13 +45,13 @@ Session.vim
 .emacs.d/url/
 .emacs.d/*.elc
 
-# tmux
+# Tmux
 .config/tmux/plugins
 
-# libvirt
+# Libvirt
 .config/libvirt/
 
-# evremap
+# Evremap
 .config/evremap/
 
 # Xcode
@@ -80,18 +83,20 @@ Pods/
 .config/cagent/
 
 # Fish local config
+.config/fish/conf.d
 .config/fish/fish_variables
-.config/fish/functions/*
-.config/fish/completions/*
-.config/fish/conf.d/*
-!.config/fish/conf.d/000-env.fish
-!.config/fish/conf.d/fish_user_key_bindings.fish
-!.config/fish/conf.d/fish_user_functions.fish
-!.config/fish/conf.d/tide.fish
+.config/fish/config-local.fish
+.config/fish/fish_variables.x86_64
+.config/fish/functions
+.config/fish/completions
+.config/fish/conf.d/_tide*
 
 # 1Password
-.config/op/
 .config/1Password/
+
+# 1password cli
+.config/op/op-daemon.sock
+.config/op/config
 
 # github-copilot
 .config/github-copilot/
@@ -101,16 +106,27 @@ Pods/
 
 # Lazygit
 .config/lazygit/state.yml
-
-# nvim
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
 
-# peazip
-.config/peazip/
+# Nvim
+vimsession
+packer_compiled.lua
+nvim.old
+nvim.lazy
+.luarc.json
+nvim-pack-lock.json
 
-# packer
+# Packer
 .config/packer/
 
-# claude
-**/.claude/settings.local.json
+# Zed
+.config/zed/.tmp*
+.config/zed/embeddings
+.config/zed/prompts
+
+# Claude Code
+.claude/*.local.json
+
+# Antigravity
+.antigravitycli
