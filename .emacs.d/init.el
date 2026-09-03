@@ -38,12 +38,13 @@
   (setq debug-on-error t))
 
 (setq gc-cons-threshold most-positive-fixnum)
-;; Run GC every 60 seconds if emacs is idle.
-(run-with-idle-timer 60.0 t #'garbage-collect)
 (add-hook 'emacs-startup-hook
           (lambda ()
-            ;; recover default value
-            (setq gc-cons-threshold 2000000)))
+            ;; Restore a realistic threshold after startup.  The idle timer
+            ;; that used to force `garbage-collect' every 60s duplicated the
+            ;; threshold-based GC, so it was dropped and the threshold was
+            ;; raised instead.
+            (setq gc-cons-threshold (* 16 1024 1024))))
 
 (defconst my:saved-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -396,7 +397,7 @@
 
 (leaf autorevert
   :custom
-  ((auto-revert-interval . 0.1))
+  ((auto-revert-interval . 1))
   :hook
   (find-file-hook . global-auto-revert-mode)
   )
@@ -570,7 +571,10 @@
    ;; (ps-line-number-start   . 1)
    ;; (ps-line-number-step    . 1)
    )
-  :hook
+  :defer-config
+  ;; This used to sit under `:hook', which is not a valid hook spec, so the
+  ;; alias was never installed.  It has to run after ps-mule is loaded,
+  ;; otherwise the library's own defun overwrites it.
   (defalias 'ps-mule-header-string-charset 'ignore)
   :config
   ;; (setq ps-mule-font-info-database-default
@@ -1034,16 +1038,16 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
             ("C-l"  . consult-toggle-preview)
             ))
   :init
-  (setq xref-show-xrefs-funcion         #'consult-xref
+  (setq xref-show-xref-funcion          #'consult-xref
         xref-show-definitions-function  #'consult-xref
         consult-preview-excluded-files '("\\`/[^/|:]+:" "\\.gpg\\'" "\\.plist\\'")
         ;; consult-preview-key  "C-l"
         ;; consult-async-refresh-delay 0.2
         ;; consult-narrow-key  "<"
-        consult-preview-partial-size 1048576
-        consult-preview-partial-chunk 102400
-        consult-preview-key '(:debounce 0.2 any)
-        consult-preview-excluded-buffers #'my:buffer-remote-p
+        consult-preview-partial-size (* 5 1024 1024) ;; ← (* 1024 1024)
+        consult-preview-partial-chunk (* 50 1024)    ;; ← (* 10 1024)
+        consult-preview-exclude-buffers #'my:buffer-remote-p
+        ;;
         project-read-file-name-function #'consult-project-find-file-with-preview
         )
   :config
@@ -1096,40 +1100,39 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   )
 
 (leaf orderless
-  :require t
+  :emacs>= 29.1
+  :if (executable-find "cmigemo")
   :ensure t
-  :init
-  (defun orderless-migemo (component)
-    (when (and (>= (length component) 2)
-               (string-match-p "\\`[a-z]+\\'" component))
-      (let ((pattern (migemo-get-pattern component)))
-        (condition-case nil
-            (progn (string-match-p pattern "") pattern)
-          (invalid-regexp nil)))))
-  :config
-  (orderless-define-completion-style orderless-default-style
-    (orderless-matching-styles '(orderless-literal
-                                 orderless-regexp)))
-  (orderless-define-completion-style orderless-migemo-style
-    (orderless-matching-styles '(orderless-literal
-                                 orderless-regexp
-                                 orderless-migemo)))
-  (orderless-define-completion-style orderless-initialism-style
-    (orderless-matching-styles '(orderless-initialism
-                                 orderless-literal)))
-  (setq completion-category-overrides
-        '((command (styles orderless-initialism-style))
-          (file (styles orderless-migemo-style))
-          (buffer (styles orderless-migemo-style))
-          (symbol (styles orderless-default-style))
-          (consult-location (styles orderless-migemo-style))
-          (consult-multi (styles orderless-migemo-style))
-          (org-roam-node (styles orderless-migemo-style))
-          (unicode-name (styles orderless-migemo-style))
-          (variable (styles orderless-default-style))))
-  (setq orderless-matching-styles '(orderless-literal orderless-regexp))
+  :defun (migemo-get-pattern . migemo)
   :custom
-  (completion-styles . '(orderless))
+  ((completion-styles . '(orderless basic))
+   (completion-category-overrides
+    . '((file (styles orderless+migemo partial-completion))
+        (buffer (styles orderless+migemo))
+        (unicode-name (styles orderless+migemo))
+        (kill-ring (styles orderless+migemo))
+        (eglot (styles orderless))
+        (eglot-capf (styles orderless))
+        ;; consult with migemo
+        (consult-location (styles orderless+migemo)) ; consult-line
+        (consult-multi (styles orderless+migemo))    ; consult-buffer
+        ))
+   )
+  ;;  ------------------------------------------------------------------------
+  :config
+  (defun orderless-migemo (component)
+    "Orderless に migemo を追加"
+    (let ((pattern (migemo-get-pattern component)))
+      (condition-case nil
+          (progn (string-match-p pattern "") pattern)
+        (invalid-regexp nil))))
+  (eval-when-compile (require 'orderless nil 'noerr))
+  (orderless-define-completion-style orderless+migemo
+    (orderless-matching-styles
+     '(orderless-literal
+       orderless-regexp
+       orderless-initialism
+       orderless-migemo)))
   )
 
 (leaf marginalia
@@ -1242,10 +1245,31 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   :if (executable-find "mu")
   :bind
   ("<f3>" . mu4e)
+  :preface
+  ;; `mu4e~headers-defun-mark-for' is a macro, so mu4e must be available
+  ;; at byte-compile time.
+  (eval-when-compile (require 'mu4e nil t))
+  (defun my:mu4e-org-open (link)
+    "Follow an Org \"mu4e:\" LINK, loading mu4e-org on demand.
+Once loaded, mu4e-org re-registers the real handler through
+`org-link-set-parameters', so this stub is only used once."
+    (require 'mu4e-org)
+    (mu4e-org-open link))
+  (defun my:mu4e-org-store-link ()
+    "Store an Org link, loading mu4e-org only inside a mu4e buffer."
+    (when (derived-mode-p 'mu4e-headers-mode 'mu4e-view-mode)
+      (require 'mu4e-org)
+      (mu4e-org-store-link)))
   :init
-  (require 'mu4e)
   ;; use mu4e for e-mail in emacs
   (setq mail-user-agent 'mu4e-user-agent)
+  ;; Keep Org "mu4e:" links followable at all times while deferring the
+  ;; mu4e load itself (~0.2s) until <f3> or a link actually needs it.
+  (with-eval-after-load 'org
+    (org-link-set-parameters "mu4e"
+                             :follow #'my:mu4e-org-open
+                             :store  #'my:mu4e-org-store-link))
+  :defer-config
 
   ;; the next are relative to the root maildir
   ;; (see `mu info`).
@@ -1361,6 +1385,11 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
 
 (leaf evil
   :ensure t
+  :preface
+  ;; `evil-define-key' is a macro, so evil must be loaded at byte-compile
+  ;; time.  Otherwise it is compiled as a plain function call and fails at
+  ;; run time with `invalid-function'.
+  (eval-when-compile (require 'evil nil t))
   :init
   (setq evil-want-keybinding nil
         evil-want-minibuffer nil
@@ -1436,6 +1465,13 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
 (leaf general
   :after evil
   :ensure t
+  :preface
+  ;; `general-nmap' and `general-def' are macros defined by
+  ;; `general-evil-setup', so the same setup has to run at byte-compile
+  ;; time as well.
+  (eval-when-compile
+    (when (and (require 'evil nil t) (require 'general nil t))
+      (general-evil-setup t)))
   :config
   (general-evil-setup t)
   (general-nmap
@@ -1466,7 +1502,10 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   )
 
 (leaf tab-bar-mode
-  :after general
+  ;; No `:after general' here.  It would defer this block until general is
+  ;; loaded (through evil-mode, i.e. while `emacs-startup-hook' is running),
+  ;; so `tab-bar-mode' would be added to a hook that `run-hooks' has already
+  ;; walked past, and the mode would never be enabled.
   :custom
   ((tab-bar-close-button-show      . nil)
    (tab-bar-close-last-tab-choice  . nil)
@@ -2502,7 +2541,7 @@ go to today's entry in record file."
              (year (nth 5 now))
              (org-refile-targets
               `((,my:org-archive-file :regexp . ,(format "%04d-%02d-%02d" year month day)))))
-        (find-file my/org-archive-file)
+        (find-file my:org-archive-file)
         (org-datetree-find-iso-week-create `(,month ,day ,year) nil))))
 
   (leaf org-capture
