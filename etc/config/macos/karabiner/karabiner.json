@@ -757,7 +757,7 @@
             ]
           },
           {
-            "description": "Double tap left_shift to iTerm(key conbination)",
+            "description": "Double tap left_shift to Gostty and Aquaskk ACII",
             "manipulators": [
               {
                 "conditions": [
@@ -795,6 +795,9 @@
                       "left_shift",
                       "left_command"
                     ]
+                  },
+                  {
+                    "key_code": "japanese_eisuu"
                   }
                 ],
                 "to_after_key_up": [

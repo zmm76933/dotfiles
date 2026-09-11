@@ -1,23 +1,33 @@
-# macOS settings
+# font settings
+font-family = HackGen Console NF
+font-size = 13
+font-thicken = true
+
+# corlor settings
+theme = "TokyoNight"
+background-opacity = 0.9
+background-opacity-cells = true
+
+# clipboard settings
+copy-on-select = clipboard
+
+# window settings
+initial-window = false
+
+# keybind settings
 keybind = ctrl+j=ignore
-#macos-hidden = "always"
+keybind = "global:shift+ctrl+alt+super+F5=toggle_quick_terminal"
 
 # quick-terminal settings
 quick-terminal-position = "top"
 quick-terminal-size = "100%,100%"
 quick-terminal-screen = "main"
 quick-terminal-animation-duration = 0.1
-quick-terminal-autohide = false
-#initial-window = false
+quick-terminal-autohide = true
 
-# keybind settings
-keybind = "global:ctrl+space=toggle_quick_terminal"
+# shell settings
+shell-integration-features = ssh-terminfo,ssh-env
 
-# cursor settings
-cursor-style = block
-cursor-style-blink = true
-
-# corlor settings
-theme = "TokyoNight"
-background-opacity = 0.9
-background-opacity-cells = true
+# macOS settings
+macos-hidden = "always"
+macos-option-as-alt = true
