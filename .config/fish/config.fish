@@ -48,6 +48,7 @@ set -gx LC_NUMERIC "ja_JP.UTF-8"
 set -gx EDITOR nvim
 set -gx DOTPATH $HOME/.dotfiles
 set -gx PATH ~/bin $PATH
+set -gx PATH ~/.local/bin $PATH
 set -gx PATH ~/.docker/bin $PATH
 
 # mise configuration code

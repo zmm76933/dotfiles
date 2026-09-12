@@ -757,7 +757,7 @@
             ]
           },
           {
-            "description": "Double tap left_shift to Gostty and Aquaskk ACII",
+            "description": "Double tap left_shift to Gostty and macskk ASCII",
             "manipulators": [
               {
                 "conditions": [
@@ -972,7 +972,7 @@
             ]
           },
           {
-            "description": "For Terminals: AquaSKK keybindings",
+            "description": "For Terminals: macSKK keybindings",
             "manipulators": [
               {
                 "conditions": [
@@ -1003,7 +1003,7 @@
             ]
           },
           {
-            "description": "For Microsoft Office: AquaSKK keybindings",
+            "description": "For Microsoft Office: macSKK keybindings",
             "manipulators": [
               {
                 "conditions": [
