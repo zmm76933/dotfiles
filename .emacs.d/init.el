@@ -310,7 +310,7 @@
     ;; undo/redo - 数字に根拠無し
     (undo-limit              . 200000)
     (undo-strong-limit       . 260000)
-    (history-length          . t)  ;; 無制限(の筈)
+    (history-length          . t)
     ;; (save-silently           . t)
     (use-short-answers       . t)
     (split-height-threshold  . nil)
@@ -397,7 +397,7 @@
 
 (leaf autorevert
   :custom
-  ((auto-revert-interval . 1))
+  ((auto-revert-interval . 3))
   :hook
   (find-file-hook . global-auto-revert-mode)
   )
@@ -731,6 +731,7 @@
                                  "^/tmp\\.*"
                                  "^/private\\.*"
                                  "^/var/folders\\.*"
+                                 "\\`/Volumes/"
                                  "^/ssh:"
                                  "/TAGS$"
                                  "^#\\.*"
@@ -1028,23 +1029,23 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
         (file-remote-p fp)
       nil))
   :bind* (("C-;"   . consult-buffer)
-          ("M-g ," . consult-find)
+          ("M-g ," . consult-fd)
           ("M-g ." . consult-ripgrep)
           ("C-c o" . consult-outline)
           )
   :bind (("M-s"     . consult-line)
          ("C-x C-r" . my:consult-recent-file)
-           (:vertico-map
-            ("C-l"  . consult-toggle-preview)
-            ))
+         (:vertico-map
+          ("M-C-l"  . consult-toggle-preview)
+          ))
   :init
-  (setq xref-show-xref-funcion          #'consult-xref
+  (setq xref-show-xrefs-function        #'consult-xref
         xref-show-definitions-function  #'consult-xref
-        consult-preview-excluded-files '("\\`/[^/|:]+:" "\\.gpg\\'" "\\.plist\\'")
+        consult-preview-excluded-files '("\\`/[^/|:]+:" "\\`/Volumes/" "\\.gpg\\'" "\\.plist\\'")
         ;; consult-preview-key  "C-l"
         ;; consult-async-refresh-delay 0.2
         ;; consult-narrow-key  "<"
-        consult-preview-partial-size (* 5 1024 1024) ;; ← (* 1024 1024)
+        consult-preview-partial-size (* 2 1024 1024) ;; ← (* 1024 1024)
         consult-preview-partial-chunk (* 50 1024)    ;; ← (* 10 1024)
         consult-preview-exclude-buffers #'my:buffer-remote-p
         ;;
@@ -1100,39 +1101,9 @@ https://github.com/minad/consult/wiki#toggle-preview-during-active-completion-se
   )
 
 (leaf orderless
-  :emacs>= 29.1
-  :if (executable-find "cmigemo")
   :ensure t
-  :defun (migemo-get-pattern . migemo)
   :custom
-  ((completion-styles . '(orderless basic))
-   (completion-category-overrides
-    . '((file (styles orderless+migemo partial-completion))
-        (buffer (styles orderless+migemo))
-        (unicode-name (styles orderless+migemo))
-        (kill-ring (styles orderless+migemo))
-        (eglot (styles orderless))
-        (eglot-capf (styles orderless))
-        ;; consult with migemo
-        (consult-location (styles orderless+migemo)) ; consult-line
-        (consult-multi (styles orderless+migemo))    ; consult-buffer
-        ))
-   )
-  ;;  ------------------------------------------------------------------------
-  :config
-  (defun orderless-migemo (component)
-    "Orderless に migemo を追加"
-    (let ((pattern (migemo-get-pattern component)))
-      (condition-case nil
-          (progn (string-match-p pattern "") pattern)
-        (invalid-regexp nil))))
-  (eval-when-compile (require 'orderless nil 'noerr))
-  (orderless-define-completion-style orderless+migemo
-    (orderless-matching-styles
-     '(orderless-literal
-       orderless-regexp
-       orderless-initialism
-       orderless-migemo)))
+  (completion-styles . '(orderless))
   )
 
 (leaf marginalia
@@ -1862,7 +1833,7 @@ Once loaded, mu4e-org re-registers the real handler through
   (leaf git-gutter-fringe
     :ensure t
     :custom
-    `((git-gutter:update-interval . 0.02)
+    `((git-gutter:update-interval . 2)
       (git-gutter:update-hooks . '(after-save-hook after-revert-hook)))
     :hook
     (emacs-startup-hook . global-git-gutter-mode))

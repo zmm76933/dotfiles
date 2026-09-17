@@ -135,19 +135,14 @@
 ;; (setq skk-show-inline 'vertical)
 (setq skk-show-inline nil)
 
-(cond
- ((getenv "SKKSERVER")
+(setq skk-get-jisyo-directory (concat my:d:tmp "skk")
+      skk-large-jisyo (concat skk-get-jisyo-directory "/SKK-JISYO.L"))
+
+(when (getenv "SKKSERVER")
   (setq skk-server-host (getenv "SKKSERVER")
-        skk-server-portnum "1178"
-        skk-large-jisyo nil)
-  (add-to-list 'skk-search-prog-list
-               '(skk-server-completion-search) t)
-  (add-to-list 'skk-search-prog-list
-               '(skk-comp-by-server-completion) t))
- (t
-  (setq skk-get-jisyo-directory (concat my:d:tmp "skk-jisyo")
-        skk-large-jisyo (concat skk-get-jisyo-directory "/SKK-JISYO.L")))
- )
+        skk-server-portnum "1178")
+  (add-to-list 'skk-search-prog-list '(skk-server-completion-search) t)
+  (add-to-list 'skk-search-prog-list '(skk-comp-by-server-completion) t))
 
 (setq skk-inhibit-ja-dic-search t)
 

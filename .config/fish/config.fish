@@ -71,7 +71,7 @@ zoxide init fish  --cmd cd | source
 set -gx GPG_TTY (tty)
 
 # SKK
-set -gx SKKSERVER localhost
+set -gx SKKSERVER 127.0.0.1
 
 # Xapian for mu4e
 set -gx XAPIAN_CJK_NGRAM japanese
