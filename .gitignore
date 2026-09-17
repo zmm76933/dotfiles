@@ -128,5 +128,8 @@ nvim-pack-lock.json
 # Claude Code
 .claude/*.local.json
 
+# Raycast
+.config/raycast/
+
 # Antigravity
 .antigravitycli
