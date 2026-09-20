@@ -13,7 +13,4 @@ function fish_user_key_bindings
 
     # zi directory history search
     bind \cs __zoxide_zi
-
-    # git repository search
-    bind \er __ghq_repository_search
 end

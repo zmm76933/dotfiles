@@ -1,18 +1,5 @@
 set fish_greeting ""
 
-# platform
-switch (uname)
-    case Darwin
-        source (dirname (status --current-filename))/config-macos.fish
-    case Linux
-        source (dirname (status --current-filename))/config-linux.fish
-        if [ "(uname -r | grep microsoft)" != '' ]
-          source (dirname (status --current-filename))/config-windows.fish
-        end
-    case '*'
-      # Do nothing
-end
-
 # theme
 set -g theme_color_scheme terminal-dark
 set -g fish_prompt_pwd_dir_length 1
@@ -21,31 +8,44 @@ set -g theme_hide_hostname no
 set -g theme_hostname always
 
 # aliases
-if type -q eza
-    alias ls "eza -g --icons"
-    alias la "eza -a -g --icons"
-    alias ll "eza -l -g --icons"
-    alias lla "ll -a"
-else
-    alias ls "ls -p -G"
-    alias la "ls -A"
-    alias ll "ls -l"
-    alias lla "ll -A"
-end
+alias ls "ls -p -G"
+alias la "ls -A"
+alias ll "ls -l"
+alias lla "ll -A"
 alias g git
-alias c claude
 alias claude-yolo "claude --dangerously-skip-permissions"
+alias cz chezmoi
 command -qv nvim && alias vi nvim
-command -qv nvim && alias vim nvim
 
-# environments
+# configuration directory
+set -gx XDG_CONFIG_HOME $HOME/.config
+
+# languages
 set -gx LANG "en_US.UTF-8"
 set -gx LC_ALL "en_US.UTF-8"
 set -gx LC_COLLATE "ja_JP.UTF-8"
 set -gx LC_CTYPE "ja_JP.UTF-8"
 set -gx LC_MONETARY "ja_JP.UTF-8"
 set -gx LC_NUMERIC "ja_JP.UTF-8"
+
+# editor
 set -gx EDITOR nvim
+
+# platform
+set -l ROOT_PATH (dirname (status --current-filename))
+switch (uname)
+    case Darwin
+        source $ROOT_PATH/config-macos.fish
+    case Linux
+        source $ROOT_PATH/config-linux.fish
+        if [ "(uname -r | grep microsoft)" != '' ]
+          source $ROOT_PATH/config-windows.fish
+        end
+    case '*'
+      # Do nothing
+end
+
+# path
 set -gx DOTPATH $HOME/.dotfiles
 set -gx PATH ~/bin $PATH
 set -gx PATH ~/.local/bin $PATH

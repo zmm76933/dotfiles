@@ -217,6 +217,7 @@
      . '("GPG_KEY_ID"
          "GPG_TTY"
          "PASSWORD_STORE_DIR"
+         "SSH_AUTH_SOCK"
          "PATH"
          "MANPATH"
          "LANG"
