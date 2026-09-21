@@ -28,6 +28,7 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 # Paths
 $env:PATH += ';.\node_modules\.bin'
 $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64'
+$env:PATH += ';C:\Users\zmm76933\.cargo\bin\'
 
 # Utilities
 function which ($command) {

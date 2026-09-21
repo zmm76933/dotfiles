@@ -101,6 +101,9 @@ Pods/
 # github-copilot
 .config/github-copilot/
 
+# Homebrew
+.config/Homebrew/
+
 # Karabiner
 .config/karabiner/
 
@@ -133,3 +136,4 @@ nvim-pack-lock.json
 
 # Antigravity
 .antigravitycli
+

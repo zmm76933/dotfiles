@@ -1,6 +1,3 @@
-[settings]
-experimental = true
-idiomatic_version_file_enable_tools = ["python"]
 [tools]
 gh = "latest"
 ghq = "latest"
@@ -17,3 +14,7 @@ terraform = "latest"
 uv = "latest"
 copier = "latest"
 cmake = "latest"
+
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["python", "ruby", "node"]

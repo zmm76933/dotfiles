@@ -7,3 +7,8 @@ customCommands:
     output: terminal
 gui:
   mouseEvents: false
+  scrollHeight: 30
+git:
+  autoFetch: false
+  diffRenderers:
+    - command: delta --dark --syntax-theme="Solarized (dark)" --paging=never

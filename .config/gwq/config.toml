@@ -1,0 +1,6 @@
+[worktree]
+basedir = "~/src/gwq"
+auto_mkdir = true
+
+[naming]
+template = "{{.Host}}/{{.Owner}}/{{.Repository}}@{{.Branch}}"
