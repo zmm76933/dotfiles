@@ -255,6 +255,12 @@
   (set-charset-priority 'ascii 'japanese-jisx0208 'latin-jisx0201
                         'katakana-jisx0201 'iso-8859-1 'unicode)
   (set-coding-system-priority 'utf-8-unix 'euc-jp 'iso-2022-jp 'cp932)
+  ;; charset=iso-2022-jp と宣言しつつ NEC 拡張(①②③, ㈱, 髙 など JIS X 0208
+  ;; 未定義の 13区・85-94区)を含むメールがあるため、受信時は cp50220 として
+  ;; デコードする。送信時のエンコードには影響しない(`mm-charset-override-alist'
+  ;; は allow-override 付きの `mm-decode-body' / `mm-decode-string' でのみ参照される)。
+  (with-eval-after-load 'mm-util
+    (add-to-list 'mm-charset-override-alist '(iso-2022-jp . cp50220)))
   )
 
 (leaf locale-eaw-emoji
